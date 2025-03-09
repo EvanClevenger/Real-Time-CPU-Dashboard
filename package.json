@@ -26,6 +26,11 @@
     "start:server": "nodemon src/server.js",
     "start:client": "parcel src/index.html"
   },
+  "notes": {
+    "start:server": "Runs the server using nodemon",
+    "start:client": "Bundles and serves the client using parcel",
+    "start": "Runs both client and server concurrently"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
