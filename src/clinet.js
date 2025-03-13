@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { useEffect, useState } from "react";
 import {
   BarChart,
@@ -11,6 +11,8 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
+
+// var ReactDom = require("react-dom");
 
 const socket = io("http://localhost:1234", {
   transports: ["websocket", "polling"],
@@ -25,3 +27,15 @@ const App = ({}) => {
     </div>
   );
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  const rootElement = document.getElementById("root");
+  if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+  }
+});
