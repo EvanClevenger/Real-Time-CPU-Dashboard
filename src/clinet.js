@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM, { createRoot } from "react-dom/client";
 import { useEffect, useState } from "react";
 import {
   BarChart,
@@ -28,14 +28,17 @@ const App = ({}) => {
   );
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  const rootElement = document.getElementById("root");
-  if (rootElement) {
-    const root = ReactDOM.createRoot(rootElement);
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-  }
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const rootElement = document.getElementById("root");
+//   const root = ReactDOM.createRoot(rootElement);
+//   root.render(
+//     <React.StrictMode>
+//       <App />
+//     </React.StrictMode>
+//   );
+// });
+// above method guarentees that the script will run after the DOM is loaded useful for legacy tech or bigger projects
+
+const DOM = document.getElementById("root");
+const root = createRoot(DOM);
+root.render(<App />);

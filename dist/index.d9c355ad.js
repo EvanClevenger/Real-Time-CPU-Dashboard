@@ -3017,23 +3017,23 @@ const App = ({})=>{
     }, undefined);
 };
 _c = App;
-document.addEventListener("DOMContentLoaded", ()=>{
-    const rootElement = document.getElementById("root");
-    if (rootElement) {
-        const root = (0, _clientDefault.default).createRoot(rootElement);
-        root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactDefault.default).StrictMode, {
-            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
-                fileName: "src/clinet.js",
-                lineNumber: 37,
-                columnNumber: 9
-            }, undefined)
-        }, void 0, false, {
-            fileName: "src/clinet.js",
-            lineNumber: 36,
-            columnNumber: 7
-        }, undefined));
-    }
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const rootElement = document.getElementById("root");
+//   const root = ReactDOM.createRoot(rootElement);
+//   root.render(
+//     <React.StrictMode>
+//       <App />
+//     </React.StrictMode>
+//   );
+// });
+// above method guarentees that the script will run after the DOM is loaded useful for legacy tech or bigger projects
+const DOM = document.getElementById("root");
+const root = (0, _client.createRoot)(DOM);
+root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
+    fileName: "src/clinet.js",
+    lineNumber: 44,
+    columnNumber: 13
+}, undefined));
 var _c;
 $RefreshReg$(_c, "App");
 
