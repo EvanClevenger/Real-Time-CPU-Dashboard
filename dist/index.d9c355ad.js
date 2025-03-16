@@ -2992,30 +2992,74 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _client = require("react-dom/client");
 var _clientDefault = parcelHelpers.interopDefault(_client);
 var _recharts = require("recharts");
-// var ReactDom = require("react-dom");
-const socket = (0, _socketIoClientDefault.default)("http://localhost:1234", {
+var _s = $RefreshSig$();
+//connect to socket server
+const socket = (0, _socketIoClientDefault.default)("http://localhost:3000", {
     transports: [
         "websocket",
         "polling"
     ]
 });
 const App = ({})=>{
+    _s();
+    const [data, setData] = (0, _react.useState)([]);
     //1. listen for cpu event and update status
+    (0, _react.useEffect)(()=>{
+        socket.on("cpu", (cpuPercent)=>{
+            setData((currentData)=>[
+                    ...currentData,
+                    cpuPercent
+                ]);
+        });
+    }, []);
     //2. render line chart using the state
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-            children: " Check Your Real Time CPU Usage"
-        }, void 0, false, {
-            fileName: "src/clinet.js",
-            lineNumber: 26,
-            columnNumber: 7
-        }, undefined)
-    }, void 0, false, {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: " Check Your Real Time CPU Usage"
+            }, void 0, false, {
+                fileName: "src/clinet.js",
+                lineNumber: 33,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _recharts.LineChart), {
+                width: 500,
+                height: 300,
+                data: data,
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _recharts.XAxis), {
+                        dataKey: "name"
+                    }, void 0, false, {
+                        fileName: "src/clinet.js",
+                        lineNumber: 35,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _recharts.YAxis), {}, void 0, false, {
+                        fileName: "src/clinet.js",
+                        lineNumber: 36,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _recharts.Line), {
+                        dataKey: "value"
+                    }, void 0, false, {
+                        fileName: "src/clinet.js",
+                        lineNumber: 37,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/clinet.js",
+                lineNumber: 34,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
         fileName: "src/clinet.js",
-        lineNumber: 25,
+        lineNumber: 32,
         columnNumber: 5
     }, undefined);
 };
+_s(App, "IEMTtLVFIuToo7X/raQbJAxzNQU=");
 _c = App;
 // document.addEventListener("DOMContentLoaded", () => {
 //   const rootElement = document.getElementById("root");
@@ -3031,7 +3075,7 @@ const DOM = document.getElementById("root");
 const root = (0, _client.createRoot)(DOM);
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
     fileName: "src/clinet.js",
-    lineNumber: 44,
+    lineNumber: 56,
     columnNumber: 13
 }, undefined));
 var _c;
@@ -3042,7 +3086,1350 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"socket.io-client":"8HBJR","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react/jsx-dev-runtime":"iTorj","recharts":"7DnXL","react-dom/client":"lOjBx"}],"8HBJR":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","socket.io-client":"8HBJR","react":"21dqq","recharts":"7DnXL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-dom/client":"lOjBx"}],"iTorj":[function(require,module,exports,__globalThis) {
+'use strict';
+module.exports = require("ee51401569654d91");
+
+},{"ee51401569654d91":"48uCM"}],"48uCM":[function(require,module,exports,__globalThis) {
+/**
+ * @license React
+ * react-jsx-dev-runtime.development.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */ "use strict";
+(function() {
+    function getComponentNameFromType(type) {
+        if (null == type) return null;
+        if ("function" === typeof type) return type.$$typeof === REACT_CLIENT_REFERENCE$2 ? null : type.displayName || type.name || null;
+        if ("string" === typeof type) return type;
+        switch(type){
+            case REACT_FRAGMENT_TYPE:
+                return "Fragment";
+            case REACT_PORTAL_TYPE:
+                return "Portal";
+            case REACT_PROFILER_TYPE:
+                return "Profiler";
+            case REACT_STRICT_MODE_TYPE:
+                return "StrictMode";
+            case REACT_SUSPENSE_TYPE:
+                return "Suspense";
+            case REACT_SUSPENSE_LIST_TYPE:
+                return "SuspenseList";
+        }
+        if ("object" === typeof type) switch("number" === typeof type.tag && console.error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), type.$$typeof){
+            case REACT_CONTEXT_TYPE:
+                return (type.displayName || "Context") + ".Provider";
+            case REACT_CONSUMER_TYPE:
+                return (type._context.displayName || "Context") + ".Consumer";
+            case REACT_FORWARD_REF_TYPE:
+                var innerType = type.render;
+                type = type.displayName;
+                type || (type = innerType.displayName || innerType.name || "", type = "" !== type ? "ForwardRef(" + type + ")" : "ForwardRef");
+                return type;
+            case REACT_MEMO_TYPE:
+                return innerType = type.displayName || null, null !== innerType ? innerType : getComponentNameFromType(type.type) || "Memo";
+            case REACT_LAZY_TYPE:
+                innerType = type._payload;
+                type = type._init;
+                try {
+                    return getComponentNameFromType(type(innerType));
+                } catch (x) {}
+        }
+        return null;
+    }
+    function testStringCoercion(value) {
+        return "" + value;
+    }
+    function checkKeyStringCoercion(value) {
+        try {
+            testStringCoercion(value);
+            var JSCompiler_inline_result = !1;
+        } catch (e) {
+            JSCompiler_inline_result = !0;
+        }
+        if (JSCompiler_inline_result) {
+            JSCompiler_inline_result = console;
+            var JSCompiler_temp_const = JSCompiler_inline_result.error;
+            var JSCompiler_inline_result$jscomp$0 = "function" === typeof Symbol && Symbol.toStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+            JSCompiler_temp_const.call(JSCompiler_inline_result, "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.", JSCompiler_inline_result$jscomp$0);
+            return testStringCoercion(value);
+        }
+    }
+    function disabledLog() {}
+    function disableLogs() {
+        if (0 === disabledDepth) {
+            prevLog = console.log;
+            prevInfo = console.info;
+            prevWarn = console.warn;
+            prevError = console.error;
+            prevGroup = console.group;
+            prevGroupCollapsed = console.groupCollapsed;
+            prevGroupEnd = console.groupEnd;
+            var props = {
+                configurable: !0,
+                enumerable: !0,
+                value: disabledLog,
+                writable: !0
+            };
+            Object.defineProperties(console, {
+                info: props,
+                log: props,
+                warn: props,
+                error: props,
+                group: props,
+                groupCollapsed: props,
+                groupEnd: props
+            });
+        }
+        disabledDepth++;
+    }
+    function reenableLogs() {
+        disabledDepth--;
+        if (0 === disabledDepth) {
+            var props = {
+                configurable: !0,
+                enumerable: !0,
+                writable: !0
+            };
+            Object.defineProperties(console, {
+                log: assign({}, props, {
+                    value: prevLog
+                }),
+                info: assign({}, props, {
+                    value: prevInfo
+                }),
+                warn: assign({}, props, {
+                    value: prevWarn
+                }),
+                error: assign({}, props, {
+                    value: prevError
+                }),
+                group: assign({}, props, {
+                    value: prevGroup
+                }),
+                groupCollapsed: assign({}, props, {
+                    value: prevGroupCollapsed
+                }),
+                groupEnd: assign({}, props, {
+                    value: prevGroupEnd
+                })
+            });
+        }
+        0 > disabledDepth && console.error("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
+    }
+    function describeBuiltInComponentFrame(name) {
+        if (void 0 === prefix) try {
+            throw Error();
+        } catch (x) {
+            var match = x.stack.trim().match(/\n( *(at )?)/);
+            prefix = match && match[1] || "";
+            suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
+        }
+        return "\n" + prefix + name + suffix;
+    }
+    function describeNativeComponentFrame(fn, construct) {
+        if (!fn || reentry) return "";
+        var frame = componentFrameCache.get(fn);
+        if (void 0 !== frame) return frame;
+        reentry = !0;
+        frame = Error.prepareStackTrace;
+        Error.prepareStackTrace = void 0;
+        var previousDispatcher = null;
+        previousDispatcher = ReactSharedInternals.H;
+        ReactSharedInternals.H = null;
+        disableLogs();
+        try {
+            var RunInRootFrame = {
+                DetermineComponentFrameRoot: function() {
+                    try {
+                        if (construct) {
+                            var Fake = function() {
+                                throw Error();
+                            };
+                            Object.defineProperty(Fake.prototype, "props", {
+                                set: function() {
+                                    throw Error();
+                                }
+                            });
+                            if ("object" === typeof Reflect && Reflect.construct) {
+                                try {
+                                    Reflect.construct(Fake, []);
+                                } catch (x) {
+                                    var control = x;
+                                }
+                                Reflect.construct(fn, [], Fake);
+                            } else {
+                                try {
+                                    Fake.call();
+                                } catch (x$0) {
+                                    control = x$0;
+                                }
+                                fn.call(Fake.prototype);
+                            }
+                        } else {
+                            try {
+                                throw Error();
+                            } catch (x$1) {
+                                control = x$1;
+                            }
+                            (Fake = fn()) && "function" === typeof Fake.catch && Fake.catch(function() {});
+                        }
+                    } catch (sample) {
+                        if (sample && control && "string" === typeof sample.stack) return [
+                            sample.stack,
+                            control.stack
+                        ];
+                    }
+                    return [
+                        null,
+                        null
+                    ];
+                }
+            };
+            RunInRootFrame.DetermineComponentFrameRoot.displayName = "DetermineComponentFrameRoot";
+            var namePropDescriptor = Object.getOwnPropertyDescriptor(RunInRootFrame.DetermineComponentFrameRoot, "name");
+            namePropDescriptor && namePropDescriptor.configurable && Object.defineProperty(RunInRootFrame.DetermineComponentFrameRoot, "name", {
+                value: "DetermineComponentFrameRoot"
+            });
+            var _RunInRootFrame$Deter = RunInRootFrame.DetermineComponentFrameRoot(), sampleStack = _RunInRootFrame$Deter[0], controlStack = _RunInRootFrame$Deter[1];
+            if (sampleStack && controlStack) {
+                var sampleLines = sampleStack.split("\n"), controlLines = controlStack.split("\n");
+                for(_RunInRootFrame$Deter = namePropDescriptor = 0; namePropDescriptor < sampleLines.length && !sampleLines[namePropDescriptor].includes("DetermineComponentFrameRoot");)namePropDescriptor++;
+                for(; _RunInRootFrame$Deter < controlLines.length && !controlLines[_RunInRootFrame$Deter].includes("DetermineComponentFrameRoot");)_RunInRootFrame$Deter++;
+                if (namePropDescriptor === sampleLines.length || _RunInRootFrame$Deter === controlLines.length) for(namePropDescriptor = sampleLines.length - 1, _RunInRootFrame$Deter = controlLines.length - 1; 1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter && sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter];)_RunInRootFrame$Deter--;
+                for(; 1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter; namePropDescriptor--, _RunInRootFrame$Deter--)if (sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
+                    if (1 !== namePropDescriptor || 1 !== _RunInRootFrame$Deter) {
+                        do if (namePropDescriptor--, _RunInRootFrame$Deter--, 0 > _RunInRootFrame$Deter || sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
+                            var _frame = "\n" + sampleLines[namePropDescriptor].replace(" at new ", " at ");
+                            fn.displayName && _frame.includes("<anonymous>") && (_frame = _frame.replace("<anonymous>", fn.displayName));
+                            "function" === typeof fn && componentFrameCache.set(fn, _frame);
+                            return _frame;
+                        }
+                        while (1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter);
+                    }
+                    break;
+                }
+            }
+        } finally{
+            reentry = !1, ReactSharedInternals.H = previousDispatcher, reenableLogs(), Error.prepareStackTrace = frame;
+        }
+        sampleLines = (sampleLines = fn ? fn.displayName || fn.name : "") ? describeBuiltInComponentFrame(sampleLines) : "";
+        "function" === typeof fn && componentFrameCache.set(fn, sampleLines);
+        return sampleLines;
+    }
+    function describeUnknownElementTypeFrameInDEV(type) {
+        if (null == type) return "";
+        if ("function" === typeof type) {
+            var prototype = type.prototype;
+            return describeNativeComponentFrame(type, !(!prototype || !prototype.isReactComponent));
+        }
+        if ("string" === typeof type) return describeBuiltInComponentFrame(type);
+        switch(type){
+            case REACT_SUSPENSE_TYPE:
+                return describeBuiltInComponentFrame("Suspense");
+            case REACT_SUSPENSE_LIST_TYPE:
+                return describeBuiltInComponentFrame("SuspenseList");
+        }
+        if ("object" === typeof type) switch(type.$$typeof){
+            case REACT_FORWARD_REF_TYPE:
+                return type = describeNativeComponentFrame(type.render, !1), type;
+            case REACT_MEMO_TYPE:
+                return describeUnknownElementTypeFrameInDEV(type.type);
+            case REACT_LAZY_TYPE:
+                prototype = type._payload;
+                type = type._init;
+                try {
+                    return describeUnknownElementTypeFrameInDEV(type(prototype));
+                } catch (x) {}
+        }
+        return "";
+    }
+    function getOwner() {
+        var dispatcher = ReactSharedInternals.A;
+        return null === dispatcher ? null : dispatcher.getOwner();
+    }
+    function hasValidKey(config) {
+        if (hasOwnProperty.call(config, "key")) {
+            var getter = Object.getOwnPropertyDescriptor(config, "key").get;
+            if (getter && getter.isReactWarning) return !1;
+        }
+        return void 0 !== config.key;
+    }
+    function defineKeyPropWarningGetter(props, displayName) {
+        function warnAboutAccessingKey() {
+            specialPropKeyWarningShown || (specialPropKeyWarningShown = !0, console.error("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)", displayName));
+        }
+        warnAboutAccessingKey.isReactWarning = !0;
+        Object.defineProperty(props, "key", {
+            get: warnAboutAccessingKey,
+            configurable: !0
+        });
+    }
+    function elementRefGetterWithDeprecationWarning() {
+        var componentName = getComponentNameFromType(this.type);
+        didWarnAboutElementRef[componentName] || (didWarnAboutElementRef[componentName] = !0, console.error("Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."));
+        componentName = this.props.ref;
+        return void 0 !== componentName ? componentName : null;
+    }
+    function ReactElement(type, key, self, source, owner, props) {
+        self = props.ref;
+        type = {
+            $$typeof: REACT_ELEMENT_TYPE,
+            type: type,
+            key: key,
+            props: props,
+            _owner: owner
+        };
+        null !== (void 0 !== self ? self : null) ? Object.defineProperty(type, "ref", {
+            enumerable: !1,
+            get: elementRefGetterWithDeprecationWarning
+        }) : Object.defineProperty(type, "ref", {
+            enumerable: !1,
+            value: null
+        });
+        type._store = {};
+        Object.defineProperty(type._store, "validated", {
+            configurable: !1,
+            enumerable: !1,
+            writable: !0,
+            value: 0
+        });
+        Object.defineProperty(type, "_debugInfo", {
+            configurable: !1,
+            enumerable: !1,
+            writable: !0,
+            value: null
+        });
+        Object.freeze && (Object.freeze(type.props), Object.freeze(type));
+        return type;
+    }
+    function jsxDEVImpl(type, config, maybeKey, isStaticChildren, source, self) {
+        if ("string" === typeof type || "function" === typeof type || type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_OFFSCREEN_TYPE || "object" === typeof type && null !== type && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_CONSUMER_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_CLIENT_REFERENCE$1 || void 0 !== type.getModuleId)) {
+            var children = config.children;
+            if (void 0 !== children) {
+                if (isStaticChildren) {
+                    if (isArrayImpl(children)) {
+                        for(isStaticChildren = 0; isStaticChildren < children.length; isStaticChildren++)validateChildKeys(children[isStaticChildren], type);
+                        Object.freeze && Object.freeze(children);
+                    } else console.error("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
+                } else validateChildKeys(children, type);
+            }
+        } else {
+            children = "";
+            if (void 0 === type || "object" === typeof type && null !== type && 0 === Object.keys(type).length) children += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
+            null === type ? isStaticChildren = "null" : isArrayImpl(type) ? isStaticChildren = "array" : void 0 !== type && type.$$typeof === REACT_ELEMENT_TYPE ? (isStaticChildren = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />", children = " Did you accidentally export a JSX literal instead of a component?") : isStaticChildren = typeof type;
+            console.error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", isStaticChildren, children);
+        }
+        if (hasOwnProperty.call(config, "key")) {
+            children = getComponentNameFromType(type);
+            var keys = Object.keys(config).filter(function(k) {
+                return "key" !== k;
+            });
+            isStaticChildren = 0 < keys.length ? "{key: someKey, " + keys.join(": ..., ") + ": ...}" : "{key: someKey}";
+            didWarnAboutKeySpread[children + isStaticChildren] || (keys = 0 < keys.length ? "{" + keys.join(": ..., ") + ": ...}" : "{}", console.error('A props object containing a "key" prop is being spread into JSX:\n  let props = %s;\n  <%s {...props} />\nReact keys must be passed directly to JSX without using spread:\n  let props = %s;\n  <%s key={someKey} {...props} />', isStaticChildren, children, keys, children), didWarnAboutKeySpread[children + isStaticChildren] = !0);
+        }
+        children = null;
+        void 0 !== maybeKey && (checkKeyStringCoercion(maybeKey), children = "" + maybeKey);
+        hasValidKey(config) && (checkKeyStringCoercion(config.key), children = "" + config.key);
+        if ("key" in config) {
+            maybeKey = {};
+            for(var propName in config)"key" !== propName && (maybeKey[propName] = config[propName]);
+        } else maybeKey = config;
+        children && defineKeyPropWarningGetter(maybeKey, "function" === typeof type ? type.displayName || type.name || "Unknown" : type);
+        return ReactElement(type, children, self, source, getOwner(), maybeKey);
+    }
+    function validateChildKeys(node, parentType) {
+        if ("object" === typeof node && node && node.$$typeof !== REACT_CLIENT_REFERENCE) {
+            if (isArrayImpl(node)) for(var i = 0; i < node.length; i++){
+                var child = node[i];
+                isValidElement(child) && validateExplicitKey(child, parentType);
+            }
+            else if (isValidElement(node)) node._store && (node._store.validated = 1);
+            else if (null === node || "object" !== typeof node ? i = null : (i = MAYBE_ITERATOR_SYMBOL && node[MAYBE_ITERATOR_SYMBOL] || node["@@iterator"], i = "function" === typeof i ? i : null), "function" === typeof i && i !== node.entries && (i = i.call(node), i !== node)) for(; !(node = i.next()).done;)isValidElement(node.value) && validateExplicitKey(node.value, parentType);
+        }
+    }
+    function isValidElement(object) {
+        return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
+    }
+    function validateExplicitKey(element, parentType) {
+        if (element._store && !element._store.validated && null == element.key && (element._store.validated = 1, parentType = getCurrentComponentErrorInfo(parentType), !ownerHasKeyUseWarning[parentType])) {
+            ownerHasKeyUseWarning[parentType] = !0;
+            var childOwner = "";
+            element && null != element._owner && element._owner !== getOwner() && (childOwner = null, "number" === typeof element._owner.tag ? childOwner = getComponentNameFromType(element._owner.type) : "string" === typeof element._owner.name && (childOwner = element._owner.name), childOwner = " It was passed a child from " + childOwner + ".");
+            var prevGetCurrentStack = ReactSharedInternals.getCurrentStack;
+            ReactSharedInternals.getCurrentStack = function() {
+                var stack = describeUnknownElementTypeFrameInDEV(element.type);
+                prevGetCurrentStack && (stack += prevGetCurrentStack() || "");
+                return stack;
+            };
+            console.error('Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information.', parentType, childOwner);
+            ReactSharedInternals.getCurrentStack = prevGetCurrentStack;
+        }
+    }
+    function getCurrentComponentErrorInfo(parentType) {
+        var info = "", owner = getOwner();
+        owner && (owner = getComponentNameFromType(owner.type)) && (info = "\n\nCheck the render method of `" + owner + "`.");
+        info || (parentType = getComponentNameFromType(parentType)) && (info = "\n\nCheck the top-level render call using <" + parentType + ">.");
+        return info;
+    }
+    var React = require("58362d9d82be395f"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler");
+    Symbol.for("react.provider");
+    var REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy"), REACT_OFFSCREEN_TYPE = Symbol.for("react.offscreen"), MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE$2 = Symbol.for("react.client.reference"), ReactSharedInternals = React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, assign = Object.assign, REACT_CLIENT_REFERENCE$1 = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, disabledDepth = 0, prevLog, prevInfo, prevWarn, prevError, prevGroup, prevGroupCollapsed, prevGroupEnd;
+    disabledLog.__reactDisabledLog = !0;
+    var prefix, suffix, reentry = !1;
+    var componentFrameCache = new ("function" === typeof WeakMap ? WeakMap : Map)();
+    var REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), specialPropKeyWarningShown;
+    var didWarnAboutElementRef = {};
+    var didWarnAboutKeySpread = {}, ownerHasKeyUseWarning = {};
+    exports.Fragment = REACT_FRAGMENT_TYPE;
+    exports.jsxDEV = function(type, config, maybeKey, isStaticChildren, source, self) {
+        return jsxDEVImpl(type, config, maybeKey, isStaticChildren, source, self);
+    };
+})();
+
+},{"58362d9d82be395f":"21dqq"}],"21dqq":[function(require,module,exports,__globalThis) {
+'use strict';
+module.exports = require("a569817e6ea559f6");
+
+},{"a569817e6ea559f6":"6YvXz"}],"6YvXz":[function(require,module,exports,__globalThis) {
+/**
+ * @license React
+ * react.development.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */ var process = require("9ffea7b9cafb49c3");
+"use strict";
+(function() {
+    function defineDeprecationWarning(methodName, info) {
+        Object.defineProperty(Component.prototype, methodName, {
+            get: function() {
+                console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", info[0], info[1]);
+            }
+        });
+    }
+    function getIteratorFn(maybeIterable) {
+        if (null === maybeIterable || "object" !== typeof maybeIterable) return null;
+        maybeIterable = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable["@@iterator"];
+        return "function" === typeof maybeIterable ? maybeIterable : null;
+    }
+    function warnNoop(publicInstance, callerName) {
+        publicInstance = (publicInstance = publicInstance.constructor) && (publicInstance.displayName || publicInstance.name) || "ReactClass";
+        var warningKey = publicInstance + "." + callerName;
+        didWarnStateUpdateForUnmountedComponent[warningKey] || (console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `this.state` directly or define a `state = {};` class property with the desired state in the %s component.", callerName, publicInstance), didWarnStateUpdateForUnmountedComponent[warningKey] = !0);
+    }
+    function Component(props, context, updater) {
+        this.props = props;
+        this.context = context;
+        this.refs = emptyObject;
+        this.updater = updater || ReactNoopUpdateQueue;
+    }
+    function ComponentDummy() {}
+    function PureComponent(props, context, updater) {
+        this.props = props;
+        this.context = context;
+        this.refs = emptyObject;
+        this.updater = updater || ReactNoopUpdateQueue;
+    }
+    function testStringCoercion(value) {
+        return "" + value;
+    }
+    function checkKeyStringCoercion(value) {
+        try {
+            testStringCoercion(value);
+            var JSCompiler_inline_result = !1;
+        } catch (e) {
+            JSCompiler_inline_result = !0;
+        }
+        if (JSCompiler_inline_result) {
+            JSCompiler_inline_result = console;
+            var JSCompiler_temp_const = JSCompiler_inline_result.error;
+            var JSCompiler_inline_result$jscomp$0 = "function" === typeof Symbol && Symbol.toStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+            JSCompiler_temp_const.call(JSCompiler_inline_result, "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.", JSCompiler_inline_result$jscomp$0);
+            return testStringCoercion(value);
+        }
+    }
+    function getComponentNameFromType(type) {
+        if (null == type) return null;
+        if ("function" === typeof type) return type.$$typeof === REACT_CLIENT_REFERENCE$2 ? null : type.displayName || type.name || null;
+        if ("string" === typeof type) return type;
+        switch(type){
+            case REACT_FRAGMENT_TYPE:
+                return "Fragment";
+            case REACT_PORTAL_TYPE:
+                return "Portal";
+            case REACT_PROFILER_TYPE:
+                return "Profiler";
+            case REACT_STRICT_MODE_TYPE:
+                return "StrictMode";
+            case REACT_SUSPENSE_TYPE:
+                return "Suspense";
+            case REACT_SUSPENSE_LIST_TYPE:
+                return "SuspenseList";
+        }
+        if ("object" === typeof type) switch("number" === typeof type.tag && console.error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), type.$$typeof){
+            case REACT_CONTEXT_TYPE:
+                return (type.displayName || "Context") + ".Provider";
+            case REACT_CONSUMER_TYPE:
+                return (type._context.displayName || "Context") + ".Consumer";
+            case REACT_FORWARD_REF_TYPE:
+                var innerType = type.render;
+                type = type.displayName;
+                type || (type = innerType.displayName || innerType.name || "", type = "" !== type ? "ForwardRef(" + type + ")" : "ForwardRef");
+                return type;
+            case REACT_MEMO_TYPE:
+                return innerType = type.displayName || null, null !== innerType ? innerType : getComponentNameFromType(type.type) || "Memo";
+            case REACT_LAZY_TYPE:
+                innerType = type._payload;
+                type = type._init;
+                try {
+                    return getComponentNameFromType(type(innerType));
+                } catch (x) {}
+        }
+        return null;
+    }
+    function isValidElementType(type) {
+        return "string" === typeof type || "function" === typeof type || type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_OFFSCREEN_TYPE || "object" === typeof type && null !== type && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_CONSUMER_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_CLIENT_REFERENCE$1 || void 0 !== type.getModuleId) ? !0 : !1;
+    }
+    function disabledLog() {}
+    function disableLogs() {
+        if (0 === disabledDepth) {
+            prevLog = console.log;
+            prevInfo = console.info;
+            prevWarn = console.warn;
+            prevError = console.error;
+            prevGroup = console.group;
+            prevGroupCollapsed = console.groupCollapsed;
+            prevGroupEnd = console.groupEnd;
+            var props = {
+                configurable: !0,
+                enumerable: !0,
+                value: disabledLog,
+                writable: !0
+            };
+            Object.defineProperties(console, {
+                info: props,
+                log: props,
+                warn: props,
+                error: props,
+                group: props,
+                groupCollapsed: props,
+                groupEnd: props
+            });
+        }
+        disabledDepth++;
+    }
+    function reenableLogs() {
+        disabledDepth--;
+        if (0 === disabledDepth) {
+            var props = {
+                configurable: !0,
+                enumerable: !0,
+                writable: !0
+            };
+            Object.defineProperties(console, {
+                log: assign({}, props, {
+                    value: prevLog
+                }),
+                info: assign({}, props, {
+                    value: prevInfo
+                }),
+                warn: assign({}, props, {
+                    value: prevWarn
+                }),
+                error: assign({}, props, {
+                    value: prevError
+                }),
+                group: assign({}, props, {
+                    value: prevGroup
+                }),
+                groupCollapsed: assign({}, props, {
+                    value: prevGroupCollapsed
+                }),
+                groupEnd: assign({}, props, {
+                    value: prevGroupEnd
+                })
+            });
+        }
+        0 > disabledDepth && console.error("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
+    }
+    function describeBuiltInComponentFrame(name) {
+        if (void 0 === prefix) try {
+            throw Error();
+        } catch (x) {
+            var match = x.stack.trim().match(/\n( *(at )?)/);
+            prefix = match && match[1] || "";
+            suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
+        }
+        return "\n" + prefix + name + suffix;
+    }
+    function describeNativeComponentFrame(fn, construct) {
+        if (!fn || reentry) return "";
+        var frame = componentFrameCache.get(fn);
+        if (void 0 !== frame) return frame;
+        reentry = !0;
+        frame = Error.prepareStackTrace;
+        Error.prepareStackTrace = void 0;
+        var previousDispatcher = null;
+        previousDispatcher = ReactSharedInternals.H;
+        ReactSharedInternals.H = null;
+        disableLogs();
+        try {
+            var RunInRootFrame = {
+                DetermineComponentFrameRoot: function() {
+                    try {
+                        if (construct) {
+                            var Fake = function() {
+                                throw Error();
+                            };
+                            Object.defineProperty(Fake.prototype, "props", {
+                                set: function() {
+                                    throw Error();
+                                }
+                            });
+                            if ("object" === typeof Reflect && Reflect.construct) {
+                                try {
+                                    Reflect.construct(Fake, []);
+                                } catch (x) {
+                                    var control = x;
+                                }
+                                Reflect.construct(fn, [], Fake);
+                            } else {
+                                try {
+                                    Fake.call();
+                                } catch (x$0) {
+                                    control = x$0;
+                                }
+                                fn.call(Fake.prototype);
+                            }
+                        } else {
+                            try {
+                                throw Error();
+                            } catch (x$1) {
+                                control = x$1;
+                            }
+                            (Fake = fn()) && "function" === typeof Fake.catch && Fake.catch(function() {});
+                        }
+                    } catch (sample) {
+                        if (sample && control && "string" === typeof sample.stack) return [
+                            sample.stack,
+                            control.stack
+                        ];
+                    }
+                    return [
+                        null,
+                        null
+                    ];
+                }
+            };
+            RunInRootFrame.DetermineComponentFrameRoot.displayName = "DetermineComponentFrameRoot";
+            var namePropDescriptor = Object.getOwnPropertyDescriptor(RunInRootFrame.DetermineComponentFrameRoot, "name");
+            namePropDescriptor && namePropDescriptor.configurable && Object.defineProperty(RunInRootFrame.DetermineComponentFrameRoot, "name", {
+                value: "DetermineComponentFrameRoot"
+            });
+            var _RunInRootFrame$Deter = RunInRootFrame.DetermineComponentFrameRoot(), sampleStack = _RunInRootFrame$Deter[0], controlStack = _RunInRootFrame$Deter[1];
+            if (sampleStack && controlStack) {
+                var sampleLines = sampleStack.split("\n"), controlLines = controlStack.split("\n");
+                for(_RunInRootFrame$Deter = namePropDescriptor = 0; namePropDescriptor < sampleLines.length && !sampleLines[namePropDescriptor].includes("DetermineComponentFrameRoot");)namePropDescriptor++;
+                for(; _RunInRootFrame$Deter < controlLines.length && !controlLines[_RunInRootFrame$Deter].includes("DetermineComponentFrameRoot");)_RunInRootFrame$Deter++;
+                if (namePropDescriptor === sampleLines.length || _RunInRootFrame$Deter === controlLines.length) for(namePropDescriptor = sampleLines.length - 1, _RunInRootFrame$Deter = controlLines.length - 1; 1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter && sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter];)_RunInRootFrame$Deter--;
+                for(; 1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter; namePropDescriptor--, _RunInRootFrame$Deter--)if (sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
+                    if (1 !== namePropDescriptor || 1 !== _RunInRootFrame$Deter) {
+                        do if (namePropDescriptor--, _RunInRootFrame$Deter--, 0 > _RunInRootFrame$Deter || sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
+                            var _frame = "\n" + sampleLines[namePropDescriptor].replace(" at new ", " at ");
+                            fn.displayName && _frame.includes("<anonymous>") && (_frame = _frame.replace("<anonymous>", fn.displayName));
+                            "function" === typeof fn && componentFrameCache.set(fn, _frame);
+                            return _frame;
+                        }
+                        while (1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter);
+                    }
+                    break;
+                }
+            }
+        } finally{
+            reentry = !1, ReactSharedInternals.H = previousDispatcher, reenableLogs(), Error.prepareStackTrace = frame;
+        }
+        sampleLines = (sampleLines = fn ? fn.displayName || fn.name : "") ? describeBuiltInComponentFrame(sampleLines) : "";
+        "function" === typeof fn && componentFrameCache.set(fn, sampleLines);
+        return sampleLines;
+    }
+    function describeUnknownElementTypeFrameInDEV(type) {
+        if (null == type) return "";
+        if ("function" === typeof type) {
+            var prototype = type.prototype;
+            return describeNativeComponentFrame(type, !(!prototype || !prototype.isReactComponent));
+        }
+        if ("string" === typeof type) return describeBuiltInComponentFrame(type);
+        switch(type){
+            case REACT_SUSPENSE_TYPE:
+                return describeBuiltInComponentFrame("Suspense");
+            case REACT_SUSPENSE_LIST_TYPE:
+                return describeBuiltInComponentFrame("SuspenseList");
+        }
+        if ("object" === typeof type) switch(type.$$typeof){
+            case REACT_FORWARD_REF_TYPE:
+                return type = describeNativeComponentFrame(type.render, !1), type;
+            case REACT_MEMO_TYPE:
+                return describeUnknownElementTypeFrameInDEV(type.type);
+            case REACT_LAZY_TYPE:
+                prototype = type._payload;
+                type = type._init;
+                try {
+                    return describeUnknownElementTypeFrameInDEV(type(prototype));
+                } catch (x) {}
+        }
+        return "";
+    }
+    function getOwner() {
+        var dispatcher = ReactSharedInternals.A;
+        return null === dispatcher ? null : dispatcher.getOwner();
+    }
+    function hasValidKey(config) {
+        if (hasOwnProperty.call(config, "key")) {
+            var getter = Object.getOwnPropertyDescriptor(config, "key").get;
+            if (getter && getter.isReactWarning) return !1;
+        }
+        return void 0 !== config.key;
+    }
+    function defineKeyPropWarningGetter(props, displayName) {
+        function warnAboutAccessingKey() {
+            specialPropKeyWarningShown || (specialPropKeyWarningShown = !0, console.error("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)", displayName));
+        }
+        warnAboutAccessingKey.isReactWarning = !0;
+        Object.defineProperty(props, "key", {
+            get: warnAboutAccessingKey,
+            configurable: !0
+        });
+    }
+    function elementRefGetterWithDeprecationWarning() {
+        var componentName = getComponentNameFromType(this.type);
+        didWarnAboutElementRef[componentName] || (didWarnAboutElementRef[componentName] = !0, console.error("Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."));
+        componentName = this.props.ref;
+        return void 0 !== componentName ? componentName : null;
+    }
+    function ReactElement(type, key, self, source, owner, props) {
+        self = props.ref;
+        type = {
+            $$typeof: REACT_ELEMENT_TYPE,
+            type: type,
+            key: key,
+            props: props,
+            _owner: owner
+        };
+        null !== (void 0 !== self ? self : null) ? Object.defineProperty(type, "ref", {
+            enumerable: !1,
+            get: elementRefGetterWithDeprecationWarning
+        }) : Object.defineProperty(type, "ref", {
+            enumerable: !1,
+            value: null
+        });
+        type._store = {};
+        Object.defineProperty(type._store, "validated", {
+            configurable: !1,
+            enumerable: !1,
+            writable: !0,
+            value: 0
+        });
+        Object.defineProperty(type, "_debugInfo", {
+            configurable: !1,
+            enumerable: !1,
+            writable: !0,
+            value: null
+        });
+        Object.freeze && (Object.freeze(type.props), Object.freeze(type));
+        return type;
+    }
+    function cloneAndReplaceKey(oldElement, newKey) {
+        newKey = ReactElement(oldElement.type, newKey, void 0, void 0, oldElement._owner, oldElement.props);
+        newKey._store.validated = oldElement._store.validated;
+        return newKey;
+    }
+    function validateChildKeys(node, parentType) {
+        if ("object" === typeof node && node && node.$$typeof !== REACT_CLIENT_REFERENCE) {
+            if (isArrayImpl(node)) for(var i = 0; i < node.length; i++){
+                var child = node[i];
+                isValidElement(child) && validateExplicitKey(child, parentType);
+            }
+            else if (isValidElement(node)) node._store && (node._store.validated = 1);
+            else if (i = getIteratorFn(node), "function" === typeof i && i !== node.entries && (i = i.call(node), i !== node)) for(; !(node = i.next()).done;)isValidElement(node.value) && validateExplicitKey(node.value, parentType);
+        }
+    }
+    function isValidElement(object) {
+        return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
+    }
+    function validateExplicitKey(element, parentType) {
+        if (element._store && !element._store.validated && null == element.key && (element._store.validated = 1, parentType = getCurrentComponentErrorInfo(parentType), !ownerHasKeyUseWarning[parentType])) {
+            ownerHasKeyUseWarning[parentType] = !0;
+            var childOwner = "";
+            element && null != element._owner && element._owner !== getOwner() && (childOwner = null, "number" === typeof element._owner.tag ? childOwner = getComponentNameFromType(element._owner.type) : "string" === typeof element._owner.name && (childOwner = element._owner.name), childOwner = " It was passed a child from " + childOwner + ".");
+            var prevGetCurrentStack = ReactSharedInternals.getCurrentStack;
+            ReactSharedInternals.getCurrentStack = function() {
+                var stack = describeUnknownElementTypeFrameInDEV(element.type);
+                prevGetCurrentStack && (stack += prevGetCurrentStack() || "");
+                return stack;
+            };
+            console.error('Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information.', parentType, childOwner);
+            ReactSharedInternals.getCurrentStack = prevGetCurrentStack;
+        }
+    }
+    function getCurrentComponentErrorInfo(parentType) {
+        var info = "", owner = getOwner();
+        owner && (owner = getComponentNameFromType(owner.type)) && (info = "\n\nCheck the render method of `" + owner + "`.");
+        info || (parentType = getComponentNameFromType(parentType)) && (info = "\n\nCheck the top-level render call using <" + parentType + ">.");
+        return info;
+    }
+    function escape(key) {
+        var escaperLookup = {
+            "=": "=0",
+            ":": "=2"
+        };
+        return "$" + key.replace(/[=:]/g, function(match) {
+            return escaperLookup[match];
+        });
+    }
+    function getElementKey(element, index) {
+        return "object" === typeof element && null !== element && null != element.key ? (checkKeyStringCoercion(element.key), escape("" + element.key)) : index.toString(36);
+    }
+    function noop$1() {}
+    function resolveThenable(thenable) {
+        switch(thenable.status){
+            case "fulfilled":
+                return thenable.value;
+            case "rejected":
+                throw thenable.reason;
+            default:
+                switch("string" === typeof thenable.status ? thenable.then(noop$1, noop$1) : (thenable.status = "pending", thenable.then(function(fulfilledValue) {
+                    "pending" === thenable.status && (thenable.status = "fulfilled", thenable.value = fulfilledValue);
+                }, function(error) {
+                    "pending" === thenable.status && (thenable.status = "rejected", thenable.reason = error);
+                })), thenable.status){
+                    case "fulfilled":
+                        return thenable.value;
+                    case "rejected":
+                        throw thenable.reason;
+                }
+        }
+        throw thenable;
+    }
+    function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
+        var type = typeof children;
+        if ("undefined" === type || "boolean" === type) children = null;
+        var invokeCallback = !1;
+        if (null === children) invokeCallback = !0;
+        else switch(type){
+            case "bigint":
+            case "string":
+            case "number":
+                invokeCallback = !0;
+                break;
+            case "object":
+                switch(children.$$typeof){
+                    case REACT_ELEMENT_TYPE:
+                    case REACT_PORTAL_TYPE:
+                        invokeCallback = !0;
+                        break;
+                    case REACT_LAZY_TYPE:
+                        return invokeCallback = children._init, mapIntoArray(invokeCallback(children._payload), array, escapedPrefix, nameSoFar, callback);
+                }
+        }
+        if (invokeCallback) {
+            invokeCallback = children;
+            callback = callback(invokeCallback);
+            var childKey = "" === nameSoFar ? "." + getElementKey(invokeCallback, 0) : nameSoFar;
+            isArrayImpl(callback) ? (escapedPrefix = "", null != childKey && (escapedPrefix = childKey.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c) {
+                return c;
+            })) : null != callback && (isValidElement(callback) && (null != callback.key && (invokeCallback && invokeCallback.key === callback.key || checkKeyStringCoercion(callback.key)), escapedPrefix = cloneAndReplaceKey(callback, escapedPrefix + (null == callback.key || invokeCallback && invokeCallback.key === callback.key ? "" : ("" + callback.key).replace(userProvidedKeyEscapeRegex, "$&/") + "/") + childKey), "" !== nameSoFar && null != invokeCallback && isValidElement(invokeCallback) && null == invokeCallback.key && invokeCallback._store && !invokeCallback._store.validated && (escapedPrefix._store.validated = 2), callback = escapedPrefix), array.push(callback));
+            return 1;
+        }
+        invokeCallback = 0;
+        childKey = "" === nameSoFar ? "." : nameSoFar + ":";
+        if (isArrayImpl(children)) for(var i = 0; i < children.length; i++)nameSoFar = children[i], type = childKey + getElementKey(nameSoFar, i), invokeCallback += mapIntoArray(nameSoFar, array, escapedPrefix, type, callback);
+        else if (i = getIteratorFn(children), "function" === typeof i) for(i === children.entries && (didWarnAboutMaps || console.warn("Using Maps as children is not supported. Use an array of keyed ReactElements instead."), didWarnAboutMaps = !0), children = i.call(children), i = 0; !(nameSoFar = children.next()).done;)nameSoFar = nameSoFar.value, type = childKey + getElementKey(nameSoFar, i++), invokeCallback += mapIntoArray(nameSoFar, array, escapedPrefix, type, callback);
+        else if ("object" === type) {
+            if ("function" === typeof children.then) return mapIntoArray(resolveThenable(children), array, escapedPrefix, nameSoFar, callback);
+            array = String(children);
+            throw Error("Objects are not valid as a React child (found: " + ("[object Object]" === array ? "object with keys {" + Object.keys(children).join(", ") + "}" : array) + "). If you meant to render a collection of children, use an array instead.");
+        }
+        return invokeCallback;
+    }
+    function mapChildren(children, func, context) {
+        if (null == children) return children;
+        var result = [], count = 0;
+        mapIntoArray(children, result, "", "", function(child) {
+            return func.call(context, child, count++);
+        });
+        return result;
+    }
+    function lazyInitializer(payload) {
+        if (-1 === payload._status) {
+            var ctor = payload._result;
+            ctor = ctor();
+            ctor.then(function(moduleObject) {
+                if (0 === payload._status || -1 === payload._status) payload._status = 1, payload._result = moduleObject;
+            }, function(error) {
+                if (0 === payload._status || -1 === payload._status) payload._status = 2, payload._result = error;
+            });
+            -1 === payload._status && (payload._status = 0, payload._result = ctor);
+        }
+        if (1 === payload._status) return ctor = payload._result, void 0 === ctor && console.error("lazy: Expected the result of a dynamic import() call. Instead received: %s\n\nYour code should look like: \n  const MyComponent = lazy(() => import('./MyComponent'))\n\nDid you accidentally put curly braces around the import?", ctor), "default" in ctor || console.error("lazy: Expected the result of a dynamic import() call. Instead received: %s\n\nYour code should look like: \n  const MyComponent = lazy(() => import('./MyComponent'))", ctor), ctor.default;
+        throw payload._result;
+    }
+    function resolveDispatcher() {
+        var dispatcher = ReactSharedInternals.H;
+        null === dispatcher && console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.");
+        return dispatcher;
+    }
+    function noop() {}
+    function enqueueTask(task) {
+        if (null === enqueueTaskImpl) try {
+            var requireString = ("require" + Math.random()).slice(0, 7);
+            enqueueTaskImpl = (module && module[requireString]).call(module, "timers").setImmediate;
+        } catch (_err) {
+            enqueueTaskImpl = function(callback) {
+                !1 === didWarnAboutMessageChannel && (didWarnAboutMessageChannel = !0, "undefined" === typeof MessageChannel && console.error("This browser does not have a MessageChannel implementation, so enqueuing tasks via await act(async () => ...) will fail. Please file an issue at https://github.com/facebook/react/issues if you encounter this warning."));
+                var channel = new MessageChannel();
+                channel.port1.onmessage = callback;
+                channel.port2.postMessage(void 0);
+            };
+        }
+        return enqueueTaskImpl(task);
+    }
+    function aggregateErrors(errors) {
+        return 1 < errors.length && "function" === typeof AggregateError ? new AggregateError(errors) : errors[0];
+    }
+    function popActScope(prevActQueue, prevActScopeDepth) {
+        prevActScopeDepth !== actScopeDepth - 1 && console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ");
+        actScopeDepth = prevActScopeDepth;
+    }
+    function recursivelyFlushAsyncActWork(returnValue, resolve, reject) {
+        var queue = ReactSharedInternals.actQueue;
+        if (null !== queue) {
+            if (0 !== queue.length) try {
+                flushActQueue(queue);
+                enqueueTask(function() {
+                    return recursivelyFlushAsyncActWork(returnValue, resolve, reject);
+                });
+                return;
+            } catch (error) {
+                ReactSharedInternals.thrownErrors.push(error);
+            }
+            else ReactSharedInternals.actQueue = null;
+        }
+        0 < ReactSharedInternals.thrownErrors.length ? (queue = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, reject(queue)) : resolve(returnValue);
+    }
+    function flushActQueue(queue) {
+        if (!isFlushing) {
+            isFlushing = !0;
+            var i = 0;
+            try {
+                for(; i < queue.length; i++){
+                    var callback = queue[i];
+                    do {
+                        ReactSharedInternals.didUsePromise = !1;
+                        var continuation = callback(!1);
+                        if (null !== continuation) {
+                            if (ReactSharedInternals.didUsePromise) {
+                                queue[i] = callback;
+                                queue.splice(0, i);
+                                return;
+                            }
+                            callback = continuation;
+                        } else break;
+                    }while (1);
+                }
+                queue.length = 0;
+            } catch (error) {
+                queue.splice(0, i + 1), ReactSharedInternals.thrownErrors.push(error);
+            } finally{
+                isFlushing = !1;
+            }
+        }
+    }
+    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
+    var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler");
+    Symbol.for("react.provider");
+    var REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy"), REACT_OFFSCREEN_TYPE = Symbol.for("react.offscreen"), MAYBE_ITERATOR_SYMBOL = Symbol.iterator, didWarnStateUpdateForUnmountedComponent = {}, ReactNoopUpdateQueue = {
+        isMounted: function() {
+            return !1;
+        },
+        enqueueForceUpdate: function(publicInstance) {
+            warnNoop(publicInstance, "forceUpdate");
+        },
+        enqueueReplaceState: function(publicInstance) {
+            warnNoop(publicInstance, "replaceState");
+        },
+        enqueueSetState: function(publicInstance) {
+            warnNoop(publicInstance, "setState");
+        }
+    }, assign = Object.assign, emptyObject = {};
+    Object.freeze(emptyObject);
+    Component.prototype.isReactComponent = {};
+    Component.prototype.setState = function(partialState, callback) {
+        if ("object" !== typeof partialState && "function" !== typeof partialState && null != partialState) throw Error("takes an object of state variables to update or a function which returns an object of state variables.");
+        this.updater.enqueueSetState(this, partialState, callback, "setState");
+    };
+    Component.prototype.forceUpdate = function(callback) {
+        this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
+    };
+    var deprecatedAPIs = {
+        isMounted: [
+            "isMounted",
+            "Instead, make sure to clean up subscriptions and pending requests in componentWillUnmount to prevent memory leaks."
+        ],
+        replaceState: [
+            "replaceState",
+            "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."
+        ]
+    }, fnName;
+    for(fnName in deprecatedAPIs)deprecatedAPIs.hasOwnProperty(fnName) && defineDeprecationWarning(fnName, deprecatedAPIs[fnName]);
+    ComponentDummy.prototype = Component.prototype;
+    deprecatedAPIs = PureComponent.prototype = new ComponentDummy();
+    deprecatedAPIs.constructor = PureComponent;
+    assign(deprecatedAPIs, Component.prototype);
+    deprecatedAPIs.isPureReactComponent = !0;
+    var isArrayImpl = Array.isArray, REACT_CLIENT_REFERENCE$2 = Symbol.for("react.client.reference"), ReactSharedInternals = {
+        H: null,
+        A: null,
+        T: null,
+        S: null,
+        actQueue: null,
+        isBatchingLegacy: !1,
+        didScheduleLegacyUpdate: !1,
+        didUsePromise: !1,
+        thrownErrors: [],
+        getCurrentStack: null
+    }, hasOwnProperty = Object.prototype.hasOwnProperty, REACT_CLIENT_REFERENCE$1 = Symbol.for("react.client.reference"), disabledDepth = 0, prevLog, prevInfo, prevWarn, prevError, prevGroup, prevGroupCollapsed, prevGroupEnd;
+    disabledLog.__reactDisabledLog = !0;
+    var prefix, suffix, reentry = !1;
+    var componentFrameCache = new ("function" === typeof WeakMap ? WeakMap : Map)();
+    var REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), specialPropKeyWarningShown, didWarnAboutOldJSXRuntime;
+    var didWarnAboutElementRef = {};
+    var ownerHasKeyUseWarning = {}, didWarnAboutMaps = !1, userProvidedKeyEscapeRegex = /\/+/g, reportGlobalError = "function" === typeof reportError ? reportError : function(error) {
+        if ("object" === typeof window && "function" === typeof window.ErrorEvent) {
+            var event = new window.ErrorEvent("error", {
+                bubbles: !0,
+                cancelable: !0,
+                message: "object" === typeof error && null !== error && "string" === typeof error.message ? String(error.message) : String(error),
+                error: error
+            });
+            if (!window.dispatchEvent(event)) return;
+        } else if ("object" === typeof process && "function" === typeof process.emit) {
+            process.emit("uncaughtException", error);
+            return;
+        }
+        console.error(error);
+    }, didWarnAboutMessageChannel = !1, enqueueTaskImpl = null, actScopeDepth = 0, didWarnNoAwaitAct = !1, isFlushing = !1, queueSeveralMicrotasks = "function" === typeof queueMicrotask ? function(callback) {
+        queueMicrotask(function() {
+            return queueMicrotask(callback);
+        });
+    } : enqueueTask;
+    exports.Children = {
+        map: mapChildren,
+        forEach: function(children, forEachFunc, forEachContext) {
+            mapChildren(children, function() {
+                forEachFunc.apply(this, arguments);
+            }, forEachContext);
+        },
+        count: function(children) {
+            var n = 0;
+            mapChildren(children, function() {
+                n++;
+            });
+            return n;
+        },
+        toArray: function(children) {
+            return mapChildren(children, function(child) {
+                return child;
+            }) || [];
+        },
+        only: function(children) {
+            if (!isValidElement(children)) throw Error("React.Children.only expected to receive a single React element child.");
+            return children;
+        }
+    };
+    exports.Component = Component;
+    exports.Fragment = REACT_FRAGMENT_TYPE;
+    exports.Profiler = REACT_PROFILER_TYPE;
+    exports.PureComponent = PureComponent;
+    exports.StrictMode = REACT_STRICT_MODE_TYPE;
+    exports.Suspense = REACT_SUSPENSE_TYPE;
+    exports.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE = ReactSharedInternals;
+    exports.act = function(callback) {
+        var prevActQueue = ReactSharedInternals.actQueue, prevActScopeDepth = actScopeDepth;
+        actScopeDepth++;
+        var queue = ReactSharedInternals.actQueue = null !== prevActQueue ? prevActQueue : [], didAwaitActCall = !1;
+        try {
+            var result = callback();
+        } catch (error) {
+            ReactSharedInternals.thrownErrors.push(error);
+        }
+        if (0 < ReactSharedInternals.thrownErrors.length) throw popActScope(prevActQueue, prevActScopeDepth), callback = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, callback;
+        if (null !== result && "object" === typeof result && "function" === typeof result.then) {
+            var thenable = result;
+            queueSeveralMicrotasks(function() {
+                didAwaitActCall || didWarnNoAwaitAct || (didWarnNoAwaitAct = !0, console.error("You called act(async () => ...) without await. This could lead to unexpected testing behaviour, interleaving multiple act calls and mixing their scopes. You should - await act(async () => ...);"));
+            });
+            return {
+                then: function(resolve, reject) {
+                    didAwaitActCall = !0;
+                    thenable.then(function(returnValue) {
+                        popActScope(prevActQueue, prevActScopeDepth);
+                        if (0 === prevActScopeDepth) {
+                            try {
+                                flushActQueue(queue), enqueueTask(function() {
+                                    return recursivelyFlushAsyncActWork(returnValue, resolve, reject);
+                                });
+                            } catch (error$2) {
+                                ReactSharedInternals.thrownErrors.push(error$2);
+                            }
+                            if (0 < ReactSharedInternals.thrownErrors.length) {
+                                var _thrownError = aggregateErrors(ReactSharedInternals.thrownErrors);
+                                ReactSharedInternals.thrownErrors.length = 0;
+                                reject(_thrownError);
+                            }
+                        } else resolve(returnValue);
+                    }, function(error) {
+                        popActScope(prevActQueue, prevActScopeDepth);
+                        0 < ReactSharedInternals.thrownErrors.length ? (error = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, reject(error)) : reject(error);
+                    });
+                }
+            };
+        }
+        var returnValue$jscomp$0 = result;
+        popActScope(prevActQueue, prevActScopeDepth);
+        0 === prevActScopeDepth && (flushActQueue(queue), 0 !== queue.length && queueSeveralMicrotasks(function() {
+            didAwaitActCall || didWarnNoAwaitAct || (didWarnNoAwaitAct = !0, console.error("A component suspended inside an `act` scope, but the `act` call was not awaited. When testing React components that depend on asynchronous data, you must await the result:\n\nawait act(() => ...)"));
+        }), ReactSharedInternals.actQueue = null);
+        if (0 < ReactSharedInternals.thrownErrors.length) throw callback = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, callback;
+        return {
+            then: function(resolve, reject) {
+                didAwaitActCall = !0;
+                0 === prevActScopeDepth ? (ReactSharedInternals.actQueue = queue, enqueueTask(function() {
+                    return recursivelyFlushAsyncActWork(returnValue$jscomp$0, resolve, reject);
+                })) : resolve(returnValue$jscomp$0);
+            }
+        };
+    };
+    exports.cache = function(fn) {
+        return function() {
+            return fn.apply(null, arguments);
+        };
+    };
+    exports.cloneElement = function(element, config, children) {
+        if (null === element || void 0 === element) throw Error("The argument must be a React element, but you passed " + element + ".");
+        var props = assign({}, element.props), key = element.key, owner = element._owner;
+        if (null != config) {
+            var JSCompiler_inline_result;
+            a: {
+                if (hasOwnProperty.call(config, "ref") && (JSCompiler_inline_result = Object.getOwnPropertyDescriptor(config, "ref").get) && JSCompiler_inline_result.isReactWarning) {
+                    JSCompiler_inline_result = !1;
+                    break a;
+                }
+                JSCompiler_inline_result = void 0 !== config.ref;
+            }
+            JSCompiler_inline_result && (owner = getOwner());
+            hasValidKey(config) && (checkKeyStringCoercion(config.key), key = "" + config.key);
+            for(propName in config)!hasOwnProperty.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
+        }
+        var propName = arguments.length - 2;
+        if (1 === propName) props.children = children;
+        else if (1 < propName) {
+            JSCompiler_inline_result = Array(propName);
+            for(var i = 0; i < propName; i++)JSCompiler_inline_result[i] = arguments[i + 2];
+            props.children = JSCompiler_inline_result;
+        }
+        props = ReactElement(element.type, key, void 0, void 0, owner, props);
+        for(key = 2; key < arguments.length; key++)validateChildKeys(arguments[key], props.type);
+        return props;
+    };
+    exports.createContext = function(defaultValue) {
+        defaultValue = {
+            $$typeof: REACT_CONTEXT_TYPE,
+            _currentValue: defaultValue,
+            _currentValue2: defaultValue,
+            _threadCount: 0,
+            Provider: null,
+            Consumer: null
+        };
+        defaultValue.Provider = defaultValue;
+        defaultValue.Consumer = {
+            $$typeof: REACT_CONSUMER_TYPE,
+            _context: defaultValue
+        };
+        defaultValue._currentRenderer = null;
+        defaultValue._currentRenderer2 = null;
+        return defaultValue;
+    };
+    exports.createElement = function(type, config, children) {
+        if (isValidElementType(type)) for(var i = 2; i < arguments.length; i++)validateChildKeys(arguments[i], type);
+        else {
+            i = "";
+            if (void 0 === type || "object" === typeof type && null !== type && 0 === Object.keys(type).length) i += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
+            if (null === type) var typeString = "null";
+            else isArrayImpl(type) ? typeString = "array" : void 0 !== type && type.$$typeof === REACT_ELEMENT_TYPE ? (typeString = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />", i = " Did you accidentally export a JSX literal instead of a component?") : typeString = typeof type;
+            console.error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, i);
+        }
+        var propName;
+        i = {};
+        typeString = null;
+        if (null != config) for(propName in didWarnAboutOldJSXRuntime || !("__self" in config) || "key" in config || (didWarnAboutOldJSXRuntime = !0, console.warn("Your app (or one of its dependencies) is using an outdated JSX transform. Update to the modern JSX transform for faster performance: https://react.dev/link/new-jsx-transform")), hasValidKey(config) && (checkKeyStringCoercion(config.key), typeString = "" + config.key), config)hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i[propName] = config[propName]);
+        var childrenLength = arguments.length - 2;
+        if (1 === childrenLength) i.children = children;
+        else if (1 < childrenLength) {
+            for(var childArray = Array(childrenLength), _i = 0; _i < childrenLength; _i++)childArray[_i] = arguments[_i + 2];
+            Object.freeze && Object.freeze(childArray);
+            i.children = childArray;
+        }
+        if (type && type.defaultProps) for(propName in childrenLength = type.defaultProps, childrenLength)void 0 === i[propName] && (i[propName] = childrenLength[propName]);
+        typeString && defineKeyPropWarningGetter(i, "function" === typeof type ? type.displayName || type.name || "Unknown" : type);
+        return ReactElement(type, typeString, void 0, void 0, getOwner(), i);
+    };
+    exports.createRef = function() {
+        var refObject = {
+            current: null
+        };
+        Object.seal(refObject);
+        return refObject;
+    };
+    exports.forwardRef = function(render) {
+        null != render && render.$$typeof === REACT_MEMO_TYPE ? console.error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).") : "function" !== typeof render ? console.error("forwardRef requires a render function but was given %s.", null === render ? "null" : typeof render) : 0 !== render.length && 2 !== render.length && console.error("forwardRef render functions accept exactly two parameters: props and ref. %s", 1 === render.length ? "Did you forget to use the ref parameter?" : "Any additional parameter will be undefined.");
+        null != render && null != render.defaultProps && console.error("forwardRef render functions do not support defaultProps. Did you accidentally pass a React component?");
+        var elementType = {
+            $$typeof: REACT_FORWARD_REF_TYPE,
+            render: render
+        }, ownName;
+        Object.defineProperty(elementType, "displayName", {
+            enumerable: !1,
+            configurable: !0,
+            get: function() {
+                return ownName;
+            },
+            set: function(name) {
+                ownName = name;
+                render.name || render.displayName || (Object.defineProperty(render, "name", {
+                    value: name
+                }), render.displayName = name);
+            }
+        });
+        return elementType;
+    };
+    exports.isValidElement = isValidElement;
+    exports.lazy = function(ctor) {
+        return {
+            $$typeof: REACT_LAZY_TYPE,
+            _payload: {
+                _status: -1,
+                _result: ctor
+            },
+            _init: lazyInitializer
+        };
+    };
+    exports.memo = function(type, compare) {
+        isValidElementType(type) || console.error("memo: The first argument must be a component. Instead received: %s", null === type ? "null" : typeof type);
+        compare = {
+            $$typeof: REACT_MEMO_TYPE,
+            type: type,
+            compare: void 0 === compare ? null : compare
+        };
+        var ownName;
+        Object.defineProperty(compare, "displayName", {
+            enumerable: !1,
+            configurable: !0,
+            get: function() {
+                return ownName;
+            },
+            set: function(name) {
+                ownName = name;
+                type.name || type.displayName || (Object.defineProperty(type, "name", {
+                    value: name
+                }), type.displayName = name);
+            }
+        });
+        return compare;
+    };
+    exports.startTransition = function(scope) {
+        var prevTransition = ReactSharedInternals.T, currentTransition = {};
+        ReactSharedInternals.T = currentTransition;
+        currentTransition._updatedFibers = new Set();
+        try {
+            var returnValue = scope(), onStartTransitionFinish = ReactSharedInternals.S;
+            null !== onStartTransitionFinish && onStartTransitionFinish(currentTransition, returnValue);
+            "object" === typeof returnValue && null !== returnValue && "function" === typeof returnValue.then && returnValue.then(noop, reportGlobalError);
+        } catch (error) {
+            reportGlobalError(error);
+        } finally{
+            null === prevTransition && currentTransition._updatedFibers && (scope = currentTransition._updatedFibers.size, currentTransition._updatedFibers.clear(), 10 < scope && console.warn("Detected a large number of updates inside startTransition. If this is due to a subscription please re-write it to use React provided hooks. Otherwise concurrent mode guarantees are off the table.")), ReactSharedInternals.T = prevTransition;
+        }
+    };
+    exports.unstable_useCacheRefresh = function() {
+        return resolveDispatcher().useCacheRefresh();
+    };
+    exports.use = function(usable) {
+        return resolveDispatcher().use(usable);
+    };
+    exports.useActionState = function(action, initialState, permalink) {
+        return resolveDispatcher().useActionState(action, initialState, permalink);
+    };
+    exports.useCallback = function(callback, deps) {
+        return resolveDispatcher().useCallback(callback, deps);
+    };
+    exports.useContext = function(Context) {
+        var dispatcher = resolveDispatcher();
+        Context.$$typeof === REACT_CONSUMER_TYPE && console.error("Calling useContext(Context.Consumer) is not supported and will cause bugs. Did you mean to call useContext(Context) instead?");
+        return dispatcher.useContext(Context);
+    };
+    exports.useDebugValue = function(value, formatterFn) {
+        return resolveDispatcher().useDebugValue(value, formatterFn);
+    };
+    exports.useDeferredValue = function(value, initialValue) {
+        return resolveDispatcher().useDeferredValue(value, initialValue);
+    };
+    exports.useEffect = function(create, deps) {
+        return resolveDispatcher().useEffect(create, deps);
+    };
+    exports.useId = function() {
+        return resolveDispatcher().useId();
+    };
+    exports.useImperativeHandle = function(ref, create, deps) {
+        return resolveDispatcher().useImperativeHandle(ref, create, deps);
+    };
+    exports.useInsertionEffect = function(create, deps) {
+        return resolveDispatcher().useInsertionEffect(create, deps);
+    };
+    exports.useLayoutEffect = function(create, deps) {
+        return resolveDispatcher().useLayoutEffect(create, deps);
+    };
+    exports.useMemo = function(create, deps) {
+        return resolveDispatcher().useMemo(create, deps);
+    };
+    exports.useOptimistic = function(passthrough, reducer) {
+        return resolveDispatcher().useOptimistic(passthrough, reducer);
+    };
+    exports.useReducer = function(reducer, initialArg, init) {
+        return resolveDispatcher().useReducer(reducer, initialArg, init);
+    };
+    exports.useRef = function(initialValue) {
+        return resolveDispatcher().useRef(initialValue);
+    };
+    exports.useState = function(initialState) {
+        return resolveDispatcher().useState(initialState);
+    };
+    exports.useSyncExternalStore = function(subscribe, getSnapshot, getServerSnapshot) {
+        return resolveDispatcher().useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+    };
+    exports.useTransition = function() {
+        return resolveDispatcher().useTransition();
+    };
+    exports.version = "19.0.0";
+    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+})();
+
+},{"9ffea7b9cafb49c3":"d5jf4"}],"8HBJR":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
@@ -6678,1495 +8065,7 @@ function Backoff(opts) {
     this.jitter = jitter;
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"21dqq":[function(require,module,exports,__globalThis) {
-'use strict';
-module.exports = require("a569817e6ea559f6");
-
-},{"a569817e6ea559f6":"6YvXz"}],"6YvXz":[function(require,module,exports,__globalThis) {
-/**
- * @license React
- * react.development.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */ var process = require("9ffea7b9cafb49c3");
-"use strict";
-(function() {
-    function defineDeprecationWarning(methodName, info) {
-        Object.defineProperty(Component.prototype, methodName, {
-            get: function() {
-                console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", info[0], info[1]);
-            }
-        });
-    }
-    function getIteratorFn(maybeIterable) {
-        if (null === maybeIterable || "object" !== typeof maybeIterable) return null;
-        maybeIterable = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable["@@iterator"];
-        return "function" === typeof maybeIterable ? maybeIterable : null;
-    }
-    function warnNoop(publicInstance, callerName) {
-        publicInstance = (publicInstance = publicInstance.constructor) && (publicInstance.displayName || publicInstance.name) || "ReactClass";
-        var warningKey = publicInstance + "." + callerName;
-        didWarnStateUpdateForUnmountedComponent[warningKey] || (console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `this.state` directly or define a `state = {};` class property with the desired state in the %s component.", callerName, publicInstance), didWarnStateUpdateForUnmountedComponent[warningKey] = !0);
-    }
-    function Component(props, context, updater) {
-        this.props = props;
-        this.context = context;
-        this.refs = emptyObject;
-        this.updater = updater || ReactNoopUpdateQueue;
-    }
-    function ComponentDummy() {}
-    function PureComponent(props, context, updater) {
-        this.props = props;
-        this.context = context;
-        this.refs = emptyObject;
-        this.updater = updater || ReactNoopUpdateQueue;
-    }
-    function testStringCoercion(value) {
-        return "" + value;
-    }
-    function checkKeyStringCoercion(value) {
-        try {
-            testStringCoercion(value);
-            var JSCompiler_inline_result = !1;
-        } catch (e) {
-            JSCompiler_inline_result = !0;
-        }
-        if (JSCompiler_inline_result) {
-            JSCompiler_inline_result = console;
-            var JSCompiler_temp_const = JSCompiler_inline_result.error;
-            var JSCompiler_inline_result$jscomp$0 = "function" === typeof Symbol && Symbol.toStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
-            JSCompiler_temp_const.call(JSCompiler_inline_result, "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.", JSCompiler_inline_result$jscomp$0);
-            return testStringCoercion(value);
-        }
-    }
-    function getComponentNameFromType(type) {
-        if (null == type) return null;
-        if ("function" === typeof type) return type.$$typeof === REACT_CLIENT_REFERENCE$2 ? null : type.displayName || type.name || null;
-        if ("string" === typeof type) return type;
-        switch(type){
-            case REACT_FRAGMENT_TYPE:
-                return "Fragment";
-            case REACT_PORTAL_TYPE:
-                return "Portal";
-            case REACT_PROFILER_TYPE:
-                return "Profiler";
-            case REACT_STRICT_MODE_TYPE:
-                return "StrictMode";
-            case REACT_SUSPENSE_TYPE:
-                return "Suspense";
-            case REACT_SUSPENSE_LIST_TYPE:
-                return "SuspenseList";
-        }
-        if ("object" === typeof type) switch("number" === typeof type.tag && console.error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), type.$$typeof){
-            case REACT_CONTEXT_TYPE:
-                return (type.displayName || "Context") + ".Provider";
-            case REACT_CONSUMER_TYPE:
-                return (type._context.displayName || "Context") + ".Consumer";
-            case REACT_FORWARD_REF_TYPE:
-                var innerType = type.render;
-                type = type.displayName;
-                type || (type = innerType.displayName || innerType.name || "", type = "" !== type ? "ForwardRef(" + type + ")" : "ForwardRef");
-                return type;
-            case REACT_MEMO_TYPE:
-                return innerType = type.displayName || null, null !== innerType ? innerType : getComponentNameFromType(type.type) || "Memo";
-            case REACT_LAZY_TYPE:
-                innerType = type._payload;
-                type = type._init;
-                try {
-                    return getComponentNameFromType(type(innerType));
-                } catch (x) {}
-        }
-        return null;
-    }
-    function isValidElementType(type) {
-        return "string" === typeof type || "function" === typeof type || type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_OFFSCREEN_TYPE || "object" === typeof type && null !== type && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_CONSUMER_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_CLIENT_REFERENCE$1 || void 0 !== type.getModuleId) ? !0 : !1;
-    }
-    function disabledLog() {}
-    function disableLogs() {
-        if (0 === disabledDepth) {
-            prevLog = console.log;
-            prevInfo = console.info;
-            prevWarn = console.warn;
-            prevError = console.error;
-            prevGroup = console.group;
-            prevGroupCollapsed = console.groupCollapsed;
-            prevGroupEnd = console.groupEnd;
-            var props = {
-                configurable: !0,
-                enumerable: !0,
-                value: disabledLog,
-                writable: !0
-            };
-            Object.defineProperties(console, {
-                info: props,
-                log: props,
-                warn: props,
-                error: props,
-                group: props,
-                groupCollapsed: props,
-                groupEnd: props
-            });
-        }
-        disabledDepth++;
-    }
-    function reenableLogs() {
-        disabledDepth--;
-        if (0 === disabledDepth) {
-            var props = {
-                configurable: !0,
-                enumerable: !0,
-                writable: !0
-            };
-            Object.defineProperties(console, {
-                log: assign({}, props, {
-                    value: prevLog
-                }),
-                info: assign({}, props, {
-                    value: prevInfo
-                }),
-                warn: assign({}, props, {
-                    value: prevWarn
-                }),
-                error: assign({}, props, {
-                    value: prevError
-                }),
-                group: assign({}, props, {
-                    value: prevGroup
-                }),
-                groupCollapsed: assign({}, props, {
-                    value: prevGroupCollapsed
-                }),
-                groupEnd: assign({}, props, {
-                    value: prevGroupEnd
-                })
-            });
-        }
-        0 > disabledDepth && console.error("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
-    }
-    function describeBuiltInComponentFrame(name) {
-        if (void 0 === prefix) try {
-            throw Error();
-        } catch (x) {
-            var match = x.stack.trim().match(/\n( *(at )?)/);
-            prefix = match && match[1] || "";
-            suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
-        }
-        return "\n" + prefix + name + suffix;
-    }
-    function describeNativeComponentFrame(fn, construct) {
-        if (!fn || reentry) return "";
-        var frame = componentFrameCache.get(fn);
-        if (void 0 !== frame) return frame;
-        reentry = !0;
-        frame = Error.prepareStackTrace;
-        Error.prepareStackTrace = void 0;
-        var previousDispatcher = null;
-        previousDispatcher = ReactSharedInternals.H;
-        ReactSharedInternals.H = null;
-        disableLogs();
-        try {
-            var RunInRootFrame = {
-                DetermineComponentFrameRoot: function() {
-                    try {
-                        if (construct) {
-                            var Fake = function() {
-                                throw Error();
-                            };
-                            Object.defineProperty(Fake.prototype, "props", {
-                                set: function() {
-                                    throw Error();
-                                }
-                            });
-                            if ("object" === typeof Reflect && Reflect.construct) {
-                                try {
-                                    Reflect.construct(Fake, []);
-                                } catch (x) {
-                                    var control = x;
-                                }
-                                Reflect.construct(fn, [], Fake);
-                            } else {
-                                try {
-                                    Fake.call();
-                                } catch (x$0) {
-                                    control = x$0;
-                                }
-                                fn.call(Fake.prototype);
-                            }
-                        } else {
-                            try {
-                                throw Error();
-                            } catch (x$1) {
-                                control = x$1;
-                            }
-                            (Fake = fn()) && "function" === typeof Fake.catch && Fake.catch(function() {});
-                        }
-                    } catch (sample) {
-                        if (sample && control && "string" === typeof sample.stack) return [
-                            sample.stack,
-                            control.stack
-                        ];
-                    }
-                    return [
-                        null,
-                        null
-                    ];
-                }
-            };
-            RunInRootFrame.DetermineComponentFrameRoot.displayName = "DetermineComponentFrameRoot";
-            var namePropDescriptor = Object.getOwnPropertyDescriptor(RunInRootFrame.DetermineComponentFrameRoot, "name");
-            namePropDescriptor && namePropDescriptor.configurable && Object.defineProperty(RunInRootFrame.DetermineComponentFrameRoot, "name", {
-                value: "DetermineComponentFrameRoot"
-            });
-            var _RunInRootFrame$Deter = RunInRootFrame.DetermineComponentFrameRoot(), sampleStack = _RunInRootFrame$Deter[0], controlStack = _RunInRootFrame$Deter[1];
-            if (sampleStack && controlStack) {
-                var sampleLines = sampleStack.split("\n"), controlLines = controlStack.split("\n");
-                for(_RunInRootFrame$Deter = namePropDescriptor = 0; namePropDescriptor < sampleLines.length && !sampleLines[namePropDescriptor].includes("DetermineComponentFrameRoot");)namePropDescriptor++;
-                for(; _RunInRootFrame$Deter < controlLines.length && !controlLines[_RunInRootFrame$Deter].includes("DetermineComponentFrameRoot");)_RunInRootFrame$Deter++;
-                if (namePropDescriptor === sampleLines.length || _RunInRootFrame$Deter === controlLines.length) for(namePropDescriptor = sampleLines.length - 1, _RunInRootFrame$Deter = controlLines.length - 1; 1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter && sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter];)_RunInRootFrame$Deter--;
-                for(; 1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter; namePropDescriptor--, _RunInRootFrame$Deter--)if (sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
-                    if (1 !== namePropDescriptor || 1 !== _RunInRootFrame$Deter) {
-                        do if (namePropDescriptor--, _RunInRootFrame$Deter--, 0 > _RunInRootFrame$Deter || sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
-                            var _frame = "\n" + sampleLines[namePropDescriptor].replace(" at new ", " at ");
-                            fn.displayName && _frame.includes("<anonymous>") && (_frame = _frame.replace("<anonymous>", fn.displayName));
-                            "function" === typeof fn && componentFrameCache.set(fn, _frame);
-                            return _frame;
-                        }
-                        while (1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter);
-                    }
-                    break;
-                }
-            }
-        } finally{
-            reentry = !1, ReactSharedInternals.H = previousDispatcher, reenableLogs(), Error.prepareStackTrace = frame;
-        }
-        sampleLines = (sampleLines = fn ? fn.displayName || fn.name : "") ? describeBuiltInComponentFrame(sampleLines) : "";
-        "function" === typeof fn && componentFrameCache.set(fn, sampleLines);
-        return sampleLines;
-    }
-    function describeUnknownElementTypeFrameInDEV(type) {
-        if (null == type) return "";
-        if ("function" === typeof type) {
-            var prototype = type.prototype;
-            return describeNativeComponentFrame(type, !(!prototype || !prototype.isReactComponent));
-        }
-        if ("string" === typeof type) return describeBuiltInComponentFrame(type);
-        switch(type){
-            case REACT_SUSPENSE_TYPE:
-                return describeBuiltInComponentFrame("Suspense");
-            case REACT_SUSPENSE_LIST_TYPE:
-                return describeBuiltInComponentFrame("SuspenseList");
-        }
-        if ("object" === typeof type) switch(type.$$typeof){
-            case REACT_FORWARD_REF_TYPE:
-                return type = describeNativeComponentFrame(type.render, !1), type;
-            case REACT_MEMO_TYPE:
-                return describeUnknownElementTypeFrameInDEV(type.type);
-            case REACT_LAZY_TYPE:
-                prototype = type._payload;
-                type = type._init;
-                try {
-                    return describeUnknownElementTypeFrameInDEV(type(prototype));
-                } catch (x) {}
-        }
-        return "";
-    }
-    function getOwner() {
-        var dispatcher = ReactSharedInternals.A;
-        return null === dispatcher ? null : dispatcher.getOwner();
-    }
-    function hasValidKey(config) {
-        if (hasOwnProperty.call(config, "key")) {
-            var getter = Object.getOwnPropertyDescriptor(config, "key").get;
-            if (getter && getter.isReactWarning) return !1;
-        }
-        return void 0 !== config.key;
-    }
-    function defineKeyPropWarningGetter(props, displayName) {
-        function warnAboutAccessingKey() {
-            specialPropKeyWarningShown || (specialPropKeyWarningShown = !0, console.error("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)", displayName));
-        }
-        warnAboutAccessingKey.isReactWarning = !0;
-        Object.defineProperty(props, "key", {
-            get: warnAboutAccessingKey,
-            configurable: !0
-        });
-    }
-    function elementRefGetterWithDeprecationWarning() {
-        var componentName = getComponentNameFromType(this.type);
-        didWarnAboutElementRef[componentName] || (didWarnAboutElementRef[componentName] = !0, console.error("Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."));
-        componentName = this.props.ref;
-        return void 0 !== componentName ? componentName : null;
-    }
-    function ReactElement(type, key, self, source, owner, props) {
-        self = props.ref;
-        type = {
-            $$typeof: REACT_ELEMENT_TYPE,
-            type: type,
-            key: key,
-            props: props,
-            _owner: owner
-        };
-        null !== (void 0 !== self ? self : null) ? Object.defineProperty(type, "ref", {
-            enumerable: !1,
-            get: elementRefGetterWithDeprecationWarning
-        }) : Object.defineProperty(type, "ref", {
-            enumerable: !1,
-            value: null
-        });
-        type._store = {};
-        Object.defineProperty(type._store, "validated", {
-            configurable: !1,
-            enumerable: !1,
-            writable: !0,
-            value: 0
-        });
-        Object.defineProperty(type, "_debugInfo", {
-            configurable: !1,
-            enumerable: !1,
-            writable: !0,
-            value: null
-        });
-        Object.freeze && (Object.freeze(type.props), Object.freeze(type));
-        return type;
-    }
-    function cloneAndReplaceKey(oldElement, newKey) {
-        newKey = ReactElement(oldElement.type, newKey, void 0, void 0, oldElement._owner, oldElement.props);
-        newKey._store.validated = oldElement._store.validated;
-        return newKey;
-    }
-    function validateChildKeys(node, parentType) {
-        if ("object" === typeof node && node && node.$$typeof !== REACT_CLIENT_REFERENCE) {
-            if (isArrayImpl(node)) for(var i = 0; i < node.length; i++){
-                var child = node[i];
-                isValidElement(child) && validateExplicitKey(child, parentType);
-            }
-            else if (isValidElement(node)) node._store && (node._store.validated = 1);
-            else if (i = getIteratorFn(node), "function" === typeof i && i !== node.entries && (i = i.call(node), i !== node)) for(; !(node = i.next()).done;)isValidElement(node.value) && validateExplicitKey(node.value, parentType);
-        }
-    }
-    function isValidElement(object) {
-        return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
-    }
-    function validateExplicitKey(element, parentType) {
-        if (element._store && !element._store.validated && null == element.key && (element._store.validated = 1, parentType = getCurrentComponentErrorInfo(parentType), !ownerHasKeyUseWarning[parentType])) {
-            ownerHasKeyUseWarning[parentType] = !0;
-            var childOwner = "";
-            element && null != element._owner && element._owner !== getOwner() && (childOwner = null, "number" === typeof element._owner.tag ? childOwner = getComponentNameFromType(element._owner.type) : "string" === typeof element._owner.name && (childOwner = element._owner.name), childOwner = " It was passed a child from " + childOwner + ".");
-            var prevGetCurrentStack = ReactSharedInternals.getCurrentStack;
-            ReactSharedInternals.getCurrentStack = function() {
-                var stack = describeUnknownElementTypeFrameInDEV(element.type);
-                prevGetCurrentStack && (stack += prevGetCurrentStack() || "");
-                return stack;
-            };
-            console.error('Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information.', parentType, childOwner);
-            ReactSharedInternals.getCurrentStack = prevGetCurrentStack;
-        }
-    }
-    function getCurrentComponentErrorInfo(parentType) {
-        var info = "", owner = getOwner();
-        owner && (owner = getComponentNameFromType(owner.type)) && (info = "\n\nCheck the render method of `" + owner + "`.");
-        info || (parentType = getComponentNameFromType(parentType)) && (info = "\n\nCheck the top-level render call using <" + parentType + ">.");
-        return info;
-    }
-    function escape(key) {
-        var escaperLookup = {
-            "=": "=0",
-            ":": "=2"
-        };
-        return "$" + key.replace(/[=:]/g, function(match) {
-            return escaperLookup[match];
-        });
-    }
-    function getElementKey(element, index) {
-        return "object" === typeof element && null !== element && null != element.key ? (checkKeyStringCoercion(element.key), escape("" + element.key)) : index.toString(36);
-    }
-    function noop$1() {}
-    function resolveThenable(thenable) {
-        switch(thenable.status){
-            case "fulfilled":
-                return thenable.value;
-            case "rejected":
-                throw thenable.reason;
-            default:
-                switch("string" === typeof thenable.status ? thenable.then(noop$1, noop$1) : (thenable.status = "pending", thenable.then(function(fulfilledValue) {
-                    "pending" === thenable.status && (thenable.status = "fulfilled", thenable.value = fulfilledValue);
-                }, function(error) {
-                    "pending" === thenable.status && (thenable.status = "rejected", thenable.reason = error);
-                })), thenable.status){
-                    case "fulfilled":
-                        return thenable.value;
-                    case "rejected":
-                        throw thenable.reason;
-                }
-        }
-        throw thenable;
-    }
-    function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
-        var type = typeof children;
-        if ("undefined" === type || "boolean" === type) children = null;
-        var invokeCallback = !1;
-        if (null === children) invokeCallback = !0;
-        else switch(type){
-            case "bigint":
-            case "string":
-            case "number":
-                invokeCallback = !0;
-                break;
-            case "object":
-                switch(children.$$typeof){
-                    case REACT_ELEMENT_TYPE:
-                    case REACT_PORTAL_TYPE:
-                        invokeCallback = !0;
-                        break;
-                    case REACT_LAZY_TYPE:
-                        return invokeCallback = children._init, mapIntoArray(invokeCallback(children._payload), array, escapedPrefix, nameSoFar, callback);
-                }
-        }
-        if (invokeCallback) {
-            invokeCallback = children;
-            callback = callback(invokeCallback);
-            var childKey = "" === nameSoFar ? "." + getElementKey(invokeCallback, 0) : nameSoFar;
-            isArrayImpl(callback) ? (escapedPrefix = "", null != childKey && (escapedPrefix = childKey.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c) {
-                return c;
-            })) : null != callback && (isValidElement(callback) && (null != callback.key && (invokeCallback && invokeCallback.key === callback.key || checkKeyStringCoercion(callback.key)), escapedPrefix = cloneAndReplaceKey(callback, escapedPrefix + (null == callback.key || invokeCallback && invokeCallback.key === callback.key ? "" : ("" + callback.key).replace(userProvidedKeyEscapeRegex, "$&/") + "/") + childKey), "" !== nameSoFar && null != invokeCallback && isValidElement(invokeCallback) && null == invokeCallback.key && invokeCallback._store && !invokeCallback._store.validated && (escapedPrefix._store.validated = 2), callback = escapedPrefix), array.push(callback));
-            return 1;
-        }
-        invokeCallback = 0;
-        childKey = "" === nameSoFar ? "." : nameSoFar + ":";
-        if (isArrayImpl(children)) for(var i = 0; i < children.length; i++)nameSoFar = children[i], type = childKey + getElementKey(nameSoFar, i), invokeCallback += mapIntoArray(nameSoFar, array, escapedPrefix, type, callback);
-        else if (i = getIteratorFn(children), "function" === typeof i) for(i === children.entries && (didWarnAboutMaps || console.warn("Using Maps as children is not supported. Use an array of keyed ReactElements instead."), didWarnAboutMaps = !0), children = i.call(children), i = 0; !(nameSoFar = children.next()).done;)nameSoFar = nameSoFar.value, type = childKey + getElementKey(nameSoFar, i++), invokeCallback += mapIntoArray(nameSoFar, array, escapedPrefix, type, callback);
-        else if ("object" === type) {
-            if ("function" === typeof children.then) return mapIntoArray(resolveThenable(children), array, escapedPrefix, nameSoFar, callback);
-            array = String(children);
-            throw Error("Objects are not valid as a React child (found: " + ("[object Object]" === array ? "object with keys {" + Object.keys(children).join(", ") + "}" : array) + "). If you meant to render a collection of children, use an array instead.");
-        }
-        return invokeCallback;
-    }
-    function mapChildren(children, func, context) {
-        if (null == children) return children;
-        var result = [], count = 0;
-        mapIntoArray(children, result, "", "", function(child) {
-            return func.call(context, child, count++);
-        });
-        return result;
-    }
-    function lazyInitializer(payload) {
-        if (-1 === payload._status) {
-            var ctor = payload._result;
-            ctor = ctor();
-            ctor.then(function(moduleObject) {
-                if (0 === payload._status || -1 === payload._status) payload._status = 1, payload._result = moduleObject;
-            }, function(error) {
-                if (0 === payload._status || -1 === payload._status) payload._status = 2, payload._result = error;
-            });
-            -1 === payload._status && (payload._status = 0, payload._result = ctor);
-        }
-        if (1 === payload._status) return ctor = payload._result, void 0 === ctor && console.error("lazy: Expected the result of a dynamic import() call. Instead received: %s\n\nYour code should look like: \n  const MyComponent = lazy(() => import('./MyComponent'))\n\nDid you accidentally put curly braces around the import?", ctor), "default" in ctor || console.error("lazy: Expected the result of a dynamic import() call. Instead received: %s\n\nYour code should look like: \n  const MyComponent = lazy(() => import('./MyComponent'))", ctor), ctor.default;
-        throw payload._result;
-    }
-    function resolveDispatcher() {
-        var dispatcher = ReactSharedInternals.H;
-        null === dispatcher && console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.");
-        return dispatcher;
-    }
-    function noop() {}
-    function enqueueTask(task) {
-        if (null === enqueueTaskImpl) try {
-            var requireString = ("require" + Math.random()).slice(0, 7);
-            enqueueTaskImpl = (module && module[requireString]).call(module, "timers").setImmediate;
-        } catch (_err) {
-            enqueueTaskImpl = function(callback) {
-                !1 === didWarnAboutMessageChannel && (didWarnAboutMessageChannel = !0, "undefined" === typeof MessageChannel && console.error("This browser does not have a MessageChannel implementation, so enqueuing tasks via await act(async () => ...) will fail. Please file an issue at https://github.com/facebook/react/issues if you encounter this warning."));
-                var channel = new MessageChannel();
-                channel.port1.onmessage = callback;
-                channel.port2.postMessage(void 0);
-            };
-        }
-        return enqueueTaskImpl(task);
-    }
-    function aggregateErrors(errors) {
-        return 1 < errors.length && "function" === typeof AggregateError ? new AggregateError(errors) : errors[0];
-    }
-    function popActScope(prevActQueue, prevActScopeDepth) {
-        prevActScopeDepth !== actScopeDepth - 1 && console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ");
-        actScopeDepth = prevActScopeDepth;
-    }
-    function recursivelyFlushAsyncActWork(returnValue, resolve, reject) {
-        var queue = ReactSharedInternals.actQueue;
-        if (null !== queue) {
-            if (0 !== queue.length) try {
-                flushActQueue(queue);
-                enqueueTask(function() {
-                    return recursivelyFlushAsyncActWork(returnValue, resolve, reject);
-                });
-                return;
-            } catch (error) {
-                ReactSharedInternals.thrownErrors.push(error);
-            }
-            else ReactSharedInternals.actQueue = null;
-        }
-        0 < ReactSharedInternals.thrownErrors.length ? (queue = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, reject(queue)) : resolve(returnValue);
-    }
-    function flushActQueue(queue) {
-        if (!isFlushing) {
-            isFlushing = !0;
-            var i = 0;
-            try {
-                for(; i < queue.length; i++){
-                    var callback = queue[i];
-                    do {
-                        ReactSharedInternals.didUsePromise = !1;
-                        var continuation = callback(!1);
-                        if (null !== continuation) {
-                            if (ReactSharedInternals.didUsePromise) {
-                                queue[i] = callback;
-                                queue.splice(0, i);
-                                return;
-                            }
-                            callback = continuation;
-                        } else break;
-                    }while (1);
-                }
-                queue.length = 0;
-            } catch (error) {
-                queue.splice(0, i + 1), ReactSharedInternals.thrownErrors.push(error);
-            } finally{
-                isFlushing = !1;
-            }
-        }
-    }
-    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-    var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler");
-    Symbol.for("react.provider");
-    var REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy"), REACT_OFFSCREEN_TYPE = Symbol.for("react.offscreen"), MAYBE_ITERATOR_SYMBOL = Symbol.iterator, didWarnStateUpdateForUnmountedComponent = {}, ReactNoopUpdateQueue = {
-        isMounted: function() {
-            return !1;
-        },
-        enqueueForceUpdate: function(publicInstance) {
-            warnNoop(publicInstance, "forceUpdate");
-        },
-        enqueueReplaceState: function(publicInstance) {
-            warnNoop(publicInstance, "replaceState");
-        },
-        enqueueSetState: function(publicInstance) {
-            warnNoop(publicInstance, "setState");
-        }
-    }, assign = Object.assign, emptyObject = {};
-    Object.freeze(emptyObject);
-    Component.prototype.isReactComponent = {};
-    Component.prototype.setState = function(partialState, callback) {
-        if ("object" !== typeof partialState && "function" !== typeof partialState && null != partialState) throw Error("takes an object of state variables to update or a function which returns an object of state variables.");
-        this.updater.enqueueSetState(this, partialState, callback, "setState");
-    };
-    Component.prototype.forceUpdate = function(callback) {
-        this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
-    };
-    var deprecatedAPIs = {
-        isMounted: [
-            "isMounted",
-            "Instead, make sure to clean up subscriptions and pending requests in componentWillUnmount to prevent memory leaks."
-        ],
-        replaceState: [
-            "replaceState",
-            "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."
-        ]
-    }, fnName;
-    for(fnName in deprecatedAPIs)deprecatedAPIs.hasOwnProperty(fnName) && defineDeprecationWarning(fnName, deprecatedAPIs[fnName]);
-    ComponentDummy.prototype = Component.prototype;
-    deprecatedAPIs = PureComponent.prototype = new ComponentDummy();
-    deprecatedAPIs.constructor = PureComponent;
-    assign(deprecatedAPIs, Component.prototype);
-    deprecatedAPIs.isPureReactComponent = !0;
-    var isArrayImpl = Array.isArray, REACT_CLIENT_REFERENCE$2 = Symbol.for("react.client.reference"), ReactSharedInternals = {
-        H: null,
-        A: null,
-        T: null,
-        S: null,
-        actQueue: null,
-        isBatchingLegacy: !1,
-        didScheduleLegacyUpdate: !1,
-        didUsePromise: !1,
-        thrownErrors: [],
-        getCurrentStack: null
-    }, hasOwnProperty = Object.prototype.hasOwnProperty, REACT_CLIENT_REFERENCE$1 = Symbol.for("react.client.reference"), disabledDepth = 0, prevLog, prevInfo, prevWarn, prevError, prevGroup, prevGroupCollapsed, prevGroupEnd;
-    disabledLog.__reactDisabledLog = !0;
-    var prefix, suffix, reentry = !1;
-    var componentFrameCache = new ("function" === typeof WeakMap ? WeakMap : Map)();
-    var REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), specialPropKeyWarningShown, didWarnAboutOldJSXRuntime;
-    var didWarnAboutElementRef = {};
-    var ownerHasKeyUseWarning = {}, didWarnAboutMaps = !1, userProvidedKeyEscapeRegex = /\/+/g, reportGlobalError = "function" === typeof reportError ? reportError : function(error) {
-        if ("object" === typeof window && "function" === typeof window.ErrorEvent) {
-            var event = new window.ErrorEvent("error", {
-                bubbles: !0,
-                cancelable: !0,
-                message: "object" === typeof error && null !== error && "string" === typeof error.message ? String(error.message) : String(error),
-                error: error
-            });
-            if (!window.dispatchEvent(event)) return;
-        } else if ("object" === typeof process && "function" === typeof process.emit) {
-            process.emit("uncaughtException", error);
-            return;
-        }
-        console.error(error);
-    }, didWarnAboutMessageChannel = !1, enqueueTaskImpl = null, actScopeDepth = 0, didWarnNoAwaitAct = !1, isFlushing = !1, queueSeveralMicrotasks = "function" === typeof queueMicrotask ? function(callback) {
-        queueMicrotask(function() {
-            return queueMicrotask(callback);
-        });
-    } : enqueueTask;
-    exports.Children = {
-        map: mapChildren,
-        forEach: function(children, forEachFunc, forEachContext) {
-            mapChildren(children, function() {
-                forEachFunc.apply(this, arguments);
-            }, forEachContext);
-        },
-        count: function(children) {
-            var n = 0;
-            mapChildren(children, function() {
-                n++;
-            });
-            return n;
-        },
-        toArray: function(children) {
-            return mapChildren(children, function(child) {
-                return child;
-            }) || [];
-        },
-        only: function(children) {
-            if (!isValidElement(children)) throw Error("React.Children.only expected to receive a single React element child.");
-            return children;
-        }
-    };
-    exports.Component = Component;
-    exports.Fragment = REACT_FRAGMENT_TYPE;
-    exports.Profiler = REACT_PROFILER_TYPE;
-    exports.PureComponent = PureComponent;
-    exports.StrictMode = REACT_STRICT_MODE_TYPE;
-    exports.Suspense = REACT_SUSPENSE_TYPE;
-    exports.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE = ReactSharedInternals;
-    exports.act = function(callback) {
-        var prevActQueue = ReactSharedInternals.actQueue, prevActScopeDepth = actScopeDepth;
-        actScopeDepth++;
-        var queue = ReactSharedInternals.actQueue = null !== prevActQueue ? prevActQueue : [], didAwaitActCall = !1;
-        try {
-            var result = callback();
-        } catch (error) {
-            ReactSharedInternals.thrownErrors.push(error);
-        }
-        if (0 < ReactSharedInternals.thrownErrors.length) throw popActScope(prevActQueue, prevActScopeDepth), callback = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, callback;
-        if (null !== result && "object" === typeof result && "function" === typeof result.then) {
-            var thenable = result;
-            queueSeveralMicrotasks(function() {
-                didAwaitActCall || didWarnNoAwaitAct || (didWarnNoAwaitAct = !0, console.error("You called act(async () => ...) without await. This could lead to unexpected testing behaviour, interleaving multiple act calls and mixing their scopes. You should - await act(async () => ...);"));
-            });
-            return {
-                then: function(resolve, reject) {
-                    didAwaitActCall = !0;
-                    thenable.then(function(returnValue) {
-                        popActScope(prevActQueue, prevActScopeDepth);
-                        if (0 === prevActScopeDepth) {
-                            try {
-                                flushActQueue(queue), enqueueTask(function() {
-                                    return recursivelyFlushAsyncActWork(returnValue, resolve, reject);
-                                });
-                            } catch (error$2) {
-                                ReactSharedInternals.thrownErrors.push(error$2);
-                            }
-                            if (0 < ReactSharedInternals.thrownErrors.length) {
-                                var _thrownError = aggregateErrors(ReactSharedInternals.thrownErrors);
-                                ReactSharedInternals.thrownErrors.length = 0;
-                                reject(_thrownError);
-                            }
-                        } else resolve(returnValue);
-                    }, function(error) {
-                        popActScope(prevActQueue, prevActScopeDepth);
-                        0 < ReactSharedInternals.thrownErrors.length ? (error = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, reject(error)) : reject(error);
-                    });
-                }
-            };
-        }
-        var returnValue$jscomp$0 = result;
-        popActScope(prevActQueue, prevActScopeDepth);
-        0 === prevActScopeDepth && (flushActQueue(queue), 0 !== queue.length && queueSeveralMicrotasks(function() {
-            didAwaitActCall || didWarnNoAwaitAct || (didWarnNoAwaitAct = !0, console.error("A component suspended inside an `act` scope, but the `act` call was not awaited. When testing React components that depend on asynchronous data, you must await the result:\n\nawait act(() => ...)"));
-        }), ReactSharedInternals.actQueue = null);
-        if (0 < ReactSharedInternals.thrownErrors.length) throw callback = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, callback;
-        return {
-            then: function(resolve, reject) {
-                didAwaitActCall = !0;
-                0 === prevActScopeDepth ? (ReactSharedInternals.actQueue = queue, enqueueTask(function() {
-                    return recursivelyFlushAsyncActWork(returnValue$jscomp$0, resolve, reject);
-                })) : resolve(returnValue$jscomp$0);
-            }
-        };
-    };
-    exports.cache = function(fn) {
-        return function() {
-            return fn.apply(null, arguments);
-        };
-    };
-    exports.cloneElement = function(element, config, children) {
-        if (null === element || void 0 === element) throw Error("The argument must be a React element, but you passed " + element + ".");
-        var props = assign({}, element.props), key = element.key, owner = element._owner;
-        if (null != config) {
-            var JSCompiler_inline_result;
-            a: {
-                if (hasOwnProperty.call(config, "ref") && (JSCompiler_inline_result = Object.getOwnPropertyDescriptor(config, "ref").get) && JSCompiler_inline_result.isReactWarning) {
-                    JSCompiler_inline_result = !1;
-                    break a;
-                }
-                JSCompiler_inline_result = void 0 !== config.ref;
-            }
-            JSCompiler_inline_result && (owner = getOwner());
-            hasValidKey(config) && (checkKeyStringCoercion(config.key), key = "" + config.key);
-            for(propName in config)!hasOwnProperty.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
-        }
-        var propName = arguments.length - 2;
-        if (1 === propName) props.children = children;
-        else if (1 < propName) {
-            JSCompiler_inline_result = Array(propName);
-            for(var i = 0; i < propName; i++)JSCompiler_inline_result[i] = arguments[i + 2];
-            props.children = JSCompiler_inline_result;
-        }
-        props = ReactElement(element.type, key, void 0, void 0, owner, props);
-        for(key = 2; key < arguments.length; key++)validateChildKeys(arguments[key], props.type);
-        return props;
-    };
-    exports.createContext = function(defaultValue) {
-        defaultValue = {
-            $$typeof: REACT_CONTEXT_TYPE,
-            _currentValue: defaultValue,
-            _currentValue2: defaultValue,
-            _threadCount: 0,
-            Provider: null,
-            Consumer: null
-        };
-        defaultValue.Provider = defaultValue;
-        defaultValue.Consumer = {
-            $$typeof: REACT_CONSUMER_TYPE,
-            _context: defaultValue
-        };
-        defaultValue._currentRenderer = null;
-        defaultValue._currentRenderer2 = null;
-        return defaultValue;
-    };
-    exports.createElement = function(type, config, children) {
-        if (isValidElementType(type)) for(var i = 2; i < arguments.length; i++)validateChildKeys(arguments[i], type);
-        else {
-            i = "";
-            if (void 0 === type || "object" === typeof type && null !== type && 0 === Object.keys(type).length) i += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
-            if (null === type) var typeString = "null";
-            else isArrayImpl(type) ? typeString = "array" : void 0 !== type && type.$$typeof === REACT_ELEMENT_TYPE ? (typeString = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />", i = " Did you accidentally export a JSX literal instead of a component?") : typeString = typeof type;
-            console.error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, i);
-        }
-        var propName;
-        i = {};
-        typeString = null;
-        if (null != config) for(propName in didWarnAboutOldJSXRuntime || !("__self" in config) || "key" in config || (didWarnAboutOldJSXRuntime = !0, console.warn("Your app (or one of its dependencies) is using an outdated JSX transform. Update to the modern JSX transform for faster performance: https://react.dev/link/new-jsx-transform")), hasValidKey(config) && (checkKeyStringCoercion(config.key), typeString = "" + config.key), config)hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i[propName] = config[propName]);
-        var childrenLength = arguments.length - 2;
-        if (1 === childrenLength) i.children = children;
-        else if (1 < childrenLength) {
-            for(var childArray = Array(childrenLength), _i = 0; _i < childrenLength; _i++)childArray[_i] = arguments[_i + 2];
-            Object.freeze && Object.freeze(childArray);
-            i.children = childArray;
-        }
-        if (type && type.defaultProps) for(propName in childrenLength = type.defaultProps, childrenLength)void 0 === i[propName] && (i[propName] = childrenLength[propName]);
-        typeString && defineKeyPropWarningGetter(i, "function" === typeof type ? type.displayName || type.name || "Unknown" : type);
-        return ReactElement(type, typeString, void 0, void 0, getOwner(), i);
-    };
-    exports.createRef = function() {
-        var refObject = {
-            current: null
-        };
-        Object.seal(refObject);
-        return refObject;
-    };
-    exports.forwardRef = function(render) {
-        null != render && render.$$typeof === REACT_MEMO_TYPE ? console.error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).") : "function" !== typeof render ? console.error("forwardRef requires a render function but was given %s.", null === render ? "null" : typeof render) : 0 !== render.length && 2 !== render.length && console.error("forwardRef render functions accept exactly two parameters: props and ref. %s", 1 === render.length ? "Did you forget to use the ref parameter?" : "Any additional parameter will be undefined.");
-        null != render && null != render.defaultProps && console.error("forwardRef render functions do not support defaultProps. Did you accidentally pass a React component?");
-        var elementType = {
-            $$typeof: REACT_FORWARD_REF_TYPE,
-            render: render
-        }, ownName;
-        Object.defineProperty(elementType, "displayName", {
-            enumerable: !1,
-            configurable: !0,
-            get: function() {
-                return ownName;
-            },
-            set: function(name) {
-                ownName = name;
-                render.name || render.displayName || (Object.defineProperty(render, "name", {
-                    value: name
-                }), render.displayName = name);
-            }
-        });
-        return elementType;
-    };
-    exports.isValidElement = isValidElement;
-    exports.lazy = function(ctor) {
-        return {
-            $$typeof: REACT_LAZY_TYPE,
-            _payload: {
-                _status: -1,
-                _result: ctor
-            },
-            _init: lazyInitializer
-        };
-    };
-    exports.memo = function(type, compare) {
-        isValidElementType(type) || console.error("memo: The first argument must be a component. Instead received: %s", null === type ? "null" : typeof type);
-        compare = {
-            $$typeof: REACT_MEMO_TYPE,
-            type: type,
-            compare: void 0 === compare ? null : compare
-        };
-        var ownName;
-        Object.defineProperty(compare, "displayName", {
-            enumerable: !1,
-            configurable: !0,
-            get: function() {
-                return ownName;
-            },
-            set: function(name) {
-                ownName = name;
-                type.name || type.displayName || (Object.defineProperty(type, "name", {
-                    value: name
-                }), type.displayName = name);
-            }
-        });
-        return compare;
-    };
-    exports.startTransition = function(scope) {
-        var prevTransition = ReactSharedInternals.T, currentTransition = {};
-        ReactSharedInternals.T = currentTransition;
-        currentTransition._updatedFibers = new Set();
-        try {
-            var returnValue = scope(), onStartTransitionFinish = ReactSharedInternals.S;
-            null !== onStartTransitionFinish && onStartTransitionFinish(currentTransition, returnValue);
-            "object" === typeof returnValue && null !== returnValue && "function" === typeof returnValue.then && returnValue.then(noop, reportGlobalError);
-        } catch (error) {
-            reportGlobalError(error);
-        } finally{
-            null === prevTransition && currentTransition._updatedFibers && (scope = currentTransition._updatedFibers.size, currentTransition._updatedFibers.clear(), 10 < scope && console.warn("Detected a large number of updates inside startTransition. If this is due to a subscription please re-write it to use React provided hooks. Otherwise concurrent mode guarantees are off the table.")), ReactSharedInternals.T = prevTransition;
-        }
-    };
-    exports.unstable_useCacheRefresh = function() {
-        return resolveDispatcher().useCacheRefresh();
-    };
-    exports.use = function(usable) {
-        return resolveDispatcher().use(usable);
-    };
-    exports.useActionState = function(action, initialState, permalink) {
-        return resolveDispatcher().useActionState(action, initialState, permalink);
-    };
-    exports.useCallback = function(callback, deps) {
-        return resolveDispatcher().useCallback(callback, deps);
-    };
-    exports.useContext = function(Context) {
-        var dispatcher = resolveDispatcher();
-        Context.$$typeof === REACT_CONSUMER_TYPE && console.error("Calling useContext(Context.Consumer) is not supported and will cause bugs. Did you mean to call useContext(Context) instead?");
-        return dispatcher.useContext(Context);
-    };
-    exports.useDebugValue = function(value, formatterFn) {
-        return resolveDispatcher().useDebugValue(value, formatterFn);
-    };
-    exports.useDeferredValue = function(value, initialValue) {
-        return resolveDispatcher().useDeferredValue(value, initialValue);
-    };
-    exports.useEffect = function(create, deps) {
-        return resolveDispatcher().useEffect(create, deps);
-    };
-    exports.useId = function() {
-        return resolveDispatcher().useId();
-    };
-    exports.useImperativeHandle = function(ref, create, deps) {
-        return resolveDispatcher().useImperativeHandle(ref, create, deps);
-    };
-    exports.useInsertionEffect = function(create, deps) {
-        return resolveDispatcher().useInsertionEffect(create, deps);
-    };
-    exports.useLayoutEffect = function(create, deps) {
-        return resolveDispatcher().useLayoutEffect(create, deps);
-    };
-    exports.useMemo = function(create, deps) {
-        return resolveDispatcher().useMemo(create, deps);
-    };
-    exports.useOptimistic = function(passthrough, reducer) {
-        return resolveDispatcher().useOptimistic(passthrough, reducer);
-    };
-    exports.useReducer = function(reducer, initialArg, init) {
-        return resolveDispatcher().useReducer(reducer, initialArg, init);
-    };
-    exports.useRef = function(initialValue) {
-        return resolveDispatcher().useRef(initialValue);
-    };
-    exports.useState = function(initialState) {
-        return resolveDispatcher().useState(initialState);
-    };
-    exports.useSyncExternalStore = function(subscribe, getSnapshot, getServerSnapshot) {
-        return resolveDispatcher().useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-    };
-    exports.useTransition = function() {
-        return resolveDispatcher().useTransition();
-    };
-    exports.version = "19.0.0";
-    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
-})();
-
-},{"9ffea7b9cafb49c3":"d5jf4"}],"km3Ru":[function(require,module,exports,__globalThis) {
-"use strict";
-var Refresh = require("7422ead32dcc1e6b");
-var { version } = require("630b62916b1ae0e7");
-function debounce(func, delay) {
-    {
-        let timeout = undefined;
-        let lastTime = 0;
-        return function(args) {
-            // Call immediately if last call was more than the delay ago.
-            // Otherwise, set a timeout. This means the first call is fast
-            // (for the common case of a single update), and subsequent updates
-            // are batched.
-            let now = Date.now();
-            if (now - lastTime > delay) {
-                lastTime = now;
-                func.call(null, args);
-            } else {
-                clearTimeout(timeout);
-                timeout = setTimeout(function() {
-                    timeout = undefined;
-                    lastTime = Date.now();
-                    func.call(null, args);
-                }, delay);
-            }
-        };
-    }
-}
-var enqueueUpdate = debounce(function() {
-    Refresh.performReactRefresh();
-}, 30);
-// Everything below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function(module1) {
-    window.__REACT_REFRESH_VERSION_TRANSFORMER = version;
-    window.$RefreshReg$ = function(type, id) {
-        if (window.__REACT_REFRESH_VERSION_TRANSFORMER && window.__REACT_REFRESH_VERSION_RUNTIME && window.__REACT_REFRESH_VERSION_TRANSFORMER !== window.__REACT_REFRESH_VERSION_RUNTIME) // Both versions were set and they did not match
-        throw new Error(`react-refresh versions did not match between transformer and runtime. Please check your dependencies. Transformer: ${window.__REACT_REFRESH_VERSION_TRANSFORMER}, Runtime: ${window.__REACT_REFRESH_VERSION_RUNTIME}`);
-        Refresh.register(type, module1.id + ' ' + id);
-    };
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function(module1) {
-    if (isReactRefreshBoundary(module1.exports)) {
-        registerExportsForReactRefresh(module1);
-        if (module1.hot) {
-            module1.hot.dispose(function(data) {
-                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
-                data.prevExports = module1.exports;
-            });
-            module1.hot.accept(function(getParents) {
-                var prevExports = module1.hot.data.prevExports;
-                var nextExports = module1.exports;
-                // Since we just executed the code for it, it's possible
-                // that the new exports make it ineligible for being a boundary.
-                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
-                // It can also become ineligible if its exports are incompatible
-                // with the previous exports.
-                // For example, if you add/remove/change exports, we'll want
-                // to re-execute the importing modules, and force those components
-                // to re-render. Similarly, if you convert a class component
-                // to a function, we want to invalidate the boundary.
-                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-                if (isNoLongerABoundary || didInvalidate) {
-                    // We'll be conservative. The only case in which we won't do a full
-                    // reload is if all parent modules are also refresh boundaries.
-                    // In that case we'll add them to the current queue.
-                    var parents = getParents();
-                    if (parents.length === 0) {
-                        // Looks like we bubbled to the root. Can't recover from that.
-                        window.location.reload();
-                        return;
-                    }
-                    return parents;
-                }
-                enqueueUpdate();
-            });
-        }
-    }
-};
-function isReactRefreshBoundary(exports) {
-    if (Refresh.isLikelyComponentType(exports)) return true;
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    return false;
-    var hasExports = false;
-    var areAllExportsComponents = true;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        hasExports = true;
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
-        return false;
-        var exportValue = exports[key];
-        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
-    }
-    return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-    var prevSignature = getRefreshBoundarySignature(prevExports);
-    var nextSignature = getRefreshBoundarySignature(nextExports);
-    if (prevSignature.length !== nextSignature.length) return true;
-    for(var i = 0; i < nextSignature.length; i++){
-        if (prevSignature[i] !== nextSignature[i]) return true;
-    }
-    return false;
-}
-// When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-    var signature = [];
-    signature.push(Refresh.getFamilyByType(exports));
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        signature.push(key);
-        signature.push(Refresh.getFamilyByType(exportValue));
-    }
-    return signature;
-}
-function registerExportsForReactRefresh(module1) {
-    var exports = module1.exports, id = module1.id;
-    Refresh.register(exports, id + ' %exports%');
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        var typeID = id + ' %exports% ' + key;
-        Refresh.register(exportValue, typeID);
-    }
-}
-
-},{"7422ead32dcc1e6b":"786KC","630b62916b1ae0e7":"4SQxb"}],"4SQxb":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.11.0\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"build-info.json\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
-
-},{}],"iTorj":[function(require,module,exports,__globalThis) {
-'use strict';
-module.exports = require("ee51401569654d91");
-
-},{"ee51401569654d91":"48uCM"}],"48uCM":[function(require,module,exports,__globalThis) {
-/**
- * @license React
- * react-jsx-dev-runtime.development.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */ "use strict";
-(function() {
-    function getComponentNameFromType(type) {
-        if (null == type) return null;
-        if ("function" === typeof type) return type.$$typeof === REACT_CLIENT_REFERENCE$2 ? null : type.displayName || type.name || null;
-        if ("string" === typeof type) return type;
-        switch(type){
-            case REACT_FRAGMENT_TYPE:
-                return "Fragment";
-            case REACT_PORTAL_TYPE:
-                return "Portal";
-            case REACT_PROFILER_TYPE:
-                return "Profiler";
-            case REACT_STRICT_MODE_TYPE:
-                return "StrictMode";
-            case REACT_SUSPENSE_TYPE:
-                return "Suspense";
-            case REACT_SUSPENSE_LIST_TYPE:
-                return "SuspenseList";
-        }
-        if ("object" === typeof type) switch("number" === typeof type.tag && console.error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), type.$$typeof){
-            case REACT_CONTEXT_TYPE:
-                return (type.displayName || "Context") + ".Provider";
-            case REACT_CONSUMER_TYPE:
-                return (type._context.displayName || "Context") + ".Consumer";
-            case REACT_FORWARD_REF_TYPE:
-                var innerType = type.render;
-                type = type.displayName;
-                type || (type = innerType.displayName || innerType.name || "", type = "" !== type ? "ForwardRef(" + type + ")" : "ForwardRef");
-                return type;
-            case REACT_MEMO_TYPE:
-                return innerType = type.displayName || null, null !== innerType ? innerType : getComponentNameFromType(type.type) || "Memo";
-            case REACT_LAZY_TYPE:
-                innerType = type._payload;
-                type = type._init;
-                try {
-                    return getComponentNameFromType(type(innerType));
-                } catch (x) {}
-        }
-        return null;
-    }
-    function testStringCoercion(value) {
-        return "" + value;
-    }
-    function checkKeyStringCoercion(value) {
-        try {
-            testStringCoercion(value);
-            var JSCompiler_inline_result = !1;
-        } catch (e) {
-            JSCompiler_inline_result = !0;
-        }
-        if (JSCompiler_inline_result) {
-            JSCompiler_inline_result = console;
-            var JSCompiler_temp_const = JSCompiler_inline_result.error;
-            var JSCompiler_inline_result$jscomp$0 = "function" === typeof Symbol && Symbol.toStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
-            JSCompiler_temp_const.call(JSCompiler_inline_result, "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.", JSCompiler_inline_result$jscomp$0);
-            return testStringCoercion(value);
-        }
-    }
-    function disabledLog() {}
-    function disableLogs() {
-        if (0 === disabledDepth) {
-            prevLog = console.log;
-            prevInfo = console.info;
-            prevWarn = console.warn;
-            prevError = console.error;
-            prevGroup = console.group;
-            prevGroupCollapsed = console.groupCollapsed;
-            prevGroupEnd = console.groupEnd;
-            var props = {
-                configurable: !0,
-                enumerable: !0,
-                value: disabledLog,
-                writable: !0
-            };
-            Object.defineProperties(console, {
-                info: props,
-                log: props,
-                warn: props,
-                error: props,
-                group: props,
-                groupCollapsed: props,
-                groupEnd: props
-            });
-        }
-        disabledDepth++;
-    }
-    function reenableLogs() {
-        disabledDepth--;
-        if (0 === disabledDepth) {
-            var props = {
-                configurable: !0,
-                enumerable: !0,
-                writable: !0
-            };
-            Object.defineProperties(console, {
-                log: assign({}, props, {
-                    value: prevLog
-                }),
-                info: assign({}, props, {
-                    value: prevInfo
-                }),
-                warn: assign({}, props, {
-                    value: prevWarn
-                }),
-                error: assign({}, props, {
-                    value: prevError
-                }),
-                group: assign({}, props, {
-                    value: prevGroup
-                }),
-                groupCollapsed: assign({}, props, {
-                    value: prevGroupCollapsed
-                }),
-                groupEnd: assign({}, props, {
-                    value: prevGroupEnd
-                })
-            });
-        }
-        0 > disabledDepth && console.error("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
-    }
-    function describeBuiltInComponentFrame(name) {
-        if (void 0 === prefix) try {
-            throw Error();
-        } catch (x) {
-            var match = x.stack.trim().match(/\n( *(at )?)/);
-            prefix = match && match[1] || "";
-            suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
-        }
-        return "\n" + prefix + name + suffix;
-    }
-    function describeNativeComponentFrame(fn, construct) {
-        if (!fn || reentry) return "";
-        var frame = componentFrameCache.get(fn);
-        if (void 0 !== frame) return frame;
-        reentry = !0;
-        frame = Error.prepareStackTrace;
-        Error.prepareStackTrace = void 0;
-        var previousDispatcher = null;
-        previousDispatcher = ReactSharedInternals.H;
-        ReactSharedInternals.H = null;
-        disableLogs();
-        try {
-            var RunInRootFrame = {
-                DetermineComponentFrameRoot: function() {
-                    try {
-                        if (construct) {
-                            var Fake = function() {
-                                throw Error();
-                            };
-                            Object.defineProperty(Fake.prototype, "props", {
-                                set: function() {
-                                    throw Error();
-                                }
-                            });
-                            if ("object" === typeof Reflect && Reflect.construct) {
-                                try {
-                                    Reflect.construct(Fake, []);
-                                } catch (x) {
-                                    var control = x;
-                                }
-                                Reflect.construct(fn, [], Fake);
-                            } else {
-                                try {
-                                    Fake.call();
-                                } catch (x$0) {
-                                    control = x$0;
-                                }
-                                fn.call(Fake.prototype);
-                            }
-                        } else {
-                            try {
-                                throw Error();
-                            } catch (x$1) {
-                                control = x$1;
-                            }
-                            (Fake = fn()) && "function" === typeof Fake.catch && Fake.catch(function() {});
-                        }
-                    } catch (sample) {
-                        if (sample && control && "string" === typeof sample.stack) return [
-                            sample.stack,
-                            control.stack
-                        ];
-                    }
-                    return [
-                        null,
-                        null
-                    ];
-                }
-            };
-            RunInRootFrame.DetermineComponentFrameRoot.displayName = "DetermineComponentFrameRoot";
-            var namePropDescriptor = Object.getOwnPropertyDescriptor(RunInRootFrame.DetermineComponentFrameRoot, "name");
-            namePropDescriptor && namePropDescriptor.configurable && Object.defineProperty(RunInRootFrame.DetermineComponentFrameRoot, "name", {
-                value: "DetermineComponentFrameRoot"
-            });
-            var _RunInRootFrame$Deter = RunInRootFrame.DetermineComponentFrameRoot(), sampleStack = _RunInRootFrame$Deter[0], controlStack = _RunInRootFrame$Deter[1];
-            if (sampleStack && controlStack) {
-                var sampleLines = sampleStack.split("\n"), controlLines = controlStack.split("\n");
-                for(_RunInRootFrame$Deter = namePropDescriptor = 0; namePropDescriptor < sampleLines.length && !sampleLines[namePropDescriptor].includes("DetermineComponentFrameRoot");)namePropDescriptor++;
-                for(; _RunInRootFrame$Deter < controlLines.length && !controlLines[_RunInRootFrame$Deter].includes("DetermineComponentFrameRoot");)_RunInRootFrame$Deter++;
-                if (namePropDescriptor === sampleLines.length || _RunInRootFrame$Deter === controlLines.length) for(namePropDescriptor = sampleLines.length - 1, _RunInRootFrame$Deter = controlLines.length - 1; 1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter && sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter];)_RunInRootFrame$Deter--;
-                for(; 1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter; namePropDescriptor--, _RunInRootFrame$Deter--)if (sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
-                    if (1 !== namePropDescriptor || 1 !== _RunInRootFrame$Deter) {
-                        do if (namePropDescriptor--, _RunInRootFrame$Deter--, 0 > _RunInRootFrame$Deter || sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
-                            var _frame = "\n" + sampleLines[namePropDescriptor].replace(" at new ", " at ");
-                            fn.displayName && _frame.includes("<anonymous>") && (_frame = _frame.replace("<anonymous>", fn.displayName));
-                            "function" === typeof fn && componentFrameCache.set(fn, _frame);
-                            return _frame;
-                        }
-                        while (1 <= namePropDescriptor && 0 <= _RunInRootFrame$Deter);
-                    }
-                    break;
-                }
-            }
-        } finally{
-            reentry = !1, ReactSharedInternals.H = previousDispatcher, reenableLogs(), Error.prepareStackTrace = frame;
-        }
-        sampleLines = (sampleLines = fn ? fn.displayName || fn.name : "") ? describeBuiltInComponentFrame(sampleLines) : "";
-        "function" === typeof fn && componentFrameCache.set(fn, sampleLines);
-        return sampleLines;
-    }
-    function describeUnknownElementTypeFrameInDEV(type) {
-        if (null == type) return "";
-        if ("function" === typeof type) {
-            var prototype = type.prototype;
-            return describeNativeComponentFrame(type, !(!prototype || !prototype.isReactComponent));
-        }
-        if ("string" === typeof type) return describeBuiltInComponentFrame(type);
-        switch(type){
-            case REACT_SUSPENSE_TYPE:
-                return describeBuiltInComponentFrame("Suspense");
-            case REACT_SUSPENSE_LIST_TYPE:
-                return describeBuiltInComponentFrame("SuspenseList");
-        }
-        if ("object" === typeof type) switch(type.$$typeof){
-            case REACT_FORWARD_REF_TYPE:
-                return type = describeNativeComponentFrame(type.render, !1), type;
-            case REACT_MEMO_TYPE:
-                return describeUnknownElementTypeFrameInDEV(type.type);
-            case REACT_LAZY_TYPE:
-                prototype = type._payload;
-                type = type._init;
-                try {
-                    return describeUnknownElementTypeFrameInDEV(type(prototype));
-                } catch (x) {}
-        }
-        return "";
-    }
-    function getOwner() {
-        var dispatcher = ReactSharedInternals.A;
-        return null === dispatcher ? null : dispatcher.getOwner();
-    }
-    function hasValidKey(config) {
-        if (hasOwnProperty.call(config, "key")) {
-            var getter = Object.getOwnPropertyDescriptor(config, "key").get;
-            if (getter && getter.isReactWarning) return !1;
-        }
-        return void 0 !== config.key;
-    }
-    function defineKeyPropWarningGetter(props, displayName) {
-        function warnAboutAccessingKey() {
-            specialPropKeyWarningShown || (specialPropKeyWarningShown = !0, console.error("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)", displayName));
-        }
-        warnAboutAccessingKey.isReactWarning = !0;
-        Object.defineProperty(props, "key", {
-            get: warnAboutAccessingKey,
-            configurable: !0
-        });
-    }
-    function elementRefGetterWithDeprecationWarning() {
-        var componentName = getComponentNameFromType(this.type);
-        didWarnAboutElementRef[componentName] || (didWarnAboutElementRef[componentName] = !0, console.error("Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."));
-        componentName = this.props.ref;
-        return void 0 !== componentName ? componentName : null;
-    }
-    function ReactElement(type, key, self, source, owner, props) {
-        self = props.ref;
-        type = {
-            $$typeof: REACT_ELEMENT_TYPE,
-            type: type,
-            key: key,
-            props: props,
-            _owner: owner
-        };
-        null !== (void 0 !== self ? self : null) ? Object.defineProperty(type, "ref", {
-            enumerable: !1,
-            get: elementRefGetterWithDeprecationWarning
-        }) : Object.defineProperty(type, "ref", {
-            enumerable: !1,
-            value: null
-        });
-        type._store = {};
-        Object.defineProperty(type._store, "validated", {
-            configurable: !1,
-            enumerable: !1,
-            writable: !0,
-            value: 0
-        });
-        Object.defineProperty(type, "_debugInfo", {
-            configurable: !1,
-            enumerable: !1,
-            writable: !0,
-            value: null
-        });
-        Object.freeze && (Object.freeze(type.props), Object.freeze(type));
-        return type;
-    }
-    function jsxDEVImpl(type, config, maybeKey, isStaticChildren, source, self) {
-        if ("string" === typeof type || "function" === typeof type || type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_OFFSCREEN_TYPE || "object" === typeof type && null !== type && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_CONSUMER_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_CLIENT_REFERENCE$1 || void 0 !== type.getModuleId)) {
-            var children = config.children;
-            if (void 0 !== children) {
-                if (isStaticChildren) {
-                    if (isArrayImpl(children)) {
-                        for(isStaticChildren = 0; isStaticChildren < children.length; isStaticChildren++)validateChildKeys(children[isStaticChildren], type);
-                        Object.freeze && Object.freeze(children);
-                    } else console.error("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
-                } else validateChildKeys(children, type);
-            }
-        } else {
-            children = "";
-            if (void 0 === type || "object" === typeof type && null !== type && 0 === Object.keys(type).length) children += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
-            null === type ? isStaticChildren = "null" : isArrayImpl(type) ? isStaticChildren = "array" : void 0 !== type && type.$$typeof === REACT_ELEMENT_TYPE ? (isStaticChildren = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />", children = " Did you accidentally export a JSX literal instead of a component?") : isStaticChildren = typeof type;
-            console.error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", isStaticChildren, children);
-        }
-        if (hasOwnProperty.call(config, "key")) {
-            children = getComponentNameFromType(type);
-            var keys = Object.keys(config).filter(function(k) {
-                return "key" !== k;
-            });
-            isStaticChildren = 0 < keys.length ? "{key: someKey, " + keys.join(": ..., ") + ": ...}" : "{key: someKey}";
-            didWarnAboutKeySpread[children + isStaticChildren] || (keys = 0 < keys.length ? "{" + keys.join(": ..., ") + ": ...}" : "{}", console.error('A props object containing a "key" prop is being spread into JSX:\n  let props = %s;\n  <%s {...props} />\nReact keys must be passed directly to JSX without using spread:\n  let props = %s;\n  <%s key={someKey} {...props} />', isStaticChildren, children, keys, children), didWarnAboutKeySpread[children + isStaticChildren] = !0);
-        }
-        children = null;
-        void 0 !== maybeKey && (checkKeyStringCoercion(maybeKey), children = "" + maybeKey);
-        hasValidKey(config) && (checkKeyStringCoercion(config.key), children = "" + config.key);
-        if ("key" in config) {
-            maybeKey = {};
-            for(var propName in config)"key" !== propName && (maybeKey[propName] = config[propName]);
-        } else maybeKey = config;
-        children && defineKeyPropWarningGetter(maybeKey, "function" === typeof type ? type.displayName || type.name || "Unknown" : type);
-        return ReactElement(type, children, self, source, getOwner(), maybeKey);
-    }
-    function validateChildKeys(node, parentType) {
-        if ("object" === typeof node && node && node.$$typeof !== REACT_CLIENT_REFERENCE) {
-            if (isArrayImpl(node)) for(var i = 0; i < node.length; i++){
-                var child = node[i];
-                isValidElement(child) && validateExplicitKey(child, parentType);
-            }
-            else if (isValidElement(node)) node._store && (node._store.validated = 1);
-            else if (null === node || "object" !== typeof node ? i = null : (i = MAYBE_ITERATOR_SYMBOL && node[MAYBE_ITERATOR_SYMBOL] || node["@@iterator"], i = "function" === typeof i ? i : null), "function" === typeof i && i !== node.entries && (i = i.call(node), i !== node)) for(; !(node = i.next()).done;)isValidElement(node.value) && validateExplicitKey(node.value, parentType);
-        }
-    }
-    function isValidElement(object) {
-        return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
-    }
-    function validateExplicitKey(element, parentType) {
-        if (element._store && !element._store.validated && null == element.key && (element._store.validated = 1, parentType = getCurrentComponentErrorInfo(parentType), !ownerHasKeyUseWarning[parentType])) {
-            ownerHasKeyUseWarning[parentType] = !0;
-            var childOwner = "";
-            element && null != element._owner && element._owner !== getOwner() && (childOwner = null, "number" === typeof element._owner.tag ? childOwner = getComponentNameFromType(element._owner.type) : "string" === typeof element._owner.name && (childOwner = element._owner.name), childOwner = " It was passed a child from " + childOwner + ".");
-            var prevGetCurrentStack = ReactSharedInternals.getCurrentStack;
-            ReactSharedInternals.getCurrentStack = function() {
-                var stack = describeUnknownElementTypeFrameInDEV(element.type);
-                prevGetCurrentStack && (stack += prevGetCurrentStack() || "");
-                return stack;
-            };
-            console.error('Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information.', parentType, childOwner);
-            ReactSharedInternals.getCurrentStack = prevGetCurrentStack;
-        }
-    }
-    function getCurrentComponentErrorInfo(parentType) {
-        var info = "", owner = getOwner();
-        owner && (owner = getComponentNameFromType(owner.type)) && (info = "\n\nCheck the render method of `" + owner + "`.");
-        info || (parentType = getComponentNameFromType(parentType)) && (info = "\n\nCheck the top-level render call using <" + parentType + ">.");
-        return info;
-    }
-    var React = require("58362d9d82be395f"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler");
-    Symbol.for("react.provider");
-    var REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy"), REACT_OFFSCREEN_TYPE = Symbol.for("react.offscreen"), MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE$2 = Symbol.for("react.client.reference"), ReactSharedInternals = React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, assign = Object.assign, REACT_CLIENT_REFERENCE$1 = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, disabledDepth = 0, prevLog, prevInfo, prevWarn, prevError, prevGroup, prevGroupCollapsed, prevGroupEnd;
-    disabledLog.__reactDisabledLog = !0;
-    var prefix, suffix, reentry = !1;
-    var componentFrameCache = new ("function" === typeof WeakMap ? WeakMap : Map)();
-    var REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), specialPropKeyWarningShown;
-    var didWarnAboutElementRef = {};
-    var didWarnAboutKeySpread = {}, ownerHasKeyUseWarning = {};
-    exports.Fragment = REACT_FRAGMENT_TYPE;
-    exports.jsxDEV = function(type, config, maybeKey, isStaticChildren, source, self) {
-        return jsxDEVImpl(type, config, maybeKey, isStaticChildren, source, self);
-    };
-})();
-
-},{"58362d9d82be395f":"21dqq"}],"7DnXL":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7DnXL":[function(require,module,exports,__globalThis) {
 // "export type" declarations on separate lines are in use
 // to workaround babel issue(s) 11465 12578
 //
@@ -8282,7 +8181,7 @@ var _funnelChart = require("./chart/FunnelChart");
 var _trapezoid = require("./shape/Trapezoid");
 var _global = require("./util/Global");
 
-},{"./container/Surface":"ldrIX","./container/Layer":"hLZRL","./component/Legend":"3qIzt","./component/DefaultLegendContent":"eCRbJ","./component/Tooltip":"gEbNO","./component/DefaultTooltipContent":"di8Sm","./component/ResponsiveContainer":"jjAvV","./component/Cell":"cmpyN","./component/Text":"gXuIW","./component/Label":"snyTy","./component/LabelList":"e2z7M","./component/Customized":"6QVhp","./shape/Sector":"djk2D","./shape/Curve":"ldzTR","./shape/Rectangle":"21ix4","./shape/Polygon":"ei100","./shape/Dot":"hrSyt","./shape/Cross":"8B3ly","./shape/Symbols":"2a019","./polar/PolarGrid":"8b5cm","./polar/PolarRadiusAxis":"94jRq","./polar/PolarAngleAxis":"7ZFSt","./polar/Pie":"4x9kw","./polar/Radar":"7NYcf","./polar/RadialBar":"aMKPI","./cartesian/Brush":"b3JiM","./cartesian/ReferenceLine":"9l3Ij","./cartesian/ReferenceDot":"8ANk2","./cartesian/ReferenceArea":"8U9tT","./cartesian/CartesianAxis":"2GpfE","./cartesian/CartesianGrid":"P0swa","./cartesian/Line":"bjP4o","./cartesian/Area":"dfpTQ","./cartesian/Bar":"62moi","./cartesian/Scatter":"djBli","./cartesian/XAxis":"doQvk","./cartesian/YAxis":"h3RMd","./cartesian/ZAxis":"7RCJH","./cartesian/ErrorBar":"ddxHl","./chart/LineChart":"2RI7N","./chart/BarChart":"as5Yi","./chart/PieChart":"4LavF","./chart/Treemap":"8SGAS","./chart/Sankey":"cT9aD","./chart/RadarChart":"dc9g6","./chart/ScatterChart":"fIiiE","./chart/AreaChart":"f9mWK","./chart/RadialBarChart":"kMX1W","./chart/ComposedChart":"8F9rr","./chart/SunburstChart":"3wB6k","./numberAxis/Funnel":"2AzTS","./chart/FunnelChart":"4JUVP","./shape/Trapezoid":"7Ff4R","./util/Global":"7fOrk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ldrIX":[function(require,module,exports,__globalThis) {
+},{"./container/Surface":false,"./container/Layer":false,"./component/Legend":false,"./component/DefaultLegendContent":false,"./component/Tooltip":false,"./component/DefaultTooltipContent":false,"./component/ResponsiveContainer":false,"./component/Cell":false,"./component/Text":false,"./component/Label":false,"./component/LabelList":false,"./component/Customized":false,"./shape/Sector":false,"./shape/Curve":false,"./shape/Rectangle":false,"./shape/Polygon":false,"./shape/Dot":false,"./shape/Cross":false,"./shape/Symbols":false,"./polar/PolarGrid":false,"./polar/PolarRadiusAxis":false,"./polar/PolarAngleAxis":false,"./polar/Pie":false,"./polar/Radar":false,"./polar/RadialBar":false,"./cartesian/Brush":false,"./cartesian/ReferenceLine":false,"./cartesian/ReferenceDot":false,"./cartesian/ReferenceArea":false,"./cartesian/CartesianAxis":false,"./cartesian/CartesianGrid":false,"./cartesian/Line":"bjP4o","./cartesian/Area":false,"./cartesian/Bar":false,"./cartesian/Scatter":false,"./cartesian/XAxis":"doQvk","./cartesian/YAxis":"h3RMd","./cartesian/ZAxis":false,"./cartesian/ErrorBar":false,"./chart/LineChart":"2RI7N","./chart/BarChart":false,"./chart/PieChart":false,"./chart/Treemap":false,"./chart/Sankey":false,"./chart/RadarChart":false,"./chart/ScatterChart":false,"./chart/AreaChart":false,"./chart/RadialBarChart":false,"./chart/ComposedChart":false,"./chart/SunburstChart":false,"./numberAxis/Funnel":false,"./chart/FunnelChart":false,"./shape/Trapezoid":false,"./util/Global":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ldrIX":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Surface", ()=>Surface);
@@ -17452,524 +17351,7 @@ var Global = {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jjAvV":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ResponsiveContainer", ()=>ResponsiveContainer);
-/**
- * @fileOverview Wrapper component to make charts adapt to the size of parent * DOM
- */ var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _throttle = require("lodash/throttle");
-var _throttleDefault = parcelHelpers.interopDefault(_throttle);
-var _dataUtils = require("../util/DataUtils");
-var _logUtils = require("../util/LogUtils");
-var _reactUtils = require("../util/ReactUtils");
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-function _iterableToArrayLimit(r, l) {
-    var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-    if (null != t) {
-        var e, n, i, u, a = [], f = !0, o = !1;
-        try {
-            if (i = (t = t.call(r)).next, 0 === l) {
-                if (Object(t) !== t) return;
-                f = !1;
-            } else for(; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-        } catch (r) {
-            o = !0, n = r;
-        } finally{
-            try {
-                if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
-            } finally{
-                if (o) throw n;
-            }
-        }
-        return a;
-    }
-}
-function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-}
-var ResponsiveContainer = /*#__PURE__*/ (0, _react.forwardRef)(function(_ref, ref) {
-    var aspect = _ref.aspect, _ref$initialDimension = _ref.initialDimension, initialDimension = _ref$initialDimension === void 0 ? {
-        width: -1,
-        height: -1
-    } : _ref$initialDimension, _ref$width = _ref.width, width = _ref$width === void 0 ? '100%' : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? '100%' : _ref$height, _ref$minWidth = _ref.minWidth, minWidth = _ref$minWidth === void 0 ? 0 : _ref$minWidth, minHeight = _ref.minHeight, maxHeight = _ref.maxHeight, children = _ref.children, _ref$debounce = _ref.debounce, debounce = _ref$debounce === void 0 ? 0 : _ref$debounce, id = _ref.id, className = _ref.className, onResize = _ref.onResize, _ref$style = _ref.style, style = _ref$style === void 0 ? {} : _ref$style;
-    var containerRef = (0, _react.useRef)(null);
-    var onResizeRef = (0, _react.useRef)();
-    onResizeRef.current = onResize;
-    (0, _react.useImperativeHandle)(ref, function() {
-        return Object.defineProperty(containerRef.current, 'current', {
-            get: function get() {
-                // eslint-disable-next-line no-console
-                console.warn('The usage of ref.current.current is deprecated and will no longer be supported.');
-                return containerRef.current;
-            },
-            configurable: true
-        });
-    });
-    var _useState = (0, _react.useState)({
-        containerWidth: initialDimension.width,
-        containerHeight: initialDimension.height
-    }), _useState2 = _slicedToArray(_useState, 2), sizes = _useState2[0], setSizes = _useState2[1];
-    var setContainerSize = (0, _react.useCallback)(function(newWidth, newHeight) {
-        setSizes(function(prevState) {
-            var roundedWidth = Math.round(newWidth);
-            var roundedHeight = Math.round(newHeight);
-            if (prevState.containerWidth === roundedWidth && prevState.containerHeight === roundedHeight) return prevState;
-            return {
-                containerWidth: roundedWidth,
-                containerHeight: roundedHeight
-            };
-        });
-    }, []);
-    (0, _react.useEffect)(function() {
-        var callback = function callback(entries) {
-            var _onResizeRef$current;
-            var _entries$0$contentRec = entries[0].contentRect, containerWidth = _entries$0$contentRec.width, containerHeight = _entries$0$contentRec.height;
-            setContainerSize(containerWidth, containerHeight);
-            (_onResizeRef$current = onResizeRef.current) === null || _onResizeRef$current === void 0 || _onResizeRef$current.call(onResizeRef, containerWidth, containerHeight);
-        };
-        if (debounce > 0) callback = (0, _throttleDefault.default)(callback, debounce, {
-            trailing: true,
-            leading: false
-        });
-        var observer = new ResizeObserver(callback);
-        var _containerRef$current = containerRef.current.getBoundingClientRect(), containerWidth = _containerRef$current.width, containerHeight = _containerRef$current.height;
-        setContainerSize(containerWidth, containerHeight);
-        observer.observe(containerRef.current);
-        return function() {
-            observer.disconnect();
-        };
-    }, [
-        setContainerSize,
-        debounce
-    ]);
-    var chartContent = (0, _react.useMemo)(function() {
-        var containerWidth = sizes.containerWidth, containerHeight = sizes.containerHeight;
-        if (containerWidth < 0 || containerHeight < 0) return null;
-        (0, _logUtils.warn)((0, _dataUtils.isPercent)(width) || (0, _dataUtils.isPercent)(height), "The width(%s) and height(%s) are both fixed numbers,\n       maybe you don't need to use a ResponsiveContainer.", width, height);
-        (0, _logUtils.warn)(!aspect || aspect > 0, 'The aspect(%s) must be greater than zero.', aspect);
-        var calculatedWidth = (0, _dataUtils.isPercent)(width) ? containerWidth : width;
-        var calculatedHeight = (0, _dataUtils.isPercent)(height) ? containerHeight : height;
-        if (aspect && aspect > 0) {
-            // Preserve the desired aspect ratio
-            if (calculatedWidth) // Will default to using width for aspect ratio
-            calculatedHeight = calculatedWidth / aspect;
-            else if (calculatedHeight) // But we should also take height into consideration
-            calculatedWidth = calculatedHeight * aspect;
-            // if maxHeight is set, overwrite if calculatedHeight is greater than maxHeight
-            if (maxHeight && calculatedHeight > maxHeight) calculatedHeight = maxHeight;
-        }
-        (0, _logUtils.warn)(calculatedWidth > 0 || calculatedHeight > 0, "The width(%s) and height(%s) of chart should be greater than 0,\n       please check the style of container, or the props width(%s) and height(%s),\n       or add a minWidth(%s) or minHeight(%s) or use aspect(%s) to control the\n       height and width.", calculatedWidth, calculatedHeight, width, height, minWidth, minHeight, aspect);
-        var isCharts = !Array.isArray(children) && (0, _reactUtils.getDisplayName)(children.type).endsWith('Chart');
-        return (0, _reactDefault.default).Children.map(children, function(child) {
-            if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(child)) return /*#__PURE__*/ (0, _react.cloneElement)(child, _objectSpread({
-                width: calculatedWidth,
-                height: calculatedHeight
-            }, isCharts ? {
-                style: _objectSpread({
-                    height: '100%',
-                    width: '100%',
-                    maxHeight: calculatedHeight,
-                    maxWidth: calculatedWidth
-                }, child.props.style)
-            } : {}));
-            return child;
-        });
-    }, [
-        aspect,
-        children,
-        height,
-        maxHeight,
-        minHeight,
-        minWidth,
-        sizes,
-        width
-    ]);
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
-        id: id ? "".concat(id) : undefined,
-        className: (0, _clsxDefault.default)('recharts-responsive-container', className),
-        style: _objectSpread(_objectSpread({}, style), {}, {
-            width: width,
-            height: height,
-            minWidth: minWidth,
-            minHeight: minHeight,
-            maxHeight: maxHeight
-        }),
-        ref: containerRef
-    }, chartContent);
-});
-
-},{"clsx":"gocd3","react":"21dqq","lodash/throttle":"lAb0D","../util/DataUtils":"exzKF","../util/LogUtils":"8xgWw","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lAb0D":[function(require,module,exports,__globalThis) {
-var debounce = require("5b383646e2c7b4c6"), isObject = require("a29ce0b3e78d037d");
-/** Error message constants. */ var FUNC_ERROR_TEXT = 'Expected a function';
-/**
- * Creates a throttled function that only invokes `func` at most once per
- * every `wait` milliseconds. The throttled function comes with a `cancel`
- * method to cancel delayed `func` invocations and a `flush` method to
- * immediately invoke them. Provide `options` to indicate whether `func`
- * should be invoked on the leading and/or trailing edge of the `wait`
- * timeout. The `func` is invoked with the last arguments provided to the
- * throttled function. Subsequent calls to the throttled function return the
- * result of the last `func` invocation.
- *
- * **Note:** If `leading` and `trailing` options are `true`, `func` is
- * invoked on the trailing edge of the timeout only if the throttled function
- * is invoked more than once during the `wait` timeout.
- *
- * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
- * until to the next tick, similar to `setTimeout` with a timeout of `0`.
- *
- * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
- * for details over the differences between `_.throttle` and `_.debounce`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to throttle.
- * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
- * @param {Object} [options={}] The options object.
- * @param {boolean} [options.leading=true]
- *  Specify invoking on the leading edge of the timeout.
- * @param {boolean} [options.trailing=true]
- *  Specify invoking on the trailing edge of the timeout.
- * @returns {Function} Returns the new throttled function.
- * @example
- *
- * // Avoid excessively updating the position while scrolling.
- * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
- *
- * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
- * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
- * jQuery(element).on('click', throttled);
- *
- * // Cancel the trailing throttled invocation.
- * jQuery(window).on('popstate', throttled.cancel);
- */ function throttle(func, wait, options) {
-    var leading = true, trailing = true;
-    if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
-    if (isObject(options)) {
-        leading = 'leading' in options ? !!options.leading : leading;
-        trailing = 'trailing' in options ? !!options.trailing : trailing;
-    }
-    return debounce(func, wait, {
-        'leading': leading,
-        'maxWait': wait,
-        'trailing': trailing
-    });
-}
-module.exports = throttle;
-
-},{"5b383646e2c7b4c6":"bv6vy","a29ce0b3e78d037d":"cGhqJ"}],"bv6vy":[function(require,module,exports,__globalThis) {
-var isObject = require("3b174a999d6a40ac"), now = require("575b2317167ce20d"), toNumber = require("a13332670c5c0f63");
-/** Error message constants. */ var FUNC_ERROR_TEXT = 'Expected a function';
-/* Built-in method references for those with the same name as other `lodash` methods. */ var nativeMax = Math.max, nativeMin = Math.min;
-/**
- * Creates a debounced function that delays invoking `func` until after `wait`
- * milliseconds have elapsed since the last time the debounced function was
- * invoked. The debounced function comes with a `cancel` method to cancel
- * delayed `func` invocations and a `flush` method to immediately invoke them.
- * Provide `options` to indicate whether `func` should be invoked on the
- * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
- * with the last arguments provided to the debounced function. Subsequent
- * calls to the debounced function return the result of the last `func`
- * invocation.
- *
- * **Note:** If `leading` and `trailing` options are `true`, `func` is
- * invoked on the trailing edge of the timeout only if the debounced function
- * is invoked more than once during the `wait` timeout.
- *
- * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
- * until to the next tick, similar to `setTimeout` with a timeout of `0`.
- *
- * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
- * for details over the differences between `_.debounce` and `_.throttle`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to debounce.
- * @param {number} [wait=0] The number of milliseconds to delay.
- * @param {Object} [options={}] The options object.
- * @param {boolean} [options.leading=false]
- *  Specify invoking on the leading edge of the timeout.
- * @param {number} [options.maxWait]
- *  The maximum time `func` is allowed to be delayed before it's invoked.
- * @param {boolean} [options.trailing=true]
- *  Specify invoking on the trailing edge of the timeout.
- * @returns {Function} Returns the new debounced function.
- * @example
- *
- * // Avoid costly calculations while the window size is in flux.
- * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
- *
- * // Invoke `sendMail` when clicked, debouncing subsequent calls.
- * jQuery(element).on('click', _.debounce(sendMail, 300, {
- *   'leading': true,
- *   'trailing': false
- * }));
- *
- * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
- * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
- * var source = new EventSource('/stream');
- * jQuery(source).on('message', debounced);
- *
- * // Cancel the trailing debounced invocation.
- * jQuery(window).on('popstate', debounced.cancel);
- */ function debounce(func, wait, options) {
-    var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
-    if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
-    wait = toNumber(wait) || 0;
-    if (isObject(options)) {
-        leading = !!options.leading;
-        maxing = 'maxWait' in options;
-        maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
-        trailing = 'trailing' in options ? !!options.trailing : trailing;
-    }
-    function invokeFunc(time) {
-        var args = lastArgs, thisArg = lastThis;
-        lastArgs = lastThis = undefined;
-        lastInvokeTime = time;
-        result = func.apply(thisArg, args);
-        return result;
-    }
-    function leadingEdge(time) {
-        // Reset any `maxWait` timer.
-        lastInvokeTime = time;
-        // Start the timer for the trailing edge.
-        timerId = setTimeout(timerExpired, wait);
-        // Invoke the leading edge.
-        return leading ? invokeFunc(time) : result;
-    }
-    function remainingWait(time) {
-        var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime, timeWaiting = wait - timeSinceLastCall;
-        return maxing ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
-    }
-    function shouldInvoke(time) {
-        var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime;
-        // Either this is the first call, activity has stopped and we're at the
-        // trailing edge, the system time has gone backwards and we're treating
-        // it as the trailing edge, or we've hit the `maxWait` limit.
-        return lastCallTime === undefined || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
-    }
-    function timerExpired() {
-        var time = now();
-        if (shouldInvoke(time)) return trailingEdge(time);
-        // Restart the timer.
-        timerId = setTimeout(timerExpired, remainingWait(time));
-    }
-    function trailingEdge(time) {
-        timerId = undefined;
-        // Only invoke if we have `lastArgs` which means `func` has been
-        // debounced at least once.
-        if (trailing && lastArgs) return invokeFunc(time);
-        lastArgs = lastThis = undefined;
-        return result;
-    }
-    function cancel() {
-        if (timerId !== undefined) clearTimeout(timerId);
-        lastInvokeTime = 0;
-        lastArgs = lastCallTime = lastThis = timerId = undefined;
-    }
-    function flush() {
-        return timerId === undefined ? result : trailingEdge(now());
-    }
-    function debounced() {
-        var time = now(), isInvoking = shouldInvoke(time);
-        lastArgs = arguments;
-        lastThis = this;
-        lastCallTime = time;
-        if (isInvoking) {
-            if (timerId === undefined) return leadingEdge(lastCallTime);
-            if (maxing) {
-                // Handle invocations in a tight loop.
-                clearTimeout(timerId);
-                timerId = setTimeout(timerExpired, wait);
-                return invokeFunc(lastCallTime);
-            }
-        }
-        if (timerId === undefined) timerId = setTimeout(timerExpired, wait);
-        return result;
-    }
-    debounced.cancel = cancel;
-    debounced.flush = flush;
-    return debounced;
-}
-module.exports = debounce;
-
-},{"3b174a999d6a40ac":"cGhqJ","575b2317167ce20d":"kOH6e","a13332670c5c0f63":"12NaH"}],"kOH6e":[function(require,module,exports,__globalThis) {
-var root = require("6439589d9d88d885");
-/**
- * Gets the timestamp of the number of milliseconds that have elapsed since
- * the Unix epoch (1 January 1970 00:00:00 UTC).
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Date
- * @returns {number} Returns the timestamp.
- * @example
- *
- * _.defer(function(stamp) {
- *   console.log(_.now() - stamp);
- * }, _.now());
- * // => Logs the number of milliseconds it took for the deferred invocation.
- */ var now = function() {
-    return root.Date.now();
-};
-module.exports = now;
-
-},{"6439589d9d88d885":"dSYUs"}],"12NaH":[function(require,module,exports,__globalThis) {
-var baseTrim = require("261e89907fb89d78"), isObject = require("faaa289d287a34a5"), isSymbol = require("47b3bd23f771891");
-/** Used as references for various `Number` constants. */ var NAN = 0 / 0;
-/** Used to detect bad signed hexadecimal string values. */ var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-/** Used to detect binary string values. */ var reIsBinary = /^0b[01]+$/i;
-/** Used to detect octal string values. */ var reIsOctal = /^0o[0-7]+$/i;
-/** Built-in method references without a dependency on `root`. */ var freeParseInt = parseInt;
-/**
- * Converts `value` to a number.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to process.
- * @returns {number} Returns the number.
- * @example
- *
- * _.toNumber(3.2);
- * // => 3.2
- *
- * _.toNumber(Number.MIN_VALUE);
- * // => 5e-324
- *
- * _.toNumber(Infinity);
- * // => Infinity
- *
- * _.toNumber('3.2');
- * // => 3.2
- */ function toNumber(value) {
-    if (typeof value == 'number') return value;
-    if (isSymbol(value)) return NAN;
-    if (isObject(value)) {
-        var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-        value = isObject(other) ? other + '' : other;
-    }
-    if (typeof value != 'string') return value === 0 ? value : +value;
-    value = baseTrim(value);
-    var isBinary = reIsBinary.test(value);
-    return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
-}
-module.exports = toNumber;
-
-},{"261e89907fb89d78":"eUJZ3","faaa289d287a34a5":"cGhqJ","47b3bd23f771891":"i3BHC"}],"eUJZ3":[function(require,module,exports,__globalThis) {
-var trimmedEndIndex = require("985d3c9be7b51937");
-/** Used to match leading whitespace. */ var reTrimStart = /^\s+/;
-/**
- * The base implementation of `_.trim`.
- *
- * @private
- * @param {string} string The string to trim.
- * @returns {string} Returns the trimmed string.
- */ function baseTrim(string) {
-    return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
-}
-module.exports = baseTrim;
-
-},{"985d3c9be7b51937":"hHJmS"}],"hHJmS":[function(require,module,exports,__globalThis) {
-/** Used to match a single whitespace character. */ var reWhitespace = /\s/;
-/**
- * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
- * character of `string`.
- *
- * @private
- * @param {string} string The string to inspect.
- * @returns {number} Returns the index of the last non-whitespace character.
- */ function trimmedEndIndex(string) {
-    var index = string.length;
-    while(index-- && reWhitespace.test(string.charAt(index)));
-    return index;
-}
-module.exports = trimmedEndIndex;
-
-},{}],"cmpyN":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cmpyN":[function(require,module,exports,__globalThis) {
 /**
  * @fileOverview Cross
  */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -30894,69 +30276,7 @@ LabelList.renderCallByParent = renderCallByParent;
 }
 module.exports = last;
 
-},{}],"6QVhp":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-/**
- * custom svg elements by rechart instance props and state.
- * @returns {Object}   svg elements
- */ parcelHelpers.export(exports, "Customized", ()=>Customized);
-/**
- * @fileOverview Customized
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _layer = require("../container/Layer");
-var _logUtils = require("../util/LogUtils");
-var _excluded = [
-    "component"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function Customized(_ref) {
-    var component = _ref.component, props = _objectWithoutProperties(_ref, _excluded);
-    var child;
-    if (/*#__PURE__*/ (0, _react.isValidElement)(component)) child = /*#__PURE__*/ (0, _react.cloneElement)(component, props);
-    else if ((0, _isFunctionDefault.default)(component)) child = /*#__PURE__*/ (0, _react.createElement)(component, props);
-    else (0, _logUtils.warn)(false, "Customized's props `component` must be React.element or Function, but got %s.", _typeof(component));
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-        className: "recharts-customized-wrapper"
-    }, child);
-}
-Customized.displayName = 'Customized';
-
-},{"react":"21dqq","lodash/isFunction":"cfti6","../container/Layer":"hLZRL","../util/LogUtils":"8xgWw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"djk2D":[function(require,module,exports,__globalThis) {
+},{}],"djk2D":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Sector", ()=>Sector);
@@ -33967,147 +33287,7 @@ exports.default = function(from, to, easing, duration, render) {
     };
 };
 
-},{"./util":"2cIYL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ei100":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Polygon", ()=>Polygon);
-/**
- * @fileOverview Polygon
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _reactUtils = require("../util/ReactUtils");
-var _excluded = [
-    "points",
-    "className",
-    "baseLinePoints",
-    "connectNulls"
-];
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-var isValidatePoint = function isValidatePoint(point) {
-    return point && point.x === +point.x && point.y === +point.y;
-};
-var getParsedPoints = function getParsedPoints() {
-    var points = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var segmentPoints = [
-        []
-    ];
-    points.forEach(function(entry) {
-        if (isValidatePoint(entry)) segmentPoints[segmentPoints.length - 1].push(entry);
-        else if (segmentPoints[segmentPoints.length - 1].length > 0) // add another path
-        segmentPoints.push([]);
-    });
-    if (isValidatePoint(points[0])) segmentPoints[segmentPoints.length - 1].push(points[0]);
-    if (segmentPoints[segmentPoints.length - 1].length <= 0) segmentPoints = segmentPoints.slice(0, -1);
-    return segmentPoints;
-};
-var getSinglePolygonPath = function getSinglePolygonPath(points, connectNulls) {
-    var segmentPoints = getParsedPoints(points);
-    if (connectNulls) segmentPoints = [
-        segmentPoints.reduce(function(res, segPoints) {
-            return [].concat(_toConsumableArray(res), _toConsumableArray(segPoints));
-        }, [])
-    ];
-    var polygonPath = segmentPoints.map(function(segPoints) {
-        return segPoints.reduce(function(path, point, index) {
-            return "".concat(path).concat(index === 0 ? 'M' : 'L').concat(point.x, ",").concat(point.y);
-        }, '');
-    }).join('');
-    return segmentPoints.length === 1 ? "".concat(polygonPath, "Z") : polygonPath;
-};
-var getRanglePath = function getRanglePath(points, baseLinePoints, connectNulls) {
-    var outerPath = getSinglePolygonPath(points, connectNulls);
-    return "".concat(outerPath.slice(-1) === 'Z' ? outerPath.slice(0, -1) : outerPath, "L").concat(getSinglePolygonPath(baseLinePoints.reverse(), connectNulls).slice(1));
-};
-var Polygon = function Polygon(props) {
-    var points = props.points, className = props.className, baseLinePoints = props.baseLinePoints, connectNulls = props.connectNulls, others = _objectWithoutProperties(props, _excluded);
-    if (!points || !points.length) return null;
-    var layerClass = (0, _clsxDefault.default)('recharts-polygon', className);
-    if (baseLinePoints && baseLinePoints.length) {
-        var hasStroke = others.stroke && others.stroke !== 'none';
-        var rangePath = getRanglePath(points, baseLinePoints, connectNulls);
-        return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-            className: layerClass
-        }, /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, (0, _reactUtils.filterProps)(others, true), {
-            fill: rangePath.slice(-1) === 'Z' ? others.fill : 'none',
-            stroke: "none",
-            d: rangePath
-        })), hasStroke ? /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, (0, _reactUtils.filterProps)(others, true), {
-            fill: "none",
-            d: getSinglePolygonPath(points, connectNulls)
-        })) : null, hasStroke ? /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, (0, _reactUtils.filterProps)(others, true), {
-            fill: "none",
-            d: getSinglePolygonPath(baseLinePoints, connectNulls)
-        })) : null);
-    }
-    var singlePath = getSinglePolygonPath(points, connectNulls);
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, (0, _reactUtils.filterProps)(others, true), {
-        fill: singlePath.slice(-1) === 'Z' ? others.fill : 'none',
-        className: layerClass,
-        d: singlePath
-    }));
-};
-
-},{"react":"21dqq","clsx":"gocd3","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hrSyt":[function(require,module,exports,__globalThis) {
+},{"./util":"2cIYL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hrSyt":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Dot", ()=>Dot);
@@ -34270,3061 +33450,7 @@ var Cross = function Cross(_ref) {
     }));
 };
 
-},{"react":"21dqq","clsx":"gocd3","../util/DataUtils":"exzKF","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8b5cm":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "PolarGrid", ()=>PolarGrid);
-/**
- * @fileOverview Polar Grid
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _polarUtils = require("../util/PolarUtils");
-var _reactUtils = require("../util/ReactUtils");
-var _excluded = [
-    "cx",
-    "cy",
-    "innerRadius",
-    "outerRadius",
-    "gridType",
-    "radialLines"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var getPolygonPath = function getPolygonPath(radius, cx, cy, polarAngles) {
-    var path = '';
-    polarAngles.forEach(function(angle, i) {
-        var point = (0, _polarUtils.polarToCartesian)(cx, cy, radius, angle);
-        if (i) path += "L ".concat(point.x, ",").concat(point.y);
-        else path += "M ".concat(point.x, ",").concat(point.y);
-    });
-    path += 'Z';
-    return path;
-};
-// Draw axis of radial line
-var PolarAngles = function PolarAngles(props) {
-    var cx = props.cx, cy = props.cy, innerRadius = props.innerRadius, outerRadius = props.outerRadius, polarAngles = props.polarAngles, radialLines = props.radialLines;
-    if (!polarAngles || !polarAngles.length || !radialLines) return null;
-    var polarAnglesProps = _objectSpread({
-        stroke: '#ccc'
-    }, (0, _reactUtils.filterProps)(props, false));
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-        className: "recharts-polar-grid-angle"
-    }, polarAngles.map(function(entry) {
-        var start = (0, _polarUtils.polarToCartesian)(cx, cy, innerRadius, entry);
-        var end = (0, _polarUtils.polarToCartesian)(cx, cy, outerRadius, entry);
-        return /*#__PURE__*/ (0, _reactDefault.default).createElement("line", _extends({}, polarAnglesProps, {
-            key: "line-".concat(entry),
-            x1: start.x,
-            y1: start.y,
-            x2: end.x,
-            y2: end.y
-        }));
-    }));
-};
-// Draw concentric circles
-var ConcentricCircle = function ConcentricCircle(props) {
-    var cx = props.cx, cy = props.cy, radius = props.radius, index = props.index;
-    var concentricCircleProps = _objectSpread(_objectSpread({
-        stroke: '#ccc'
-    }, (0, _reactUtils.filterProps)(props, false)), {}, {
-        fill: 'none'
-    });
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("circle", _extends({}, concentricCircleProps, {
-        className: (0, _clsxDefault.default)('recharts-polar-grid-concentric-circle', props.className),
-        key: "circle-".concat(index),
-        cx: cx,
-        cy: cy,
-        r: radius
-    }));
-};
-// Draw concentric polygons
-var ConcentricPolygon = function ConcentricPolygon(props) {
-    var radius = props.radius, index = props.index;
-    var concentricPolygonProps = _objectSpread(_objectSpread({
-        stroke: '#ccc'
-    }, (0, _reactUtils.filterProps)(props, false)), {}, {
-        fill: 'none'
-    });
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, concentricPolygonProps, {
-        className: (0, _clsxDefault.default)('recharts-polar-grid-concentric-polygon', props.className),
-        key: "path-".concat(index),
-        d: getPolygonPath(radius, props.cx, props.cy, props.polarAngles)
-    }));
-};
-// Draw concentric axis
-// TODO Optimize the name
-var ConcentricPath = function ConcentricPath(props) {
-    var polarRadius = props.polarRadius, gridType = props.gridType;
-    if (!polarRadius || !polarRadius.length) return null;
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-        className: "recharts-polar-grid-concentric"
-    }, polarRadius.map(function(entry, i) {
-        var key = i;
-        if (gridType === 'circle') return /*#__PURE__*/ (0, _reactDefault.default).createElement(ConcentricCircle, _extends({
-            key: key
-        }, props, {
-            radius: entry,
-            index: i
-        }));
-        return /*#__PURE__*/ (0, _reactDefault.default).createElement(ConcentricPolygon, _extends({
-            key: key
-        }, props, {
-            radius: entry,
-            index: i
-        }));
-    }));
-};
-var PolarGrid = function PolarGrid(_ref) {
-    var _ref$cx = _ref.cx, cx = _ref$cx === void 0 ? 0 : _ref$cx, _ref$cy = _ref.cy, cy = _ref$cy === void 0 ? 0 : _ref$cy, _ref$innerRadius = _ref.innerRadius, innerRadius = _ref$innerRadius === void 0 ? 0 : _ref$innerRadius, _ref$outerRadius = _ref.outerRadius, outerRadius = _ref$outerRadius === void 0 ? 0 : _ref$outerRadius, _ref$gridType = _ref.gridType, gridType = _ref$gridType === void 0 ? 'polygon' : _ref$gridType, _ref$radialLines = _ref.radialLines, radialLines = _ref$radialLines === void 0 ? true : _ref$radialLines, props = _objectWithoutProperties(_ref, _excluded);
-    if (outerRadius <= 0) return null;
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-        className: "recharts-polar-grid"
-    }, /*#__PURE__*/ (0, _reactDefault.default).createElement(PolarAngles, _extends({
-        cx: cx,
-        cy: cy,
-        innerRadius: innerRadius,
-        outerRadius: outerRadius,
-        gridType: gridType,
-        radialLines: radialLines
-    }, props)), /*#__PURE__*/ (0, _reactDefault.default).createElement(ConcentricPath, _extends({
-        cx: cx,
-        cy: cy,
-        innerRadius: innerRadius,
-        outerRadius: outerRadius,
-        gridType: gridType,
-        radialLines: radialLines
-    }, props)));
-};
-PolarGrid.displayName = 'PolarGrid';
-
-},{"react":"21dqq","clsx":"gocd3","../util/PolarUtils":"xMDoY","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"94jRq":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "PolarRadiusAxis", ()=>PolarRadiusAxis);
-/**
- * @fileOverview The axis of polar coordinate system
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _maxBy = require("lodash/maxBy");
-var _maxByDefault = parcelHelpers.interopDefault(_maxBy);
-var _minBy = require("lodash/minBy");
-var _minByDefault = parcelHelpers.interopDefault(_minBy);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _text = require("../component/Text");
-var _label = require("../component/Label");
-var _layer = require("../container/Layer");
-var _polarUtils = require("../util/PolarUtils");
-var _types = require("../util/types");
-var _reactUtils = require("../util/ReactUtils");
-var _excluded = [
-    "cx",
-    "cy",
-    "angle",
-    "ticks",
-    "axisLine"
-], _excluded2 = [
-    "ticks",
-    "tick",
-    "angle",
-    "tickFormatter",
-    "stroke"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var PolarRadiusAxis = /*#__PURE__*/ function(_PureComponent) {
-    function PolarRadiusAxis() {
-        _classCallCheck(this, PolarRadiusAxis);
-        return _callSuper(this, PolarRadiusAxis, arguments);
-    }
-    _inherits(PolarRadiusAxis, _PureComponent);
-    return _createClass(PolarRadiusAxis, [
-        {
-            key: "getTickValueCoord",
-            value: /**
-     * Calculate the coordinate of tick
-     * @param  {Number} coordinate The radius of tick
-     * @return {Object} (x, y)
-     */ function getTickValueCoord(_ref) {
-                var coordinate = _ref.coordinate;
-                var _this$props = this.props, angle = _this$props.angle, cx = _this$props.cx, cy = _this$props.cy;
-                return (0, _polarUtils.polarToCartesian)(cx, cy, coordinate, angle);
-            }
-        },
-        {
-            key: "getTickTextAnchor",
-            value: function getTickTextAnchor() {
-                var orientation = this.props.orientation;
-                var textAnchor;
-                switch(orientation){
-                    case 'left':
-                        textAnchor = 'end';
-                        break;
-                    case 'right':
-                        textAnchor = 'start';
-                        break;
-                    default:
-                        textAnchor = 'middle';
-                        break;
-                }
-                return textAnchor;
-            }
-        },
-        {
-            key: "getViewBox",
-            value: function getViewBox() {
-                var _this$props2 = this.props, cx = _this$props2.cx, cy = _this$props2.cy, angle = _this$props2.angle, ticks = _this$props2.ticks;
-                var maxRadiusTick = (0, _maxByDefault.default)(ticks, function(entry) {
-                    return entry.coordinate || 0;
-                });
-                var minRadiusTick = (0, _minByDefault.default)(ticks, function(entry) {
-                    return entry.coordinate || 0;
-                });
-                return {
-                    cx: cx,
-                    cy: cy,
-                    startAngle: angle,
-                    endAngle: angle,
-                    innerRadius: minRadiusTick.coordinate || 0,
-                    outerRadius: maxRadiusTick.coordinate || 0
-                };
-            }
-        },
-        {
-            key: "renderAxisLine",
-            value: function renderAxisLine() {
-                var _this$props3 = this.props, cx = _this$props3.cx, cy = _this$props3.cy, angle = _this$props3.angle, ticks = _this$props3.ticks, axisLine = _this$props3.axisLine, others = _objectWithoutProperties(_this$props3, _excluded);
-                var extent = ticks.reduce(function(result, entry) {
-                    return [
-                        Math.min(result[0], entry.coordinate),
-                        Math.max(result[1], entry.coordinate)
-                    ];
-                }, [
-                    Infinity,
-                    -Infinity
-                ]);
-                var point0 = (0, _polarUtils.polarToCartesian)(cx, cy, extent[0], angle);
-                var point1 = (0, _polarUtils.polarToCartesian)(cx, cy, extent[1], angle);
-                var props = _objectSpread(_objectSpread(_objectSpread({}, (0, _reactUtils.filterProps)(others, false)), {}, {
-                    fill: 'none'
-                }, (0, _reactUtils.filterProps)(axisLine, false)), {}, {
-                    x1: point0.x,
-                    y1: point0.y,
-                    x2: point1.x,
-                    y2: point1.y
-                });
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement("line", _extends({
-                    className: "recharts-polar-radius-axis-line"
-                }, props));
-            }
-        },
-        {
-            key: "renderTicks",
-            value: function renderTicks() {
-                var _this = this;
-                var _this$props4 = this.props, ticks = _this$props4.ticks, tick = _this$props4.tick, angle = _this$props4.angle, tickFormatter = _this$props4.tickFormatter, stroke = _this$props4.stroke, others = _objectWithoutProperties(_this$props4, _excluded2);
-                var textAnchor = this.getTickTextAnchor();
-                var axisProps = (0, _reactUtils.filterProps)(others, false);
-                var customTickProps = (0, _reactUtils.filterProps)(tick, false);
-                var items = ticks.map(function(entry, i) {
-                    var coord = _this.getTickValueCoord(entry);
-                    var tickProps = _objectSpread(_objectSpread(_objectSpread(_objectSpread({
-                        textAnchor: textAnchor,
-                        transform: "rotate(".concat(90 - angle, ", ").concat(coord.x, ", ").concat(coord.y, ")")
-                    }, axisProps), {}, {
-                        stroke: 'none',
-                        fill: stroke
-                    }, customTickProps), {}, {
-                        index: i
-                    }, coord), {}, {
-                        payload: entry
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), _extends({
-                        className: (0, _clsxDefault.default)('recharts-polar-radius-axis-tick', (0, _polarUtils.getTickClassName)(tick)),
-                        key: "tick-".concat(entry.coordinate)
-                    }, (0, _types.adaptEventsOfChild)(_this.props, entry, i)), PolarRadiusAxis.renderTickItem(tick, tickProps, tickFormatter ? tickFormatter(entry.value, i) : entry.value));
-                });
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-polar-radius-axis-ticks"
-                }, items);
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this$props5 = this.props, ticks = _this$props5.ticks, axisLine = _this$props5.axisLine, tick = _this$props5.tick;
-                if (!ticks || !ticks.length) return null;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: (0, _clsxDefault.default)('recharts-polar-radius-axis', this.props.className)
-                }, axisLine && this.renderAxisLine(), tick && this.renderTicks(), (0, _label.Label).renderCallByParent(this.props, this.getViewBox()));
-            }
-        }
-    ], [
-        {
-            key: "renderTickItem",
-            value: function renderTickItem(option, props, value) {
-                var tickItem;
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) tickItem = /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-                else if ((0, _isFunctionDefault.default)(option)) tickItem = option(props);
-                else tickItem = /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _text.Text), _extends({}, props, {
-                    className: "recharts-polar-radius-axis-tick-value"
-                }), value);
-                return tickItem;
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_defineProperty(PolarRadiusAxis, "displayName", 'PolarRadiusAxis');
-_defineProperty(PolarRadiusAxis, "axisType", 'radiusAxis');
-_defineProperty(PolarRadiusAxis, "defaultProps", {
-    type: 'number',
-    radiusAxisId: 0,
-    cx: 0,
-    cy: 0,
-    angle: 0,
-    orientation: 'right',
-    stroke: '#ccc',
-    axisLine: true,
-    tick: true,
-    tickCount: 5,
-    allowDataOverflow: false,
-    scale: 'auto',
-    allowDuplicatedCategory: true
-});
-
-},{"react":"21dqq","lodash/maxBy":"8s43L","lodash/minBy":"g6O9A","lodash/isFunction":"cfti6","clsx":"gocd3","../component/Text":"gXuIW","../component/Label":"snyTy","../container/Layer":"hLZRL","../util/PolarUtils":"xMDoY","../util/types":"8jZsH","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8s43L":[function(require,module,exports,__globalThis) {
-var baseExtremum = require("dba025d59f90321a"), baseGt = require("d445a3f41a3424f9"), baseIteratee = require("3271a4dbe265890");
-/**
- * This method is like `_.max` except that it accepts `iteratee` which is
- * invoked for each element in `array` to generate the criterion by which
- * the value is ranked. The iteratee is invoked with one argument: (value).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Math
- * @param {Array} array The array to iterate over.
- * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
- * @returns {*} Returns the maximum value.
- * @example
- *
- * var objects = [{ 'n': 1 }, { 'n': 2 }];
- *
- * _.maxBy(objects, function(o) { return o.n; });
- * // => { 'n': 2 }
- *
- * // The `_.property` iteratee shorthand.
- * _.maxBy(objects, 'n');
- * // => { 'n': 2 }
- */ function maxBy(array, iteratee) {
-    return array && array.length ? baseExtremum(array, baseIteratee(iteratee, 2), baseGt) : undefined;
-}
-module.exports = maxBy;
-
-},{"dba025d59f90321a":"hKBnr","d445a3f41a3424f9":"a6FTJ","3271a4dbe265890":"2fsgg"}],"g6O9A":[function(require,module,exports,__globalThis) {
-var baseExtremum = require("515d8abb123de545"), baseIteratee = require("e7a24e488e92031a"), baseLt = require("cba661d625852896");
-/**
- * This method is like `_.min` except that it accepts `iteratee` which is
- * invoked for each element in `array` to generate the criterion by which
- * the value is ranked. The iteratee is invoked with one argument: (value).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Math
- * @param {Array} array The array to iterate over.
- * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
- * @returns {*} Returns the minimum value.
- * @example
- *
- * var objects = [{ 'n': 1 }, { 'n': 2 }];
- *
- * _.minBy(objects, function(o) { return o.n; });
- * // => { 'n': 1 }
- *
- * // The `_.property` iteratee shorthand.
- * _.minBy(objects, 'n');
- * // => { 'n': 1 }
- */ function minBy(array, iteratee) {
-    return array && array.length ? baseExtremum(array, baseIteratee(iteratee, 2), baseLt) : undefined;
-}
-module.exports = minBy;
-
-},{"515d8abb123de545":"hKBnr","e7a24e488e92031a":"2fsgg","cba661d625852896":"joHlO"}],"7ZFSt":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "PolarAngleAxis", ()=>PolarAngleAxis);
-/**
- * @fileOverview Axis of radial direction
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _layer = require("../container/Layer");
-var _dot = require("../shape/Dot");
-var _polygon = require("../shape/Polygon");
-var _text = require("../component/Text");
-var _types = require("../util/types");
-var _reactUtils = require("../util/ReactUtils");
-var _polarUtils = require("../util/PolarUtils");
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var RADIAN = Math.PI / 180;
-var eps = 1e-5;
-var PolarAngleAxis = /*#__PURE__*/ function(_PureComponent) {
-    function PolarAngleAxis() {
-        _classCallCheck(this, PolarAngleAxis);
-        return _callSuper(this, PolarAngleAxis, arguments);
-    }
-    _inherits(PolarAngleAxis, _PureComponent);
-    return _createClass(PolarAngleAxis, [
-        {
-            key: "getTickLineCoord",
-            value: /**
-     * Calculate the coordinate of line endpoint
-     * @param  {Object} data The Data if ticks
-     * @return {Object} (x0, y0): The start point of text,
-     *                  (x1, y1): The end point close to text,
-     *                  (x2, y2): The end point close to axis
-     */ function getTickLineCoord(data) {
-                var _this$props = this.props, cx = _this$props.cx, cy = _this$props.cy, radius = _this$props.radius, orientation = _this$props.orientation, tickSize = _this$props.tickSize;
-                var tickLineSize = tickSize || 8;
-                var p1 = (0, _polarUtils.polarToCartesian)(cx, cy, radius, data.coordinate);
-                var p2 = (0, _polarUtils.polarToCartesian)(cx, cy, radius + (orientation === 'inner' ? -1 : 1) * tickLineSize, data.coordinate);
-                return {
-                    x1: p1.x,
-                    y1: p1.y,
-                    x2: p2.x,
-                    y2: p2.y
-                };
-            }
-        },
-        {
-            key: "getTickTextAnchor",
-            value: function getTickTextAnchor(data) {
-                var orientation = this.props.orientation;
-                var cos = Math.cos(-data.coordinate * RADIAN);
-                var textAnchor;
-                if (cos > eps) textAnchor = orientation === 'outer' ? 'start' : 'end';
-                else if (cos < -eps) textAnchor = orientation === 'outer' ? 'end' : 'start';
-                else textAnchor = 'middle';
-                return textAnchor;
-            }
-        },
-        {
-            key: "renderAxisLine",
-            value: function renderAxisLine() {
-                var _this$props2 = this.props, cx = _this$props2.cx, cy = _this$props2.cy, radius = _this$props2.radius, axisLine = _this$props2.axisLine, axisLineType = _this$props2.axisLineType;
-                var props = _objectSpread(_objectSpread({}, (0, _reactUtils.filterProps)(this.props, false)), {}, {
-                    fill: 'none'
-                }, (0, _reactUtils.filterProps)(axisLine, false));
-                if (axisLineType === 'circle') return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _dot.Dot), _extends({
-                    className: "recharts-polar-angle-axis-line"
-                }, props, {
-                    cx: cx,
-                    cy: cy,
-                    r: radius
-                }));
-                var ticks = this.props.ticks;
-                var points = ticks.map(function(entry) {
-                    return (0, _polarUtils.polarToCartesian)(cx, cy, radius, entry.coordinate);
-                });
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _polygon.Polygon), _extends({
-                    className: "recharts-polar-angle-axis-line"
-                }, props, {
-                    points: points
-                }));
-            }
-        },
-        {
-            key: "renderTicks",
-            value: function renderTicks() {
-                var _this = this;
-                var _this$props3 = this.props, ticks = _this$props3.ticks, tick = _this$props3.tick, tickLine = _this$props3.tickLine, tickFormatter = _this$props3.tickFormatter, stroke = _this$props3.stroke;
-                var axisProps = (0, _reactUtils.filterProps)(this.props, false);
-                var customTickProps = (0, _reactUtils.filterProps)(tick, false);
-                var tickLineProps = _objectSpread(_objectSpread({}, axisProps), {}, {
-                    fill: 'none'
-                }, (0, _reactUtils.filterProps)(tickLine, false));
-                var items = ticks.map(function(entry, i) {
-                    var lineCoord = _this.getTickLineCoord(entry);
-                    var textAnchor = _this.getTickTextAnchor(entry);
-                    var tickProps = _objectSpread(_objectSpread(_objectSpread({
-                        textAnchor: textAnchor
-                    }, axisProps), {}, {
-                        stroke: 'none',
-                        fill: stroke
-                    }, customTickProps), {}, {
-                        index: i,
-                        payload: entry,
-                        x: lineCoord.x2,
-                        y: lineCoord.y2
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), _extends({
-                        className: (0, _clsxDefault.default)('recharts-polar-angle-axis-tick', (0, _polarUtils.getTickClassName)(tick)),
-                        key: "tick-".concat(entry.coordinate)
-                    }, (0, _types.adaptEventsOfChild)(_this.props, entry, i)), tickLine && /*#__PURE__*/ (0, _reactDefault.default).createElement("line", _extends({
-                        className: "recharts-polar-angle-axis-tick-line"
-                    }, tickLineProps, lineCoord)), tick && PolarAngleAxis.renderTickItem(tick, tickProps, tickFormatter ? tickFormatter(entry.value, i) : entry.value));
-                });
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-polar-angle-axis-ticks"
-                }, items);
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this$props4 = this.props, ticks = _this$props4.ticks, radius = _this$props4.radius, axisLine = _this$props4.axisLine;
-                if (radius <= 0 || !ticks || !ticks.length) return null;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: (0, _clsxDefault.default)('recharts-polar-angle-axis', this.props.className)
-                }, axisLine && this.renderAxisLine(), this.renderTicks());
-            }
-        }
-    ], [
-        {
-            key: "renderTickItem",
-            value: function renderTickItem(option, props, value) {
-                var tickItem;
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) tickItem = /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-                else if ((0, _isFunctionDefault.default)(option)) tickItem = option(props);
-                else tickItem = /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _text.Text), _extends({}, props, {
-                    className: "recharts-polar-angle-axis-tick-value"
-                }), value);
-                return tickItem;
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_defineProperty(PolarAngleAxis, "displayName", 'PolarAngleAxis');
-_defineProperty(PolarAngleAxis, "axisType", 'angleAxis');
-_defineProperty(PolarAngleAxis, "defaultProps", {
-    type: 'category',
-    angleAxisId: 0,
-    scale: 'auto',
-    cx: 0,
-    cy: 0,
-    orientation: 'outer',
-    axisLine: true,
-    tickLine: true,
-    tickSize: 8,
-    tick: true,
-    hide: false,
-    allowDuplicatedCategory: true
-});
-
-},{"react":"21dqq","lodash/isFunction":"cfti6","clsx":"gocd3","../container/Layer":"hLZRL","../shape/Dot":"hrSyt","../shape/Polygon":"ei100","../component/Text":"gXuIW","../util/types":"8jZsH","../util/ReactUtils":"gDert","../util/PolarUtils":"xMDoY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4x9kw":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Pie", ()=>Pie);
-/**
- * @fileOverview Render sectors of a pie
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactSmooth = require("react-smooth");
-var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
-var _get = require("lodash/get");
-var _getDefault = parcelHelpers.interopDefault(_get);
-var _isEqual = require("lodash/isEqual");
-var _isEqualDefault = parcelHelpers.interopDefault(_isEqual);
-var _isNil = require("lodash/isNil");
-var _isNilDefault = parcelHelpers.interopDefault(_isNil);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _layer = require("../container/Layer");
-var _curve = require("../shape/Curve");
-var _text = require("../component/Text");
-var _label = require("../component/Label");
-var _labelList = require("../component/LabelList");
-var _cell = require("../component/Cell");
-var _reactUtils = require("../util/ReactUtils");
-var _global = require("../util/Global");
-var _polarUtils = require("../util/PolarUtils");
-var _dataUtils = require("../util/DataUtils");
-var _chartUtils = require("../util/ChartUtils");
-var _logUtils = require("../util/LogUtils");
-var _types = require("../util/types");
-var _activeShapeUtils = require("../util/ActiveShapeUtils");
-var _Pie;
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var Pie = /*#__PURE__*/ function(_PureComponent) {
-    function Pie(props) {
-        var _this;
-        _classCallCheck(this, Pie);
-        _this = _callSuper(this, Pie, [
-            props
-        ]);
-        _defineProperty(_this, "pieRef", null);
-        _defineProperty(_this, "sectorRefs", []);
-        _defineProperty(_this, "id", (0, _dataUtils.uniqueId)('recharts-pie-'));
-        _defineProperty(_this, "handleAnimationEnd", function() {
-            var onAnimationEnd = _this.props.onAnimationEnd;
-            _this.setState({
-                isAnimationFinished: true
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationEnd)) onAnimationEnd();
-        });
-        _defineProperty(_this, "handleAnimationStart", function() {
-            var onAnimationStart = _this.props.onAnimationStart;
-            _this.setState({
-                isAnimationFinished: false
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationStart)) onAnimationStart();
-        });
-        _this.state = {
-            isAnimationFinished: !props.isAnimationActive,
-            prevIsAnimationActive: props.isAnimationActive,
-            prevAnimationId: props.animationId,
-            sectorToFocus: 0
-        };
-        return _this;
-    }
-    _inherits(Pie, _PureComponent);
-    return _createClass(Pie, [
-        {
-            key: "isActiveIndex",
-            value: function isActiveIndex(i) {
-                var activeIndex = this.props.activeIndex;
-                if (Array.isArray(activeIndex)) return activeIndex.indexOf(i) !== -1;
-                return i === activeIndex;
-            }
-        },
-        {
-            key: "hasActiveIndex",
-            value: function hasActiveIndex() {
-                var activeIndex = this.props.activeIndex;
-                return Array.isArray(activeIndex) ? activeIndex.length !== 0 : activeIndex || activeIndex === 0;
-            }
-        },
-        {
-            key: "renderLabels",
-            value: function renderLabels(sectors) {
-                var isAnimationActive = this.props.isAnimationActive;
-                if (isAnimationActive && !this.state.isAnimationFinished) return null;
-                var _this$props = this.props, label = _this$props.label, labelLine = _this$props.labelLine, dataKey = _this$props.dataKey, valueKey = _this$props.valueKey;
-                var pieProps = (0, _reactUtils.filterProps)(this.props, false);
-                var customLabelProps = (0, _reactUtils.filterProps)(label, false);
-                var customLabelLineProps = (0, _reactUtils.filterProps)(labelLine, false);
-                var offsetRadius = label && label.offsetRadius || 20;
-                var labels = sectors.map(function(entry, i) {
-                    var midAngle = (entry.startAngle + entry.endAngle) / 2;
-                    var endPoint = (0, _polarUtils.polarToCartesian)(entry.cx, entry.cy, entry.outerRadius + offsetRadius, midAngle);
-                    var labelProps = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, pieProps), entry), {}, {
-                        stroke: 'none'
-                    }, customLabelProps), {}, {
-                        index: i,
-                        textAnchor: Pie.getTextAnchor(endPoint.x, entry.cx)
-                    }, endPoint);
-                    var lineProps = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, pieProps), entry), {}, {
-                        fill: 'none',
-                        stroke: entry.fill
-                    }, customLabelLineProps), {}, {
-                        index: i,
-                        points: [
-                            (0, _polarUtils.polarToCartesian)(entry.cx, entry.cy, entry.outerRadius, midAngle),
-                            endPoint
-                        ]
-                    });
-                    var realDataKey = dataKey;
-                    // TODO: compatible to lower versions
-                    if ((0, _isNilDefault.default)(dataKey) && (0, _isNilDefault.default)(valueKey)) realDataKey = 'value';
-                    else if ((0, _isNilDefault.default)(dataKey)) realDataKey = valueKey;
-                    return(/*#__PURE__*/ // eslint-disable-next-line react/no-array-index-key
-                    (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                        key: "label-".concat(entry.startAngle, "-").concat(entry.endAngle, "-").concat(entry.midAngle, "-").concat(i)
-                    }, labelLine && Pie.renderLabelLineItem(labelLine, lineProps, 'line'), Pie.renderLabelItem(label, labelProps, (0, _chartUtils.getValueByDataKey)(entry, realDataKey))));
-                });
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-pie-labels"
-                }, labels);
-            }
-        },
-        {
-            key: "renderSectorsStatically",
-            value: function renderSectorsStatically(sectors) {
-                var _this2 = this;
-                var _this$props2 = this.props, activeShape = _this$props2.activeShape, blendStroke = _this$props2.blendStroke, inactiveShapeProp = _this$props2.inactiveShape;
-                return sectors.map(function(entry, i) {
-                    if ((entry === null || entry === void 0 ? void 0 : entry.startAngle) === 0 && (entry === null || entry === void 0 ? void 0 : entry.endAngle) === 0 && sectors.length !== 1) return null;
-                    var isActive = _this2.isActiveIndex(i);
-                    var inactiveShape = inactiveShapeProp && _this2.hasActiveIndex() ? inactiveShapeProp : null;
-                    var sectorOptions = isActive ? activeShape : inactiveShape;
-                    var sectorProps = _objectSpread(_objectSpread({}, entry), {}, {
-                        stroke: blendStroke ? entry.fill : entry.stroke,
-                        tabIndex: -1
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), _extends({
-                        ref: function ref(_ref) {
-                            if (_ref && !_this2.sectorRefs.includes(_ref)) _this2.sectorRefs.push(_ref);
-                        },
-                        tabIndex: -1,
-                        className: "recharts-pie-sector"
-                    }, (0, _types.adaptEventsOfChild)(_this2.props, entry, i), {
-                        // eslint-disable-next-line react/no-array-index-key
-                        key: "sector-".concat(entry === null || entry === void 0 ? void 0 : entry.startAngle, "-").concat(entry === null || entry === void 0 ? void 0 : entry.endAngle, "-").concat(entry.midAngle, "-").concat(i)
-                    }), /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _activeShapeUtils.Shape), _extends({
-                        option: sectorOptions,
-                        isActive: isActive,
-                        shapeType: "sector"
-                    }, sectorProps)));
-                });
-            }
-        },
-        {
-            key: "renderSectorsWithAnimation",
-            value: function renderSectorsWithAnimation() {
-                var _this3 = this;
-                var _this$props3 = this.props, sectors = _this$props3.sectors, isAnimationActive = _this$props3.isAnimationActive, animationBegin = _this$props3.animationBegin, animationDuration = _this$props3.animationDuration, animationEasing = _this$props3.animationEasing, animationId = _this$props3.animationId;
-                var _this$state = this.state, prevSectors = _this$state.prevSectors, prevIsAnimationActive = _this$state.prevIsAnimationActive;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-                    begin: animationBegin,
-                    duration: animationDuration,
-                    isActive: isAnimationActive,
-                    easing: animationEasing,
-                    from: {
-                        t: 0
-                    },
-                    to: {
-                        t: 1
-                    },
-                    key: "pie-".concat(animationId, "-").concat(prevIsAnimationActive),
-                    onAnimationStart: this.handleAnimationStart,
-                    onAnimationEnd: this.handleAnimationEnd
-                }, function(_ref2) {
-                    var t = _ref2.t;
-                    var stepData = [];
-                    var first = sectors && sectors[0];
-                    var curAngle = first.startAngle;
-                    sectors.forEach(function(entry, index) {
-                        var prev = prevSectors && prevSectors[index];
-                        var paddingAngle = index > 0 ? (0, _getDefault.default)(entry, 'paddingAngle', 0) : 0;
-                        if (prev) {
-                            var angleIp = (0, _dataUtils.interpolateNumber)(prev.endAngle - prev.startAngle, entry.endAngle - entry.startAngle);
-                            var latest = _objectSpread(_objectSpread({}, entry), {}, {
-                                startAngle: curAngle + paddingAngle,
-                                endAngle: curAngle + angleIp(t) + paddingAngle
-                            });
-                            stepData.push(latest);
-                            curAngle = latest.endAngle;
-                        } else {
-                            var endAngle = entry.endAngle, startAngle = entry.startAngle;
-                            var interpolatorAngle = (0, _dataUtils.interpolateNumber)(0, endAngle - startAngle);
-                            var deltaAngle = interpolatorAngle(t);
-                            var _latest = _objectSpread(_objectSpread({}, entry), {}, {
-                                startAngle: curAngle + paddingAngle,
-                                endAngle: curAngle + deltaAngle + paddingAngle
-                            });
-                            stepData.push(_latest);
-                            curAngle = _latest.endAngle;
-                        }
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), null, _this3.renderSectorsStatically(stepData));
-                });
-            }
-        },
-        {
-            key: "attachKeyboardHandlers",
-            value: function attachKeyboardHandlers(pieRef) {
-                var _this4 = this;
-                // eslint-disable-next-line no-param-reassign
-                pieRef.onkeydown = function(e) {
-                    if (!e.altKey) switch(e.key){
-                        case 'ArrowLeft':
-                            var next = ++_this4.state.sectorToFocus % _this4.sectorRefs.length;
-                            _this4.sectorRefs[next].focus();
-                            _this4.setState({
-                                sectorToFocus: next
-                            });
-                            break;
-                        case 'ArrowRight':
-                            var _next = --_this4.state.sectorToFocus < 0 ? _this4.sectorRefs.length - 1 : _this4.state.sectorToFocus % _this4.sectorRefs.length;
-                            _this4.sectorRefs[_next].focus();
-                            _this4.setState({
-                                sectorToFocus: _next
-                            });
-                            break;
-                        case 'Escape':
-                            _this4.sectorRefs[_this4.state.sectorToFocus].blur();
-                            _this4.setState({
-                                sectorToFocus: 0
-                            });
-                            break;
-                        default:
-                    }
-                };
-            }
-        },
-        {
-            key: "renderSectors",
-            value: function renderSectors() {
-                var _this$props4 = this.props, sectors = _this$props4.sectors, isAnimationActive = _this$props4.isAnimationActive;
-                var prevSectors = this.state.prevSectors;
-                if (isAnimationActive && sectors && sectors.length && (!prevSectors || !(0, _isEqualDefault.default)(prevSectors, sectors))) return this.renderSectorsWithAnimation();
-                return this.renderSectorsStatically(sectors);
-            }
-        },
-        {
-            key: "componentDidMount",
-            value: function componentDidMount() {
-                if (this.pieRef) this.attachKeyboardHandlers(this.pieRef);
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this5 = this;
-                var _this$props5 = this.props, hide = _this$props5.hide, sectors = _this$props5.sectors, className = _this$props5.className, label = _this$props5.label, cx = _this$props5.cx, cy = _this$props5.cy, innerRadius = _this$props5.innerRadius, outerRadius = _this$props5.outerRadius, isAnimationActive = _this$props5.isAnimationActive;
-                var isAnimationFinished = this.state.isAnimationFinished;
-                if (hide || !sectors || !sectors.length || !(0, _dataUtils.isNumber)(cx) || !(0, _dataUtils.isNumber)(cy) || !(0, _dataUtils.isNumber)(innerRadius) || !(0, _dataUtils.isNumber)(outerRadius)) return null;
-                var layerClass = (0, _clsxDefault.default)('recharts-pie', className);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    tabIndex: this.props.rootTabIndex,
-                    className: layerClass,
-                    ref: function ref(_ref3) {
-                        _this5.pieRef = _ref3;
-                    }
-                }, this.renderSectors(), label && this.renderLabels(sectors), (0, _label.Label).renderCallByParent(this.props, null, false), (!isAnimationActive || isAnimationFinished) && (0, _labelList.LabelList).renderCallByParent(this.props, sectors, false));
-            }
-        }
-    ], [
-        {
-            key: "getDerivedStateFromProps",
-            value: function getDerivedStateFromProps(nextProps, prevState) {
-                if (prevState.prevIsAnimationActive !== nextProps.isAnimationActive) return {
-                    prevIsAnimationActive: nextProps.isAnimationActive,
-                    prevAnimationId: nextProps.animationId,
-                    curSectors: nextProps.sectors,
-                    prevSectors: [],
-                    isAnimationFinished: true
-                };
-                if (nextProps.isAnimationActive && nextProps.animationId !== prevState.prevAnimationId) return {
-                    prevAnimationId: nextProps.animationId,
-                    curSectors: nextProps.sectors,
-                    prevSectors: prevState.curSectors,
-                    isAnimationFinished: true
-                };
-                if (nextProps.sectors !== prevState.curSectors) return {
-                    curSectors: nextProps.sectors,
-                    isAnimationFinished: true
-                };
-                return null;
-            }
-        },
-        {
-            key: "getTextAnchor",
-            value: function getTextAnchor(x, cx) {
-                if (x > cx) return 'start';
-                if (x < cx) return 'end';
-                return 'middle';
-            }
-        },
-        {
-            key: "renderLabelLineItem",
-            value: function renderLabelLineItem(option, props, key) {
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-                if ((0, _isFunctionDefault.default)(option)) return option(props);
-                var className = (0, _clsxDefault.default)('recharts-pie-label-line', typeof option !== 'boolean' ? option.className : '');
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _curve.Curve), _extends({}, props, {
-                    key: key,
-                    type: "linear",
-                    className: className
-                }));
-            }
-        },
-        {
-            key: "renderLabelItem",
-            value: function renderLabelItem(option, props, value) {
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-                var label = value;
-                if ((0, _isFunctionDefault.default)(option)) {
-                    label = option(props);
-                    if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(label)) return label;
-                }
-                var className = (0, _clsxDefault.default)('recharts-pie-label-text', typeof option !== 'boolean' && !(0, _isFunctionDefault.default)(option) ? option.className : '');
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _text.Text), _extends({}, props, {
-                    alignmentBaseline: "middle",
-                    className: className
-                }), label);
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_Pie = Pie;
-_defineProperty(Pie, "displayName", 'Pie');
-_defineProperty(Pie, "defaultProps", {
-    stroke: '#fff',
-    fill: '#808080',
-    legendType: 'rect',
-    cx: '50%',
-    cy: '50%',
-    startAngle: 0,
-    endAngle: 360,
-    innerRadius: 0,
-    outerRadius: '80%',
-    paddingAngle: 0,
-    labelLine: true,
-    hide: false,
-    minAngle: 0,
-    isAnimationActive: !(0, _global.Global).isSsr,
-    animationBegin: 400,
-    animationDuration: 1500,
-    animationEasing: 'ease',
-    nameKey: 'name',
-    blendStroke: false,
-    rootTabIndex: 0
-});
-_defineProperty(Pie, "parseDeltaAngle", function(startAngle, endAngle) {
-    var sign = (0, _dataUtils.mathSign)(endAngle - startAngle);
-    var deltaAngle = Math.min(Math.abs(endAngle - startAngle), 360);
-    return sign * deltaAngle;
-});
-_defineProperty(Pie, "getRealPieData", function(itemProps) {
-    var data = itemProps.data, children = itemProps.children;
-    var presentationProps = (0, _reactUtils.filterProps)(itemProps, false);
-    var cells = (0, _reactUtils.findAllByType)(children, (0, _cell.Cell));
-    if (data && data.length) return data.map(function(entry, index) {
-        return _objectSpread(_objectSpread(_objectSpread({
-            payload: entry
-        }, presentationProps), entry), cells && cells[index] && cells[index].props);
-    });
-    if (cells && cells.length) return cells.map(function(cell) {
-        return _objectSpread(_objectSpread({}, presentationProps), cell.props);
-    });
-    return [];
-});
-_defineProperty(Pie, "parseCoordinateOfPie", function(itemProps, offset) {
-    var top = offset.top, left = offset.left, width = offset.width, height = offset.height;
-    var maxPieRadius = (0, _polarUtils.getMaxRadius)(width, height);
-    var cx = left + (0, _dataUtils.getPercentValue)(itemProps.cx, width, width / 2);
-    var cy = top + (0, _dataUtils.getPercentValue)(itemProps.cy, height, height / 2);
-    var innerRadius = (0, _dataUtils.getPercentValue)(itemProps.innerRadius, maxPieRadius, 0);
-    var outerRadius = (0, _dataUtils.getPercentValue)(itemProps.outerRadius, maxPieRadius, maxPieRadius * 0.8);
-    var maxRadius = itemProps.maxRadius || Math.sqrt(width * width + height * height) / 2;
-    return {
-        cx: cx,
-        cy: cy,
-        innerRadius: innerRadius,
-        outerRadius: outerRadius,
-        maxRadius: maxRadius
-    };
-});
-_defineProperty(Pie, "getComposedData", function(_ref4) {
-    var item = _ref4.item, offset = _ref4.offset;
-    var itemProps = item.type.defaultProps !== undefined ? _objectSpread(_objectSpread({}, item.type.defaultProps), item.props) : item.props;
-    var pieData = _Pie.getRealPieData(itemProps);
-    if (!pieData || !pieData.length) return null;
-    var cornerRadius = itemProps.cornerRadius, startAngle = itemProps.startAngle, endAngle = itemProps.endAngle, paddingAngle = itemProps.paddingAngle, dataKey = itemProps.dataKey, nameKey = itemProps.nameKey, valueKey = itemProps.valueKey, tooltipType = itemProps.tooltipType;
-    var minAngle = Math.abs(itemProps.minAngle);
-    var coordinate = _Pie.parseCoordinateOfPie(itemProps, offset);
-    var deltaAngle = _Pie.parseDeltaAngle(startAngle, endAngle);
-    var absDeltaAngle = Math.abs(deltaAngle);
-    var realDataKey = dataKey;
-    if ((0, _isNilDefault.default)(dataKey) && (0, _isNilDefault.default)(valueKey)) {
-        (0, _logUtils.warn)(false, "Use \"dataKey\" to specify the value of pie,\n      the props \"valueKey\" will be deprecated in 1.1.0");
-        realDataKey = 'value';
-    } else if ((0, _isNilDefault.default)(dataKey)) {
-        (0, _logUtils.warn)(false, "Use \"dataKey\" to specify the value of pie,\n      the props \"valueKey\" will be deprecated in 1.1.0");
-        realDataKey = valueKey;
-    }
-    var notZeroItemCount = pieData.filter(function(entry) {
-        return (0, _chartUtils.getValueByDataKey)(entry, realDataKey, 0) !== 0;
-    }).length;
-    var totalPadingAngle = (absDeltaAngle >= 360 ? notZeroItemCount : notZeroItemCount - 1) * paddingAngle;
-    var realTotalAngle = absDeltaAngle - notZeroItemCount * minAngle - totalPadingAngle;
-    var sum = pieData.reduce(function(result, entry) {
-        var val = (0, _chartUtils.getValueByDataKey)(entry, realDataKey, 0);
-        return result + ((0, _dataUtils.isNumber)(val) ? val : 0);
-    }, 0);
-    var sectors;
-    if (sum > 0) {
-        var prev;
-        sectors = pieData.map(function(entry, i) {
-            var val = (0, _chartUtils.getValueByDataKey)(entry, realDataKey, 0);
-            var name = (0, _chartUtils.getValueByDataKey)(entry, nameKey, i);
-            var percent = ((0, _dataUtils.isNumber)(val) ? val : 0) / sum;
-            var tempStartAngle;
-            if (i) tempStartAngle = prev.endAngle + (0, _dataUtils.mathSign)(deltaAngle) * paddingAngle * (val !== 0 ? 1 : 0);
-            else tempStartAngle = startAngle;
-            var tempEndAngle = tempStartAngle + (0, _dataUtils.mathSign)(deltaAngle) * ((val !== 0 ? minAngle : 0) + percent * realTotalAngle);
-            var midAngle = (tempStartAngle + tempEndAngle) / 2;
-            var middleRadius = (coordinate.innerRadius + coordinate.outerRadius) / 2;
-            var tooltipPayload = [
-                {
-                    name: name,
-                    value: val,
-                    payload: entry,
-                    dataKey: realDataKey,
-                    type: tooltipType
-                }
-            ];
-            var tooltipPosition = (0, _polarUtils.polarToCartesian)(coordinate.cx, coordinate.cy, middleRadius, midAngle);
-            prev = _objectSpread(_objectSpread(_objectSpread({
-                percent: percent,
-                cornerRadius: cornerRadius,
-                name: name,
-                tooltipPayload: tooltipPayload,
-                midAngle: midAngle,
-                middleRadius: middleRadius,
-                tooltipPosition: tooltipPosition
-            }, entry), coordinate), {}, {
-                value: (0, _chartUtils.getValueByDataKey)(entry, realDataKey),
-                startAngle: tempStartAngle,
-                endAngle: tempEndAngle,
-                payload: entry,
-                paddingAngle: (0, _dataUtils.mathSign)(deltaAngle) * paddingAngle
-            });
-            return prev;
-        });
-    }
-    return _objectSpread(_objectSpread({}, coordinate), {}, {
-        sectors: sectors,
-        data: pieData
-    });
-});
-
-},{"react":"21dqq","react-smooth":"p2bRC","lodash/get":"8UELX","lodash/isEqual":"9XEia","lodash/isNil":"jYD3f","lodash/isFunction":"cfti6","clsx":"gocd3","../container/Layer":"hLZRL","../shape/Curve":"ldzTR","../component/Text":"gXuIW","../component/Label":"snyTy","../component/LabelList":"e2z7M","../component/Cell":"cmpyN","../util/ReactUtils":"gDert","../util/Global":"7fOrk","../util/PolarUtils":"xMDoY","../util/DataUtils":"exzKF","../util/ChartUtils":"2s4mV","../util/LogUtils":"8xgWw","../util/types":"8jZsH","../util/ActiveShapeUtils":"6gaj7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6gaj7":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getPropsFromShapeOption", ()=>getPropsFromShapeOption);
-parcelHelpers.export(exports, "Shape", ()=>Shape);
-/**
- * This is an abstraction to handle identifying the active index from a tooltip mouse interaction
- */ parcelHelpers.export(exports, "isFunnel", ()=>isFunnel);
-parcelHelpers.export(exports, "isPie", ()=>isPie);
-parcelHelpers.export(exports, "isScatter", ()=>isScatter);
-parcelHelpers.export(exports, "compareFunnel", ()=>compareFunnel);
-parcelHelpers.export(exports, "comparePie", ()=>comparePie);
-parcelHelpers.export(exports, "compareScatter", ()=>compareScatter);
-/**
- *
- * @param {GetActiveShapeIndexForTooltip} arg an object of incoming attributes from Tooltip
- * @returns {number}
- *
- * To handle possible duplicates in the data set,
- * match both the data value of the active item to a data value on a graph item,
- * and match the mouse coordinates of the active item to the coordinates of in a particular components shape data.
- * This assumes equal lengths of shape objects to data items.
- */ parcelHelpers.export(exports, "getActiveShapeIndexForTooltip", ()=>getActiveShapeIndexForTooltip);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _isPlainObject = require("lodash/isPlainObject");
-var _isPlainObjectDefault = parcelHelpers.interopDefault(_isPlainObject);
-var _isBoolean = require("lodash/isBoolean");
-var _isBooleanDefault = parcelHelpers.interopDefault(_isBoolean);
-var _isEqual = require("lodash/isEqual");
-var _isEqualDefault = parcelHelpers.interopDefault(_isEqual);
-var _rectangle = require("../shape/Rectangle");
-var _trapezoid = require("../shape/Trapezoid");
-var _sector = require("../shape/Sector");
-var _layer = require("../container/Layer");
-var _symbols = require("../shape/Symbols");
-var _excluded = [
-    "option",
-    "shapeType",
-    "propTransformer",
-    "activeClassName",
-    "isActive"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-/**
- * This is an abstraction for rendering a user defined prop for a customized shape in several forms.
- *
- * <Shape /> is the root and will handle taking in:
- *  - an object of svg properties
- *  - a boolean
- *  - a render prop(inline function that returns jsx)
- *  - a react element
- *
- * <ShapeSelector /> is a subcomponent of <Shape /> and used to match a component
- * to the value of props.shapeType that is passed to the root.
- *
- */ function defaultPropTransformer(option, props) {
-    return _objectSpread(_objectSpread({}, props), option);
-}
-function isSymbolsProps(shapeType, _elementProps) {
-    return shapeType === 'symbols';
-}
-function ShapeSelector(_ref) {
-    var shapeType = _ref.shapeType, elementProps = _ref.elementProps;
-    switch(shapeType){
-        case 'rectangle':
-            return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _rectangle.Rectangle), elementProps);
-        case 'trapezoid':
-            return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _trapezoid.Trapezoid), elementProps);
-        case 'sector':
-            return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _sector.Sector), elementProps);
-        case 'symbols':
-            if (isSymbolsProps(shapeType, elementProps)) return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _symbols.Symbols), elementProps);
-            break;
-        default:
-            return null;
-    }
-}
-function getPropsFromShapeOption(option) {
-    if (/*#__PURE__*/ (0, _react.isValidElement)(option)) return option.props;
-    return option;
-}
-function Shape(_ref2) {
-    var option = _ref2.option, shapeType = _ref2.shapeType, _ref2$propTransformer = _ref2.propTransformer, propTransformer = _ref2$propTransformer === void 0 ? defaultPropTransformer : _ref2$propTransformer, _ref2$activeClassName = _ref2.activeClassName, activeClassName = _ref2$activeClassName === void 0 ? 'recharts-active-shape' : _ref2$activeClassName, isActive = _ref2.isActive, props = _objectWithoutProperties(_ref2, _excluded);
-    var shape;
-    if (/*#__PURE__*/ (0, _react.isValidElement)(option)) shape = /*#__PURE__*/ (0, _react.cloneElement)(option, _objectSpread(_objectSpread({}, props), getPropsFromShapeOption(option)));
-    else if ((0, _isFunctionDefault.default)(option)) shape = option(props);
-    else if ((0, _isPlainObjectDefault.default)(option) && !(0, _isBooleanDefault.default)(option)) {
-        var nextProps = propTransformer(option, props);
-        shape = /*#__PURE__*/ (0, _reactDefault.default).createElement(ShapeSelector, {
-            shapeType: shapeType,
-            elementProps: nextProps
-        });
-    } else {
-        var elementProps = props;
-        shape = /*#__PURE__*/ (0, _reactDefault.default).createElement(ShapeSelector, {
-            shapeType: shapeType,
-            elementProps: elementProps
-        });
-    }
-    if (isActive) return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-        className: activeClassName
-    }, shape);
-    return shape;
-}
-function isFunnel(graphicalItem, _item) {
-    return _item != null && 'trapezoids' in graphicalItem.props;
-}
-function isPie(graphicalItem, _item) {
-    return _item != null && 'sectors' in graphicalItem.props;
-}
-function isScatter(graphicalItem, _item) {
-    return _item != null && 'points' in graphicalItem.props;
-}
-function compareFunnel(shapeData, activeTooltipItem) {
-    var _activeTooltipItem$la, _activeTooltipItem$la2;
-    var xMatches = shapeData.x === (activeTooltipItem === null || activeTooltipItem === void 0 || (_activeTooltipItem$la = activeTooltipItem.labelViewBox) === null || _activeTooltipItem$la === void 0 ? void 0 : _activeTooltipItem$la.x) || shapeData.x === activeTooltipItem.x;
-    var yMatches = shapeData.y === (activeTooltipItem === null || activeTooltipItem === void 0 || (_activeTooltipItem$la2 = activeTooltipItem.labelViewBox) === null || _activeTooltipItem$la2 === void 0 ? void 0 : _activeTooltipItem$la2.y) || shapeData.y === activeTooltipItem.y;
-    return xMatches && yMatches;
-}
-function comparePie(shapeData, activeTooltipItem) {
-    var startAngleMatches = shapeData.endAngle === activeTooltipItem.endAngle;
-    var endAngleMatches = shapeData.startAngle === activeTooltipItem.startAngle;
-    return startAngleMatches && endAngleMatches;
-}
-function compareScatter(shapeData, activeTooltipItem) {
-    var xMatches = shapeData.x === activeTooltipItem.x;
-    var yMatches = shapeData.y === activeTooltipItem.y;
-    var zMatches = shapeData.z === activeTooltipItem.z;
-    return xMatches && yMatches && zMatches;
-}
-function getComparisonFn(graphicalItem, activeItem) {
-    var comparison;
-    if (isFunnel(graphicalItem, activeItem)) comparison = compareFunnel;
-    else if (isPie(graphicalItem, activeItem)) comparison = comparePie;
-    else if (isScatter(graphicalItem, activeItem)) comparison = compareScatter;
-    return comparison;
-}
-function getShapeDataKey(graphicalItem, activeItem) {
-    var shapeKey;
-    if (isFunnel(graphicalItem, activeItem)) shapeKey = 'trapezoids';
-    else if (isPie(graphicalItem, activeItem)) shapeKey = 'sectors';
-    else if (isScatter(graphicalItem, activeItem)) shapeKey = 'points';
-    return shapeKey;
-}
-function getActiveShapeTooltipPayload(graphicalItem, activeItem) {
-    if (isFunnel(graphicalItem, activeItem)) {
-        var _activeItem$tooltipPa;
-        return (_activeItem$tooltipPa = activeItem.tooltipPayload) === null || _activeItem$tooltipPa === void 0 || (_activeItem$tooltipPa = _activeItem$tooltipPa[0]) === null || _activeItem$tooltipPa === void 0 || (_activeItem$tooltipPa = _activeItem$tooltipPa.payload) === null || _activeItem$tooltipPa === void 0 ? void 0 : _activeItem$tooltipPa.payload;
-    }
-    if (isPie(graphicalItem, activeItem)) {
-        var _activeItem$tooltipPa2;
-        return (_activeItem$tooltipPa2 = activeItem.tooltipPayload) === null || _activeItem$tooltipPa2 === void 0 || (_activeItem$tooltipPa2 = _activeItem$tooltipPa2[0]) === null || _activeItem$tooltipPa2 === void 0 || (_activeItem$tooltipPa2 = _activeItem$tooltipPa2.payload) === null || _activeItem$tooltipPa2 === void 0 ? void 0 : _activeItem$tooltipPa2.payload;
-    }
-    if (isScatter(graphicalItem, activeItem)) return activeItem.payload;
-    return {};
-}
-function getActiveShapeIndexForTooltip(_ref3) {
-    var activeTooltipItem = _ref3.activeTooltipItem, graphicalItem = _ref3.graphicalItem, itemData = _ref3.itemData;
-    var shapeKey = getShapeDataKey(graphicalItem, activeTooltipItem);
-    var tooltipPayload = getActiveShapeTooltipPayload(graphicalItem, activeTooltipItem);
-    var activeItemMatches = itemData.filter(function(datum, dataIndex) {
-        var valuesMatch = (0, _isEqualDefault.default)(tooltipPayload, datum);
-        var mouseCoordinateMatches = graphicalItem.props[shapeKey].filter(function(shapeData) {
-            var comparison = getComparisonFn(graphicalItem, activeTooltipItem);
-            return comparison(shapeData, activeTooltipItem);
-        });
-        // get the last index in case of multiple matches
-        var indexOfMouseCoordinates = graphicalItem.props[shapeKey].indexOf(mouseCoordinateMatches[mouseCoordinateMatches.length - 1]);
-        var coordinatesMatch = dataIndex === indexOfMouseCoordinates;
-        return valuesMatch && coordinatesMatch;
-    });
-    // get the last index in case of multiple matches
-    var activeIndex = itemData.indexOf(activeItemMatches[activeItemMatches.length - 1]);
-    return activeIndex;
-}
-
-},{"react":"21dqq","lodash/isFunction":"cfti6","lodash/isPlainObject":"cvSNF","lodash/isBoolean":"3vg3p","lodash/isEqual":"9XEia","../shape/Rectangle":"21ix4","../shape/Trapezoid":"7Ff4R","../shape/Sector":"djk2D","../container/Layer":"hLZRL","../shape/Symbols":"2a019","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cvSNF":[function(require,module,exports,__globalThis) {
-var baseGetTag = require("c03dd41ed9922dd2"), getPrototype = require("2ca5b85a120835de"), isObjectLike = require("963b65e043435612");
-/** `Object#toString` result references. */ var objectTag = '[object Object]';
-/** Used for built-in method references. */ var funcProto = Function.prototype, objectProto = Object.prototype;
-/** Used to resolve the decompiled source of functions. */ var funcToString = funcProto.toString;
-/** Used to check objects for own properties. */ var hasOwnProperty = objectProto.hasOwnProperty;
-/** Used to infer the `Object` constructor. */ var objectCtorString = funcToString.call(Object);
-/**
- * Checks if `value` is a plain object, that is, an object created by the
- * `Object` constructor or one with a `[[Prototype]]` of `null`.
- *
- * @static
- * @memberOf _
- * @since 0.8.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- * }
- *
- * _.isPlainObject(new Foo);
- * // => false
- *
- * _.isPlainObject([1, 2, 3]);
- * // => false
- *
- * _.isPlainObject({ 'x': 0, 'y': 0 });
- * // => true
- *
- * _.isPlainObject(Object.create(null));
- * // => true
- */ function isPlainObject(value) {
-    if (!isObjectLike(value) || baseGetTag(value) != objectTag) return false;
-    var proto = getPrototype(value);
-    if (proto === null) return true;
-    var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-    return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
-}
-module.exports = isPlainObject;
-
-},{"c03dd41ed9922dd2":"lOnbo","2ca5b85a120835de":"8ASKT","963b65e043435612":"3BLi4"}],"8ASKT":[function(require,module,exports,__globalThis) {
-var overArg = require("11c2fcc01fbb2119");
-/** Built-in value references. */ var getPrototype = overArg(Object.getPrototypeOf, Object);
-module.exports = getPrototype;
-
-},{"11c2fcc01fbb2119":"dpUvl"}],"3vg3p":[function(require,module,exports,__globalThis) {
-var baseGetTag = require("763d54281423d9ac"), isObjectLike = require("37c1c7912587466b");
-/** `Object#toString` result references. */ var boolTag = '[object Boolean]';
-/**
- * Checks if `value` is classified as a boolean primitive or object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a boolean, else `false`.
- * @example
- *
- * _.isBoolean(false);
- * // => true
- *
- * _.isBoolean(null);
- * // => false
- */ function isBoolean(value) {
-    return value === true || value === false || isObjectLike(value) && baseGetTag(value) == boolTag;
-}
-module.exports = isBoolean;
-
-},{"763d54281423d9ac":"lOnbo","37c1c7912587466b":"3BLi4"}],"7Ff4R":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Trapezoid", ()=>Trapezoid);
-/**
- * @fileOverview Rectangle
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _reactSmooth = require("react-smooth");
-var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
-var _reactUtils = require("../util/ReactUtils");
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-function _iterableToArrayLimit(r, l) {
-    var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-    if (null != t) {
-        var e, n, i, u, a = [], f = !0, o = !1;
-        try {
-            if (i = (t = t.call(r)).next, 0 === l) {
-                if (Object(t) !== t) return;
-                f = !1;
-            } else for(; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-        } catch (r) {
-            o = !0, n = r;
-        } finally{
-            try {
-                if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
-            } finally{
-                if (o) throw n;
-            }
-        }
-        return a;
-    }
-}
-function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var getTrapezoidPath = function getTrapezoidPath(x, y, upperWidth, lowerWidth, height) {
-    var widthGap = upperWidth - lowerWidth;
-    var path;
-    path = "M ".concat(x, ",").concat(y);
-    path += "L ".concat(x + upperWidth, ",").concat(y);
-    path += "L ".concat(x + upperWidth - widthGap / 2, ",").concat(y + height);
-    path += "L ".concat(x + upperWidth - widthGap / 2 - lowerWidth, ",").concat(y + height);
-    path += "L ".concat(x, ",").concat(y, " Z");
-    return path;
-};
-var defaultProps = {
-    x: 0,
-    y: 0,
-    upperWidth: 0,
-    lowerWidth: 0,
-    height: 0,
-    isUpdateAnimationActive: false,
-    animationBegin: 0,
-    animationDuration: 1500,
-    animationEasing: 'ease'
-};
-var Trapezoid = function Trapezoid(props) {
-    var trapezoidProps = _objectSpread(_objectSpread({}, defaultProps), props);
-    var pathRef = (0, _react.useRef)();
-    var _useState = (0, _react.useState)(-1), _useState2 = _slicedToArray(_useState, 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
-    (0, _react.useEffect)(function() {
-        if (pathRef.current && pathRef.current.getTotalLength) try {
-            var pathTotalLength = pathRef.current.getTotalLength();
-            if (pathTotalLength) setTotalLength(pathTotalLength);
-        } catch (err) {
-        // calculate total length error
-        }
-    }, []);
-    var x = trapezoidProps.x, y = trapezoidProps.y, upperWidth = trapezoidProps.upperWidth, lowerWidth = trapezoidProps.lowerWidth, height = trapezoidProps.height, className = trapezoidProps.className;
-    var animationEasing = trapezoidProps.animationEasing, animationDuration = trapezoidProps.animationDuration, animationBegin = trapezoidProps.animationBegin, isUpdateAnimationActive = trapezoidProps.isUpdateAnimationActive;
-    if (x !== +x || y !== +y || upperWidth !== +upperWidth || lowerWidth !== +lowerWidth || height !== +height || upperWidth === 0 && lowerWidth === 0 || height === 0) return null;
-    var layerClass = (0, _clsxDefault.default)('recharts-trapezoid', className);
-    if (!isUpdateAnimationActive) return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", null, /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, (0, _reactUtils.filterProps)(trapezoidProps, true), {
-        className: layerClass,
-        d: getTrapezoidPath(x, y, upperWidth, lowerWidth, height)
-    })));
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-        canBegin: totalLength > 0,
-        from: {
-            upperWidth: 0,
-            lowerWidth: 0,
-            height: height,
-            x: x,
-            y: y
-        },
-        to: {
-            upperWidth: upperWidth,
-            lowerWidth: lowerWidth,
-            height: height,
-            x: x,
-            y: y
-        },
-        duration: animationDuration,
-        animationEasing: animationEasing,
-        isActive: isUpdateAnimationActive
-    }, function(_ref) {
-        var currUpperWidth = _ref.upperWidth, currLowerWidth = _ref.lowerWidth, currHeight = _ref.height, currX = _ref.x, currY = _ref.y;
-        return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-            canBegin: totalLength > 0,
-            from: "0px ".concat(totalLength === -1 ? 1 : totalLength, "px"),
-            to: "".concat(totalLength, "px 0px"),
-            attributeName: "strokeDasharray",
-            begin: animationBegin,
-            duration: animationDuration,
-            easing: animationEasing
-        }, /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, (0, _reactUtils.filterProps)(trapezoidProps, true), {
-            className: layerClass,
-            d: getTrapezoidPath(currX, currY, currUpperWidth, currLowerWidth, currHeight),
-            ref: pathRef
-        })));
-    });
-};
-
-},{"react":"21dqq","clsx":"gocd3","react-smooth":"p2bRC","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7NYcf":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Radar", ()=>Radar);
-/**
- * @fileOverview Radar
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactSmooth = require("react-smooth");
-var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
-var _isNil = require("lodash/isNil");
-var _isNilDefault = parcelHelpers.interopDefault(_isNil);
-var _last = require("lodash/last");
-var _lastDefault = parcelHelpers.interopDefault(_last);
-var _first = require("lodash/first");
-var _firstDefault = parcelHelpers.interopDefault(_first);
-var _isEqual = require("lodash/isEqual");
-var _isEqualDefault = parcelHelpers.interopDefault(_isEqual);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _dataUtils = require("../util/DataUtils");
-var _global = require("../util/Global");
-var _polarUtils = require("../util/PolarUtils");
-var _chartUtils = require("../util/ChartUtils");
-var _polygon = require("../shape/Polygon");
-var _dot = require("../shape/Dot");
-var _layer = require("../container/Layer");
-var _labelList = require("../component/LabelList");
-var _reactUtils = require("../util/ReactUtils");
-var _excluded = [
-    "key"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var Radar = /*#__PURE__*/ function(_PureComponent) {
-    function Radar() {
-        var _this;
-        _classCallCheck(this, Radar);
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        _this = _callSuper(this, Radar, [].concat(args));
-        _defineProperty(_this, "state", {
-            isAnimationFinished: false
-        });
-        _defineProperty(_this, "handleAnimationEnd", function() {
-            var onAnimationEnd = _this.props.onAnimationEnd;
-            _this.setState({
-                isAnimationFinished: true
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationEnd)) onAnimationEnd();
-        });
-        _defineProperty(_this, "handleAnimationStart", function() {
-            var onAnimationStart = _this.props.onAnimationStart;
-            _this.setState({
-                isAnimationFinished: false
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationStart)) onAnimationStart();
-        });
-        _defineProperty(_this, "handleMouseEnter", function(e) {
-            var onMouseEnter = _this.props.onMouseEnter;
-            if (onMouseEnter) onMouseEnter(_this.props, e);
-        });
-        _defineProperty(_this, "handleMouseLeave", function(e) {
-            var onMouseLeave = _this.props.onMouseLeave;
-            if (onMouseLeave) onMouseLeave(_this.props, e);
-        });
-        return _this;
-    }
-    _inherits(Radar, _PureComponent);
-    return _createClass(Radar, [
-        {
-            key: "renderDots",
-            value: function renderDots(points) {
-                var _this$props = this.props, dot = _this$props.dot, dataKey = _this$props.dataKey;
-                var baseProps = (0, _reactUtils.filterProps)(this.props, false);
-                var customDotProps = (0, _reactUtils.filterProps)(dot, true);
-                var dots = points.map(function(entry, i) {
-                    var dotProps = _objectSpread(_objectSpread(_objectSpread({
-                        key: "dot-".concat(i),
-                        r: 3
-                    }, baseProps), customDotProps), {}, {
-                        dataKey: dataKey,
-                        cx: entry.x,
-                        cy: entry.y,
-                        index: i,
-                        payload: entry
-                    });
-                    return Radar.renderDotItem(dot, dotProps);
-                });
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-radar-dots"
-                }, dots);
-            }
-        },
-        {
-            key: "renderPolygonStatically",
-            value: function renderPolygonStatically(points) {
-                var _this$props2 = this.props, shape = _this$props2.shape, dot = _this$props2.dot, isRange = _this$props2.isRange, baseLinePoints = _this$props2.baseLinePoints, connectNulls = _this$props2.connectNulls;
-                var radar;
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(shape)) radar = /*#__PURE__*/ (0, _reactDefault.default).cloneElement(shape, _objectSpread(_objectSpread({}, this.props), {}, {
-                    points: points
-                }));
-                else if ((0, _isFunctionDefault.default)(shape)) radar = shape(_objectSpread(_objectSpread({}, this.props), {}, {
-                    points: points
-                }));
-                else radar = /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _polygon.Polygon), _extends({}, (0, _reactUtils.filterProps)(this.props, true), {
-                    onMouseEnter: this.handleMouseEnter,
-                    onMouseLeave: this.handleMouseLeave,
-                    points: points,
-                    baseLinePoints: isRange ? baseLinePoints : null,
-                    connectNulls: connectNulls
-                }));
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-radar-polygon"
-                }, radar, dot ? this.renderDots(points) : null);
-            }
-        },
-        {
-            key: "renderPolygonWithAnimation",
-            value: function renderPolygonWithAnimation() {
-                var _this2 = this;
-                var _this$props3 = this.props, points = _this$props3.points, isAnimationActive = _this$props3.isAnimationActive, animationBegin = _this$props3.animationBegin, animationDuration = _this$props3.animationDuration, animationEasing = _this$props3.animationEasing, animationId = _this$props3.animationId;
-                var prevPoints = this.state.prevPoints;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-                    begin: animationBegin,
-                    duration: animationDuration,
-                    isActive: isAnimationActive,
-                    easing: animationEasing,
-                    from: {
-                        t: 0
-                    },
-                    to: {
-                        t: 1
-                    },
-                    key: "radar-".concat(animationId),
-                    onAnimationEnd: this.handleAnimationEnd,
-                    onAnimationStart: this.handleAnimationStart
-                }, function(_ref) {
-                    var t = _ref.t;
-                    var prevPointsDiffFactor = prevPoints && prevPoints.length / points.length;
-                    var stepData = points.map(function(entry, index) {
-                        var prev = prevPoints && prevPoints[Math.floor(index * prevPointsDiffFactor)];
-                        if (prev) {
-                            var _interpolatorX = (0, _dataUtils.interpolateNumber)(prev.x, entry.x);
-                            var _interpolatorY = (0, _dataUtils.interpolateNumber)(prev.y, entry.y);
-                            return _objectSpread(_objectSpread({}, entry), {}, {
-                                x: _interpolatorX(t),
-                                y: _interpolatorY(t)
-                            });
-                        }
-                        var interpolatorX = (0, _dataUtils.interpolateNumber)(entry.cx, entry.x);
-                        var interpolatorY = (0, _dataUtils.interpolateNumber)(entry.cy, entry.y);
-                        return _objectSpread(_objectSpread({}, entry), {}, {
-                            x: interpolatorX(t),
-                            y: interpolatorY(t)
-                        });
-                    });
-                    return _this2.renderPolygonStatically(stepData);
-                });
-            }
-        },
-        {
-            key: "renderPolygon",
-            value: function renderPolygon() {
-                var _this$props4 = this.props, points = _this$props4.points, isAnimationActive = _this$props4.isAnimationActive, isRange = _this$props4.isRange;
-                var prevPoints = this.state.prevPoints;
-                if (isAnimationActive && points && points.length && !isRange && (!prevPoints || !(0, _isEqualDefault.default)(prevPoints, points))) return this.renderPolygonWithAnimation();
-                return this.renderPolygonStatically(points);
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this$props5 = this.props, hide = _this$props5.hide, className = _this$props5.className, points = _this$props5.points, isAnimationActive = _this$props5.isAnimationActive;
-                if (hide || !points || !points.length) return null;
-                var isAnimationFinished = this.state.isAnimationFinished;
-                var layerClass = (0, _clsxDefault.default)('recharts-radar', className);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: layerClass
-                }, this.renderPolygon(), (!isAnimationActive || isAnimationFinished) && (0, _labelList.LabelList).renderCallByParent(this.props, points));
-            }
-        }
-    ], [
-        {
-            key: "getDerivedStateFromProps",
-            value: function getDerivedStateFromProps(nextProps, prevState) {
-                if (nextProps.animationId !== prevState.prevAnimationId) return {
-                    prevAnimationId: nextProps.animationId,
-                    curPoints: nextProps.points,
-                    prevPoints: prevState.curPoints
-                };
-                if (nextProps.points !== prevState.curPoints) return {
-                    curPoints: nextProps.points
-                };
-                return null;
-            }
-        },
-        {
-            key: "renderDotItem",
-            value: function renderDotItem(option, props) {
-                var dotItem;
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) dotItem = /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-                else if ((0, _isFunctionDefault.default)(option)) dotItem = option(props);
-                else {
-                    var key = props.key, dotProps = _objectWithoutProperties(props, _excluded);
-                    dotItem = /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _dot.Dot), _extends({}, dotProps, {
-                        key: key,
-                        className: (0, _clsxDefault.default)('recharts-radar-dot', typeof option !== 'boolean' ? option.className : '')
-                    }));
-                }
-                return dotItem;
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_defineProperty(Radar, "displayName", 'Radar');
-_defineProperty(Radar, "defaultProps", {
-    angleAxisId: 0,
-    radiusAxisId: 0,
-    hide: false,
-    activeDot: true,
-    dot: false,
-    legendType: 'rect',
-    isAnimationActive: !(0, _global.Global).isSsr,
-    animationBegin: 0,
-    animationDuration: 1500,
-    animationEasing: 'ease'
-});
-_defineProperty(Radar, "getComposedData", function(_ref2) {
-    var radiusAxis = _ref2.radiusAxis, angleAxis = _ref2.angleAxis, displayedData = _ref2.displayedData, dataKey = _ref2.dataKey, bandSize = _ref2.bandSize;
-    var cx = angleAxis.cx, cy = angleAxis.cy;
-    var isRange = false;
-    var points = [];
-    var angleBandSize = angleAxis.type !== 'number' ? bandSize !== null && bandSize !== void 0 ? bandSize : 0 : 0;
-    displayedData.forEach(function(entry, i) {
-        var name = (0, _chartUtils.getValueByDataKey)(entry, angleAxis.dataKey, i);
-        var value = (0, _chartUtils.getValueByDataKey)(entry, dataKey);
-        var angle = angleAxis.scale(name) + angleBandSize;
-        var pointValue = Array.isArray(value) ? (0, _lastDefault.default)(value) : value;
-        var radius = (0, _isNilDefault.default)(pointValue) ? undefined : radiusAxis.scale(pointValue);
-        if (Array.isArray(value) && value.length >= 2) isRange = true;
-        points.push(_objectSpread(_objectSpread({}, (0, _polarUtils.polarToCartesian)(cx, cy, radius, angle)), {}, {
-            name: name,
-            value: value,
-            cx: cx,
-            cy: cy,
-            radius: radius,
-            angle: angle,
-            payload: entry
-        }));
-    });
-    var baseLinePoints = [];
-    if (isRange) points.forEach(function(point) {
-        if (Array.isArray(point.value)) {
-            var baseValue = (0, _firstDefault.default)(point.value);
-            var radius = (0, _isNilDefault.default)(baseValue) ? undefined : radiusAxis.scale(baseValue);
-            baseLinePoints.push(_objectSpread(_objectSpread({}, point), {}, {
-                radius: radius
-            }, (0, _polarUtils.polarToCartesian)(cx, cy, radius, point.angle)));
-        } else baseLinePoints.push(point);
-    });
-    return {
-        points: points,
-        isRange: isRange,
-        baseLinePoints: baseLinePoints
-    };
-});
-
-},{"react":"21dqq","react-smooth":"p2bRC","lodash/isNil":"jYD3f","lodash/last":"fv3GK","lodash/first":"3s87u","lodash/isEqual":"9XEia","lodash/isFunction":"cfti6","clsx":"gocd3","../util/DataUtils":"exzKF","../util/Global":"7fOrk","../util/PolarUtils":"xMDoY","../util/ChartUtils":"2s4mV","../shape/Polygon":"ei100","../shape/Dot":"hrSyt","../container/Layer":"hLZRL","../component/LabelList":"e2z7M","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3s87u":[function(require,module,exports,__globalThis) {
-module.exports = require("4b24fec89d0eece4");
-
-},{"4b24fec89d0eece4":"gKJL1"}],"gKJL1":[function(require,module,exports,__globalThis) {
-/**
- * Gets the first element of `array`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @alias first
- * @category Array
- * @param {Array} array The array to query.
- * @returns {*} Returns the first element of `array`.
- * @example
- *
- * _.head([1, 2, 3]);
- * // => 1
- *
- * _.head([]);
- * // => undefined
- */ function head(array) {
-    return array && array.length ? array[0] : undefined;
-}
-module.exports = head;
-
-},{}],"aMKPI":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "RadialBar", ()=>RadialBar);
-/**
- * @fileOverview Render a group of radial bar
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _reactSmooth = require("react-smooth");
-var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
-var _isEqual = require("lodash/isEqual");
-var _isEqualDefault = parcelHelpers.interopDefault(_isEqual);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _radialBarUtils = require("../util/RadialBarUtils");
-var _layer = require("../container/Layer");
-var _reactUtils = require("../util/ReactUtils");
-var _global = require("../util/Global");
-var _labelList = require("../component/LabelList");
-var _cell = require("../component/Cell");
-var _dataUtils = require("../util/DataUtils");
-var _chartUtils = require("../util/ChartUtils");
-var _types = require("../util/types");
-var _polarUtils = require("../util/PolarUtils");
-var _excluded = [
-    "shape",
-    "activeShape",
-    "activeIndex",
-    "cornerRadius"
-], _excluded2 = [
-    "value",
-    "background"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var RadialBar = /*#__PURE__*/ function(_PureComponent) {
-    function RadialBar() {
-        var _this;
-        _classCallCheck(this, RadialBar);
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        _this = _callSuper(this, RadialBar, [].concat(args));
-        _defineProperty(_this, "state", {
-            isAnimationFinished: false
-        });
-        _defineProperty(_this, "handleAnimationEnd", function() {
-            var onAnimationEnd = _this.props.onAnimationEnd;
-            _this.setState({
-                isAnimationFinished: true
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationEnd)) onAnimationEnd();
-        });
-        _defineProperty(_this, "handleAnimationStart", function() {
-            var onAnimationStart = _this.props.onAnimationStart;
-            _this.setState({
-                isAnimationFinished: false
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationStart)) onAnimationStart();
-        });
-        return _this;
-    }
-    _inherits(RadialBar, _PureComponent);
-    return _createClass(RadialBar, [
-        {
-            key: "getDeltaAngle",
-            value: function getDeltaAngle() {
-                var _this$props = this.props, startAngle = _this$props.startAngle, endAngle = _this$props.endAngle;
-                var sign = (0, _dataUtils.mathSign)(endAngle - startAngle);
-                var deltaAngle = Math.min(Math.abs(endAngle - startAngle), 360);
-                return sign * deltaAngle;
-            }
-        },
-        {
-            key: "renderSectorsStatically",
-            value: function renderSectorsStatically(sectors) {
-                var _this2 = this;
-                var _this$props2 = this.props, shape = _this$props2.shape, activeShape = _this$props2.activeShape, activeIndex = _this$props2.activeIndex, cornerRadius = _this$props2.cornerRadius, others = _objectWithoutProperties(_this$props2, _excluded);
-                var baseProps = (0, _reactUtils.filterProps)(others, false);
-                return sectors.map(function(entry, i) {
-                    var isActive = i === activeIndex;
-                    var props = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, baseProps), {}, {
-                        cornerRadius: (0, _radialBarUtils.parseCornerRadius)(cornerRadius)
-                    }, entry), (0, _types.adaptEventsOfChild)(_this2.props, entry, i)), {}, {
-                        className: "recharts-radial-bar-sector ".concat(entry.className),
-                        forceCornerRadius: others.forceCornerRadius,
-                        cornerIsExternal: others.cornerIsExternal,
-                        isActive: isActive,
-                        option: isActive ? activeShape : shape
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _radialBarUtils.RadialBarSector), _extends({}, props, {
-                        key: "sector-".concat(i)
-                    }));
-                });
-            }
-        },
-        {
-            key: "renderSectorsWithAnimation",
-            value: function renderSectorsWithAnimation() {
-                var _this3 = this;
-                var _this$props3 = this.props, data = _this$props3.data, isAnimationActive = _this$props3.isAnimationActive, animationBegin = _this$props3.animationBegin, animationDuration = _this$props3.animationDuration, animationEasing = _this$props3.animationEasing, animationId = _this$props3.animationId;
-                var prevData = this.state.prevData;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-                    begin: animationBegin,
-                    duration: animationDuration,
-                    isActive: isAnimationActive,
-                    easing: animationEasing,
-                    from: {
-                        t: 0
-                    },
-                    to: {
-                        t: 1
-                    },
-                    key: "radialBar-".concat(animationId),
-                    onAnimationStart: this.handleAnimationStart,
-                    onAnimationEnd: this.handleAnimationEnd
-                }, function(_ref) {
-                    var t = _ref.t;
-                    var stepData = data.map(function(entry, index) {
-                        var prev = prevData && prevData[index];
-                        if (prev) {
-                            var interpolatorStartAngle = (0, _dataUtils.interpolateNumber)(prev.startAngle, entry.startAngle);
-                            var interpolatorEndAngle = (0, _dataUtils.interpolateNumber)(prev.endAngle, entry.endAngle);
-                            return _objectSpread(_objectSpread({}, entry), {}, {
-                                startAngle: interpolatorStartAngle(t),
-                                endAngle: interpolatorEndAngle(t)
-                            });
-                        }
-                        var endAngle = entry.endAngle, startAngle = entry.startAngle;
-                        var interpolator = (0, _dataUtils.interpolateNumber)(startAngle, endAngle);
-                        return _objectSpread(_objectSpread({}, entry), {}, {
-                            endAngle: interpolator(t)
-                        });
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), null, _this3.renderSectorsStatically(stepData));
-                });
-            }
-        },
-        {
-            key: "renderSectors",
-            value: function renderSectors() {
-                var _this$props4 = this.props, data = _this$props4.data, isAnimationActive = _this$props4.isAnimationActive;
-                var prevData = this.state.prevData;
-                if (isAnimationActive && data && data.length && (!prevData || !(0, _isEqualDefault.default)(prevData, data))) return this.renderSectorsWithAnimation();
-                return this.renderSectorsStatically(data);
-            }
-        },
-        {
-            key: "renderBackground",
-            value: function renderBackground(sectors) {
-                var _this4 = this;
-                var cornerRadius = this.props.cornerRadius;
-                var backgroundProps = (0, _reactUtils.filterProps)(this.props.background, false);
-                return sectors.map(function(entry, i) {
-                    var value = entry.value, background = entry.background, rest = _objectWithoutProperties(entry, _excluded2);
-                    if (!background) return null;
-                    var props = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
-                        cornerRadius: (0, _radialBarUtils.parseCornerRadius)(cornerRadius)
-                    }, rest), {}, {
-                        fill: '#eee'
-                    }, background), backgroundProps), (0, _types.adaptEventsOfChild)(_this4.props, entry, i)), {}, {
-                        index: i,
-                        className: (0, _clsxDefault.default)('recharts-radial-bar-background-sector', backgroundProps === null || backgroundProps === void 0 ? void 0 : backgroundProps.className),
-                        option: background,
-                        isActive: false
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _radialBarUtils.RadialBarSector), _extends({}, props, {
-                        key: "sector-".concat(i)
-                    }));
-                });
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this$props5 = this.props, hide = _this$props5.hide, data = _this$props5.data, className = _this$props5.className, background = _this$props5.background, isAnimationActive = _this$props5.isAnimationActive;
-                if (hide || !data || !data.length) return null;
-                var isAnimationFinished = this.state.isAnimationFinished;
-                var layerClass = (0, _clsxDefault.default)('recharts-area', className);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: layerClass
-                }, background && /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-radial-bar-background"
-                }, this.renderBackground(data)), /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-radial-bar-sectors"
-                }, this.renderSectors()), (!isAnimationActive || isAnimationFinished) && (0, _labelList.LabelList).renderCallByParent(_objectSpread({}, this.props), data));
-            }
-        }
-    ], [
-        {
-            key: "getDerivedStateFromProps",
-            value: function getDerivedStateFromProps(nextProps, prevState) {
-                if (nextProps.animationId !== prevState.prevAnimationId) return {
-                    prevAnimationId: nextProps.animationId,
-                    curData: nextProps.data,
-                    prevData: prevState.curData
-                };
-                if (nextProps.data !== prevState.curData) return {
-                    curData: nextProps.data
-                };
-                return null;
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_defineProperty(RadialBar, "displayName", 'RadialBar');
-_defineProperty(RadialBar, "defaultProps", {
-    angleAxisId: 0,
-    radiusAxisId: 0,
-    minPointSize: 0,
-    hide: false,
-    legendType: 'rect',
-    data: [],
-    isAnimationActive: !(0, _global.Global).isSsr,
-    animationBegin: 0,
-    animationDuration: 1500,
-    animationEasing: 'ease',
-    forceCornerRadius: false,
-    cornerIsExternal: false
-});
-_defineProperty(RadialBar, "getComposedData", function(_ref2) {
-    var item = _ref2.item, props = _ref2.props, radiusAxis = _ref2.radiusAxis, radiusAxisTicks = _ref2.radiusAxisTicks, angleAxis = _ref2.angleAxis, angleAxisTicks = _ref2.angleAxisTicks, displayedData = _ref2.displayedData, dataKey = _ref2.dataKey, stackedData = _ref2.stackedData, barPosition = _ref2.barPosition, bandSize = _ref2.bandSize, dataStartIndex = _ref2.dataStartIndex;
-    var pos = (0, _chartUtils.findPositionOfBar)(barPosition, item);
-    if (!pos) return null;
-    var cx = angleAxis.cx, cy = angleAxis.cy;
-    var layout = props.layout;
-    var _item$props = item.props, children = _item$props.children, minPointSize = _item$props.minPointSize;
-    var numericAxis = layout === 'radial' ? angleAxis : radiusAxis;
-    var stackedDomain = stackedData ? numericAxis.scale.domain() : null;
-    var baseValue = (0, _chartUtils.getBaseValueOfBar)({
-        numericAxis: numericAxis
-    });
-    var cells = (0, _reactUtils.findAllByType)(children, (0, _cell.Cell));
-    var sectors = displayedData.map(function(entry, index) {
-        var value, innerRadius, outerRadius, startAngle, endAngle, backgroundSector;
-        if (stackedData) value = (0, _chartUtils.truncateByDomain)(stackedData[dataStartIndex + index], stackedDomain);
-        else {
-            value = (0, _chartUtils.getValueByDataKey)(entry, dataKey);
-            if (!Array.isArray(value)) value = [
-                baseValue,
-                value
-            ];
-        }
-        if (layout === 'radial') {
-            innerRadius = (0, _chartUtils.getCateCoordinateOfBar)({
-                axis: radiusAxis,
-                ticks: radiusAxisTicks,
-                bandSize: bandSize,
-                offset: pos.offset,
-                entry: entry,
-                index: index
-            });
-            endAngle = angleAxis.scale(value[1]);
-            startAngle = angleAxis.scale(value[0]);
-            outerRadius = innerRadius + pos.size;
-            var deltaAngle = endAngle - startAngle;
-            if (Math.abs(minPointSize) > 0 && Math.abs(deltaAngle) < Math.abs(minPointSize)) {
-                var delta = (0, _dataUtils.mathSign)(deltaAngle || minPointSize) * (Math.abs(minPointSize) - Math.abs(deltaAngle));
-                endAngle += delta;
-            }
-            backgroundSector = {
-                background: {
-                    cx: cx,
-                    cy: cy,
-                    innerRadius: innerRadius,
-                    outerRadius: outerRadius,
-                    startAngle: props.startAngle,
-                    endAngle: props.endAngle
-                }
-            };
-        } else {
-            innerRadius = radiusAxis.scale(value[0]);
-            outerRadius = radiusAxis.scale(value[1]);
-            startAngle = (0, _chartUtils.getCateCoordinateOfBar)({
-                axis: angleAxis,
-                ticks: angleAxisTicks,
-                bandSize: bandSize,
-                offset: pos.offset,
-                entry: entry,
-                index: index
-            });
-            endAngle = startAngle + pos.size;
-            var deltaRadius = outerRadius - innerRadius;
-            if (Math.abs(minPointSize) > 0 && Math.abs(deltaRadius) < Math.abs(minPointSize)) {
-                var _delta = (0, _dataUtils.mathSign)(deltaRadius || minPointSize) * (Math.abs(minPointSize) - Math.abs(deltaRadius));
-                outerRadius += _delta;
-            }
-        }
-        return _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, entry), backgroundSector), {}, {
-            payload: entry,
-            value: stackedData ? value : value[1],
-            cx: cx,
-            cy: cy,
-            innerRadius: innerRadius,
-            outerRadius: outerRadius,
-            startAngle: startAngle,
-            endAngle: endAngle
-        }, cells && cells[index] && cells[index].props), {}, {
-            tooltipPayload: [
-                (0, _chartUtils.getTooltipItem)(item, entry)
-            ],
-            tooltipPosition: (0, _polarUtils.polarToCartesian)(cx, cy, (innerRadius + outerRadius) / 2, (startAngle + endAngle) / 2)
-        });
-    });
-    return {
-        data: sectors,
-        layout: layout
-    };
-});
-
-},{"react":"21dqq","clsx":"gocd3","react-smooth":"p2bRC","lodash/isEqual":"9XEia","lodash/isFunction":"cfti6","../util/RadialBarUtils":"ekKOX","../container/Layer":"hLZRL","../util/ReactUtils":"gDert","../util/Global":"7fOrk","../component/LabelList":"e2z7M","../component/Cell":"cmpyN","../util/DataUtils":"exzKF","../util/ChartUtils":"2s4mV","../util/types":"8jZsH","../util/PolarUtils":"xMDoY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ekKOX":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "parseCornerRadius", ()=>parseCornerRadius);
-// Sector props is expecting cx, cy as numbers.
-// When props are being spread in from a user defined component in RadialBar,
-// the prop types of an SVGElement have these typed as string | number.
-// This function will return the passed in props along with cx, cy as numbers.
-parcelHelpers.export(exports, "typeGuardSectorProps", ()=>typeGuardSectorProps);
-parcelHelpers.export(exports, "RadialBarSector", ()=>RadialBarSector);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _activeShapeUtils = require("./ActiveShapeUtils");
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-function parseCornerRadius(cornerRadius) {
-    if (typeof cornerRadius === 'string') return parseInt(cornerRadius, 10);
-    return cornerRadius;
-}
-function typeGuardSectorProps(option, props) {
-    var cxValue = "".concat(props.cx || option.cx);
-    var cx = Number(cxValue);
-    var cyValue = "".concat(props.cy || option.cy);
-    var cy = Number(cyValue);
-    return _objectSpread(_objectSpread(_objectSpread({}, props), option), {}, {
-        cx: cx,
-        cy: cy
-    });
-}
-function RadialBarSector(props) {
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _activeShapeUtils.Shape), _extends({
-        shapeType: "sector",
-        propTransformer: typeGuardSectorProps
-    }, props));
-}
-
-},{"react":"21dqq","./ActiveShapeUtils":"6gaj7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3JiM":[function(require,module,exports,__globalThis) {
+},{"react":"21dqq","clsx":"gocd3","../util/DataUtils":"exzKF","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3JiM":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Brush", ()=>Brush);
@@ -38086,7 +34212,80 @@ var toNumber = require("90c5878489629896");
 }
 module.exports = toFinite;
 
-},{"90c5878489629896":"12NaH"}],"tV6uk":[function(require,module,exports,__globalThis) {
+},{"90c5878489629896":"12NaH"}],"12NaH":[function(require,module,exports,__globalThis) {
+var baseTrim = require("261e89907fb89d78"), isObject = require("faaa289d287a34a5"), isSymbol = require("47b3bd23f771891");
+/** Used as references for various `Number` constants. */ var NAN = 0 / 0;
+/** Used to detect bad signed hexadecimal string values. */ var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+/** Used to detect binary string values. */ var reIsBinary = /^0b[01]+$/i;
+/** Used to detect octal string values. */ var reIsOctal = /^0o[0-7]+$/i;
+/** Built-in method references without a dependency on `root`. */ var freeParseInt = parseInt;
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */ function toNumber(value) {
+    if (typeof value == 'number') return value;
+    if (isSymbol(value)) return NAN;
+    if (isObject(value)) {
+        var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+        value = isObject(other) ? other + '' : other;
+    }
+    if (typeof value != 'string') return value === 0 ? value : +value;
+    value = baseTrim(value);
+    var isBinary = reIsBinary.test(value);
+    return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+module.exports = toNumber;
+
+},{"261e89907fb89d78":"eUJZ3","faaa289d287a34a5":"cGhqJ","47b3bd23f771891":"i3BHC"}],"eUJZ3":[function(require,module,exports,__globalThis) {
+var trimmedEndIndex = require("985d3c9be7b51937");
+/** Used to match leading whitespace. */ var reTrimStart = /^\s+/;
+/**
+ * The base implementation of `_.trim`.
+ *
+ * @private
+ * @param {string} string The string to trim.
+ * @returns {string} Returns the trimmed string.
+ */ function baseTrim(string) {
+    return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
+}
+module.exports = baseTrim;
+
+},{"985d3c9be7b51937":"hHJmS"}],"hHJmS":[function(require,module,exports,__globalThis) {
+/** Used to match a single whitespace character. */ var reWhitespace = /\s/;
+/**
+ * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
+ * character of `string`.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {number} Returns the index of the last non-whitespace character.
+ */ function trimmedEndIndex(string) {
+    var index = string.length;
+    while(index-- && reWhitespace.test(string.charAt(index)));
+    return index;
+}
+module.exports = trimmedEndIndex;
+
+},{}],"tV6uk":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "generatePrefixStyle", ()=>generatePrefixStyle);
@@ -39706,7 +35905,533 @@ var minPointSizeCallback = function minPointSizeCallback(minPointSize) {
     };
 };
 
-},{"react":"21dqq","tiny-invariant":"fnIPv","./ActiveShapeUtils":"6gaj7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bLou8":[function(require,module,exports,__globalThis) {
+},{"react":"21dqq","tiny-invariant":"fnIPv","./ActiveShapeUtils":"6gaj7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6gaj7":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getPropsFromShapeOption", ()=>getPropsFromShapeOption);
+parcelHelpers.export(exports, "Shape", ()=>Shape);
+/**
+ * This is an abstraction to handle identifying the active index from a tooltip mouse interaction
+ */ parcelHelpers.export(exports, "isFunnel", ()=>isFunnel);
+parcelHelpers.export(exports, "isPie", ()=>isPie);
+parcelHelpers.export(exports, "isScatter", ()=>isScatter);
+parcelHelpers.export(exports, "compareFunnel", ()=>compareFunnel);
+parcelHelpers.export(exports, "comparePie", ()=>comparePie);
+parcelHelpers.export(exports, "compareScatter", ()=>compareScatter);
+/**
+ *
+ * @param {GetActiveShapeIndexForTooltip} arg an object of incoming attributes from Tooltip
+ * @returns {number}
+ *
+ * To handle possible duplicates in the data set,
+ * match both the data value of the active item to a data value on a graph item,
+ * and match the mouse coordinates of the active item to the coordinates of in a particular components shape data.
+ * This assumes equal lengths of shape objects to data items.
+ */ parcelHelpers.export(exports, "getActiveShapeIndexForTooltip", ()=>getActiveShapeIndexForTooltip);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _isFunction = require("lodash/isFunction");
+var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
+var _isPlainObject = require("lodash/isPlainObject");
+var _isPlainObjectDefault = parcelHelpers.interopDefault(_isPlainObject);
+var _isBoolean = require("lodash/isBoolean");
+var _isBooleanDefault = parcelHelpers.interopDefault(_isBoolean);
+var _isEqual = require("lodash/isEqual");
+var _isEqualDefault = parcelHelpers.interopDefault(_isEqual);
+var _rectangle = require("../shape/Rectangle");
+var _trapezoid = require("../shape/Trapezoid");
+var _sector = require("../shape/Sector");
+var _layer = require("../container/Layer");
+var _symbols = require("../shape/Symbols");
+var _excluded = [
+    "option",
+    "shapeType",
+    "propTransformer",
+    "activeClassName",
+    "isActive"
+];
+function _typeof(o) {
+    "@babel/helpers - typeof";
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+        return typeof o;
+    } : function(o) {
+        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+}
+function _objectWithoutProperties(source, excluded) {
+    if (source == null) return {};
+    var target = _objectWithoutPropertiesLoose(source, excluded);
+    var key, i;
+    if (Object.getOwnPropertySymbols) {
+        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+        for(i = 0; i < sourceSymbolKeys.length; i++){
+            key = sourceSymbolKeys[i];
+            if (excluded.indexOf(key) >= 0) continue;
+            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+            target[key] = source[key];
+        }
+    }
+    return target;
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+        var o = Object.getOwnPropertySymbols(e);
+        r && (o = o.filter(function(r) {
+            return Object.getOwnPropertyDescriptor(e, r).enumerable;
+        })), t.push.apply(t, o);
+    }
+    return t;
+}
+function _objectSpread(e) {
+    for(var r = 1; r < arguments.length; r++){
+        var t = null != arguments[r] ? arguments[r] : {};
+        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
+            _defineProperty(e, r, t[r]);
+        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
+            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+        });
+    }
+    return e;
+}
+function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+    else obj[key] = value;
+    return obj;
+}
+function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == _typeof(i) ? i : i + "";
+}
+function _toPrimitive(t, r) {
+    if ("object" != _typeof(t) || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+        var i = e.call(t, r || "default");
+        if ("object" != _typeof(i)) return i;
+        throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+}
+/**
+ * This is an abstraction for rendering a user defined prop for a customized shape in several forms.
+ *
+ * <Shape /> is the root and will handle taking in:
+ *  - an object of svg properties
+ *  - a boolean
+ *  - a render prop(inline function that returns jsx)
+ *  - a react element
+ *
+ * <ShapeSelector /> is a subcomponent of <Shape /> and used to match a component
+ * to the value of props.shapeType that is passed to the root.
+ *
+ */ function defaultPropTransformer(option, props) {
+    return _objectSpread(_objectSpread({}, props), option);
+}
+function isSymbolsProps(shapeType, _elementProps) {
+    return shapeType === 'symbols';
+}
+function ShapeSelector(_ref) {
+    var shapeType = _ref.shapeType, elementProps = _ref.elementProps;
+    switch(shapeType){
+        case 'rectangle':
+            return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _rectangle.Rectangle), elementProps);
+        case 'trapezoid':
+            return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _trapezoid.Trapezoid), elementProps);
+        case 'sector':
+            return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _sector.Sector), elementProps);
+        case 'symbols':
+            if (isSymbolsProps(shapeType, elementProps)) return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _symbols.Symbols), elementProps);
+            break;
+        default:
+            return null;
+    }
+}
+function getPropsFromShapeOption(option) {
+    if (/*#__PURE__*/ (0, _react.isValidElement)(option)) return option.props;
+    return option;
+}
+function Shape(_ref2) {
+    var option = _ref2.option, shapeType = _ref2.shapeType, _ref2$propTransformer = _ref2.propTransformer, propTransformer = _ref2$propTransformer === void 0 ? defaultPropTransformer : _ref2$propTransformer, _ref2$activeClassName = _ref2.activeClassName, activeClassName = _ref2$activeClassName === void 0 ? 'recharts-active-shape' : _ref2$activeClassName, isActive = _ref2.isActive, props = _objectWithoutProperties(_ref2, _excluded);
+    var shape;
+    if (/*#__PURE__*/ (0, _react.isValidElement)(option)) shape = /*#__PURE__*/ (0, _react.cloneElement)(option, _objectSpread(_objectSpread({}, props), getPropsFromShapeOption(option)));
+    else if ((0, _isFunctionDefault.default)(option)) shape = option(props);
+    else if ((0, _isPlainObjectDefault.default)(option) && !(0, _isBooleanDefault.default)(option)) {
+        var nextProps = propTransformer(option, props);
+        shape = /*#__PURE__*/ (0, _reactDefault.default).createElement(ShapeSelector, {
+            shapeType: shapeType,
+            elementProps: nextProps
+        });
+    } else {
+        var elementProps = props;
+        shape = /*#__PURE__*/ (0, _reactDefault.default).createElement(ShapeSelector, {
+            shapeType: shapeType,
+            elementProps: elementProps
+        });
+    }
+    if (isActive) return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
+        className: activeClassName
+    }, shape);
+    return shape;
+}
+function isFunnel(graphicalItem, _item) {
+    return _item != null && 'trapezoids' in graphicalItem.props;
+}
+function isPie(graphicalItem, _item) {
+    return _item != null && 'sectors' in graphicalItem.props;
+}
+function isScatter(graphicalItem, _item) {
+    return _item != null && 'points' in graphicalItem.props;
+}
+function compareFunnel(shapeData, activeTooltipItem) {
+    var _activeTooltipItem$la, _activeTooltipItem$la2;
+    var xMatches = shapeData.x === (activeTooltipItem === null || activeTooltipItem === void 0 || (_activeTooltipItem$la = activeTooltipItem.labelViewBox) === null || _activeTooltipItem$la === void 0 ? void 0 : _activeTooltipItem$la.x) || shapeData.x === activeTooltipItem.x;
+    var yMatches = shapeData.y === (activeTooltipItem === null || activeTooltipItem === void 0 || (_activeTooltipItem$la2 = activeTooltipItem.labelViewBox) === null || _activeTooltipItem$la2 === void 0 ? void 0 : _activeTooltipItem$la2.y) || shapeData.y === activeTooltipItem.y;
+    return xMatches && yMatches;
+}
+function comparePie(shapeData, activeTooltipItem) {
+    var startAngleMatches = shapeData.endAngle === activeTooltipItem.endAngle;
+    var endAngleMatches = shapeData.startAngle === activeTooltipItem.startAngle;
+    return startAngleMatches && endAngleMatches;
+}
+function compareScatter(shapeData, activeTooltipItem) {
+    var xMatches = shapeData.x === activeTooltipItem.x;
+    var yMatches = shapeData.y === activeTooltipItem.y;
+    var zMatches = shapeData.z === activeTooltipItem.z;
+    return xMatches && yMatches && zMatches;
+}
+function getComparisonFn(graphicalItem, activeItem) {
+    var comparison;
+    if (isFunnel(graphicalItem, activeItem)) comparison = compareFunnel;
+    else if (isPie(graphicalItem, activeItem)) comparison = comparePie;
+    else if (isScatter(graphicalItem, activeItem)) comparison = compareScatter;
+    return comparison;
+}
+function getShapeDataKey(graphicalItem, activeItem) {
+    var shapeKey;
+    if (isFunnel(graphicalItem, activeItem)) shapeKey = 'trapezoids';
+    else if (isPie(graphicalItem, activeItem)) shapeKey = 'sectors';
+    else if (isScatter(graphicalItem, activeItem)) shapeKey = 'points';
+    return shapeKey;
+}
+function getActiveShapeTooltipPayload(graphicalItem, activeItem) {
+    if (isFunnel(graphicalItem, activeItem)) {
+        var _activeItem$tooltipPa;
+        return (_activeItem$tooltipPa = activeItem.tooltipPayload) === null || _activeItem$tooltipPa === void 0 || (_activeItem$tooltipPa = _activeItem$tooltipPa[0]) === null || _activeItem$tooltipPa === void 0 || (_activeItem$tooltipPa = _activeItem$tooltipPa.payload) === null || _activeItem$tooltipPa === void 0 ? void 0 : _activeItem$tooltipPa.payload;
+    }
+    if (isPie(graphicalItem, activeItem)) {
+        var _activeItem$tooltipPa2;
+        return (_activeItem$tooltipPa2 = activeItem.tooltipPayload) === null || _activeItem$tooltipPa2 === void 0 || (_activeItem$tooltipPa2 = _activeItem$tooltipPa2[0]) === null || _activeItem$tooltipPa2 === void 0 || (_activeItem$tooltipPa2 = _activeItem$tooltipPa2.payload) === null || _activeItem$tooltipPa2 === void 0 ? void 0 : _activeItem$tooltipPa2.payload;
+    }
+    if (isScatter(graphicalItem, activeItem)) return activeItem.payload;
+    return {};
+}
+function getActiveShapeIndexForTooltip(_ref3) {
+    var activeTooltipItem = _ref3.activeTooltipItem, graphicalItem = _ref3.graphicalItem, itemData = _ref3.itemData;
+    var shapeKey = getShapeDataKey(graphicalItem, activeTooltipItem);
+    var tooltipPayload = getActiveShapeTooltipPayload(graphicalItem, activeTooltipItem);
+    var activeItemMatches = itemData.filter(function(datum, dataIndex) {
+        var valuesMatch = (0, _isEqualDefault.default)(tooltipPayload, datum);
+        var mouseCoordinateMatches = graphicalItem.props[shapeKey].filter(function(shapeData) {
+            var comparison = getComparisonFn(graphicalItem, activeTooltipItem);
+            return comparison(shapeData, activeTooltipItem);
+        });
+        // get the last index in case of multiple matches
+        var indexOfMouseCoordinates = graphicalItem.props[shapeKey].indexOf(mouseCoordinateMatches[mouseCoordinateMatches.length - 1]);
+        var coordinatesMatch = dataIndex === indexOfMouseCoordinates;
+        return valuesMatch && coordinatesMatch;
+    });
+    // get the last index in case of multiple matches
+    var activeIndex = itemData.indexOf(activeItemMatches[activeItemMatches.length - 1]);
+    return activeIndex;
+}
+
+},{"react":"21dqq","lodash/isFunction":"cfti6","lodash/isPlainObject":"cvSNF","lodash/isBoolean":"3vg3p","lodash/isEqual":"9XEia","../shape/Rectangle":"21ix4","../shape/Trapezoid":"7Ff4R","../shape/Sector":"djk2D","../container/Layer":"hLZRL","../shape/Symbols":"2a019","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cvSNF":[function(require,module,exports,__globalThis) {
+var baseGetTag = require("c03dd41ed9922dd2"), getPrototype = require("2ca5b85a120835de"), isObjectLike = require("963b65e043435612");
+/** `Object#toString` result references. */ var objectTag = '[object Object]';
+/** Used for built-in method references. */ var funcProto = Function.prototype, objectProto = Object.prototype;
+/** Used to resolve the decompiled source of functions. */ var funcToString = funcProto.toString;
+/** Used to check objects for own properties. */ var hasOwnProperty = objectProto.hasOwnProperty;
+/** Used to infer the `Object` constructor. */ var objectCtorString = funcToString.call(Object);
+/**
+ * Checks if `value` is a plain object, that is, an object created by the
+ * `Object` constructor or one with a `[[Prototype]]` of `null`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.8.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ * }
+ *
+ * _.isPlainObject(new Foo);
+ * // => false
+ *
+ * _.isPlainObject([1, 2, 3]);
+ * // => false
+ *
+ * _.isPlainObject({ 'x': 0, 'y': 0 });
+ * // => true
+ *
+ * _.isPlainObject(Object.create(null));
+ * // => true
+ */ function isPlainObject(value) {
+    if (!isObjectLike(value) || baseGetTag(value) != objectTag) return false;
+    var proto = getPrototype(value);
+    if (proto === null) return true;
+    var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+    return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
+}
+module.exports = isPlainObject;
+
+},{"c03dd41ed9922dd2":"lOnbo","2ca5b85a120835de":"8ASKT","963b65e043435612":"3BLi4"}],"8ASKT":[function(require,module,exports,__globalThis) {
+var overArg = require("11c2fcc01fbb2119");
+/** Built-in value references. */ var getPrototype = overArg(Object.getPrototypeOf, Object);
+module.exports = getPrototype;
+
+},{"11c2fcc01fbb2119":"dpUvl"}],"3vg3p":[function(require,module,exports,__globalThis) {
+var baseGetTag = require("763d54281423d9ac"), isObjectLike = require("37c1c7912587466b");
+/** `Object#toString` result references. */ var boolTag = '[object Boolean]';
+/**
+ * Checks if `value` is classified as a boolean primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a boolean, else `false`.
+ * @example
+ *
+ * _.isBoolean(false);
+ * // => true
+ *
+ * _.isBoolean(null);
+ * // => false
+ */ function isBoolean(value) {
+    return value === true || value === false || isObjectLike(value) && baseGetTag(value) == boolTag;
+}
+module.exports = isBoolean;
+
+},{"763d54281423d9ac":"lOnbo","37c1c7912587466b":"3BLi4"}],"7Ff4R":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Trapezoid", ()=>Trapezoid);
+/**
+ * @fileOverview Rectangle
+ */ var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _reactSmooth = require("react-smooth");
+var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
+var _reactUtils = require("../util/ReactUtils");
+function _typeof(o) {
+    "@babel/helpers - typeof";
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+        return typeof o;
+    } : function(o) {
+        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+}
+function _extends() {
+    _extends = Object.assign ? Object.assign.bind() : function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
+}
+function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
+    return arr2;
+}
+function _iterableToArrayLimit(r, l) {
+    var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+    if (null != t) {
+        var e, n, i, u, a = [], f = !0, o = !1;
+        try {
+            if (i = (t = t.call(r)).next, 0 === l) {
+                if (Object(t) !== t) return;
+                f = !1;
+            } else for(; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+        } catch (r) {
+            o = !0, n = r;
+        } finally{
+            try {
+                if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+            } finally{
+                if (o) throw n;
+            }
+        }
+        return a;
+    }
+}
+function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+}
+function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+        var o = Object.getOwnPropertySymbols(e);
+        r && (o = o.filter(function(r) {
+            return Object.getOwnPropertyDescriptor(e, r).enumerable;
+        })), t.push.apply(t, o);
+    }
+    return t;
+}
+function _objectSpread(e) {
+    for(var r = 1; r < arguments.length; r++){
+        var t = null != arguments[r] ? arguments[r] : {};
+        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
+            _defineProperty(e, r, t[r]);
+        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
+            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+        });
+    }
+    return e;
+}
+function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+    else obj[key] = value;
+    return obj;
+}
+function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == _typeof(i) ? i : i + "";
+}
+function _toPrimitive(t, r) {
+    if ("object" != _typeof(t) || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+        var i = e.call(t, r || "default");
+        if ("object" != _typeof(i)) return i;
+        throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+}
+var getTrapezoidPath = function getTrapezoidPath(x, y, upperWidth, lowerWidth, height) {
+    var widthGap = upperWidth - lowerWidth;
+    var path;
+    path = "M ".concat(x, ",").concat(y);
+    path += "L ".concat(x + upperWidth, ",").concat(y);
+    path += "L ".concat(x + upperWidth - widthGap / 2, ",").concat(y + height);
+    path += "L ".concat(x + upperWidth - widthGap / 2 - lowerWidth, ",").concat(y + height);
+    path += "L ".concat(x, ",").concat(y, " Z");
+    return path;
+};
+var defaultProps = {
+    x: 0,
+    y: 0,
+    upperWidth: 0,
+    lowerWidth: 0,
+    height: 0,
+    isUpdateAnimationActive: false,
+    animationBegin: 0,
+    animationDuration: 1500,
+    animationEasing: 'ease'
+};
+var Trapezoid = function Trapezoid(props) {
+    var trapezoidProps = _objectSpread(_objectSpread({}, defaultProps), props);
+    var pathRef = (0, _react.useRef)();
+    var _useState = (0, _react.useState)(-1), _useState2 = _slicedToArray(_useState, 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
+    (0, _react.useEffect)(function() {
+        if (pathRef.current && pathRef.current.getTotalLength) try {
+            var pathTotalLength = pathRef.current.getTotalLength();
+            if (pathTotalLength) setTotalLength(pathTotalLength);
+        } catch (err) {
+        // calculate total length error
+        }
+    }, []);
+    var x = trapezoidProps.x, y = trapezoidProps.y, upperWidth = trapezoidProps.upperWidth, lowerWidth = trapezoidProps.lowerWidth, height = trapezoidProps.height, className = trapezoidProps.className;
+    var animationEasing = trapezoidProps.animationEasing, animationDuration = trapezoidProps.animationDuration, animationBegin = trapezoidProps.animationBegin, isUpdateAnimationActive = trapezoidProps.isUpdateAnimationActive;
+    if (x !== +x || y !== +y || upperWidth !== +upperWidth || lowerWidth !== +lowerWidth || height !== +height || upperWidth === 0 && lowerWidth === 0 || height === 0) return null;
+    var layerClass = (0, _clsxDefault.default)('recharts-trapezoid', className);
+    if (!isUpdateAnimationActive) return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", null, /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, (0, _reactUtils.filterProps)(trapezoidProps, true), {
+        className: layerClass,
+        d: getTrapezoidPath(x, y, upperWidth, lowerWidth, height)
+    })));
+    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
+        canBegin: totalLength > 0,
+        from: {
+            upperWidth: 0,
+            lowerWidth: 0,
+            height: height,
+            x: x,
+            y: y
+        },
+        to: {
+            upperWidth: upperWidth,
+            lowerWidth: lowerWidth,
+            height: height,
+            x: x,
+            y: y
+        },
+        duration: animationDuration,
+        animationEasing: animationEasing,
+        isActive: isUpdateAnimationActive
+    }, function(_ref) {
+        var currUpperWidth = _ref.upperWidth, currLowerWidth = _ref.lowerWidth, currHeight = _ref.height, currX = _ref.x, currY = _ref.y;
+        return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
+            canBegin: totalLength > 0,
+            from: "0px ".concat(totalLength === -1 ? 1 : totalLength, "px"),
+            to: "".concat(totalLength, "px 0px"),
+            attributeName: "strokeDasharray",
+            begin: animationBegin,
+            duration: animationDuration,
+            easing: animationEasing
+        }, /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({}, (0, _reactUtils.filterProps)(trapezoidProps, true), {
+            className: layerClass,
+            d: getTrapezoidPath(currX, currY, currUpperWidth, currLowerWidth, currHeight),
+            ref: pathRef
+        })));
+    });
+};
+
+},{"react":"21dqq","clsx":"gocd3","react-smooth":"p2bRC","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bLou8":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "XAxisContext", ()=>XAxisContext);
@@ -41202,384 +37927,7 @@ function getEquidistantTicks(sign, boundaries, getTickSize, ticks, minTickGap) {
     return [];
 }
 
-},{"../util/TickUtils":"a7suL","../util/getEveryNthWithCondition":"jo0t8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"P0swa":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CartesianGrid", ()=>CartesianGrid);
-/**
- * @fileOverview Cartesian Grid
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _logUtils = require("../util/LogUtils");
-var _dataUtils = require("../util/DataUtils");
-var _reactUtils = require("../util/ReactUtils");
-var _chartUtils = require("../util/ChartUtils");
-var _getTicks = require("./getTicks");
-var _cartesianAxis = require("./CartesianAxis");
-var _chartLayoutContext = require("../context/chartLayoutContext");
-var _excluded = [
-    "x1",
-    "y1",
-    "x2",
-    "y2",
-    "key"
-], _excluded2 = [
-    "offset"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-/**
- * The <CartesianGrid horizontal
- */ var Background = function Background(props) {
-    var fill = props.fill;
-    if (!fill || fill === 'none') return null;
-    var fillOpacity = props.fillOpacity, x = props.x, y = props.y, width = props.width, height = props.height, ry = props.ry;
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("rect", {
-        x: x,
-        y: y,
-        ry: ry,
-        width: width,
-        height: height,
-        stroke: "none",
-        fill: fill,
-        fillOpacity: fillOpacity,
-        className: "recharts-cartesian-grid-bg"
-    });
-};
-function renderLineItem(option, props) {
-    var lineItem;
-    if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) // @ts-expect-error typescript does not see the props type when cloning an element
-    lineItem = /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-    else if ((0, _isFunctionDefault.default)(option)) lineItem = option(props);
-    else {
-        var x1 = props.x1, y1 = props.y1, x2 = props.x2, y2 = props.y2, key = props.key, others = _objectWithoutProperties(props, _excluded);
-        var _filterProps = (0, _reactUtils.filterProps)(others, false), __ = _filterProps.offset, restOfFilteredProps = _objectWithoutProperties(_filterProps, _excluded2);
-        lineItem = /*#__PURE__*/ (0, _reactDefault.default).createElement("line", _extends({}, restOfFilteredProps, {
-            x1: x1,
-            y1: y1,
-            x2: x2,
-            y2: y2,
-            fill: "none",
-            key: key
-        }));
-    }
-    return lineItem;
-}
-function HorizontalGridLines(props) {
-    var x = props.x, width = props.width, _props$horizontal = props.horizontal, horizontal = _props$horizontal === void 0 ? true : _props$horizontal, horizontalPoints = props.horizontalPoints;
-    if (!horizontal || !horizontalPoints || !horizontalPoints.length) return null;
-    var items = horizontalPoints.map(function(entry, i) {
-        var lineItemProps = _objectSpread(_objectSpread({}, props), {}, {
-            x1: x,
-            y1: entry,
-            x2: x + width,
-            y2: entry,
-            key: "line-".concat(i),
-            index: i
-        });
-        return renderLineItem(horizontal, lineItemProps);
-    });
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-        className: "recharts-cartesian-grid-horizontal"
-    }, items);
-}
-function VerticalGridLines(props) {
-    var y = props.y, height = props.height, _props$vertical = props.vertical, vertical = _props$vertical === void 0 ? true : _props$vertical, verticalPoints = props.verticalPoints;
-    if (!vertical || !verticalPoints || !verticalPoints.length) return null;
-    var items = verticalPoints.map(function(entry, i) {
-        var lineItemProps = _objectSpread(_objectSpread({}, props), {}, {
-            x1: entry,
-            y1: y,
-            x2: entry,
-            y2: y + height,
-            key: "line-".concat(i),
-            index: i
-        });
-        return renderLineItem(vertical, lineItemProps);
-    });
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-        className: "recharts-cartesian-grid-vertical"
-    }, items);
-}
-function HorizontalStripes(props) {
-    var horizontalFill = props.horizontalFill, fillOpacity = props.fillOpacity, x = props.x, y = props.y, width = props.width, height = props.height, horizontalPoints = props.horizontalPoints, _props$horizontal2 = props.horizontal, horizontal = _props$horizontal2 === void 0 ? true : _props$horizontal2;
-    if (!horizontal || !horizontalFill || !horizontalFill.length) return null;
-    // Why =y -y? I was trying to find any difference that this makes, with floating point numbers and edge cases but ... nothing.
-    var roundedSortedHorizontalPoints = horizontalPoints.map(function(e) {
-        return Math.round(e + y - y);
-    }).sort(function(a, b) {
-        return a - b;
-    });
-    // Why is this condition `!==` instead of `<=` ?
-    if (y !== roundedSortedHorizontalPoints[0]) roundedSortedHorizontalPoints.unshift(0);
-    var items = roundedSortedHorizontalPoints.map(function(entry, i) {
-        // Why do we strip only the last stripe if it is invisible, and not all invisible stripes?
-        var lastStripe = !roundedSortedHorizontalPoints[i + 1];
-        var lineHeight = lastStripe ? y + height - entry : roundedSortedHorizontalPoints[i + 1] - entry;
-        if (lineHeight <= 0) return null;
-        var colorIndex = i % horizontalFill.length;
-        return /*#__PURE__*/ (0, _reactDefault.default).createElement("rect", {
-            key: "react-".concat(i) // eslint-disable-line react/no-array-index-key
-            ,
-            y: entry,
-            x: x,
-            height: lineHeight,
-            width: width,
-            stroke: "none",
-            fill: horizontalFill[colorIndex],
-            fillOpacity: fillOpacity,
-            className: "recharts-cartesian-grid-bg"
-        });
-    });
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-        className: "recharts-cartesian-gridstripes-horizontal"
-    }, items);
-}
-function VerticalStripes(props) {
-    var _props$vertical2 = props.vertical, vertical = _props$vertical2 === void 0 ? true : _props$vertical2, verticalFill = props.verticalFill, fillOpacity = props.fillOpacity, x = props.x, y = props.y, width = props.width, height = props.height, verticalPoints = props.verticalPoints;
-    if (!vertical || !verticalFill || !verticalFill.length) return null;
-    var roundedSortedVerticalPoints = verticalPoints.map(function(e) {
-        return Math.round(e + x - x);
-    }).sort(function(a, b) {
-        return a - b;
-    });
-    if (x !== roundedSortedVerticalPoints[0]) roundedSortedVerticalPoints.unshift(0);
-    var items = roundedSortedVerticalPoints.map(function(entry, i) {
-        var lastStripe = !roundedSortedVerticalPoints[i + 1];
-        var lineWidth = lastStripe ? x + width - entry : roundedSortedVerticalPoints[i + 1] - entry;
-        if (lineWidth <= 0) return null;
-        var colorIndex = i % verticalFill.length;
-        return /*#__PURE__*/ (0, _reactDefault.default).createElement("rect", {
-            key: "react-".concat(i) // eslint-disable-line react/no-array-index-key
-            ,
-            x: entry,
-            y: y,
-            width: lineWidth,
-            height: height,
-            stroke: "none",
-            fill: verticalFill[colorIndex],
-            fillOpacity: fillOpacity,
-            className: "recharts-cartesian-grid-bg"
-        });
-    });
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-        className: "recharts-cartesian-gridstripes-vertical"
-    }, items);
-}
-var defaultVerticalCoordinatesGenerator = function defaultVerticalCoordinatesGenerator(_ref, syncWithTicks) {
-    var xAxis = _ref.xAxis, width = _ref.width, height = _ref.height, offset = _ref.offset;
-    return (0, _chartUtils.getCoordinatesOfGrid)((0, _getTicks.getTicks)(_objectSpread(_objectSpread(_objectSpread({}, (0, _cartesianAxis.CartesianAxis).defaultProps), xAxis), {}, {
-        ticks: (0, _chartUtils.getTicksOfAxis)(xAxis, true),
-        viewBox: {
-            x: 0,
-            y: 0,
-            width: width,
-            height: height
-        }
-    })), offset.left, offset.left + offset.width, syncWithTicks);
-};
-var defaultHorizontalCoordinatesGenerator = function defaultHorizontalCoordinatesGenerator(_ref2, syncWithTicks) {
-    var yAxis = _ref2.yAxis, width = _ref2.width, height = _ref2.height, offset = _ref2.offset;
-    return (0, _chartUtils.getCoordinatesOfGrid)((0, _getTicks.getTicks)(_objectSpread(_objectSpread(_objectSpread({}, (0, _cartesianAxis.CartesianAxis).defaultProps), yAxis), {}, {
-        ticks: (0, _chartUtils.getTicksOfAxis)(yAxis, true),
-        viewBox: {
-            x: 0,
-            y: 0,
-            width: width,
-            height: height
-        }
-    })), offset.top, offset.top + offset.height, syncWithTicks);
-};
-var defaultProps = {
-    horizontal: true,
-    vertical: true,
-    // The ordinates of horizontal grid lines
-    horizontalPoints: [],
-    // The abscissas of vertical grid lines
-    verticalPoints: [],
-    stroke: '#ccc',
-    fill: 'none',
-    // The fill of colors of grid lines
-    verticalFill: [],
-    horizontalFill: []
-};
-function CartesianGrid(props) {
-    var _props$stroke, _props$fill, _props$horizontal3, _props$horizontalFill, _props$vertical3, _props$verticalFill;
-    var chartWidth = (0, _chartLayoutContext.useChartWidth)();
-    var chartHeight = (0, _chartLayoutContext.useChartHeight)();
-    var offset = (0, _chartLayoutContext.useOffset)();
-    var propsIncludingDefaults = _objectSpread(_objectSpread({}, props), {}, {
-        stroke: (_props$stroke = props.stroke) !== null && _props$stroke !== void 0 ? _props$stroke : defaultProps.stroke,
-        fill: (_props$fill = props.fill) !== null && _props$fill !== void 0 ? _props$fill : defaultProps.fill,
-        horizontal: (_props$horizontal3 = props.horizontal) !== null && _props$horizontal3 !== void 0 ? _props$horizontal3 : defaultProps.horizontal,
-        horizontalFill: (_props$horizontalFill = props.horizontalFill) !== null && _props$horizontalFill !== void 0 ? _props$horizontalFill : defaultProps.horizontalFill,
-        vertical: (_props$vertical3 = props.vertical) !== null && _props$vertical3 !== void 0 ? _props$vertical3 : defaultProps.vertical,
-        verticalFill: (_props$verticalFill = props.verticalFill) !== null && _props$verticalFill !== void 0 ? _props$verticalFill : defaultProps.verticalFill,
-        x: (0, _dataUtils.isNumber)(props.x) ? props.x : offset.left,
-        y: (0, _dataUtils.isNumber)(props.y) ? props.y : offset.top,
-        width: (0, _dataUtils.isNumber)(props.width) ? props.width : offset.width,
-        height: (0, _dataUtils.isNumber)(props.height) ? props.height : offset.height
-    });
-    var x = propsIncludingDefaults.x, y = propsIncludingDefaults.y, width = propsIncludingDefaults.width, height = propsIncludingDefaults.height, syncWithTicks = propsIncludingDefaults.syncWithTicks, horizontalValues = propsIncludingDefaults.horizontalValues, verticalValues = propsIncludingDefaults.verticalValues;
-    // @ts-expect-error the scale prop is mixed up - we need to untagle this at some point
-    var xAxis = (0, _chartLayoutContext.useArbitraryXAxis)();
-    // @ts-expect-error the scale prop is mixed up - we need to untagle this at some point
-    var yAxis = (0, _chartLayoutContext.useYAxisWithFiniteDomainOrRandom)();
-    if (!(0, _dataUtils.isNumber)(width) || width <= 0 || !(0, _dataUtils.isNumber)(height) || height <= 0 || !(0, _dataUtils.isNumber)(x) || x !== +x || !(0, _dataUtils.isNumber)(y) || y !== +y) return null;
-    /*
-   * verticalCoordinatesGenerator and horizontalCoordinatesGenerator are defined
-   * outside of the propsIncludingDefaults because they were never part of the original props
-   * and they were never passed as a prop down to horizontal/vertical custom elements.
-   * If we add these two to propsIncludingDefaults then we are changing public API.
-   * Not a bad thing per se but also not necessary.
-   */ var verticalCoordinatesGenerator = propsIncludingDefaults.verticalCoordinatesGenerator || defaultVerticalCoordinatesGenerator;
-    var horizontalCoordinatesGenerator = propsIncludingDefaults.horizontalCoordinatesGenerator || defaultHorizontalCoordinatesGenerator;
-    var horizontalPoints = propsIncludingDefaults.horizontalPoints, verticalPoints = propsIncludingDefaults.verticalPoints;
-    // No horizontal points are specified
-    if ((!horizontalPoints || !horizontalPoints.length) && (0, _isFunctionDefault.default)(horizontalCoordinatesGenerator)) {
-        var isHorizontalValues = horizontalValues && horizontalValues.length;
-        var generatorResult = horizontalCoordinatesGenerator({
-            yAxis: yAxis ? _objectSpread(_objectSpread({}, yAxis), {}, {
-                ticks: isHorizontalValues ? horizontalValues : yAxis.ticks
-            }) : undefined,
-            width: chartWidth,
-            height: chartHeight,
-            offset: offset
-        }, isHorizontalValues ? true : syncWithTicks);
-        (0, _logUtils.warn)(Array.isArray(generatorResult), "horizontalCoordinatesGenerator should return Array but instead it returned [".concat(_typeof(generatorResult), "]"));
-        if (Array.isArray(generatorResult)) horizontalPoints = generatorResult;
-    }
-    // No vertical points are specified
-    if ((!verticalPoints || !verticalPoints.length) && (0, _isFunctionDefault.default)(verticalCoordinatesGenerator)) {
-        var isVerticalValues = verticalValues && verticalValues.length;
-        var _generatorResult = verticalCoordinatesGenerator({
-            xAxis: xAxis ? _objectSpread(_objectSpread({}, xAxis), {}, {
-                ticks: isVerticalValues ? verticalValues : xAxis.ticks
-            }) : undefined,
-            width: chartWidth,
-            height: chartHeight,
-            offset: offset
-        }, isVerticalValues ? true : syncWithTicks);
-        (0, _logUtils.warn)(Array.isArray(_generatorResult), "verticalCoordinatesGenerator should return Array but instead it returned [".concat(_typeof(_generatorResult), "]"));
-        if (Array.isArray(_generatorResult)) verticalPoints = _generatorResult;
-    }
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", {
-        className: "recharts-cartesian-grid"
-    }, /*#__PURE__*/ (0, _reactDefault.default).createElement(Background, {
-        fill: propsIncludingDefaults.fill,
-        fillOpacity: propsIncludingDefaults.fillOpacity,
-        x: propsIncludingDefaults.x,
-        y: propsIncludingDefaults.y,
-        width: propsIncludingDefaults.width,
-        height: propsIncludingDefaults.height,
-        ry: propsIncludingDefaults.ry
-    }), /*#__PURE__*/ (0, _reactDefault.default).createElement(HorizontalGridLines, _extends({}, propsIncludingDefaults, {
-        offset: offset,
-        horizontalPoints: horizontalPoints,
-        xAxis: xAxis,
-        yAxis: yAxis
-    })), /*#__PURE__*/ (0, _reactDefault.default).createElement(VerticalGridLines, _extends({}, propsIncludingDefaults, {
-        offset: offset,
-        verticalPoints: verticalPoints,
-        xAxis: xAxis,
-        yAxis: yAxis
-    })), /*#__PURE__*/ (0, _reactDefault.default).createElement(HorizontalStripes, _extends({}, propsIncludingDefaults, {
-        horizontalPoints: horizontalPoints
-    })), /*#__PURE__*/ (0, _reactDefault.default).createElement(VerticalStripes, _extends({}, propsIncludingDefaults, {
-        verticalPoints: verticalPoints
-    })));
-}
-CartesianGrid.displayName = 'CartesianGrid';
-
-},{"react":"21dqq","lodash/isFunction":"cfti6","../util/LogUtils":"8xgWw","../util/DataUtils":"exzKF","../util/ReactUtils":"gDert","../util/ChartUtils":"2s4mV","./getTicks":"aQkNo","./CartesianAxis":"2GpfE","../context/chartLayoutContext":"bLou8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bjP4o":[function(require,module,exports,__globalThis) {
+},{"../util/TickUtils":"a7suL","../util/getEveryNthWithCondition":"jo0t8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bjP4o":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Line", ()=>Line);
@@ -42186,1288 +38534,7 @@ _defineProperty(Line, "defaultProps", {
     }, offset);
 });
 
-},{"react":"21dqq","react-smooth":"p2bRC","lodash/isFunction":"cfti6","lodash/isNil":"jYD3f","lodash/isEqual":"9XEia","clsx":"gocd3","../shape/Curve":"ldzTR","../shape/Dot":"hrSyt","../container/Layer":"hLZRL","../component/LabelList":"e2z7M","./ErrorBar":"ddxHl","../util/DataUtils":"exzKF","../util/ReactUtils":"gDert","../util/Global":"7fOrk","../util/ChartUtils":"2s4mV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dfpTQ":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Area", ()=>Area);
-/**
- * @fileOverview Area
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _reactSmooth = require("react-smooth");
-var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _max = require("lodash/max");
-var _maxDefault = parcelHelpers.interopDefault(_max);
-var _isNil = require("lodash/isNil");
-var _isNilDefault = parcelHelpers.interopDefault(_isNil);
-var _isNaN = require("lodash/isNaN");
-var _isNaNDefault = parcelHelpers.interopDefault(_isNaN);
-var _isEqual = require("lodash/isEqual");
-var _isEqualDefault = parcelHelpers.interopDefault(_isEqual);
-var _curve = require("../shape/Curve");
-var _dot = require("../shape/Dot");
-var _layer = require("../container/Layer");
-var _labelList = require("../component/LabelList");
-var _global = require("../util/Global");
-var _dataUtils = require("../util/DataUtils");
-var _chartUtils = require("../util/ChartUtils");
-var _reactUtils = require("../util/ReactUtils");
-var _excluded = [
-    "layout",
-    "type",
-    "stroke",
-    "connectNulls",
-    "isRange",
-    "ref"
-], _excluded2 = [
-    "key"
-];
-var _Area;
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var Area = /*#__PURE__*/ function(_PureComponent) {
-    function Area() {
-        var _this;
-        _classCallCheck(this, Area);
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        _this = _callSuper(this, Area, [].concat(args));
-        _defineProperty(_this, "state", {
-            isAnimationFinished: true
-        });
-        _defineProperty(_this, "id", (0, _dataUtils.uniqueId)('recharts-area-'));
-        _defineProperty(_this, "handleAnimationEnd", function() {
-            var onAnimationEnd = _this.props.onAnimationEnd;
-            _this.setState({
-                isAnimationFinished: true
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationEnd)) onAnimationEnd();
-        });
-        _defineProperty(_this, "handleAnimationStart", function() {
-            var onAnimationStart = _this.props.onAnimationStart;
-            _this.setState({
-                isAnimationFinished: false
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationStart)) onAnimationStart();
-        });
-        return _this;
-    }
-    _inherits(Area, _PureComponent);
-    return _createClass(Area, [
-        {
-            key: "renderDots",
-            value: function renderDots(needClip, clipDot, clipPathId) {
-                var isAnimationActive = this.props.isAnimationActive;
-                var isAnimationFinished = this.state.isAnimationFinished;
-                if (isAnimationActive && !isAnimationFinished) return null;
-                var _this$props = this.props, dot = _this$props.dot, points = _this$props.points, dataKey = _this$props.dataKey;
-                var areaProps = (0, _reactUtils.filterProps)(this.props, false);
-                var customDotProps = (0, _reactUtils.filterProps)(dot, true);
-                var dots = points.map(function(entry, i) {
-                    var dotProps = _objectSpread(_objectSpread(_objectSpread({
-                        key: "dot-".concat(i),
-                        r: 3
-                    }, areaProps), customDotProps), {}, {
-                        index: i,
-                        cx: entry.x,
-                        cy: entry.y,
-                        dataKey: dataKey,
-                        value: entry.value,
-                        payload: entry.payload,
-                        points: points
-                    });
-                    return Area.renderDotItem(dot, dotProps);
-                });
-                var dotsProps = {
-                    clipPath: needClip ? "url(#clipPath-".concat(clipDot ? '' : 'dots-').concat(clipPathId, ")") : null
-                };
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), _extends({
-                    className: "recharts-area-dots"
-                }, dotsProps), dots);
-            }
-        },
-        {
-            key: "renderHorizontalRect",
-            value: function renderHorizontalRect(alpha) {
-                var _this$props2 = this.props, baseLine = _this$props2.baseLine, points = _this$props2.points, strokeWidth = _this$props2.strokeWidth;
-                var startX = points[0].x;
-                var endX = points[points.length - 1].x;
-                var width = alpha * Math.abs(startX - endX);
-                var maxY = (0, _maxDefault.default)(points.map(function(entry) {
-                    return entry.y || 0;
-                }));
-                if ((0, _dataUtils.isNumber)(baseLine) && typeof baseLine === 'number') maxY = Math.max(baseLine, maxY);
-                else if (baseLine && Array.isArray(baseLine) && baseLine.length) maxY = Math.max((0, _maxDefault.default)(baseLine.map(function(entry) {
-                    return entry.y || 0;
-                })), maxY);
-                if ((0, _dataUtils.isNumber)(maxY)) return /*#__PURE__*/ (0, _reactDefault.default).createElement("rect", {
-                    x: startX < endX ? startX : startX - width,
-                    y: 0,
-                    width: width,
-                    height: Math.floor(maxY + (strokeWidth ? parseInt("".concat(strokeWidth), 10) : 1))
-                });
-                return null;
-            }
-        },
-        {
-            key: "renderVerticalRect",
-            value: function renderVerticalRect(alpha) {
-                var _this$props3 = this.props, baseLine = _this$props3.baseLine, points = _this$props3.points, strokeWidth = _this$props3.strokeWidth;
-                var startY = points[0].y;
-                var endY = points[points.length - 1].y;
-                var height = alpha * Math.abs(startY - endY);
-                var maxX = (0, _maxDefault.default)(points.map(function(entry) {
-                    return entry.x || 0;
-                }));
-                if ((0, _dataUtils.isNumber)(baseLine) && typeof baseLine === 'number') maxX = Math.max(baseLine, maxX);
-                else if (baseLine && Array.isArray(baseLine) && baseLine.length) maxX = Math.max((0, _maxDefault.default)(baseLine.map(function(entry) {
-                    return entry.x || 0;
-                })), maxX);
-                if ((0, _dataUtils.isNumber)(maxX)) return /*#__PURE__*/ (0, _reactDefault.default).createElement("rect", {
-                    x: 0,
-                    y: startY < endY ? startY : startY - height,
-                    width: maxX + (strokeWidth ? parseInt("".concat(strokeWidth), 10) : 1),
-                    height: Math.floor(height)
-                });
-                return null;
-            }
-        },
-        {
-            key: "renderClipRect",
-            value: function renderClipRect(alpha) {
-                var layout = this.props.layout;
-                if (layout === 'vertical') return this.renderVerticalRect(alpha);
-                return this.renderHorizontalRect(alpha);
-            }
-        },
-        {
-            key: "renderAreaStatically",
-            value: function renderAreaStatically(points, baseLine, needClip, clipPathId) {
-                var _this$props4 = this.props, layout = _this$props4.layout, type = _this$props4.type, stroke = _this$props4.stroke, connectNulls = _this$props4.connectNulls, isRange = _this$props4.isRange, ref = _this$props4.ref, others = _objectWithoutProperties(_this$props4, _excluded);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
-                }, /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _curve.Curve), _extends({}, (0, _reactUtils.filterProps)(others, true), {
-                    points: points,
-                    connectNulls: connectNulls,
-                    type: type,
-                    baseLine: baseLine,
-                    layout: layout,
-                    stroke: "none",
-                    className: "recharts-area-area"
-                })), stroke !== 'none' && /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _curve.Curve), _extends({}, (0, _reactUtils.filterProps)(this.props, false), {
-                    className: "recharts-area-curve",
-                    layout: layout,
-                    type: type,
-                    connectNulls: connectNulls,
-                    fill: "none",
-                    points: points
-                })), stroke !== 'none' && isRange && /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _curve.Curve), _extends({}, (0, _reactUtils.filterProps)(this.props, false), {
-                    className: "recharts-area-curve",
-                    layout: layout,
-                    type: type,
-                    connectNulls: connectNulls,
-                    fill: "none",
-                    points: baseLine
-                })));
-            }
-        },
-        {
-            key: "renderAreaWithAnimation",
-            value: function renderAreaWithAnimation(needClip, clipPathId) {
-                var _this2 = this;
-                var _this$props5 = this.props, points = _this$props5.points, baseLine = _this$props5.baseLine, isAnimationActive = _this$props5.isAnimationActive, animationBegin = _this$props5.animationBegin, animationDuration = _this$props5.animationDuration, animationEasing = _this$props5.animationEasing, animationId = _this$props5.animationId;
-                var _this$state = this.state, prevPoints = _this$state.prevPoints, prevBaseLine = _this$state.prevBaseLine;
-                // const clipPathId = isNil(id) ? this.id : id;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-                    begin: animationBegin,
-                    duration: animationDuration,
-                    isActive: isAnimationActive,
-                    easing: animationEasing,
-                    from: {
-                        t: 0
-                    },
-                    to: {
-                        t: 1
-                    },
-                    key: "area-".concat(animationId),
-                    onAnimationEnd: this.handleAnimationEnd,
-                    onAnimationStart: this.handleAnimationStart
-                }, function(_ref) {
-                    var t = _ref.t;
-                    if (prevPoints) {
-                        var prevPointsDiffFactor = prevPoints.length / points.length;
-                        // update animtaion
-                        var stepPoints = points.map(function(entry, index) {
-                            var prevPointIndex = Math.floor(index * prevPointsDiffFactor);
-                            if (prevPoints[prevPointIndex]) {
-                                var prev = prevPoints[prevPointIndex];
-                                var interpolatorX = (0, _dataUtils.interpolateNumber)(prev.x, entry.x);
-                                var interpolatorY = (0, _dataUtils.interpolateNumber)(prev.y, entry.y);
-                                return _objectSpread(_objectSpread({}, entry), {}, {
-                                    x: interpolatorX(t),
-                                    y: interpolatorY(t)
-                                });
-                            }
-                            return entry;
-                        });
-                        var stepBaseLine;
-                        if ((0, _dataUtils.isNumber)(baseLine) && typeof baseLine === 'number') {
-                            var interpolator = (0, _dataUtils.interpolateNumber)(prevBaseLine, baseLine);
-                            stepBaseLine = interpolator(t);
-                        } else if ((0, _isNilDefault.default)(baseLine) || (0, _isNaNDefault.default)(baseLine)) {
-                            var _interpolator = (0, _dataUtils.interpolateNumber)(prevBaseLine, 0);
-                            stepBaseLine = _interpolator(t);
-                        } else stepBaseLine = baseLine.map(function(entry, index) {
-                            var prevPointIndex = Math.floor(index * prevPointsDiffFactor);
-                            if (prevBaseLine[prevPointIndex]) {
-                                var prev = prevBaseLine[prevPointIndex];
-                                var interpolatorX = (0, _dataUtils.interpolateNumber)(prev.x, entry.x);
-                                var interpolatorY = (0, _dataUtils.interpolateNumber)(prev.y, entry.y);
-                                return _objectSpread(_objectSpread({}, entry), {}, {
-                                    x: interpolatorX(t),
-                                    y: interpolatorY(t)
-                                });
-                            }
-                            return entry;
-                        });
-                        return _this2.renderAreaStatically(stepPoints, stepBaseLine, needClip, clipPathId);
-                    }
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), null, /*#__PURE__*/ (0, _reactDefault.default).createElement("defs", null, /*#__PURE__*/ (0, _reactDefault.default).createElement("clipPath", {
-                        id: "animationClipPath-".concat(clipPathId)
-                    }, _this2.renderClipRect(t))), /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                        clipPath: "url(#animationClipPath-".concat(clipPathId, ")")
-                    }, _this2.renderAreaStatically(points, baseLine, needClip, clipPathId)));
-                });
-            }
-        },
-        {
-            key: "renderArea",
-            value: function renderArea(needClip, clipPathId) {
-                var _this$props6 = this.props, points = _this$props6.points, baseLine = _this$props6.baseLine, isAnimationActive = _this$props6.isAnimationActive;
-                var _this$state2 = this.state, prevPoints = _this$state2.prevPoints, prevBaseLine = _this$state2.prevBaseLine, totalLength = _this$state2.totalLength;
-                if (isAnimationActive && points && points.length && (!prevPoints && totalLength > 0 || !(0, _isEqualDefault.default)(prevPoints, points) || !(0, _isEqualDefault.default)(prevBaseLine, baseLine))) return this.renderAreaWithAnimation(needClip, clipPathId);
-                return this.renderAreaStatically(points, baseLine, needClip, clipPathId);
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _filterProps;
-                var _this$props7 = this.props, hide = _this$props7.hide, dot = _this$props7.dot, points = _this$props7.points, className = _this$props7.className, top = _this$props7.top, left = _this$props7.left, xAxis = _this$props7.xAxis, yAxis = _this$props7.yAxis, width = _this$props7.width, height = _this$props7.height, isAnimationActive = _this$props7.isAnimationActive, id = _this$props7.id;
-                if (hide || !points || !points.length) return null;
-                var isAnimationFinished = this.state.isAnimationFinished;
-                var hasSinglePoint = points.length === 1;
-                var layerClass = (0, _clsxDefault.default)('recharts-area', className);
-                var needClipX = xAxis && xAxis.allowDataOverflow;
-                var needClipY = yAxis && yAxis.allowDataOverflow;
-                var needClip = needClipX || needClipY;
-                var clipPathId = (0, _isNilDefault.default)(id) ? this.id : id;
-                var _ref2 = (_filterProps = (0, _reactUtils.filterProps)(dot, false)) !== null && _filterProps !== void 0 ? _filterProps : {
-                    r: 3,
-                    strokeWidth: 2
-                }, _ref2$r = _ref2.r, r = _ref2$r === void 0 ? 3 : _ref2$r, _ref2$strokeWidth = _ref2.strokeWidth, strokeWidth = _ref2$strokeWidth === void 0 ? 2 : _ref2$strokeWidth;
-                var _ref3 = (0, _reactUtils.hasClipDot)(dot) ? dot : {}, _ref3$clipDot = _ref3.clipDot, clipDot = _ref3$clipDot === void 0 ? true : _ref3$clipDot;
-                var dotSize = r * 2 + strokeWidth;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: layerClass
-                }, needClipX || needClipY ? /*#__PURE__*/ (0, _reactDefault.default).createElement("defs", null, /*#__PURE__*/ (0, _reactDefault.default).createElement("clipPath", {
-                    id: "clipPath-".concat(clipPathId)
-                }, /*#__PURE__*/ (0, _reactDefault.default).createElement("rect", {
-                    x: needClipX ? left : left - width / 2,
-                    y: needClipY ? top : top - height / 2,
-                    width: needClipX ? width : width * 2,
-                    height: needClipY ? height : height * 2
-                })), !clipDot && /*#__PURE__*/ (0, _reactDefault.default).createElement("clipPath", {
-                    id: "clipPath-dots-".concat(clipPathId)
-                }, /*#__PURE__*/ (0, _reactDefault.default).createElement("rect", {
-                    x: left - dotSize / 2,
-                    y: top - dotSize / 2,
-                    width: width + dotSize,
-                    height: height + dotSize
-                }))) : null, !hasSinglePoint ? this.renderArea(needClip, clipPathId) : null, (dot || hasSinglePoint) && this.renderDots(needClip, clipDot, clipPathId), (!isAnimationActive || isAnimationFinished) && (0, _labelList.LabelList).renderCallByParent(this.props, points));
-            }
-        }
-    ], [
-        {
-            key: "getDerivedStateFromProps",
-            value: function getDerivedStateFromProps(nextProps, prevState) {
-                if (nextProps.animationId !== prevState.prevAnimationId) return {
-                    prevAnimationId: nextProps.animationId,
-                    curPoints: nextProps.points,
-                    curBaseLine: nextProps.baseLine,
-                    prevPoints: prevState.curPoints,
-                    prevBaseLine: prevState.curBaseLine
-                };
-                if (nextProps.points !== prevState.curPoints || nextProps.baseLine !== prevState.curBaseLine) return {
-                    curPoints: nextProps.points,
-                    curBaseLine: nextProps.baseLine
-                };
-                return null;
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_Area = Area;
-_defineProperty(Area, "displayName", 'Area');
-_defineProperty(Area, "defaultProps", {
-    stroke: '#3182bd',
-    fill: '#3182bd',
-    fillOpacity: 0.6,
-    xAxisId: 0,
-    yAxisId: 0,
-    legendType: 'line',
-    connectNulls: false,
-    // points of area
-    points: [],
-    dot: false,
-    activeDot: true,
-    hide: false,
-    isAnimationActive: !(0, _global.Global).isSsr,
-    animationBegin: 0,
-    animationDuration: 1500,
-    animationEasing: 'ease'
-});
-_defineProperty(Area, "getBaseValue", function(props, item, xAxis, yAxis) {
-    var layout = props.layout, chartBaseValue = props.baseValue;
-    var itemBaseValue = item.props.baseValue;
-    // The baseValue can be defined both on the AreaChart as well as on the Area.
-    // The value for the item takes precedence.
-    var baseValue = itemBaseValue !== null && itemBaseValue !== void 0 ? itemBaseValue : chartBaseValue;
-    if ((0, _dataUtils.isNumber)(baseValue) && typeof baseValue === 'number') return baseValue;
-    var numericAxis = layout === 'horizontal' ? yAxis : xAxis;
-    var domain = numericAxis.scale.domain();
-    if (numericAxis.type === 'number') {
-        var domainMax = Math.max(domain[0], domain[1]);
-        var domainMin = Math.min(domain[0], domain[1]);
-        if (baseValue === 'dataMin') return domainMin;
-        if (baseValue === 'dataMax') return domainMax;
-        return domainMax < 0 ? domainMax : Math.max(Math.min(domain[0], domain[1]), 0);
-    }
-    if (baseValue === 'dataMin') return domain[0];
-    if (baseValue === 'dataMax') return domain[1];
-    return domain[0];
-});
-_defineProperty(Area, "getComposedData", function(_ref4) {
-    var props = _ref4.props, item = _ref4.item, xAxis = _ref4.xAxis, yAxis = _ref4.yAxis, xAxisTicks = _ref4.xAxisTicks, yAxisTicks = _ref4.yAxisTicks, bandSize = _ref4.bandSize, dataKey = _ref4.dataKey, stackedData = _ref4.stackedData, dataStartIndex = _ref4.dataStartIndex, displayedData = _ref4.displayedData, offset = _ref4.offset;
-    var layout = props.layout;
-    var hasStack = stackedData && stackedData.length;
-    var baseValue = _Area.getBaseValue(props, item, xAxis, yAxis);
-    var isHorizontalLayout = layout === 'horizontal';
-    var isRange = false;
-    var points = displayedData.map(function(entry, index) {
-        var value;
-        if (hasStack) value = stackedData[dataStartIndex + index];
-        else {
-            value = (0, _chartUtils.getValueByDataKey)(entry, dataKey);
-            if (!Array.isArray(value)) value = [
-                baseValue,
-                value
-            ];
-            else isRange = true;
-        }
-        var isBreakPoint = value[1] == null || hasStack && (0, _chartUtils.getValueByDataKey)(entry, dataKey) == null;
-        if (isHorizontalLayout) return {
-            x: (0, _chartUtils.getCateCoordinateOfLine)({
-                axis: xAxis,
-                ticks: xAxisTicks,
-                bandSize: bandSize,
-                entry: entry,
-                index: index
-            }),
-            y: isBreakPoint ? null : yAxis.scale(value[1]),
-            value: value,
-            payload: entry
-        };
-        return {
-            x: isBreakPoint ? null : xAxis.scale(value[1]),
-            y: (0, _chartUtils.getCateCoordinateOfLine)({
-                axis: yAxis,
-                ticks: yAxisTicks,
-                bandSize: bandSize,
-                entry: entry,
-                index: index
-            }),
-            value: value,
-            payload: entry
-        };
-    });
-    var baseLine;
-    if (hasStack || isRange) baseLine = points.map(function(entry) {
-        var x = Array.isArray(entry.value) ? entry.value[0] : null;
-        if (isHorizontalLayout) return {
-            x: entry.x,
-            y: x != null && entry.y != null ? yAxis.scale(x) : null
-        };
-        return {
-            x: x != null ? xAxis.scale(x) : null,
-            y: entry.y
-        };
-    });
-    else baseLine = isHorizontalLayout ? yAxis.scale(baseValue) : xAxis.scale(baseValue);
-    return _objectSpread({
-        points: points,
-        baseLine: baseLine,
-        layout: layout,
-        isRange: isRange
-    }, offset);
-});
-_defineProperty(Area, "renderDotItem", function(option, props) {
-    var dotItem;
-    if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) dotItem = /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-    else if ((0, _isFunctionDefault.default)(option)) dotItem = option(props);
-    else {
-        var className = (0, _clsxDefault.default)('recharts-area-dot', typeof option !== 'boolean' ? option.className : '');
-        var key = props.key, rest = _objectWithoutProperties(props, _excluded2);
-        dotItem = /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _dot.Dot), _extends({}, rest, {
-            key: key,
-            className: className
-        }));
-    }
-    return dotItem;
-});
-
-},{"react":"21dqq","clsx":"gocd3","react-smooth":"p2bRC","lodash/isFunction":"cfti6","lodash/max":"d0ret","lodash/isNil":"jYD3f","lodash/isNaN":"5ajks","lodash/isEqual":"9XEia","../shape/Curve":"ldzTR","../shape/Dot":"hrSyt","../container/Layer":"hLZRL","../component/LabelList":"e2z7M","../util/Global":"7fOrk","../util/DataUtils":"exzKF","../util/ChartUtils":"2s4mV","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"djBli":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Scatter", ()=>Scatter);
-/**
- * @fileOverview Render a group of scatters
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactSmooth = require("react-smooth");
-var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
-var _isNil = require("lodash/isNil");
-var _isNilDefault = parcelHelpers.interopDefault(_isNil);
-var _isEqual = require("lodash/isEqual");
-var _isEqualDefault = parcelHelpers.interopDefault(_isEqual);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _layer = require("../container/Layer");
-var _labelList = require("../component/LabelList");
-var _reactUtils = require("../util/ReactUtils");
-var _global = require("../util/Global");
-var _zaxis = require("./ZAxis");
-var _curve = require("../shape/Curve");
-var _errorBar = require("./ErrorBar");
-var _cell = require("../component/Cell");
-var _dataUtils = require("../util/DataUtils");
-var _chartUtils = require("../util/ChartUtils");
-var _types = require("../util/types");
-var _scatterUtils = require("../util/ScatterUtils");
-var _Scatter;
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var Scatter = /*#__PURE__*/ function(_PureComponent) {
-    function Scatter() {
-        var _this;
-        _classCallCheck(this, Scatter);
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        _this = _callSuper(this, Scatter, [].concat(args));
-        _defineProperty(_this, "state", {
-            isAnimationFinished: false
-        });
-        _defineProperty(_this, "handleAnimationEnd", function() {
-            _this.setState({
-                isAnimationFinished: true
-            });
-        });
-        _defineProperty(_this, "handleAnimationStart", function() {
-            _this.setState({
-                isAnimationFinished: false
-            });
-        });
-        _defineProperty(_this, "id", (0, _dataUtils.uniqueId)('recharts-scatter-'));
-        return _this;
-    }
-    _inherits(Scatter, _PureComponent);
-    return _createClass(Scatter, [
-        {
-            key: "renderSymbolsStatically",
-            value: function renderSymbolsStatically(points) {
-                var _this2 = this;
-                var _this$props = this.props, shape = _this$props.shape, activeShape = _this$props.activeShape, activeIndex = _this$props.activeIndex;
-                var baseProps = (0, _reactUtils.filterProps)(this.props, false);
-                return points.map(function(entry, i) {
-                    var isActive = activeIndex === i;
-                    var option = isActive ? activeShape : shape;
-                    var props = _objectSpread(_objectSpread({}, baseProps), entry);
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), _extends({
-                        className: "recharts-scatter-symbol",
-                        key: "symbol-".concat(entry === null || entry === void 0 ? void 0 : entry.cx, "-").concat(entry === null || entry === void 0 ? void 0 : entry.cy, "-").concat(entry === null || entry === void 0 ? void 0 : entry.size, "-").concat(i)
-                    }, (0, _types.adaptEventsOfChild)(_this2.props, entry, i), {
-                        role: "img"
-                    }), /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _scatterUtils.ScatterSymbol), _extends({
-                        option: option,
-                        isActive: isActive,
-                        key: "symbol-".concat(i)
-                    }, props)));
-                });
-            }
-        },
-        {
-            key: "renderSymbolsWithAnimation",
-            value: function renderSymbolsWithAnimation() {
-                var _this3 = this;
-                var _this$props2 = this.props, points = _this$props2.points, isAnimationActive = _this$props2.isAnimationActive, animationBegin = _this$props2.animationBegin, animationDuration = _this$props2.animationDuration, animationEasing = _this$props2.animationEasing, animationId = _this$props2.animationId;
-                var prevPoints = this.state.prevPoints;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-                    begin: animationBegin,
-                    duration: animationDuration,
-                    isActive: isAnimationActive,
-                    easing: animationEasing,
-                    from: {
-                        t: 0
-                    },
-                    to: {
-                        t: 1
-                    },
-                    key: "pie-".concat(animationId),
-                    onAnimationEnd: this.handleAnimationEnd,
-                    onAnimationStart: this.handleAnimationStart
-                }, function(_ref) {
-                    var t = _ref.t;
-                    var stepData = points.map(function(entry, index) {
-                        var prev = prevPoints && prevPoints[index];
-                        if (prev) {
-                            var interpolatorCx = (0, _dataUtils.interpolateNumber)(prev.cx, entry.cx);
-                            var interpolatorCy = (0, _dataUtils.interpolateNumber)(prev.cy, entry.cy);
-                            var interpolatorSize = (0, _dataUtils.interpolateNumber)(prev.size, entry.size);
-                            return _objectSpread(_objectSpread({}, entry), {}, {
-                                cx: interpolatorCx(t),
-                                cy: interpolatorCy(t),
-                                size: interpolatorSize(t)
-                            });
-                        }
-                        var interpolator = (0, _dataUtils.interpolateNumber)(0, entry.size);
-                        return _objectSpread(_objectSpread({}, entry), {}, {
-                            size: interpolator(t)
-                        });
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), null, _this3.renderSymbolsStatically(stepData));
-                });
-            }
-        },
-        {
-            key: "renderSymbols",
-            value: function renderSymbols() {
-                var _this$props3 = this.props, points = _this$props3.points, isAnimationActive = _this$props3.isAnimationActive;
-                var prevPoints = this.state.prevPoints;
-                if (isAnimationActive && points && points.length && (!prevPoints || !(0, _isEqualDefault.default)(prevPoints, points))) return this.renderSymbolsWithAnimation();
-                return this.renderSymbolsStatically(points);
-            }
-        },
-        {
-            key: "renderErrorBar",
-            value: function renderErrorBar() {
-                var isAnimationActive = this.props.isAnimationActive;
-                if (isAnimationActive && !this.state.isAnimationFinished) return null;
-                var _this$props4 = this.props, points = _this$props4.points, xAxis = _this$props4.xAxis, yAxis = _this$props4.yAxis, children = _this$props4.children;
-                var errorBarItems = (0, _reactUtils.findAllByType)(children, (0, _errorBar.ErrorBar));
-                if (!errorBarItems) return null;
-                return errorBarItems.map(function(item, i) {
-                    var _item$props = item.props, direction = _item$props.direction, errorDataKey = _item$props.dataKey;
-                    return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(item, {
-                        key: "".concat(direction, "-").concat(errorDataKey, "-").concat(points[i]),
-                        data: points,
-                        xAxis: xAxis,
-                        yAxis: yAxis,
-                        layout: direction === 'x' ? 'vertical' : 'horizontal',
-                        dataPointFormatter: function dataPointFormatter(dataPoint, dataKey) {
-                            return {
-                                x: dataPoint.cx,
-                                y: dataPoint.cy,
-                                value: direction === 'x' ? +dataPoint.node.x : +dataPoint.node.y,
-                                errorVal: (0, _chartUtils.getValueByDataKey)(dataPoint, dataKey)
-                            };
-                        }
-                    });
-                });
-            }
-        },
-        {
-            key: "renderLine",
-            value: function renderLine() {
-                var _this$props5 = this.props, points = _this$props5.points, line = _this$props5.line, lineType = _this$props5.lineType, lineJointType = _this$props5.lineJointType;
-                var scatterProps = (0, _reactUtils.filterProps)(this.props, false);
-                var customLineProps = (0, _reactUtils.filterProps)(line, false);
-                var linePoints, lineItem;
-                if (lineType === 'joint') linePoints = points.map(function(entry) {
-                    return {
-                        x: entry.cx,
-                        y: entry.cy
-                    };
-                });
-                else if (lineType === 'fitting') {
-                    var _getLinearRegression = (0, _dataUtils.getLinearRegression)(points), xmin = _getLinearRegression.xmin, xmax = _getLinearRegression.xmax, a = _getLinearRegression.a, b = _getLinearRegression.b;
-                    var linearExp = function linearExp(x) {
-                        return a * x + b;
-                    };
-                    linePoints = [
-                        {
-                            x: xmin,
-                            y: linearExp(xmin)
-                        },
-                        {
-                            x: xmax,
-                            y: linearExp(xmax)
-                        }
-                    ];
-                }
-                var lineProps = _objectSpread(_objectSpread(_objectSpread({}, scatterProps), {}, {
-                    fill: 'none',
-                    stroke: scatterProps && scatterProps.fill
-                }, customLineProps), {}, {
-                    points: linePoints
-                });
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(line)) lineItem = /*#__PURE__*/ (0, _reactDefault.default).cloneElement(line, lineProps);
-                else if ((0, _isFunctionDefault.default)(line)) lineItem = line(lineProps);
-                else lineItem = /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _curve.Curve), _extends({}, lineProps, {
-                    type: lineJointType
-                }));
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-scatter-line",
-                    key: "recharts-scatter-line"
-                }, lineItem);
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this$props6 = this.props, hide = _this$props6.hide, points = _this$props6.points, line = _this$props6.line, className = _this$props6.className, xAxis = _this$props6.xAxis, yAxis = _this$props6.yAxis, left = _this$props6.left, top = _this$props6.top, width = _this$props6.width, height = _this$props6.height, id = _this$props6.id, isAnimationActive = _this$props6.isAnimationActive;
-                if (hide || !points || !points.length) return null;
-                var isAnimationFinished = this.state.isAnimationFinished;
-                var layerClass = (0, _clsxDefault.default)('recharts-scatter', className);
-                var needClipX = xAxis && xAxis.allowDataOverflow;
-                var needClipY = yAxis && yAxis.allowDataOverflow;
-                var needClip = needClipX || needClipY;
-                var clipPathId = (0, _isNilDefault.default)(id) ? this.id : id;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: layerClass,
-                    clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
-                }, needClipX || needClipY ? /*#__PURE__*/ (0, _reactDefault.default).createElement("defs", null, /*#__PURE__*/ (0, _reactDefault.default).createElement("clipPath", {
-                    id: "clipPath-".concat(clipPathId)
-                }, /*#__PURE__*/ (0, _reactDefault.default).createElement("rect", {
-                    x: needClipX ? left : left - width / 2,
-                    y: needClipY ? top : top - height / 2,
-                    width: needClipX ? width : width * 2,
-                    height: needClipY ? height : height * 2
-                }))) : null, line && this.renderLine(), this.renderErrorBar(), /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    key: "recharts-scatter-symbols"
-                }, this.renderSymbols()), (!isAnimationActive || isAnimationFinished) && (0, _labelList.LabelList).renderCallByParent(this.props, points));
-            }
-        }
-    ], [
-        {
-            key: "getDerivedStateFromProps",
-            value: function getDerivedStateFromProps(nextProps, prevState) {
-                if (nextProps.animationId !== prevState.prevAnimationId) return {
-                    prevAnimationId: nextProps.animationId,
-                    curPoints: nextProps.points,
-                    prevPoints: prevState.curPoints
-                };
-                if (nextProps.points !== prevState.curPoints) return {
-                    curPoints: nextProps.points
-                };
-                return null;
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_Scatter = Scatter;
-_defineProperty(Scatter, "displayName", 'Scatter');
-_defineProperty(Scatter, "defaultProps", {
-    xAxisId: 0,
-    yAxisId: 0,
-    zAxisId: 0,
-    legendType: 'circle',
-    lineType: 'joint',
-    lineJointType: 'linear',
-    data: [],
-    shape: 'circle',
-    hide: false,
-    isAnimationActive: !(0, _global.Global).isSsr,
-    animationBegin: 0,
-    animationDuration: 400,
-    animationEasing: 'linear'
-});
-/**
- * Compose the data of each group
- * @param  {Object} xAxis   The configuration of x-axis
- * @param  {Object} yAxis   The configuration of y-axis
- * @param  {String} dataKey The unique key of a group
- * @return {Array}  Composed data
- */ _defineProperty(Scatter, "getComposedData", function(_ref2) {
-    var xAxis = _ref2.xAxis, yAxis = _ref2.yAxis, zAxis = _ref2.zAxis, item = _ref2.item, displayedData = _ref2.displayedData, xAxisTicks = _ref2.xAxisTicks, yAxisTicks = _ref2.yAxisTicks, offset = _ref2.offset;
-    var tooltipType = item.props.tooltipType;
-    var cells = (0, _reactUtils.findAllByType)(item.props.children, (0, _cell.Cell));
-    var xAxisDataKey = (0, _isNilDefault.default)(xAxis.dataKey) ? item.props.dataKey : xAxis.dataKey;
-    var yAxisDataKey = (0, _isNilDefault.default)(yAxis.dataKey) ? item.props.dataKey : yAxis.dataKey;
-    var zAxisDataKey = zAxis && zAxis.dataKey;
-    var defaultRangeZ = zAxis ? zAxis.range : (0, _zaxis.ZAxis).defaultProps.range;
-    var defaultZ = defaultRangeZ && defaultRangeZ[0];
-    var xBandSize = xAxis.scale.bandwidth ? xAxis.scale.bandwidth() : 0;
-    var yBandSize = yAxis.scale.bandwidth ? yAxis.scale.bandwidth() : 0;
-    var points = displayedData.map(function(entry, index) {
-        var x = (0, _chartUtils.getValueByDataKey)(entry, xAxisDataKey);
-        var y = (0, _chartUtils.getValueByDataKey)(entry, yAxisDataKey);
-        var z = !(0, _isNilDefault.default)(zAxisDataKey) && (0, _chartUtils.getValueByDataKey)(entry, zAxisDataKey) || '-';
-        var tooltipPayload = [
-            {
-                name: (0, _isNilDefault.default)(xAxis.dataKey) ? item.props.name : xAxis.name || xAxis.dataKey,
-                unit: xAxis.unit || '',
-                value: x,
-                payload: entry,
-                dataKey: xAxisDataKey,
-                type: tooltipType
-            },
-            {
-                name: (0, _isNilDefault.default)(yAxis.dataKey) ? item.props.name : yAxis.name || yAxis.dataKey,
-                unit: yAxis.unit || '',
-                value: y,
-                payload: entry,
-                dataKey: yAxisDataKey,
-                type: tooltipType
-            }
-        ];
-        if (z !== '-') tooltipPayload.push({
-            name: zAxis.name || zAxis.dataKey,
-            unit: zAxis.unit || '',
-            value: z,
-            payload: entry,
-            dataKey: zAxisDataKey,
-            type: tooltipType
-        });
-        var cx = (0, _chartUtils.getCateCoordinateOfLine)({
-            axis: xAxis,
-            ticks: xAxisTicks,
-            bandSize: xBandSize,
-            entry: entry,
-            index: index,
-            dataKey: xAxisDataKey
-        });
-        var cy = (0, _chartUtils.getCateCoordinateOfLine)({
-            axis: yAxis,
-            ticks: yAxisTicks,
-            bandSize: yBandSize,
-            entry: entry,
-            index: index,
-            dataKey: yAxisDataKey
-        });
-        var size = z !== '-' ? zAxis.scale(z) : defaultZ;
-        var radius = Math.sqrt(Math.max(size, 0) / Math.PI);
-        return _objectSpread(_objectSpread({}, entry), {}, {
-            cx: cx,
-            cy: cy,
-            x: cx - radius,
-            y: cy - radius,
-            xAxis: xAxis,
-            yAxis: yAxis,
-            zAxis: zAxis,
-            width: 2 * radius,
-            height: 2 * radius,
-            size: size,
-            node: {
-                x: x,
-                y: y,
-                z: z
-            },
-            tooltipPayload: tooltipPayload,
-            tooltipPosition: {
-                x: cx,
-                y: cy
-            },
-            payload: entry
-        }, cells && cells[index] && cells[index].props);
-    });
-    return _objectSpread({
-        points: points
-    }, offset);
-});
-
-},{"react":"21dqq","react-smooth":"p2bRC","lodash/isNil":"jYD3f","lodash/isEqual":"9XEia","lodash/isFunction":"cfti6","clsx":"gocd3","../container/Layer":"hLZRL","../component/LabelList":"e2z7M","../util/ReactUtils":"gDert","../util/Global":"7fOrk","./ZAxis":"7RCJH","../shape/Curve":"ldzTR","./ErrorBar":"ddxHl","../component/Cell":"cmpyN","../util/DataUtils":"exzKF","../util/ChartUtils":"2s4mV","../util/types":"8jZsH","../util/ScatterUtils":"azj0J","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7RCJH":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ZAxis", ()=>ZAxis);
-/**
- * @fileOverview Z Axis
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var ZAxis = /*#__PURE__*/ function(_React$Component) {
-    function ZAxis() {
-        _classCallCheck(this, ZAxis);
-        return _callSuper(this, ZAxis, arguments);
-    }
-    _inherits(ZAxis, _React$Component);
-    return _createClass(ZAxis, [
-        {
-            key: "render",
-            value: function render() {
-                return null;
-            }
-        }
-    ]);
-}((0, _reactDefault.default).Component);
-_defineProperty(ZAxis, "displayName", 'ZAxis');
-_defineProperty(ZAxis, "defaultProps", {
-    zAxisId: 0,
-    range: [
-        64,
-        64
-    ],
-    scale: 'auto',
-    type: 'number'
-});
-
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"azj0J":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ScatterSymbol", ()=>ScatterSymbol);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _symbols = require("../shape/Symbols");
-var _activeShapeUtils = require("./ActiveShapeUtils");
-var _excluded = [
-    "option",
-    "isActive"
-];
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function ScatterSymbol(_ref) {
-    var option = _ref.option, isActive = _ref.isActive, props = _objectWithoutProperties(_ref, _excluded);
-    if (typeof option === 'string') return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _activeShapeUtils.Shape), _extends({
-        option: /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _symbols.Symbols), _extends({
-            type: option
-        }, props)),
-        isActive: isActive,
-        shapeType: "symbols"
-    }, props));
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _activeShapeUtils.Shape), _extends({
-        option: option,
-        isActive: isActive,
-        shapeType: "symbols"
-    }, props));
-}
-
-},{"react":"21dqq","../shape/Symbols":"2a019","./ActiveShapeUtils":"6gaj7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"doQvk":[function(require,module,exports,__globalThis) {
+},{"react":"21dqq","react-smooth":"p2bRC","lodash/isFunction":"cfti6","lodash/isNil":"jYD3f","lodash/isEqual":"9XEia","clsx":"gocd3","../shape/Curve":"ldzTR","../shape/Dot":"hrSyt","../container/Layer":"hLZRL","../component/LabelList":"e2z7M","./ErrorBar":"ddxHl","../util/DataUtils":"exzKF","../util/ReactUtils":"gDert","../util/Global":"7fOrk","../util/ChartUtils":"2s4mV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"doQvk":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "XAxis", ()=>XAxis);
@@ -45808,7 +40875,228 @@ var generateCategoricalChart = function generateCategoricalChart(_ref6) {
     return CategoricalChart;
 };
 
-},{"react":"21dqq","lodash/isNil":"jYD3f","lodash/isFunction":"cfti6","lodash/range":"jv1m4","lodash/get":"8UELX","lodash/sortBy":"5rYDX","lodash/throttle":"lAb0D","clsx":"gocd3","tiny-invariant":"fnIPv","../container/Surface":"ldrIX","../container/Layer":"hLZRL","../component/Tooltip":"gEbNO","../component/Legend":"3qIzt","../shape/Dot":"hrSyt","../shape/Rectangle":"21ix4","../util/ReactUtils":"gDert","../cartesian/Brush":"b3JiM","../util/DOMUtils":"kK8xO","../util/DataUtils":"exzKF","../util/ChartUtils":"2s4mV","../util/DetectReferenceElementsDomain":"kwuC0","../util/PolarUtils":"xMDoY","../util/ShallowEqual":"6PNVp","../util/Events":"1zO3W","../util/types":"8jZsH","./AccessibilityManager":"87JeW","../util/isDomainSpecifiedByUser":"krINi","../util/ActiveShapeUtils":"6gaj7","../component/Cursor":"fKVsI","../context/chartLayoutContext":"bLou8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kwuC0":[function(require,module,exports,__globalThis) {
+},{"react":"21dqq","lodash/isNil":"jYD3f","lodash/isFunction":"cfti6","lodash/range":"jv1m4","lodash/get":"8UELX","lodash/sortBy":"5rYDX","lodash/throttle":"lAb0D","clsx":"gocd3","tiny-invariant":"fnIPv","../container/Surface":"ldrIX","../container/Layer":"hLZRL","../component/Tooltip":"gEbNO","../component/Legend":"3qIzt","../shape/Dot":"hrSyt","../shape/Rectangle":"21ix4","../util/ReactUtils":"gDert","../cartesian/Brush":"b3JiM","../util/DOMUtils":"kK8xO","../util/DataUtils":"exzKF","../util/ChartUtils":"2s4mV","../util/DetectReferenceElementsDomain":"kwuC0","../util/PolarUtils":"xMDoY","../util/ShallowEqual":"6PNVp","../util/Events":"1zO3W","../util/types":"8jZsH","./AccessibilityManager":"87JeW","../util/isDomainSpecifiedByUser":"krINi","../util/ActiveShapeUtils":"6gaj7","../component/Cursor":"fKVsI","../context/chartLayoutContext":"bLou8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lAb0D":[function(require,module,exports,__globalThis) {
+var debounce = require("5b383646e2c7b4c6"), isObject = require("a29ce0b3e78d037d");
+/** Error message constants. */ var FUNC_ERROR_TEXT = 'Expected a function';
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */ function throttle(func, wait, options) {
+    var leading = true, trailing = true;
+    if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+    if (isObject(options)) {
+        leading = 'leading' in options ? !!options.leading : leading;
+        trailing = 'trailing' in options ? !!options.trailing : trailing;
+    }
+    return debounce(func, wait, {
+        'leading': leading,
+        'maxWait': wait,
+        'trailing': trailing
+    });
+}
+module.exports = throttle;
+
+},{"5b383646e2c7b4c6":"bv6vy","a29ce0b3e78d037d":"cGhqJ"}],"bv6vy":[function(require,module,exports,__globalThis) {
+var isObject = require("3b174a999d6a40ac"), now = require("575b2317167ce20d"), toNumber = require("a13332670c5c0f63");
+/** Error message constants. */ var FUNC_ERROR_TEXT = 'Expected a function';
+/* Built-in method references for those with the same name as other `lodash` methods. */ var nativeMax = Math.max, nativeMin = Math.min;
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */ function debounce(func, wait, options) {
+    var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
+    if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+    wait = toNumber(wait) || 0;
+    if (isObject(options)) {
+        leading = !!options.leading;
+        maxing = 'maxWait' in options;
+        maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+        trailing = 'trailing' in options ? !!options.trailing : trailing;
+    }
+    function invokeFunc(time) {
+        var args = lastArgs, thisArg = lastThis;
+        lastArgs = lastThis = undefined;
+        lastInvokeTime = time;
+        result = func.apply(thisArg, args);
+        return result;
+    }
+    function leadingEdge(time) {
+        // Reset any `maxWait` timer.
+        lastInvokeTime = time;
+        // Start the timer for the trailing edge.
+        timerId = setTimeout(timerExpired, wait);
+        // Invoke the leading edge.
+        return leading ? invokeFunc(time) : result;
+    }
+    function remainingWait(time) {
+        var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime, timeWaiting = wait - timeSinceLastCall;
+        return maxing ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
+    }
+    function shouldInvoke(time) {
+        var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime;
+        // Either this is the first call, activity has stopped and we're at the
+        // trailing edge, the system time has gone backwards and we're treating
+        // it as the trailing edge, or we've hit the `maxWait` limit.
+        return lastCallTime === undefined || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
+    }
+    function timerExpired() {
+        var time = now();
+        if (shouldInvoke(time)) return trailingEdge(time);
+        // Restart the timer.
+        timerId = setTimeout(timerExpired, remainingWait(time));
+    }
+    function trailingEdge(time) {
+        timerId = undefined;
+        // Only invoke if we have `lastArgs` which means `func` has been
+        // debounced at least once.
+        if (trailing && lastArgs) return invokeFunc(time);
+        lastArgs = lastThis = undefined;
+        return result;
+    }
+    function cancel() {
+        if (timerId !== undefined) clearTimeout(timerId);
+        lastInvokeTime = 0;
+        lastArgs = lastCallTime = lastThis = timerId = undefined;
+    }
+    function flush() {
+        return timerId === undefined ? result : trailingEdge(now());
+    }
+    function debounced() {
+        var time = now(), isInvoking = shouldInvoke(time);
+        lastArgs = arguments;
+        lastThis = this;
+        lastCallTime = time;
+        if (isInvoking) {
+            if (timerId === undefined) return leadingEdge(lastCallTime);
+            if (maxing) {
+                // Handle invocations in a tight loop.
+                clearTimeout(timerId);
+                timerId = setTimeout(timerExpired, wait);
+                return invokeFunc(lastCallTime);
+            }
+        }
+        if (timerId === undefined) timerId = setTimeout(timerExpired, wait);
+        return result;
+    }
+    debounced.cancel = cancel;
+    debounced.flush = flush;
+    return debounced;
+}
+module.exports = debounce;
+
+},{"3b174a999d6a40ac":"cGhqJ","575b2317167ce20d":"kOH6e","a13332670c5c0f63":"12NaH"}],"kOH6e":[function(require,module,exports,__globalThis) {
+var root = require("6439589d9d88d885");
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */ var now = function() {
+    return root.Date.now();
+};
+module.exports = now;
+
+},{"6439589d9d88d885":"dSYUs"}],"kwuC0":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "detectReferenceElementsDomain", ()=>detectReferenceElementsDomain);
@@ -46511,3336 +41799,152 @@ function getCursorPoints(layout, activeCoordinate, offset) {
     ];
 }
 
-},{"../PolarUtils":"xMDoY","./getRadialCursorPoints":"kM53y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"as5Yi":[function(require,module,exports,__globalThis) {
-/**
- * @fileOverview Bar Chart
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "BarChart", ()=>BarChart);
-var _generateCategoricalChart = require("./generateCategoricalChart");
-var _bar = require("../cartesian/Bar");
-var _xaxis = require("../cartesian/XAxis");
-var _yaxis = require("../cartesian/YAxis");
-var _cartesianUtils = require("../util/CartesianUtils");
-var BarChart = (0, _generateCategoricalChart.generateCategoricalChart)({
-    chartName: 'BarChart',
-    GraphicalChild: (0, _bar.Bar),
-    defaultTooltipEventType: 'axis',
-    validateTooltipEventTypes: [
-        'axis',
-        'item'
-    ],
-    axisComponents: [
-        {
-            axisType: 'xAxis',
-            AxisComp: (0, _xaxis.XAxis)
-        },
-        {
-            axisType: 'yAxis',
-            AxisComp: (0, _yaxis.YAxis)
-        }
-    ],
-    formatAxisMap: (0, _cartesianUtils.formatAxisMap)
-});
-
-},{"./generateCategoricalChart":"4ZsfY","../cartesian/Bar":"62moi","../cartesian/XAxis":"doQvk","../cartesian/YAxis":"h3RMd","../util/CartesianUtils":"j0cay","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4LavF":[function(require,module,exports,__globalThis) {
-/**
- * @fileOverview Pie Chart
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "PieChart", ()=>PieChart);
-var _generateCategoricalChart = require("./generateCategoricalChart");
-var _polarAngleAxis = require("../polar/PolarAngleAxis");
-var _polarRadiusAxis = require("../polar/PolarRadiusAxis");
-var _polarUtils = require("../util/PolarUtils");
-var _pie = require("../polar/Pie");
-var PieChart = (0, _generateCategoricalChart.generateCategoricalChart)({
-    chartName: 'PieChart',
-    GraphicalChild: (0, _pie.Pie),
-    validateTooltipEventTypes: [
-        'item'
-    ],
-    defaultTooltipEventType: 'item',
-    legendContent: 'children',
-    axisComponents: [
-        {
-            axisType: 'angleAxis',
-            AxisComp: (0, _polarAngleAxis.PolarAngleAxis)
-        },
-        {
-            axisType: 'radiusAxis',
-            AxisComp: (0, _polarRadiusAxis.PolarRadiusAxis)
-        }
-    ],
-    formatAxisMap: (0, _polarUtils.formatAxisMap),
-    defaultProps: {
-        layout: 'centric',
-        startAngle: 0,
-        endAngle: 360,
-        cx: '50%',
-        cy: '50%',
-        innerRadius: 0,
-        outerRadius: '80%'
-    }
-});
-
-},{"./generateCategoricalChart":"4ZsfY","../polar/PolarAngleAxis":"7ZFSt","../polar/PolarRadiusAxis":"94jRq","../util/PolarUtils":"xMDoY","../polar/Pie":"4x9kw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8SGAS":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Treemap", ()=>Treemap);
-var _isNaN = require("lodash/isNaN");
-var _isNaNDefault = parcelHelpers.interopDefault(_isNaN);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _omit = require("lodash/omit");
-var _omitDefault = parcelHelpers.interopDefault(_omit);
-var _get = require("lodash/get");
-var _getDefault = parcelHelpers.interopDefault(_get);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-/**
- * @fileOverview TreemapChart
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactSmooth = require("react-smooth");
-var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
-var _tooltip = require("../component/Tooltip");
-var _layer = require("../container/Layer");
-var _surface = require("../container/Surface");
-var _polygon = require("../shape/Polygon");
-var _rectangle = require("../shape/Rectangle");
-var _chartUtils = require("../util/ChartUtils");
-var _constants = require("../util/Constants");
-var _dataUtils = require("../util/DataUtils");
-var _domutils = require("../util/DOMUtils");
-var _global = require("../util/Global");
-var _reactUtils = require("../util/ReactUtils");
-var _excluded = [
-    "width",
-    "height",
-    "className",
-    "style",
-    "children",
-    "type"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var NODE_VALUE_KEY = 'value';
-var computeNode = function computeNode(_ref) {
-    var depth = _ref.depth, node = _ref.node, index = _ref.index, valueKey = _ref.valueKey;
-    var children = node.children;
-    var childDepth = depth + 1;
-    var computedChildren = children && children.length ? children.map(function(child, i) {
-        return computeNode({
-            depth: childDepth,
-            node: child,
-            index: i,
-            valueKey: valueKey
-        });
-    }) : null;
-    var nodeValue;
-    if (children && children.length) nodeValue = computedChildren.reduce(function(result, child) {
-        return result + child[NODE_VALUE_KEY];
-    }, 0);
-    else // TODO need to verify valueKey
-    nodeValue = (0, _isNaNDefault.default)(node[valueKey]) || node[valueKey] <= 0 ? 0 : node[valueKey];
-    return _objectSpread(_objectSpread({}, node), {}, _defineProperty(_defineProperty(_defineProperty({
-        children: computedChildren
-    }, NODE_VALUE_KEY, nodeValue), "depth", depth), "index", index));
-};
-var filterRect = function filterRect(node) {
-    return {
-        x: node.x,
-        y: node.y,
-        width: node.width,
-        height: node.height
-    };
-};
-// Compute the area for each child based on value & scale.
-var getAreaOfChildren = function getAreaOfChildren(children, areaValueRatio) {
-    var ratio = areaValueRatio < 0 ? 0 : areaValueRatio;
-    return children.map(function(child) {
-        var area = child[NODE_VALUE_KEY] * ratio;
-        return _objectSpread(_objectSpread({}, child), {}, {
-            area: (0, _isNaNDefault.default)(area) || area <= 0 ? 0 : area
-        });
-    });
-};
-// Computes the score for the specified row, as the worst aspect ratio.
-var getWorstScore = function getWorstScore(row, parentSize, aspectRatio) {
-    var parentArea = parentSize * parentSize;
-    var rowArea = row.area * row.area;
-    var _row$reduce = row.reduce(function(result, child) {
-        return {
-            min: Math.min(result.min, child.area),
-            max: Math.max(result.max, child.area)
-        };
-    }, {
-        min: Infinity,
-        max: 0
-    }), min = _row$reduce.min, max = _row$reduce.max;
-    return rowArea ? Math.max(parentArea * max * aspectRatio / rowArea, rowArea / (parentArea * min * aspectRatio)) : Infinity;
-};
-var horizontalPosition = function horizontalPosition(row, parentSize, parentRect, isFlush) {
-    var rowHeight = parentSize ? Math.round(row.area / parentSize) : 0;
-    if (isFlush || rowHeight > parentRect.height) rowHeight = parentRect.height;
-    var curX = parentRect.x;
-    var child;
-    for(var i = 0, len = row.length; i < len; i++){
-        child = row[i];
-        child.x = curX;
-        child.y = parentRect.y;
-        child.height = rowHeight;
-        child.width = Math.min(rowHeight ? Math.round(child.area / rowHeight) : 0, parentRect.x + parentRect.width - curX);
-        curX += child.width;
-    }
-    // add the remain x to the last one of row
-    child.width += parentRect.x + parentRect.width - curX;
-    return _objectSpread(_objectSpread({}, parentRect), {}, {
-        y: parentRect.y + rowHeight,
-        height: parentRect.height - rowHeight
-    });
-};
-var verticalPosition = function verticalPosition(row, parentSize, parentRect, isFlush) {
-    var rowWidth = parentSize ? Math.round(row.area / parentSize) : 0;
-    if (isFlush || rowWidth > parentRect.width) rowWidth = parentRect.width;
-    var curY = parentRect.y;
-    var child;
-    for(var i = 0, len = row.length; i < len; i++){
-        child = row[i];
-        child.x = parentRect.x;
-        child.y = curY;
-        child.width = rowWidth;
-        child.height = Math.min(rowWidth ? Math.round(child.area / rowWidth) : 0, parentRect.y + parentRect.height - curY);
-        curY += child.height;
-    }
-    if (child) child.height += parentRect.y + parentRect.height - curY;
-    return _objectSpread(_objectSpread({}, parentRect), {}, {
-        x: parentRect.x + rowWidth,
-        width: parentRect.width - rowWidth
-    });
-};
-var position = function position(row, parentSize, parentRect, isFlush) {
-    if (parentSize === parentRect.width) return horizontalPosition(row, parentSize, parentRect, isFlush);
-    return verticalPosition(row, parentSize, parentRect, isFlush);
-};
-// Recursively arranges the specified node's children into squarified rows.
-var squarify = function squarify(node, aspectRatio) {
-    var children = node.children;
-    if (children && children.length) {
-        var rect = filterRect(node);
-        // maybe a bug
-        var row = [];
-        var best = Infinity; // the best row score so far
-        var child, score; // the current row score
-        var size = Math.min(rect.width, rect.height); // initial orientation
-        var scaleChildren = getAreaOfChildren(children, rect.width * rect.height / node[NODE_VALUE_KEY]);
-        var tempChildren = scaleChildren.slice();
-        row.area = 0;
-        while(tempChildren.length > 0){
-            // row first
-            // eslint-disable-next-line prefer-destructuring
-            row.push(child = tempChildren[0]);
-            row.area += child.area;
-            score = getWorstScore(row, size, aspectRatio);
-            if (score <= best) {
-                // continue with this orientation
-                tempChildren.shift();
-                best = score;
+},{"../PolarUtils":"xMDoY","./getRadialCursorPoints":"kM53y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"km3Ru":[function(require,module,exports,__globalThis) {
+"use strict";
+var Refresh = require("7422ead32dcc1e6b");
+var { version } = require("630b62916b1ae0e7");
+function debounce(func, delay) {
+    {
+        let timeout = undefined;
+        let lastTime = 0;
+        return function(args) {
+            // Call immediately if last call was more than the delay ago.
+            // Otherwise, set a timeout. This means the first call is fast
+            // (for the common case of a single update), and subsequent updates
+            // are batched.
+            let now = Date.now();
+            if (now - lastTime > delay) {
+                lastTime = now;
+                func.call(null, args);
             } else {
-                // abort, and try a different orientation
-                row.area -= row.pop().area;
-                rect = position(row, size, rect, false);
-                size = Math.min(rect.width, rect.height);
-                row.length = row.area = 0;
-                best = Infinity;
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    timeout = undefined;
+                    lastTime = Date.now();
+                    func.call(null, args);
+                }, delay);
             }
-        }
-        if (row.length) {
-            rect = position(row, size, rect, true);
-            row.length = row.area = 0;
-        }
-        return _objectSpread(_objectSpread({}, node), {}, {
-            children: scaleChildren.map(function(c) {
-                return squarify(c, aspectRatio);
-            })
-        });
-    }
-    return node;
-};
-var defaultState = {
-    isTooltipActive: false,
-    isAnimationFinished: false,
-    activeNode: null,
-    formatRoot: null,
-    currentRoot: null,
-    nestIndex: []
-};
-var Treemap = /*#__PURE__*/ function(_PureComponent) {
-    function Treemap() {
-        var _this;
-        _classCallCheck(this, Treemap);
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        _this = _callSuper(this, Treemap, [].concat(args));
-        _defineProperty(_this, "state", _objectSpread({}, defaultState));
-        _defineProperty(_this, "handleAnimationEnd", function() {
-            var onAnimationEnd = _this.props.onAnimationEnd;
-            _this.setState({
-                isAnimationFinished: true
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationEnd)) onAnimationEnd();
-        });
-        _defineProperty(_this, "handleAnimationStart", function() {
-            var onAnimationStart = _this.props.onAnimationStart;
-            _this.setState({
-                isAnimationFinished: false
-            });
-            if ((0, _isFunctionDefault.default)(onAnimationStart)) onAnimationStart();
-        });
-        return _this;
-    }
-    _inherits(Treemap, _PureComponent);
-    return _createClass(Treemap, [
-        {
-            key: "handleMouseEnter",
-            value: function handleMouseEnter(node, e) {
-                e.persist();
-                var _this$props = this.props, onMouseEnter = _this$props.onMouseEnter, children = _this$props.children;
-                var tooltipItem = (0, _reactUtils.findChildByType)(children, (0, _tooltip.Tooltip));
-                if (tooltipItem) this.setState({
-                    isTooltipActive: true,
-                    activeNode: node
-                }, function() {
-                    if (onMouseEnter) onMouseEnter(node, e);
-                });
-                else if (onMouseEnter) onMouseEnter(node, e);
-            }
-        },
-        {
-            key: "handleMouseLeave",
-            value: function handleMouseLeave(node, e) {
-                e.persist();
-                var _this$props2 = this.props, onMouseLeave = _this$props2.onMouseLeave, children = _this$props2.children;
-                var tooltipItem = (0, _reactUtils.findChildByType)(children, (0, _tooltip.Tooltip));
-                if (tooltipItem) this.setState({
-                    isTooltipActive: false,
-                    activeNode: null
-                }, function() {
-                    if (onMouseLeave) onMouseLeave(node, e);
-                });
-                else if (onMouseLeave) onMouseLeave(node, e);
-            }
-        },
-        {
-            key: "handleClick",
-            value: function handleClick(node) {
-                var _this$props3 = this.props, onClick = _this$props3.onClick, type = _this$props3.type;
-                if (type === 'nest' && node.children) {
-                    var _this$props4 = this.props, width = _this$props4.width, height = _this$props4.height, dataKey = _this$props4.dataKey, aspectRatio = _this$props4.aspectRatio;
-                    var root = computeNode({
-                        depth: 0,
-                        node: _objectSpread(_objectSpread({}, node), {}, {
-                            x: 0,
-                            y: 0,
-                            width: width,
-                            height: height
-                        }),
-                        index: 0,
-                        valueKey: dataKey
-                    });
-                    var formatRoot = squarify(root, aspectRatio);
-                    var nestIndex = this.state.nestIndex;
-                    nestIndex.push(node);
-                    this.setState({
-                        formatRoot: formatRoot,
-                        currentRoot: root,
-                        nestIndex: nestIndex
-                    });
-                }
-                if (onClick) onClick(node);
-            }
-        },
-        {
-            key: "handleNestIndex",
-            value: function handleNestIndex(node, i) {
-                var nestIndex = this.state.nestIndex;
-                var _this$props5 = this.props, width = _this$props5.width, height = _this$props5.height, dataKey = _this$props5.dataKey, aspectRatio = _this$props5.aspectRatio;
-                var root = computeNode({
-                    depth: 0,
-                    node: _objectSpread(_objectSpread({}, node), {}, {
-                        x: 0,
-                        y: 0,
-                        width: width,
-                        height: height
-                    }),
-                    index: 0,
-                    valueKey: dataKey
-                });
-                var formatRoot = squarify(root, aspectRatio);
-                nestIndex = nestIndex.slice(0, i + 1);
-                this.setState({
-                    formatRoot: formatRoot,
-                    currentRoot: node,
-                    nestIndex: nestIndex
-                });
-            }
-        },
-        {
-            key: "renderItem",
-            value: function renderItem(content, nodeProps, isLeaf) {
-                var _this2 = this;
-                var _this$props6 = this.props, isAnimationActive = _this$props6.isAnimationActive, animationBegin = _this$props6.animationBegin, animationDuration = _this$props6.animationDuration, animationEasing = _this$props6.animationEasing, isUpdateAnimationActive = _this$props6.isUpdateAnimationActive, type = _this$props6.type, animationId = _this$props6.animationId, colorPanel = _this$props6.colorPanel;
-                var isAnimationFinished = this.state.isAnimationFinished;
-                var width = nodeProps.width, height = nodeProps.height, x = nodeProps.x, y = nodeProps.y, depth = nodeProps.depth;
-                var translateX = parseInt("".concat((Math.random() * 2 - 1) * width), 10);
-                var event = {};
-                if (isLeaf || type === 'nest') event = {
-                    onMouseEnter: this.handleMouseEnter.bind(this, nodeProps),
-                    onMouseLeave: this.handleMouseLeave.bind(this, nodeProps),
-                    onClick: this.handleClick.bind(this, nodeProps)
-                };
-                if (!isAnimationActive) return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), event, this.constructor.renderContentItem(content, _objectSpread(_objectSpread({}, nodeProps), {}, {
-                    isAnimationActive: false,
-                    isUpdateAnimationActive: false,
-                    width: width,
-                    height: height,
-                    x: x,
-                    y: y
-                }), type, colorPanel));
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-                    begin: animationBegin,
-                    duration: animationDuration,
-                    isActive: isAnimationActive,
-                    easing: animationEasing,
-                    key: "treemap-".concat(animationId),
-                    from: {
-                        x: x,
-                        y: y,
-                        width: width,
-                        height: height
-                    },
-                    to: {
-                        x: x,
-                        y: y,
-                        width: width,
-                        height: height
-                    },
-                    onAnimationStart: this.handleAnimationStart,
-                    onAnimationEnd: this.handleAnimationEnd
-                }, function(_ref2) {
-                    var currX = _ref2.x, currY = _ref2.y, currWidth = _ref2.width, currHeight = _ref2.height;
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-                        from: "translate(".concat(translateX, "px, ").concat(translateX, "px)"),
-                        to: "translate(0, 0)",
-                        attributeName: "transform",
-                        begin: animationBegin,
-                        easing: animationEasing,
-                        isActive: isAnimationActive,
-                        duration: animationDuration
-                    }, /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), event, function() {
-                        // when animation Duration , only render depth=1 nodes
-                        if (depth > 2 && !isAnimationFinished) return null;
-                        return _this2.constructor.renderContentItem(content, _objectSpread(_objectSpread({}, nodeProps), {}, {
-                            isAnimationActive: isAnimationActive,
-                            isUpdateAnimationActive: !isUpdateAnimationActive,
-                            width: currWidth,
-                            height: currHeight,
-                            x: currX,
-                            y: currY
-                        }), type, colorPanel);
-                    }()));
-                });
-            }
-        },
-        {
-            key: "renderNode",
-            value: function renderNode(root, node) {
-                var _this3 = this;
-                var _this$props7 = this.props, content = _this$props7.content, type = _this$props7.type;
-                var nodeProps = _objectSpread(_objectSpread(_objectSpread({}, (0, _reactUtils.filterProps)(this.props, false)), node), {}, {
-                    root: root
-                });
-                var isLeaf = !node.children || !node.children.length;
-                var currentRoot = this.state.currentRoot;
-                var isCurrentRootChild = (currentRoot.children || []).filter(function(item) {
-                    return item.depth === node.depth && item.name === node.name;
-                });
-                if (!isCurrentRootChild.length && root.depth && type === 'nest') return null;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    key: "recharts-treemap-node-".concat(nodeProps.x, "-").concat(nodeProps.y, "-").concat(nodeProps.name),
-                    className: "recharts-treemap-depth-".concat(node.depth)
-                }, this.renderItem(content, nodeProps, isLeaf), node.children && node.children.length ? node.children.map(function(child) {
-                    return _this3.renderNode(node, child);
-                }) : null);
-            }
-        },
-        {
-            key: "renderAllNodes",
-            value: function renderAllNodes() {
-                var formatRoot = this.state.formatRoot;
-                if (!formatRoot) return null;
-                return this.renderNode(formatRoot, formatRoot);
-            }
-        },
-        {
-            key: "renderTooltip",
-            value: function renderTooltip() {
-                var _this$props8 = this.props, children = _this$props8.children, nameKey = _this$props8.nameKey;
-                var tooltipItem = (0, _reactUtils.findChildByType)(children, (0, _tooltip.Tooltip));
-                if (!tooltipItem) return null;
-                var _this$props9 = this.props, width = _this$props9.width, height = _this$props9.height;
-                var _this$state = this.state, isTooltipActive = _this$state.isTooltipActive, activeNode = _this$state.activeNode;
-                var viewBox = {
-                    x: 0,
-                    y: 0,
-                    width: width,
-                    height: height
-                };
-                var coordinate = activeNode ? {
-                    x: activeNode.x + activeNode.width / 2,
-                    y: activeNode.y + activeNode.height / 2
-                } : null;
-                var payload = isTooltipActive && activeNode ? [
-                    {
-                        payload: activeNode,
-                        name: (0, _chartUtils.getValueByDataKey)(activeNode, nameKey, ''),
-                        value: (0, _chartUtils.getValueByDataKey)(activeNode, NODE_VALUE_KEY)
-                    }
-                ] : [];
-                return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(tooltipItem, {
-                    viewBox: viewBox,
-                    active: isTooltipActive,
-                    coordinate: coordinate,
-                    label: '',
-                    payload: payload
-                });
-            }
-        },
-        {
-            key: "renderNestIndex",
-            value: function renderNestIndex() {
-                var _this4 = this;
-                var _this$props10 = this.props, nameKey = _this$props10.nameKey, nestIndexContent = _this$props10.nestIndexContent;
-                var nestIndex = this.state.nestIndex;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
-                    className: "recharts-treemap-nest-index-wrapper",
-                    style: {
-                        marginTop: '8px',
-                        textAlign: 'center'
-                    }
-                }, nestIndex.map(function(item, i) {
-                    // TODO need to verify nameKey type
-                    var name = (0, _getDefault.default)(item, nameKey, 'root');
-                    var content = null;
-                    if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(nestIndexContent)) content = /*#__PURE__*/ (0, _reactDefault.default).cloneElement(nestIndexContent, item, i);
-                    if ((0, _isFunctionDefault.default)(nestIndexContent)) content = nestIndexContent(item, i);
-                    else content = name;
-                    return(/*#__PURE__*/ // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-                    (0, _reactDefault.default).createElement("div", {
-                        onClick: _this4.handleNestIndex.bind(_this4, item, i),
-                        key: "nest-index-".concat((0, _dataUtils.uniqueId)()),
-                        className: "recharts-treemap-nest-index-box",
-                        style: {
-                            cursor: 'pointer',
-                            display: 'inline-block',
-                            padding: '0 7px',
-                            background: '#000',
-                            color: '#fff',
-                            marginRight: '3px'
-                        }
-                    }, content));
-                }));
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                if (!(0, _reactUtils.validateWidthHeight)(this)) return null;
-                var _this$props11 = this.props, width = _this$props11.width, height = _this$props11.height, className = _this$props11.className, style = _this$props11.style, children = _this$props11.children, type = _this$props11.type, others = _objectWithoutProperties(_this$props11, _excluded);
-                var attrs = (0, _reactUtils.filterProps)(others, false);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
-                    className: (0, _clsxDefault.default)('recharts-wrapper', className),
-                    style: _objectSpread(_objectSpread({}, style), {}, {
-                        position: 'relative',
-                        cursor: 'default',
-                        width: width,
-                        height: height
-                    }),
-                    role: "region"
-                }, /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _surface.Surface), _extends({}, attrs, {
-                    width: width,
-                    height: type === 'nest' ? height - 30 : height
-                }), this.renderAllNodes(), (0, _reactUtils.filterSvgElements)(children)), this.renderTooltip(), type === 'nest' && this.renderNestIndex());
-            }
-        }
-    ], [
-        {
-            key: "getDerivedStateFromProps",
-            value: function getDerivedStateFromProps(nextProps, prevState) {
-                if (nextProps.data !== prevState.prevData || nextProps.type !== prevState.prevType || nextProps.width !== prevState.prevWidth || nextProps.height !== prevState.prevHeight || nextProps.dataKey !== prevState.prevDataKey || nextProps.aspectRatio !== prevState.prevAspectRatio) {
-                    var root = computeNode({
-                        depth: 0,
-                        node: {
-                            children: nextProps.data,
-                            x: 0,
-                            y: 0,
-                            width: nextProps.width,
-                            height: nextProps.height
-                        },
-                        index: 0,
-                        valueKey: nextProps.dataKey
-                    });
-                    var formatRoot = squarify(root, nextProps.aspectRatio);
-                    return _objectSpread(_objectSpread({}, prevState), {}, {
-                        formatRoot: formatRoot,
-                        currentRoot: root,
-                        nestIndex: [
-                            root
-                        ],
-                        prevAspectRatio: nextProps.aspectRatio,
-                        prevData: nextProps.data,
-                        prevWidth: nextProps.width,
-                        prevHeight: nextProps.height,
-                        prevDataKey: nextProps.dataKey,
-                        prevType: nextProps.type
-                    });
-                }
-                return null;
-            }
-        },
-        {
-            key: "renderContentItem",
-            value: function renderContentItem(content, nodeProps, type, colorPanel) {
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(content)) return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(content, nodeProps);
-                if ((0, _isFunctionDefault.default)(content)) return content(nodeProps);
-                // optimize default shape
-                var x = nodeProps.x, y = nodeProps.y, width = nodeProps.width, height = nodeProps.height, index = nodeProps.index;
-                var arrow = null;
-                if (width > 10 && height > 10 && nodeProps.children && type === 'nest') arrow = /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _polygon.Polygon), {
-                    points: [
-                        {
-                            x: x + 2,
-                            y: y + height / 2
-                        },
-                        {
-                            x: x + 6,
-                            y: y + height / 2 + 3
-                        },
-                        {
-                            x: x + 2,
-                            y: y + height / 2 + 6
-                        }
-                    ]
-                });
-                var text = null;
-                var nameSize = (0, _domutils.getStringSize)(nodeProps.name);
-                if (width > 20 && height > 20 && nameSize.width < width && nameSize.height < height) text = /*#__PURE__*/ (0, _reactDefault.default).createElement("text", {
-                    x: x + 8,
-                    y: y + height / 2 + 7,
-                    fontSize: 14
-                }, nodeProps.name);
-                var colors = colorPanel || (0, _constants.COLOR_PANEL);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement("g", null, /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _rectangle.Rectangle), _extends({
-                    fill: nodeProps.depth < 2 ? colors[index % colors.length] : 'rgba(255,255,255,0)',
-                    stroke: "#fff"
-                }, (0, _omitDefault.default)(nodeProps, 'children'), {
-                    role: "img"
-                })), arrow, text);
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_defineProperty(Treemap, "displayName", 'Treemap');
-_defineProperty(Treemap, "defaultProps", {
-    aspectRatio: 0.5 * (1 + Math.sqrt(5)),
-    dataKey: 'value',
-    type: 'flat',
-    isAnimationActive: !(0, _global.Global).isSsr,
-    isUpdateAnimationActive: !(0, _global.Global).isSsr,
-    animationBegin: 0,
-    animationDuration: 1500,
-    animationEasing: 'linear'
-});
-
-},{"lodash/isNaN":"5ajks","lodash/isFunction":"cfti6","lodash/omit":"8Uh9e","lodash/get":"8UELX","clsx":"gocd3","react":"21dqq","react-smooth":"p2bRC","../component/Tooltip":"gEbNO","../container/Layer":"hLZRL","../container/Surface":"ldrIX","../shape/Polygon":"ei100","../shape/Rectangle":"21ix4","../util/ChartUtils":"2s4mV","../util/Constants":"64f3z","../util/DataUtils":"exzKF","../util/DOMUtils":"kK8xO","../util/Global":"7fOrk","../util/ReactUtils":"gDert","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8Uh9e":[function(require,module,exports,__globalThis) {
-var arrayMap = require("edf8d2f2f36e65cf"), baseClone = require("dd27ddc2340179e5"), baseUnset = require("589767d435c41297"), castPath = require("565c158f6d380e60"), copyObject = require("9b4f3122fc9cc1a6"), customOmitClone = require("1c19467b6c51de37"), flatRest = require("24ab2b6e4b71312a"), getAllKeysIn = require("e20a1a7cbb58999e");
-/** Used to compose bitmasks for cloning. */ var CLONE_DEEP_FLAG = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG = 4;
-/**
- * The opposite of `_.pick`; this method creates an object composed of the
- * own and inherited enumerable property paths of `object` that are not omitted.
- *
- * **Note:** This method is considerably slower than `_.pick`.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Object
- * @param {Object} object The source object.
- * @param {...(string|string[])} [paths] The property paths to omit.
- * @returns {Object} Returns the new object.
- * @example
- *
- * var object = { 'a': 1, 'b': '2', 'c': 3 };
- *
- * _.omit(object, ['a', 'c']);
- * // => { 'b': '2' }
- */ var omit = flatRest(function(object, paths) {
-    var result = {};
-    if (object == null) return result;
-    var isDeep = false;
-    paths = arrayMap(paths, function(path) {
-        path = castPath(path, object);
-        isDeep || (isDeep = path.length > 1);
-        return path;
-    });
-    copyObject(object, getAllKeysIn(object), result);
-    if (isDeep) result = baseClone(result, CLONE_DEEP_FLAG | CLONE_FLAT_FLAG | CLONE_SYMBOLS_FLAG, customOmitClone);
-    var length = paths.length;
-    while(length--)baseUnset(result, paths[length]);
-    return result;
-});
-module.exports = omit;
-
-},{"edf8d2f2f36e65cf":"imI5Z","dd27ddc2340179e5":"2GC2p","589767d435c41297":"lhSCB","565c158f6d380e60":"apxk5","9b4f3122fc9cc1a6":"gfA7W","1c19467b6c51de37":"dfRaj","24ab2b6e4b71312a":"bmlRd","e20a1a7cbb58999e":"6BBOq"}],"2GC2p":[function(require,module,exports,__globalThis) {
-var Stack = require("c3256a0a192955f9"), arrayEach = require("3a79976eb46af94a"), assignValue = require("bc83a05a4f99d69b"), baseAssign = require("e6b4c3e6c85df6bb"), baseAssignIn = require("f340cc553ba5643c"), cloneBuffer = require("e72e99883a50402d"), copyArray = require("dc840ead07f1054"), copySymbols = require("309288e8ee190af0"), copySymbolsIn = require("687fa30fede0b048"), getAllKeys = require("bb0ba724f98b094d"), getAllKeysIn = require("12bae1dca0e83064"), getTag = require("4c3204eaea28d680"), initCloneArray = require("fd7741200b462cdf"), initCloneByTag = require("f93a1d24ac08e076"), initCloneObject = require("630039e80f692f17"), isArray = require("f37949484ab52dae"), isBuffer = require("ac876cc65d29c86e"), isMap = require("1056c031d98783c0"), isObject = require("1800fb3122907fc2"), isSet = require("31f022f648037bd3"), keys = require("5f3267fbd9848a7d"), keysIn = require("7d3f3bdc4f2e7bb8");
-/** Used to compose bitmasks for cloning. */ var CLONE_DEEP_FLAG = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG = 4;
-/** `Object#toString` result references. */ var argsTag = '[object Arguments]', arrayTag = '[object Array]', boolTag = '[object Boolean]', dateTag = '[object Date]', errorTag = '[object Error]', funcTag = '[object Function]', genTag = '[object GeneratorFunction]', mapTag = '[object Map]', numberTag = '[object Number]', objectTag = '[object Object]', regexpTag = '[object RegExp]', setTag = '[object Set]', stringTag = '[object String]', symbolTag = '[object Symbol]', weakMapTag = '[object WeakMap]';
-var arrayBufferTag = '[object ArrayBuffer]', dataViewTag = '[object DataView]', float32Tag = '[object Float32Array]', float64Tag = '[object Float64Array]', int8Tag = '[object Int8Array]', int16Tag = '[object Int16Array]', int32Tag = '[object Int32Array]', uint8Tag = '[object Uint8Array]', uint8ClampedTag = '[object Uint8ClampedArray]', uint16Tag = '[object Uint16Array]', uint32Tag = '[object Uint32Array]';
-/** Used to identify `toStringTag` values supported by `_.clone`. */ var cloneableTags = {};
-cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
-cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
-/**
- * The base implementation of `_.clone` and `_.cloneDeep` which tracks
- * traversed objects.
- *
- * @private
- * @param {*} value The value to clone.
- * @param {boolean} bitmask The bitmask flags.
- *  1 - Deep clone
- *  2 - Flatten inherited properties
- *  4 - Clone symbols
- * @param {Function} [customizer] The function to customize cloning.
- * @param {string} [key] The key of `value`.
- * @param {Object} [object] The parent object of `value`.
- * @param {Object} [stack] Tracks traversed objects and their clone counterparts.
- * @returns {*} Returns the cloned value.
- */ function baseClone(value, bitmask, customizer, key, object, stack) {
-    var result, isDeep = bitmask & CLONE_DEEP_FLAG, isFlat = bitmask & CLONE_FLAT_FLAG, isFull = bitmask & CLONE_SYMBOLS_FLAG;
-    if (customizer) result = object ? customizer(value, key, object, stack) : customizer(value);
-    if (result !== undefined) return result;
-    if (!isObject(value)) return value;
-    var isArr = isArray(value);
-    if (isArr) {
-        result = initCloneArray(value);
-        if (!isDeep) return copyArray(value, result);
-    } else {
-        var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
-        if (isBuffer(value)) return cloneBuffer(value, isDeep);
-        if (tag == objectTag || tag == argsTag || isFunc && !object) {
-            result = isFlat || isFunc ? {} : initCloneObject(value);
-            if (!isDeep) return isFlat ? copySymbolsIn(value, baseAssignIn(result, value)) : copySymbols(value, baseAssign(result, value));
-        } else {
-            if (!cloneableTags[tag]) return object ? value : {};
-            result = initCloneByTag(value, tag, isDeep);
-        }
-    }
-    // Check for circular references and return its corresponding clone.
-    stack || (stack = new Stack);
-    var stacked = stack.get(value);
-    if (stacked) return stacked;
-    stack.set(value, result);
-    if (isSet(value)) value.forEach(function(subValue) {
-        result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
-    });
-    else if (isMap(value)) value.forEach(function(subValue, key) {
-        result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
-    });
-    var keysFunc = isFull ? isFlat ? getAllKeysIn : getAllKeys : isFlat ? keysIn : keys;
-    var props = isArr ? undefined : keysFunc(value);
-    arrayEach(props || value, function(subValue, key) {
-        if (props) {
-            key = subValue;
-            subValue = value[key];
-        }
-        // Recursively populate clone (susceptible to call stack limits).
-        assignValue(result, key, baseClone(subValue, bitmask, customizer, key, value, stack));
-    });
-    return result;
-}
-module.exports = baseClone;
-
-},{"c3256a0a192955f9":"atP87","3a79976eb46af94a":"kMhnH","bc83a05a4f99d69b":"5M3eX","e6b4c3e6c85df6bb":"fNRtQ","f340cc553ba5643c":"6Gpuu","e72e99883a50402d":"6zXd4","dc840ead07f1054":"jJ8fu","309288e8ee190af0":"78Za0","687fa30fede0b048":"lhZg2","bb0ba724f98b094d":"d2kML","12bae1dca0e83064":"6BBOq","4c3204eaea28d680":"cRPhM","fd7741200b462cdf":"1RKeS","f93a1d24ac08e076":"26ysD","630039e80f692f17":"dG1H0","f37949484ab52dae":"dZaTH","ac876cc65d29c86e":"cn85h","1056c031d98783c0":"3qbv8","1800fb3122907fc2":"cGhqJ","31f022f648037bd3":"bZrVh","5f3267fbd9848a7d":"6fHVw","7d3f3bdc4f2e7bb8":"c9sMs"}],"kMhnH":[function(require,module,exports,__globalThis) {
-/**
- * A specialized version of `_.forEach` for arrays without support for
- * iteratee shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns `array`.
- */ function arrayEach(array, iteratee) {
-    var index = -1, length = array == null ? 0 : array.length;
-    while(++index < length){
-        if (iteratee(array[index], index, array) === false) break;
-    }
-    return array;
-}
-module.exports = arrayEach;
-
-},{}],"5M3eX":[function(require,module,exports,__globalThis) {
-var baseAssignValue = require("be513dd57a36b3f4"), eq = require("b62ef95b3cf1cde1");
-/** Used for built-in method references. */ var objectProto = Object.prototype;
-/** Used to check objects for own properties. */ var hasOwnProperty = objectProto.hasOwnProperty;
-/**
- * Assigns `value` to `key` of `object` if the existing value is not equivalent
- * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * for equality comparisons.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {string} key The key of the property to assign.
- * @param {*} value The value to assign.
- */ function assignValue(object, key, value) {
-    var objValue = object[key];
-    if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) || value === undefined && !(key in object)) baseAssignValue(object, key, value);
-}
-module.exports = assignValue;
-
-},{"be513dd57a36b3f4":"fprBU","b62ef95b3cf1cde1":"aVz5f"}],"fNRtQ":[function(require,module,exports,__globalThis) {
-var copyObject = require("c7567f70ddd05963"), keys = require("fcf23a0242ef0da9");
-/**
- * The base implementation of `_.assign` without support for multiple sources
- * or `customizer` functions.
- *
- * @private
- * @param {Object} object The destination object.
- * @param {Object} source The source object.
- * @returns {Object} Returns `object`.
- */ function baseAssign(object, source) {
-    return object && copyObject(source, keys(source), object);
-}
-module.exports = baseAssign;
-
-},{"c7567f70ddd05963":"gfA7W","fcf23a0242ef0da9":"6fHVw"}],"gfA7W":[function(require,module,exports,__globalThis) {
-var assignValue = require("51e2769785cbfa78"), baseAssignValue = require("9cddf6ac1a092765");
-/**
- * Copies properties of `source` to `object`.
- *
- * @private
- * @param {Object} source The object to copy properties from.
- * @param {Array} props The property identifiers to copy.
- * @param {Object} [object={}] The object to copy properties to.
- * @param {Function} [customizer] The function to customize copied values.
- * @returns {Object} Returns `object`.
- */ function copyObject(source, props, object, customizer) {
-    var isNew = !object;
-    object || (object = {});
-    var index = -1, length = props.length;
-    while(++index < length){
-        var key = props[index];
-        var newValue = customizer ? customizer(object[key], source[key], key, object, source) : undefined;
-        if (newValue === undefined) newValue = source[key];
-        if (isNew) baseAssignValue(object, key, newValue);
-        else assignValue(object, key, newValue);
-    }
-    return object;
-}
-module.exports = copyObject;
-
-},{"51e2769785cbfa78":"5M3eX","9cddf6ac1a092765":"fprBU"}],"6Gpuu":[function(require,module,exports,__globalThis) {
-var copyObject = require("6f2a44bcb454186d"), keysIn = require("7697a1565646c93");
-/**
- * The base implementation of `_.assignIn` without support for multiple sources
- * or `customizer` functions.
- *
- * @private
- * @param {Object} object The destination object.
- * @param {Object} source The source object.
- * @returns {Object} Returns `object`.
- */ function baseAssignIn(object, source) {
-    return object && copyObject(source, keysIn(source), object);
-}
-module.exports = baseAssignIn;
-
-},{"6f2a44bcb454186d":"gfA7W","7697a1565646c93":"c9sMs"}],"c9sMs":[function(require,module,exports,__globalThis) {
-var arrayLikeKeys = require("635aebb56f3a408f"), baseKeysIn = require("194eb1a802636842"), isArrayLike = require("ac15afdc3ddd76cd");
-/**
- * Creates an array of the own and inherited enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects.
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keysIn(new Foo);
- * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
- */ function keysIn(object) {
-    return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
-}
-module.exports = keysIn;
-
-},{"635aebb56f3a408f":"dquIQ","194eb1a802636842":"23s7e","ac15afdc3ddd76cd":"gMCbp"}],"23s7e":[function(require,module,exports,__globalThis) {
-var isObject = require("bd1636f5883f1002"), isPrototype = require("f7d53cd92b2b977b"), nativeKeysIn = require("c039208a16eb68bd");
-/** Used for built-in method references. */ var objectProto = Object.prototype;
-/** Used to check objects for own properties. */ var hasOwnProperty = objectProto.hasOwnProperty;
-/**
- * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */ function baseKeysIn(object) {
-    if (!isObject(object)) return nativeKeysIn(object);
-    var isProto = isPrototype(object), result = [];
-    for(var key in object)if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) result.push(key);
-    return result;
-}
-module.exports = baseKeysIn;
-
-},{"bd1636f5883f1002":"cGhqJ","f7d53cd92b2b977b":"iG4eR","c039208a16eb68bd":"5CFL0"}],"5CFL0":[function(require,module,exports,__globalThis) {
-/**
- * This function is like
- * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
- * except that it includes inherited enumerable properties.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */ function nativeKeysIn(object) {
-    var result = [];
-    if (object != null) for(var key in Object(object))result.push(key);
-    return result;
-}
-module.exports = nativeKeysIn;
-
-},{}],"6zXd4":[function(require,module,exports,__globalThis) {
-var root = require("5d68e87b918bbcc5");
-/** Detect free variable `exports`. */ var freeExports = exports && !exports.nodeType && exports;
-/** Detect free variable `module`. */ var freeModule = freeExports && true && module && !module.nodeType && module;
-/** Detect the popular CommonJS extension `module.exports`. */ var moduleExports = freeModule && freeModule.exports === freeExports;
-/** Built-in value references. */ var Buffer = moduleExports ? root.Buffer : undefined, allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined;
-/**
- * Creates a clone of  `buffer`.
- *
- * @private
- * @param {Buffer} buffer The buffer to clone.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Buffer} Returns the cloned buffer.
- */ function cloneBuffer(buffer, isDeep) {
-    if (isDeep) return buffer.slice();
-    var length = buffer.length, result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
-    buffer.copy(result);
-    return result;
-}
-module.exports = cloneBuffer;
-
-},{"5d68e87b918bbcc5":"dSYUs"}],"jJ8fu":[function(require,module,exports,__globalThis) {
-/**
- * Copies the values of `source` to `array`.
- *
- * @private
- * @param {Array} source The array to copy values from.
- * @param {Array} [array=[]] The array to copy values to.
- * @returns {Array} Returns `array`.
- */ function copyArray(source, array) {
-    var index = -1, length = source.length;
-    array || (array = Array(length));
-    while(++index < length)array[index] = source[index];
-    return array;
-}
-module.exports = copyArray;
-
-},{}],"78Za0":[function(require,module,exports,__globalThis) {
-var copyObject = require("4cc37626612884ad"), getSymbols = require("39cbde2205d9399c");
-/**
- * Copies own symbols of `source` to `object`.
- *
- * @private
- * @param {Object} source The object to copy symbols from.
- * @param {Object} [object={}] The object to copy symbols to.
- * @returns {Object} Returns `object`.
- */ function copySymbols(source, object) {
-    return copyObject(source, getSymbols(source), object);
-}
-module.exports = copySymbols;
-
-},{"4cc37626612884ad":"gfA7W","39cbde2205d9399c":"5p5Yd"}],"lhZg2":[function(require,module,exports,__globalThis) {
-var copyObject = require("73fd77060a6bfcff"), getSymbolsIn = require("9b660e6b0c20d303");
-/**
- * Copies own and inherited symbols of `source` to `object`.
- *
- * @private
- * @param {Object} source The object to copy symbols from.
- * @param {Object} [object={}] The object to copy symbols to.
- * @returns {Object} Returns `object`.
- */ function copySymbolsIn(source, object) {
-    return copyObject(source, getSymbolsIn(source), object);
-}
-module.exports = copySymbolsIn;
-
-},{"73fd77060a6bfcff":"gfA7W","9b660e6b0c20d303":"dVaAc"}],"dVaAc":[function(require,module,exports,__globalThis) {
-var arrayPush = require("2f7c7daf8773557"), getPrototype = require("6ccae2aa7cfa3c66"), getSymbols = require("bdb501682ee9305d"), stubArray = require("7641fe4ae6d2cc96");
-/* Built-in method references for those with the same name as other `lodash` methods. */ var nativeGetSymbols = Object.getOwnPropertySymbols;
-/**
- * Creates an array of the own and inherited enumerable symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of symbols.
- */ var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
-    var result = [];
-    while(object){
-        arrayPush(result, getSymbols(object));
-        object = getPrototype(object);
-    }
-    return result;
-};
-module.exports = getSymbolsIn;
-
-},{"2f7c7daf8773557":"ivo5r","6ccae2aa7cfa3c66":"8ASKT","bdb501682ee9305d":"5p5Yd","7641fe4ae6d2cc96":"6TgRy"}],"6BBOq":[function(require,module,exports,__globalThis) {
-var baseGetAllKeys = require("f6d6a583609f5bf6"), getSymbolsIn = require("feede5d0a2d06427"), keysIn = require("287f70f798405911");
-/**
- * Creates an array of own and inherited enumerable property names and
- * symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names and symbols.
- */ function getAllKeysIn(object) {
-    return baseGetAllKeys(object, keysIn, getSymbolsIn);
-}
-module.exports = getAllKeysIn;
-
-},{"f6d6a583609f5bf6":"aeckf","feede5d0a2d06427":"dVaAc","287f70f798405911":"c9sMs"}],"1RKeS":[function(require,module,exports,__globalThis) {
-/** Used for built-in method references. */ var objectProto = Object.prototype;
-/** Used to check objects for own properties. */ var hasOwnProperty = objectProto.hasOwnProperty;
-/**
- * Initializes an array clone.
- *
- * @private
- * @param {Array} array The array to clone.
- * @returns {Array} Returns the initialized clone.
- */ function initCloneArray(array) {
-    var length = array.length, result = new array.constructor(length);
-    // Add properties assigned by `RegExp#exec`.
-    if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
-        result.index = array.index;
-        result.input = array.input;
-    }
-    return result;
-}
-module.exports = initCloneArray;
-
-},{}],"26ysD":[function(require,module,exports,__globalThis) {
-var cloneArrayBuffer = require("d24f0b9a34d2e38a"), cloneDataView = require("dbf04edaab2ae376"), cloneRegExp = require("763300f2dd9bdaf3"), cloneSymbol = require("c30e64d90e4b92d1"), cloneTypedArray = require("d1edd8349e9ad54d");
-/** `Object#toString` result references. */ var boolTag = '[object Boolean]', dateTag = '[object Date]', mapTag = '[object Map]', numberTag = '[object Number]', regexpTag = '[object RegExp]', setTag = '[object Set]', stringTag = '[object String]', symbolTag = '[object Symbol]';
-var arrayBufferTag = '[object ArrayBuffer]', dataViewTag = '[object DataView]', float32Tag = '[object Float32Array]', float64Tag = '[object Float64Array]', int8Tag = '[object Int8Array]', int16Tag = '[object Int16Array]', int32Tag = '[object Int32Array]', uint8Tag = '[object Uint8Array]', uint8ClampedTag = '[object Uint8ClampedArray]', uint16Tag = '[object Uint16Array]', uint32Tag = '[object Uint32Array]';
-/**
- * Initializes an object clone based on its `toStringTag`.
- *
- * **Note:** This function only supports cloning values with tags of
- * `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
- *
- * @private
- * @param {Object} object The object to clone.
- * @param {string} tag The `toStringTag` of the object to clone.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Object} Returns the initialized clone.
- */ function initCloneByTag(object, tag, isDeep) {
-    var Ctor = object.constructor;
-    switch(tag){
-        case arrayBufferTag:
-            return cloneArrayBuffer(object);
-        case boolTag:
-        case dateTag:
-            return new Ctor(+object);
-        case dataViewTag:
-            return cloneDataView(object, isDeep);
-        case float32Tag:
-        case float64Tag:
-        case int8Tag:
-        case int16Tag:
-        case int32Tag:
-        case uint8Tag:
-        case uint8ClampedTag:
-        case uint16Tag:
-        case uint32Tag:
-            return cloneTypedArray(object, isDeep);
-        case mapTag:
-            return new Ctor;
-        case numberTag:
-        case stringTag:
-            return new Ctor(object);
-        case regexpTag:
-            return cloneRegExp(object);
-        case setTag:
-            return new Ctor;
-        case symbolTag:
-            return cloneSymbol(object);
-    }
-}
-module.exports = initCloneByTag;
-
-},{"d24f0b9a34d2e38a":"7fi2W","dbf04edaab2ae376":"hEqzP","763300f2dd9bdaf3":"aeJOQ","c30e64d90e4b92d1":"5ScBc","d1edd8349e9ad54d":"7eG7Y"}],"7fi2W":[function(require,module,exports,__globalThis) {
-var Uint8Array = require("c50984a96481fd62");
-/**
- * Creates a clone of `arrayBuffer`.
- *
- * @private
- * @param {ArrayBuffer} arrayBuffer The array buffer to clone.
- * @returns {ArrayBuffer} Returns the cloned array buffer.
- */ function cloneArrayBuffer(arrayBuffer) {
-    var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-    new Uint8Array(result).set(new Uint8Array(arrayBuffer));
-    return result;
-}
-module.exports = cloneArrayBuffer;
-
-},{"c50984a96481fd62":"6xFrA"}],"hEqzP":[function(require,module,exports,__globalThis) {
-var cloneArrayBuffer = require("55b473c4a5622b5a");
-/**
- * Creates a clone of `dataView`.
- *
- * @private
- * @param {Object} dataView The data view to clone.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Object} Returns the cloned data view.
- */ function cloneDataView(dataView, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
-    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
-}
-module.exports = cloneDataView;
-
-},{"55b473c4a5622b5a":"7fi2W"}],"aeJOQ":[function(require,module,exports,__globalThis) {
-/** Used to match `RegExp` flags from their coerced string values. */ var reFlags = /\w*$/;
-/**
- * Creates a clone of `regexp`.
- *
- * @private
- * @param {Object} regexp The regexp to clone.
- * @returns {Object} Returns the cloned regexp.
- */ function cloneRegExp(regexp) {
-    var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-    result.lastIndex = regexp.lastIndex;
-    return result;
-}
-module.exports = cloneRegExp;
-
-},{}],"5ScBc":[function(require,module,exports,__globalThis) {
-var Symbol = require("b88cf659c1f1d984");
-/** Used to convert symbols to primitives and strings. */ var symbolProto = Symbol ? Symbol.prototype : undefined, symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
-/**
- * Creates a clone of the `symbol` object.
- *
- * @private
- * @param {Object} symbol The symbol object to clone.
- * @returns {Object} Returns the cloned symbol object.
- */ function cloneSymbol(symbol) {
-    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
-}
-module.exports = cloneSymbol;
-
-},{"b88cf659c1f1d984":"7lsL9"}],"7eG7Y":[function(require,module,exports,__globalThis) {
-var cloneArrayBuffer = require("b3183de060e04548");
-/**
- * Creates a clone of `typedArray`.
- *
- * @private
- * @param {Object} typedArray The typed array to clone.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Object} Returns the cloned typed array.
- */ function cloneTypedArray(typedArray, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
-    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
-}
-module.exports = cloneTypedArray;
-
-},{"b3183de060e04548":"7fi2W"}],"dG1H0":[function(require,module,exports,__globalThis) {
-var baseCreate = require("4a25a11eb90445e8"), getPrototype = require("8c92276927b7c3e0"), isPrototype = require("e939f15d7a0f64a5");
-/**
- * Initializes an object clone.
- *
- * @private
- * @param {Object} object The object to clone.
- * @returns {Object} Returns the initialized clone.
- */ function initCloneObject(object) {
-    return typeof object.constructor == 'function' && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
-}
-module.exports = initCloneObject;
-
-},{"4a25a11eb90445e8":"ef1VZ","8c92276927b7c3e0":"8ASKT","e939f15d7a0f64a5":"iG4eR"}],"ef1VZ":[function(require,module,exports,__globalThis) {
-var isObject = require("2c87f13f7934e7bd");
-/** Built-in value references. */ var objectCreate = Object.create;
-/**
- * The base implementation of `_.create` without support for assigning
- * properties to the created object.
- *
- * @private
- * @param {Object} proto The object to inherit from.
- * @returns {Object} Returns the new object.
- */ var baseCreate = function() {
-    function object() {}
-    return function(proto) {
-        if (!isObject(proto)) return {};
-        if (objectCreate) return objectCreate(proto);
-        object.prototype = proto;
-        var result = new object;
-        object.prototype = undefined;
-        return result;
-    };
-}();
-module.exports = baseCreate;
-
-},{"2c87f13f7934e7bd":"cGhqJ"}],"3qbv8":[function(require,module,exports,__globalThis) {
-var baseIsMap = require("bcb4b5290583d129"), baseUnary = require("6a7e6b1a2d9fb1d5"), nodeUtil = require("7d4f449dd306450f");
-/* Node.js helper references. */ var nodeIsMap = nodeUtil && nodeUtil.isMap;
-/**
- * Checks if `value` is classified as a `Map` object.
- *
- * @static
- * @memberOf _
- * @since 4.3.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a map, else `false`.
- * @example
- *
- * _.isMap(new Map);
- * // => true
- *
- * _.isMap(new WeakMap);
- * // => false
- */ var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
-module.exports = isMap;
-
-},{"bcb4b5290583d129":"9v3CD","6a7e6b1a2d9fb1d5":"eJXq4","7d4f449dd306450f":"5edNe"}],"9v3CD":[function(require,module,exports,__globalThis) {
-var getTag = require("f59b9932854175ea"), isObjectLike = require("88260e33e0003386");
-/** `Object#toString` result references. */ var mapTag = '[object Map]';
-/**
- * The base implementation of `_.isMap` without Node.js optimizations.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a map, else `false`.
- */ function baseIsMap(value) {
-    return isObjectLike(value) && getTag(value) == mapTag;
-}
-module.exports = baseIsMap;
-
-},{"f59b9932854175ea":"cRPhM","88260e33e0003386":"3BLi4"}],"bZrVh":[function(require,module,exports,__globalThis) {
-var baseIsSet = require("efa5963001bed2f4"), baseUnary = require("3cb35dba719c68b1"), nodeUtil = require("7a3e899a332ff7be");
-/* Node.js helper references. */ var nodeIsSet = nodeUtil && nodeUtil.isSet;
-/**
- * Checks if `value` is classified as a `Set` object.
- *
- * @static
- * @memberOf _
- * @since 4.3.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a set, else `false`.
- * @example
- *
- * _.isSet(new Set);
- * // => true
- *
- * _.isSet(new WeakSet);
- * // => false
- */ var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
-module.exports = isSet;
-
-},{"efa5963001bed2f4":"7lzzg","3cb35dba719c68b1":"eJXq4","7a3e899a332ff7be":"5edNe"}],"7lzzg":[function(require,module,exports,__globalThis) {
-var getTag = require("3451ecb010f954cc"), isObjectLike = require("b6fc875bc5f351c9");
-/** `Object#toString` result references. */ var setTag = '[object Set]';
-/**
- * The base implementation of `_.isSet` without Node.js optimizations.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a set, else `false`.
- */ function baseIsSet(value) {
-    return isObjectLike(value) && getTag(value) == setTag;
-}
-module.exports = baseIsSet;
-
-},{"3451ecb010f954cc":"cRPhM","b6fc875bc5f351c9":"3BLi4"}],"lhSCB":[function(require,module,exports,__globalThis) {
-var castPath = require("f9ed36b4ad99fc49"), last = require("bbfbe3a50d8efe39"), parent = require("b7b0084465c39aec"), toKey = require("7b9792fcc4179101");
-/**
- * The base implementation of `_.unset`.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {Array|string} path The property path to unset.
- * @returns {boolean} Returns `true` if the property is deleted, else `false`.
- */ function baseUnset(object, path) {
-    path = castPath(path, object);
-    object = parent(object, path);
-    return object == null || delete object[toKey(last(path))];
-}
-module.exports = baseUnset;
-
-},{"f9ed36b4ad99fc49":"apxk5","bbfbe3a50d8efe39":"fv3GK","b7b0084465c39aec":"1hPE8","7b9792fcc4179101":"bEgue"}],"1hPE8":[function(require,module,exports,__globalThis) {
-var baseGet = require("cbcb75b7339c1ad"), baseSlice = require("3443758a32fd0de1");
-/**
- * Gets the parent value at `path` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Array} path The path to get the parent value of.
- * @returns {*} Returns the parent value.
- */ function parent(object, path) {
-    return path.length < 2 ? object : baseGet(object, baseSlice(path, 0, -1));
-}
-module.exports = parent;
-
-},{"cbcb75b7339c1ad":"kMRe3","3443758a32fd0de1":"cqqI2"}],"dfRaj":[function(require,module,exports,__globalThis) {
-var isPlainObject = require("e34ef634df1bf68a");
-/**
- * Used by `_.omit` to customize its `_.cloneDeep` use to only clone plain
- * objects.
- *
- * @private
- * @param {*} value The value to inspect.
- * @param {string} key The key of the property to inspect.
- * @returns {*} Returns the uncloned value or `undefined` to defer cloning to `_.cloneDeep`.
- */ function customOmitClone(value) {
-    return isPlainObject(value) ? undefined : value;
-}
-module.exports = customOmitClone;
-
-},{"e34ef634df1bf68a":"cvSNF"}],"bmlRd":[function(require,module,exports,__globalThis) {
-var flatten = require("199f7cbd69032298"), overRest = require("aa5c38699e42775a"), setToString = require("6a66c8b3fbd122d5");
-/**
- * A specialized version of `baseRest` which flattens the rest array.
- *
- * @private
- * @param {Function} func The function to apply a rest parameter to.
- * @returns {Function} Returns the new function.
- */ function flatRest(func) {
-    return setToString(overRest(func, undefined, flatten), func + '');
-}
-module.exports = flatRest;
-
-},{"199f7cbd69032298":"71l7m","aa5c38699e42775a":"16F1z","6a66c8b3fbd122d5":"b5kjI"}],"71l7m":[function(require,module,exports,__globalThis) {
-var baseFlatten = require("a35d6abfacb4b52b");
-/**
- * Flattens `array` a single level deep.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Array
- * @param {Array} array The array to flatten.
- * @returns {Array} Returns the new flattened array.
- * @example
- *
- * _.flatten([1, [2, [3, [4]], 5]]);
- * // => [1, 2, [3, [4]], 5]
- */ function flatten(array) {
-    var length = array == null ? 0 : array.length;
-    return length ? baseFlatten(array, 1) : [];
-}
-module.exports = flatten;
-
-},{"a35d6abfacb4b52b":"60rt9"}],"64f3z":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "COLOR_PANEL", ()=>COLOR_PANEL);
-var COLOR_PANEL = [
-    '#1890FF',
-    '#66B5FF',
-    '#41D9C7',
-    '#2FC25B',
-    '#6EDB8F',
-    '#9AE65C',
-    '#FACC14',
-    '#E6965C',
-    '#57AD71',
-    '#223273',
-    '#738AE6',
-    '#7564CC',
-    '#8543E0',
-    '#A877ED',
-    '#5C8EE6',
-    '#13C2C2',
-    '#70E0E0',
-    '#5CA3E6',
-    '#3436C7',
-    '#8082FF',
-    '#DD81E6',
-    '#F04864',
-    '#FA7D92',
-    '#D598D9'
-];
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cT9aD":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Sankey", ()=>Sankey);
-/**
- * @file TreemapChart
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _maxBy = require("lodash/maxBy");
-var _maxByDefault = parcelHelpers.interopDefault(_maxBy);
-var _min = require("lodash/min");
-var _minDefault = parcelHelpers.interopDefault(_min);
-var _get = require("lodash/get");
-var _getDefault = parcelHelpers.interopDefault(_get);
-var _sumBy = require("lodash/sumBy");
-var _sumByDefault = parcelHelpers.interopDefault(_sumBy);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _surface = require("../container/Surface");
-var _layer = require("../container/Layer");
-var _tooltip = require("../component/Tooltip");
-var _rectangle = require("../shape/Rectangle");
-var _shallowEqual = require("../util/ShallowEqual");
-var _reactUtils = require("../util/ReactUtils");
-var _chartUtils = require("../util/ChartUtils");
-var _excluded = [
-    "width",
-    "height",
-    "className",
-    "style",
-    "children"
-], _excluded2 = [
-    "sourceX",
-    "sourceY",
-    "sourceControlX",
-    "targetX",
-    "targetY",
-    "targetControlX",
-    "linkWidth"
-];
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var defaultCoordinateOfTooltip = {
-    x: 0,
-    y: 0
-};
-var interpolationGenerator = function interpolationGenerator(a, b) {
-    var ka = +a;
-    var kb = b - ka;
-    return function(t) {
-        return ka + kb * t;
-    };
-};
-var centerY = function centerY(node) {
-    return node.y + node.dy / 2;
-};
-var getValue = function getValue(entry) {
-    return entry && entry.value || 0;
-};
-var getSumOfIds = function getSumOfIds(links, ids) {
-    return ids.reduce(function(result, id) {
-        return result + getValue(links[id]);
-    }, 0);
-};
-var getSumWithWeightedSource = function getSumWithWeightedSource(tree, links, ids) {
-    return ids.reduce(function(result, id) {
-        var link = links[id];
-        var sourceNode = tree[link.source];
-        return result + centerY(sourceNode) * getValue(links[id]);
-    }, 0);
-};
-var getSumWithWeightedTarget = function getSumWithWeightedTarget(tree, links, ids) {
-    return ids.reduce(function(result, id) {
-        var link = links[id];
-        var targetNode = tree[link.target];
-        return result + centerY(targetNode) * getValue(links[id]);
-    }, 0);
-};
-var ascendingY = function ascendingY(a, b) {
-    return a.y - b.y;
-};
-var searchTargetsAndSources = function searchTargetsAndSources(links, id) {
-    var sourceNodes = [];
-    var sourceLinks = [];
-    var targetNodes = [];
-    var targetLinks = [];
-    for(var i = 0, len = links.length; i < len; i++){
-        var link = links[i];
-        if (link.source === id) {
-            targetNodes.push(link.target);
-            targetLinks.push(i);
-        }
-        if (link.target === id) {
-            sourceNodes.push(link.source);
-            sourceLinks.push(i);
-        }
-    }
-    return {
-        sourceNodes: sourceNodes,
-        sourceLinks: sourceLinks,
-        targetLinks: targetLinks,
-        targetNodes: targetNodes
-    };
-};
-var updateDepthOfTargets = function updateDepthOfTargets(tree, curNode) {
-    var targetNodes = curNode.targetNodes;
-    for(var i = 0, len = targetNodes.length; i < len; i++){
-        var target = tree[targetNodes[i]];
-        if (target) {
-            target.depth = Math.max(curNode.depth + 1, target.depth);
-            updateDepthOfTargets(tree, target);
-        }
-    }
-};
-var getNodesTree = function getNodesTree(_ref, width, nodeWidth) {
-    var nodes = _ref.nodes, links = _ref.links;
-    var tree = nodes.map(function(entry, index) {
-        var result = searchTargetsAndSources(links, index);
-        return _objectSpread(_objectSpread(_objectSpread({}, entry), result), {}, {
-            value: Math.max(getSumOfIds(links, result.sourceLinks), getSumOfIds(links, result.targetLinks)),
-            depth: 0
-        });
-    });
-    for(var i = 0, len = tree.length; i < len; i++){
-        var node = tree[i];
-        if (!node.sourceNodes.length) updateDepthOfTargets(tree, node);
-    }
-    var maxDepth = (0, _maxByDefault.default)(tree, function(entry) {
-        return entry.depth;
-    }).depth;
-    if (maxDepth >= 1) {
-        var childWidth = (width - nodeWidth) / maxDepth;
-        for(var _i = 0, _len = tree.length; _i < _len; _i++){
-            var _node = tree[_i];
-            if (!_node.targetNodes.length) _node.depth = maxDepth;
-            _node.x = _node.depth * childWidth;
-            _node.dx = nodeWidth;
-        }
-    }
-    return {
-        tree: tree,
-        maxDepth: maxDepth
-    };
-};
-var getDepthTree = function getDepthTree(tree) {
-    var result = [];
-    for(var i = 0, len = tree.length; i < len; i++){
-        var node = tree[i];
-        if (!result[node.depth]) result[node.depth] = [];
-        result[node.depth].push(node);
-    }
-    return result;
-};
-var updateYOfTree = function updateYOfTree(depthTree, height, nodePadding, links) {
-    var yRatio = (0, _minDefault.default)(depthTree.map(function(nodes) {
-        return (height - (nodes.length - 1) * nodePadding) / (0, _sumByDefault.default)(nodes, getValue);
-    }));
-    for(var d = 0, maxDepth = depthTree.length; d < maxDepth; d++)for(var i = 0, len = depthTree[d].length; i < len; i++){
-        var node = depthTree[d][i];
-        node.y = i;
-        node.dy = node.value * yRatio;
-    }
-    return links.map(function(link) {
-        return _objectSpread(_objectSpread({}, link), {}, {
-            dy: getValue(link) * yRatio
-        });
-    });
-};
-var resolveCollisions = function resolveCollisions(depthTree, height, nodePadding) {
-    var sort = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    for(var i = 0, len = depthTree.length; i < len; i++){
-        var nodes = depthTree[i];
-        var n = nodes.length;
-        // Sort by the value of y
-        if (sort) nodes.sort(ascendingY);
-        var y0 = 0;
-        for(var j = 0; j < n; j++){
-            var node = nodes[j];
-            var dy = y0 - node.y;
-            if (dy > 0) node.y += dy;
-            y0 = node.y + node.dy + nodePadding;
-        }
-        y0 = height + nodePadding;
-        for(var _j = n - 1; _j >= 0; _j--){
-            var _node2 = nodes[_j];
-            var _dy = _node2.y + _node2.dy + nodePadding - y0;
-            if (_dy > 0) {
-                _node2.y -= _dy;
-                y0 = _node2.y;
-            } else break;
-        }
-    }
-};
-var relaxLeftToRight = function relaxLeftToRight(tree, depthTree, links, alpha) {
-    for(var i = 0, maxDepth = depthTree.length; i < maxDepth; i++){
-        var nodes = depthTree[i];
-        for(var j = 0, len = nodes.length; j < len; j++){
-            var node = nodes[j];
-            if (node.sourceLinks.length) {
-                var sourceSum = getSumOfIds(links, node.sourceLinks);
-                var weightedSum = getSumWithWeightedSource(tree, links, node.sourceLinks);
-                var y = weightedSum / sourceSum;
-                node.y += (y - centerY(node)) * alpha;
-            }
-        }
-    }
-};
-var relaxRightToLeft = function relaxRightToLeft(tree, depthTree, links, alpha) {
-    for(var i = depthTree.length - 1; i >= 0; i--){
-        var nodes = depthTree[i];
-        for(var j = 0, len = nodes.length; j < len; j++){
-            var node = nodes[j];
-            if (node.targetLinks.length) {
-                var targetSum = getSumOfIds(links, node.targetLinks);
-                var weightedSum = getSumWithWeightedTarget(tree, links, node.targetLinks);
-                var y = weightedSum / targetSum;
-                node.y += (y - centerY(node)) * alpha;
-            }
-        }
-    }
-};
-var updateYOfLinks = function updateYOfLinks(tree, links) {
-    for(var i = 0, len = tree.length; i < len; i++){
-        var node = tree[i];
-        var sy = 0;
-        var ty = 0;
-        node.targetLinks.sort(function(a, b) {
-            return tree[links[a].target].y - tree[links[b].target].y;
-        });
-        node.sourceLinks.sort(function(a, b) {
-            return tree[links[a].source].y - tree[links[b].source].y;
-        });
-        for(var j = 0, tLen = node.targetLinks.length; j < tLen; j++){
-            var link = links[node.targetLinks[j]];
-            if (link) {
-                link.sy = sy;
-                sy += link.dy;
-            }
-        }
-        for(var _j2 = 0, sLen = node.sourceLinks.length; _j2 < sLen; _j2++){
-            var _link = links[node.sourceLinks[_j2]];
-            if (_link) {
-                _link.ty = ty;
-                ty += _link.dy;
-            }
-        }
-    }
-};
-var computeData = function computeData(_ref2) {
-    var data = _ref2.data, width = _ref2.width, height = _ref2.height, iterations = _ref2.iterations, nodeWidth = _ref2.nodeWidth, nodePadding = _ref2.nodePadding, sort = _ref2.sort;
-    var links = data.links;
-    var _getNodesTree = getNodesTree(data, width, nodeWidth), tree = _getNodesTree.tree;
-    var depthTree = getDepthTree(tree);
-    var newLinks = updateYOfTree(depthTree, height, nodePadding, links);
-    resolveCollisions(depthTree, height, nodePadding, sort);
-    var alpha = 1;
-    for(var i = 1; i <= iterations; i++){
-        relaxRightToLeft(tree, depthTree, newLinks, alpha *= 0.99);
-        resolveCollisions(depthTree, height, nodePadding, sort);
-        relaxLeftToRight(tree, depthTree, newLinks, alpha);
-        resolveCollisions(depthTree, height, nodePadding, sort);
-    }
-    updateYOfLinks(tree, newLinks);
-    return {
-        nodes: tree,
-        links: newLinks
-    };
-};
-var getCoordinateOfTooltip = function getCoordinateOfTooltip(el, type) {
-    if (type === 'node') return {
-        x: el.x + el.width / 2,
-        y: el.y + el.height / 2
-    };
-    return {
-        x: (el.sourceX + el.targetX) / 2,
-        y: (el.sourceY + el.targetY) / 2
-    };
-};
-var getPayloadOfTooltip = function getPayloadOfTooltip(el, type, nameKey) {
-    var payload = el.payload;
-    if (type === 'node') return [
-        {
-            payload: el,
-            name: (0, _chartUtils.getValueByDataKey)(payload, nameKey, ''),
-            value: (0, _chartUtils.getValueByDataKey)(payload, 'value')
-        }
-    ];
-    if (payload.source && payload.target) {
-        var sourceName = (0, _chartUtils.getValueByDataKey)(payload.source, nameKey, '');
-        var targetName = (0, _chartUtils.getValueByDataKey)(payload.target, nameKey, '');
-        return [
-            {
-                payload: el,
-                name: "".concat(sourceName, " - ").concat(targetName),
-                value: (0, _chartUtils.getValueByDataKey)(payload, 'value')
-            }
-        ];
-    }
-    return [];
-};
-var Sankey = /*#__PURE__*/ function(_PureComponent) {
-    function Sankey() {
-        var _this;
-        _classCallCheck(this, Sankey);
-        for(var _len2 = arguments.length, args = new Array(_len2), _key = 0; _key < _len2; _key++)args[_key] = arguments[_key];
-        _this = _callSuper(this, Sankey, [].concat(args));
-        _defineProperty(_this, "state", {
-            activeElement: null,
-            activeElementType: null,
-            isTooltipActive: false,
-            nodes: [],
-            links: []
-        });
-        return _this;
-    }
-    _inherits(Sankey, _PureComponent);
-    return _createClass(Sankey, [
-        {
-            key: "handleMouseEnter",
-            value: function handleMouseEnter(el, type, e) {
-                var _this$props = this.props, onMouseEnter = _this$props.onMouseEnter, children = _this$props.children;
-                var tooltipItem = (0, _reactUtils.findChildByType)(children, (0, _tooltip.Tooltip));
-                if (tooltipItem) this.setState(function(prev) {
-                    if (tooltipItem.props.trigger === 'hover') return _objectSpread(_objectSpread({}, prev), {}, {
-                        activeElement: el,
-                        activeElementType: type,
-                        isTooltipActive: true
-                    });
-                    return prev;
-                }, function() {
-                    if (onMouseEnter) onMouseEnter(el, type, e);
-                });
-                else if (onMouseEnter) onMouseEnter(el, type, e);
-            }
-        },
-        {
-            key: "handleMouseLeave",
-            value: function handleMouseLeave(el, type, e) {
-                var _this$props2 = this.props, onMouseLeave = _this$props2.onMouseLeave, children = _this$props2.children;
-                var tooltipItem = (0, _reactUtils.findChildByType)(children, (0, _tooltip.Tooltip));
-                if (tooltipItem) this.setState(function(prev) {
-                    if (tooltipItem.props.trigger === 'hover') return _objectSpread(_objectSpread({}, prev), {}, {
-                        activeElement: undefined,
-                        activeElementType: undefined,
-                        isTooltipActive: false
-                    });
-                    return prev;
-                }, function() {
-                    if (onMouseLeave) onMouseLeave(el, type, e);
-                });
-                else if (onMouseLeave) onMouseLeave(el, type, e);
-            }
-        },
-        {
-            key: "handleClick",
-            value: function handleClick(el, type, e) {
-                var _this$props3 = this.props, onClick = _this$props3.onClick, children = _this$props3.children;
-                var tooltipItem = (0, _reactUtils.findChildByType)(children, (0, _tooltip.Tooltip));
-                if (tooltipItem && tooltipItem.props.trigger === 'click') {
-                    if (this.state.isTooltipActive) this.setState(function(prev) {
-                        return _objectSpread(_objectSpread({}, prev), {}, {
-                            activeElement: undefined,
-                            activeElementType: undefined,
-                            isTooltipActive: false
-                        });
-                    });
-                    else this.setState(function(prev) {
-                        return _objectSpread(_objectSpread({}, prev), {}, {
-                            activeElement: el,
-                            activeElementType: type,
-                            isTooltipActive: true
-                        });
-                    });
-                }
-                if (onClick) onClick(el, type, e);
-            }
-        },
-        {
-            key: "renderLinks",
-            value: function renderLinks(links, nodes) {
-                var _this2 = this;
-                var _this$props4 = this.props, linkCurvature = _this$props4.linkCurvature, linkContent = _this$props4.link, margin = _this$props4.margin;
-                var top = (0, _getDefault.default)(margin, 'top') || 0;
-                var left = (0, _getDefault.default)(margin, 'left') || 0;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-sankey-links",
-                    key: "recharts-sankey-links"
-                }, links.map(function(link, i) {
-                    var sourceRelativeY = link.sy, targetRelativeY = link.ty, linkWidth = link.dy;
-                    var source = nodes[link.source];
-                    var target = nodes[link.target];
-                    var sourceX = source.x + source.dx + left;
-                    var targetX = target.x + left;
-                    var interpolationFunc = interpolationGenerator(sourceX, targetX);
-                    var sourceControlX = interpolationFunc(linkCurvature);
-                    var targetControlX = interpolationFunc(1 - linkCurvature);
-                    var sourceY = source.y + sourceRelativeY + linkWidth / 2 + top;
-                    var targetY = target.y + targetRelativeY + linkWidth / 2 + top;
-                    var linkProps = _objectSpread({
-                        sourceX: sourceX,
-                        targetX: targetX,
-                        sourceY: sourceY,
-                        targetY: targetY,
-                        sourceControlX: sourceControlX,
-                        targetControlX: targetControlX,
-                        sourceRelativeY: sourceRelativeY,
-                        targetRelativeY: targetRelativeY,
-                        linkWidth: linkWidth,
-                        index: i,
-                        payload: _objectSpread(_objectSpread({}, link), {}, {
-                            source: source,
-                            target: target
-                        })
-                    }, (0, _reactUtils.filterProps)(linkContent, false));
-                    var events = {
-                        onMouseEnter: _this2.handleMouseEnter.bind(_this2, linkProps, 'link'),
-                        onMouseLeave: _this2.handleMouseLeave.bind(_this2, linkProps, 'link'),
-                        onClick: _this2.handleClick.bind(_this2, linkProps, 'link')
-                    };
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), _extends({
-                        key: "link-".concat(link.source, "-").concat(link.target, "-").concat(link.value)
-                    }, events), _this2.constructor.renderLinkItem(linkContent, linkProps));
-                }));
-            }
-        },
-        {
-            key: "renderNodes",
-            value: function renderNodes(nodes) {
-                var _this3 = this;
-                var _this$props5 = this.props, nodeContent = _this$props5.node, margin = _this$props5.margin;
-                var top = (0, _getDefault.default)(margin, 'top') || 0;
-                var left = (0, _getDefault.default)(margin, 'left') || 0;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: "recharts-sankey-nodes",
-                    key: "recharts-sankey-nodes"
-                }, nodes.map(function(node, i) {
-                    var x = node.x, y = node.y, dx = node.dx, dy = node.dy;
-                    var nodeProps = _objectSpread(_objectSpread({}, (0, _reactUtils.filterProps)(nodeContent, false)), {}, {
-                        x: x + left,
-                        y: y + top,
-                        width: dx,
-                        height: dy,
-                        index: i,
-                        payload: node
-                    });
-                    var events = {
-                        onMouseEnter: _this3.handleMouseEnter.bind(_this3, nodeProps, 'node'),
-                        onMouseLeave: _this3.handleMouseLeave.bind(_this3, nodeProps, 'node'),
-                        onClick: _this3.handleClick.bind(_this3, nodeProps, 'node')
-                    };
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), _extends({
-                        key: "node-".concat(node.x, "-").concat(node.y, "-").concat(node.value)
-                    }, events), _this3.constructor.renderNodeItem(nodeContent, nodeProps));
-                }));
-            }
-        },
-        {
-            key: "renderTooltip",
-            value: function renderTooltip() {
-                var _this$props6 = this.props, children = _this$props6.children, width = _this$props6.width, height = _this$props6.height, nameKey = _this$props6.nameKey;
-                var tooltipItem = (0, _reactUtils.findChildByType)(children, (0, _tooltip.Tooltip));
-                if (!tooltipItem) return null;
-                var _this$state = this.state, isTooltipActive = _this$state.isTooltipActive, activeElement = _this$state.activeElement, activeElementType = _this$state.activeElementType;
-                var viewBox = {
-                    x: 0,
-                    y: 0,
-                    width: width,
-                    height: height
-                };
-                var coordinate = activeElement ? getCoordinateOfTooltip(activeElement, activeElementType) : defaultCoordinateOfTooltip;
-                var payload = activeElement ? getPayloadOfTooltip(activeElement, activeElementType, nameKey) : [];
-                return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(tooltipItem, {
-                    viewBox: viewBox,
-                    active: isTooltipActive,
-                    coordinate: coordinate,
-                    label: '',
-                    payload: payload
-                });
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                if (!(0, _reactUtils.validateWidthHeight)(this)) return null;
-                var _this$props7 = this.props, width = _this$props7.width, height = _this$props7.height, className = _this$props7.className, style = _this$props7.style, children = _this$props7.children, others = _objectWithoutProperties(_this$props7, _excluded);
-                var _this$state2 = this.state, links = _this$state2.links, nodes = _this$state2.nodes;
-                var attrs = (0, _reactUtils.filterProps)(others, false);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
-                    className: (0, _clsxDefault.default)('recharts-wrapper', className),
-                    style: _objectSpread(_objectSpread({}, style), {}, {
-                        position: 'relative',
-                        cursor: 'default',
-                        width: width,
-                        height: height
-                    }),
-                    role: "region"
-                }, /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _surface.Surface), _extends({}, attrs, {
-                    width: width,
-                    height: height
-                }), (0, _reactUtils.filterSvgElements)(children), this.renderLinks(links, nodes), this.renderNodes(nodes)), this.renderTooltip());
-            }
-        }
-    ], [
-        {
-            key: "getDerivedStateFromProps",
-            value: function getDerivedStateFromProps(nextProps, prevState) {
-                var data = nextProps.data, width = nextProps.width, height = nextProps.height, margin = nextProps.margin, iterations = nextProps.iterations, nodeWidth = nextProps.nodeWidth, nodePadding = nextProps.nodePadding, sort = nextProps.sort;
-                if (data !== prevState.prevData || width !== prevState.prevWidth || height !== prevState.prevHeight || !(0, _shallowEqual.shallowEqual)(margin, prevState.prevMargin) || iterations !== prevState.prevIterations || nodeWidth !== prevState.prevNodeWidth || nodePadding !== prevState.prevNodePadding || sort !== prevState.sort) {
-                    var contentWidth = width - (margin && margin.left || 0) - (margin && margin.right || 0);
-                    var contentHeight = height - (margin && margin.top || 0) - (margin && margin.bottom || 0);
-                    var _computeData = computeData({
-                        data: data,
-                        width: contentWidth,
-                        height: contentHeight,
-                        iterations: iterations,
-                        nodeWidth: nodeWidth,
-                        nodePadding: nodePadding,
-                        sort: sort
-                    }), links = _computeData.links, nodes = _computeData.nodes;
-                    return _objectSpread(_objectSpread({}, prevState), {}, {
-                        nodes: nodes,
-                        links: links,
-                        prevData: data,
-                        prevWidth: iterations,
-                        prevHeight: height,
-                        prevMargin: margin,
-                        prevNodePadding: nodePadding,
-                        prevNodeWidth: nodeWidth,
-                        prevIterations: iterations,
-                        prevSort: sort
-                    });
-                }
-                return null;
-            }
-        },
-        {
-            key: "renderLinkItem",
-            value: function renderLinkItem(option, props) {
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-                if ((0, _isFunctionDefault.default)(option)) return option(props);
-                var sourceX = props.sourceX, sourceY = props.sourceY, sourceControlX = props.sourceControlX, targetX = props.targetX, targetY = props.targetY, targetControlX = props.targetControlX, linkWidth = props.linkWidth, others = _objectWithoutProperties(props, _excluded2);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement("path", _extends({
-                    className: "recharts-sankey-link",
-                    d: "\n          M".concat(sourceX, ",").concat(sourceY, "\n          C").concat(sourceControlX, ",").concat(sourceY, " ").concat(targetControlX, ",").concat(targetY, " ").concat(targetX, ",").concat(targetY, "\n        "),
-                    fill: "none",
-                    stroke: "#333",
-                    strokeWidth: linkWidth,
-                    strokeOpacity: "0.2"
-                }, (0, _reactUtils.filterProps)(others, false)));
-            }
-        },
-        {
-            key: "renderNodeItem",
-            value: function renderNodeItem(option, props) {
-                if (/*#__PURE__*/ (0, _reactDefault.default).isValidElement(option)) return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(option, props);
-                if ((0, _isFunctionDefault.default)(option)) return option(props);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _rectangle.Rectangle), _extends({
-                    className: "recharts-sankey-node",
-                    fill: "#0088fe",
-                    fillOpacity: "0.8"
-                }, (0, _reactUtils.filterProps)(props, false), {
-                    role: "img"
-                }));
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_defineProperty(Sankey, "displayName", 'Sankey');
-_defineProperty(Sankey, "defaultProps", {
-    nameKey: 'name',
-    dataKey: 'value',
-    nodePadding: 10,
-    nodeWidth: 10,
-    linkCurvature: 0.5,
-    iterations: 32,
-    margin: {
-        top: 5,
-        right: 5,
-        bottom: 5,
-        left: 5
-    },
-    sort: true
-});
-
-},{"react":"21dqq","lodash/maxBy":"8s43L","lodash/min":"24yyd","lodash/get":"8UELX","lodash/sumBy":"8xNP9","lodash/isFunction":"cfti6","clsx":"gocd3","../container/Surface":"ldrIX","../container/Layer":"hLZRL","../component/Tooltip":"gEbNO","../shape/Rectangle":"21ix4","../util/ShallowEqual":"6PNVp","../util/ReactUtils":"gDert","../util/ChartUtils":"2s4mV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8xNP9":[function(require,module,exports,__globalThis) {
-var baseIteratee = require("b6e801120c057469"), baseSum = require("97af3dd2a2d187d");
-/**
- * This method is like `_.sum` except that it accepts `iteratee` which is
- * invoked for each element in `array` to generate the value to be summed.
- * The iteratee is invoked with one argument: (value).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Math
- * @param {Array} array The array to iterate over.
- * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
- * @returns {number} Returns the sum.
- * @example
- *
- * var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
- *
- * _.sumBy(objects, function(o) { return o.n; });
- * // => 20
- *
- * // The `_.property` iteratee shorthand.
- * _.sumBy(objects, 'n');
- * // => 20
- */ function sumBy(array, iteratee) {
-    return array && array.length ? baseSum(array, baseIteratee(iteratee, 2)) : 0;
-}
-module.exports = sumBy;
-
-},{"b6e801120c057469":"2fsgg","97af3dd2a2d187d":"hD6tV"}],"hD6tV":[function(require,module,exports,__globalThis) {
-/**
- * The base implementation of `_.sum` and `_.sumBy` without support for
- * iteratee shorthands.
- *
- * @private
- * @param {Array} array The array to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {number} Returns the sum.
- */ function baseSum(array, iteratee) {
-    var result, index = -1, length = array.length;
-    while(++index < length){
-        var current = iteratee(array[index]);
-        if (current !== undefined) result = result === undefined ? current : result + current;
-    }
-    return result;
-}
-module.exports = baseSum;
-
-},{}],"dc9g6":[function(require,module,exports,__globalThis) {
-/**
- * @fileOverview Radar Chart
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "RadarChart", ()=>RadarChart);
-var _generateCategoricalChart = require("./generateCategoricalChart");
-var _radar = require("../polar/Radar");
-var _polarAngleAxis = require("../polar/PolarAngleAxis");
-var _polarRadiusAxis = require("../polar/PolarRadiusAxis");
-var _polarUtils = require("../util/PolarUtils");
-var RadarChart = (0, _generateCategoricalChart.generateCategoricalChart)({
-    chartName: 'RadarChart',
-    GraphicalChild: (0, _radar.Radar),
-    axisComponents: [
-        {
-            axisType: 'angleAxis',
-            AxisComp: (0, _polarAngleAxis.PolarAngleAxis)
-        },
-        {
-            axisType: 'radiusAxis',
-            AxisComp: (0, _polarRadiusAxis.PolarRadiusAxis)
-        }
-    ],
-    formatAxisMap: (0, _polarUtils.formatAxisMap),
-    defaultProps: {
-        layout: 'centric',
-        startAngle: 90,
-        endAngle: -270,
-        cx: '50%',
-        cy: '50%',
-        innerRadius: 0,
-        outerRadius: '80%'
-    }
-});
-
-},{"./generateCategoricalChart":"4ZsfY","../polar/Radar":"7NYcf","../polar/PolarAngleAxis":"7ZFSt","../polar/PolarRadiusAxis":"94jRq","../util/PolarUtils":"xMDoY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fIiiE":[function(require,module,exports,__globalThis) {
-/**
- * @fileOverview Scatter Chart
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ScatterChart", ()=>ScatterChart);
-var _generateCategoricalChart = require("./generateCategoricalChart");
-var _scatter = require("../cartesian/Scatter");
-var _xaxis = require("../cartesian/XAxis");
-var _yaxis = require("../cartesian/YAxis");
-var _zaxis = require("../cartesian/ZAxis");
-var _cartesianUtils = require("../util/CartesianUtils");
-var ScatterChart = (0, _generateCategoricalChart.generateCategoricalChart)({
-    chartName: 'ScatterChart',
-    GraphicalChild: (0, _scatter.Scatter),
-    defaultTooltipEventType: 'item',
-    validateTooltipEventTypes: [
-        'item'
-    ],
-    axisComponents: [
-        {
-            axisType: 'xAxis',
-            AxisComp: (0, _xaxis.XAxis)
-        },
-        {
-            axisType: 'yAxis',
-            AxisComp: (0, _yaxis.YAxis)
-        },
-        {
-            axisType: 'zAxis',
-            AxisComp: (0, _zaxis.ZAxis)
-        }
-    ],
-    formatAxisMap: (0, _cartesianUtils.formatAxisMap)
-});
-
-},{"./generateCategoricalChart":"4ZsfY","../cartesian/Scatter":"djBli","../cartesian/XAxis":"doQvk","../cartesian/YAxis":"h3RMd","../cartesian/ZAxis":"7RCJH","../util/CartesianUtils":"j0cay","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f9mWK":[function(require,module,exports,__globalThis) {
-/**
- * @fileOverview Area Chart
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "AreaChart", ()=>AreaChart);
-var _generateCategoricalChart = require("./generateCategoricalChart");
-var _area = require("../cartesian/Area");
-var _xaxis = require("../cartesian/XAxis");
-var _yaxis = require("../cartesian/YAxis");
-var _cartesianUtils = require("../util/CartesianUtils");
-var AreaChart = (0, _generateCategoricalChart.generateCategoricalChart)({
-    chartName: 'AreaChart',
-    GraphicalChild: (0, _area.Area),
-    axisComponents: [
-        {
-            axisType: 'xAxis',
-            AxisComp: (0, _xaxis.XAxis)
-        },
-        {
-            axisType: 'yAxis',
-            AxisComp: (0, _yaxis.YAxis)
-        }
-    ],
-    formatAxisMap: (0, _cartesianUtils.formatAxisMap)
-});
-
-},{"./generateCategoricalChart":"4ZsfY","../cartesian/Area":"dfpTQ","../cartesian/XAxis":"doQvk","../cartesian/YAxis":"h3RMd","../util/CartesianUtils":"j0cay","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kMX1W":[function(require,module,exports,__globalThis) {
-/**
- * @fileOverview Radar Bar Chart
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "RadialBarChart", ()=>RadialBarChart);
-var _generateCategoricalChart = require("./generateCategoricalChart");
-var _polarAngleAxis = require("../polar/PolarAngleAxis");
-var _polarRadiusAxis = require("../polar/PolarRadiusAxis");
-var _polarUtils = require("../util/PolarUtils");
-var _radialBar = require("../polar/RadialBar");
-var RadialBarChart = (0, _generateCategoricalChart.generateCategoricalChart)({
-    chartName: 'RadialBarChart',
-    GraphicalChild: (0, _radialBar.RadialBar),
-    legendContent: 'children',
-    defaultTooltipEventType: 'axis',
-    validateTooltipEventTypes: [
-        'axis',
-        'item'
-    ],
-    axisComponents: [
-        {
-            axisType: 'angleAxis',
-            AxisComp: (0, _polarAngleAxis.PolarAngleAxis)
-        },
-        {
-            axisType: 'radiusAxis',
-            AxisComp: (0, _polarRadiusAxis.PolarRadiusAxis)
-        }
-    ],
-    formatAxisMap: (0, _polarUtils.formatAxisMap),
-    defaultProps: {
-        layout: 'radial',
-        startAngle: 0,
-        endAngle: 360,
-        cx: '50%',
-        cy: '50%',
-        innerRadius: 0,
-        outerRadius: '80%'
-    }
-});
-
-},{"./generateCategoricalChart":"4ZsfY","../polar/PolarAngleAxis":"7ZFSt","../polar/PolarRadiusAxis":"94jRq","../util/PolarUtils":"xMDoY","../polar/RadialBar":"aMKPI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8F9rr":[function(require,module,exports,__globalThis) {
-/**
- * @fileOverview Composed Chart
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ComposedChart", ()=>ComposedChart);
-var _generateCategoricalChart = require("./generateCategoricalChart");
-var _area = require("../cartesian/Area");
-var _bar = require("../cartesian/Bar");
-var _line = require("../cartesian/Line");
-var _scatter = require("../cartesian/Scatter");
-var _xaxis = require("../cartesian/XAxis");
-var _yaxis = require("../cartesian/YAxis");
-var _zaxis = require("../cartesian/ZAxis");
-var _cartesianUtils = require("../util/CartesianUtils");
-var ComposedChart = (0, _generateCategoricalChart.generateCategoricalChart)({
-    chartName: 'ComposedChart',
-    GraphicalChild: [
-        (0, _line.Line),
-        (0, _area.Area),
-        (0, _bar.Bar),
-        (0, _scatter.Scatter)
-    ],
-    axisComponents: [
-        {
-            axisType: 'xAxis',
-            AxisComp: (0, _xaxis.XAxis)
-        },
-        {
-            axisType: 'yAxis',
-            AxisComp: (0, _yaxis.YAxis)
-        },
-        {
-            axisType: 'zAxis',
-            AxisComp: (0, _zaxis.ZAxis)
-        }
-    ],
-    formatAxisMap: (0, _cartesianUtils.formatAxisMap)
-});
-
-},{"./generateCategoricalChart":"4ZsfY","../cartesian/Area":"dfpTQ","../cartesian/Bar":"62moi","../cartesian/Line":"bjP4o","../cartesian/Scatter":"djBli","../cartesian/XAxis":"doQvk","../cartesian/YAxis":"h3RMd","../cartesian/ZAxis":"7RCJH","../util/CartesianUtils":"j0cay","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3wB6k":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "SunburstChart", ()=>SunburstChart);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _d3Scale = require("victory-vendor/d3-scale");
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _reactUtils = require("../util/ReactUtils");
-var _surface = require("../container/Surface");
-var _layer = require("../container/Layer");
-var _sector = require("../shape/Sector");
-var _text = require("../component/Text");
-var _polarUtils = require("../util/PolarUtils");
-var _tooltip = require("../component/Tooltip");
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _iterableToArrayLimit(r, l) {
-    var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-    if (null != t) {
-        var e, n, i, u, a = [], f = !0, o = !1;
-        try {
-            if (i = (t = t.call(r)).next, 0 === l) {
-                if (Object(t) !== t) return;
-                f = !1;
-            } else for(; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-        } catch (r) {
-            o = !0, n = r;
-        } finally{
-            try {
-                if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
-            } finally{
-                if (o) throw n;
-            }
-        }
-        return a;
-    }
-}
-function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-}
-function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-var defaultTextProps = {
-    fontWeight: 'bold',
-    paintOrder: 'stroke fill',
-    fontSize: '.75rem',
-    stroke: '#FFF',
-    fill: 'black',
-    pointerEvents: 'none'
-};
-function getMaxDepthOf(node) {
-    if (!node.children || node.children.length === 0) return 1;
-    // Calculate depth for each child and find the maximum
-    var childDepths = node.children.map(function(d) {
-        return getMaxDepthOf(d);
-    });
-    return 1 + Math.max.apply(Math, _toConsumableArray(childDepths));
-}
-var SunburstChart = function SunburstChart(_ref) {
-    var className = _ref.className, data = _ref.data, children = _ref.children, width = _ref.width, height = _ref.height, _ref$padding = _ref.padding, padding = _ref$padding === void 0 ? 2 : _ref$padding, _ref$dataKey = _ref.dataKey, dataKey = _ref$dataKey === void 0 ? 'value' : _ref$dataKey, _ref$ringPadding = _ref.ringPadding, ringPadding = _ref$ringPadding === void 0 ? 2 : _ref$ringPadding, _ref$innerRadius = _ref.innerRadius, innerRadius = _ref$innerRadius === void 0 ? 50 : _ref$innerRadius, _ref$fill = _ref.fill, fill = _ref$fill === void 0 ? '#333' : _ref$fill, _ref$stroke = _ref.stroke, stroke = _ref$stroke === void 0 ? '#FFF' : _ref$stroke, _ref$textOptions = _ref.textOptions, textOptions = _ref$textOptions === void 0 ? defaultTextProps : _ref$textOptions, _ref$outerRadius = _ref.outerRadius, outerRadius = _ref$outerRadius === void 0 ? Math.min(width, height) / 2 : _ref$outerRadius, _ref$cx = _ref.cx, cx = _ref$cx === void 0 ? width / 2 : _ref$cx, _ref$cy = _ref.cy, cy = _ref$cy === void 0 ? height / 2 : _ref$cy, _ref$startAngle = _ref.startAngle, startAngle = _ref$startAngle === void 0 ? 0 : _ref$startAngle, _ref$endAngle = _ref.endAngle, endAngle = _ref$endAngle === void 0 ? 360 : _ref$endAngle, onClick = _ref.onClick, onMouseEnter = _ref.onMouseEnter, onMouseLeave = _ref.onMouseLeave;
-    var _useState = (0, _react.useState)(false), _useState2 = _slicedToArray(_useState, 2), isTooltipActive = _useState2[0], setIsTooltipActive = _useState2[1];
-    var _useState3 = (0, _react.useState)(null), _useState4 = _slicedToArray(_useState3, 2), activeNode = _useState4[0], setActiveNode = _useState4[1];
-    var rScale = (0, _d3Scale.scaleLinear)([
-        0,
-        data[dataKey]
-    ], [
-        0,
-        endAngle
-    ]);
-    var treeDepth = getMaxDepthOf(data);
-    var thickness = (outerRadius - innerRadius) / treeDepth;
-    var sectors = [];
-    var positions = new Map([]);
-    // event handlers
-    function handleMouseEnter(node, e) {
-        if (onMouseEnter) onMouseEnter(node, e);
-        setActiveNode(node);
-        setIsTooltipActive(true);
-    }
-    function handleMouseLeave(node, e) {
-        if (onMouseLeave) onMouseLeave(node, e);
-        setActiveNode(null);
-        setIsTooltipActive(false);
-    }
-    function handleClick(node) {
-        if (onClick) onClick(node);
-    }
-    // recursively add nodes for each data point and its children
-    function drawArcs(childNodes, options) {
-        var radius = options.radius, innerR = options.innerR, initialAngle = options.initialAngle, childColor = options.childColor;
-        var currentAngle = initialAngle;
-        if (!childNodes) return; // base case: no children of this node
-        childNodes.forEach(function(d) {
-            var _ref2, _d$fill;
-            var arcLength = rScale(d[dataKey]);
-            var start = currentAngle;
-            // color priority - if there's a color on the individual point use that, otherwise use parent color or default
-            var fillColor = (_ref2 = (_d$fill = d === null || d === void 0 ? void 0 : d.fill) !== null && _d$fill !== void 0 ? _d$fill : childColor) !== null && _ref2 !== void 0 ? _ref2 : fill;
-            var _polarToCartesian = (0, _polarUtils.polarToCartesian)(0, 0, innerR + radius / 2, -(start + arcLength - arcLength / 2)), textX = _polarToCartesian.x, textY = _polarToCartesian.y;
-            currentAngle += arcLength;
-            sectors.push(/*#__PURE__*/ // TODO: Missing key warning. Can we use `key={d.name}`?
-            (0, _reactDefault.default).createElement("g", {
-                "aria-label": d.name,
-                tabIndex: 0
-            }, /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _sector.Sector), {
-                onClick: function onClick() {
-                    return handleClick(d);
-                },
-                onMouseEnter: function onMouseEnter(e) {
-                    return handleMouseEnter(d, e);
-                },
-                onMouseLeave: function onMouseLeave(e) {
-                    return handleMouseLeave(d, e);
-                },
-                fill: fillColor,
-                stroke: stroke,
-                strokeWidth: padding,
-                startAngle: start,
-                endAngle: start + arcLength,
-                innerRadius: innerR,
-                outerRadius: innerR + radius,
-                cx: cx,
-                cy: cy
-            }), /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _text.Text), _extends({}, textOptions, {
-                alignmentBaseline: "middle",
-                textAnchor: "middle",
-                x: textX + cx,
-                y: cy - textY
-            }), d[dataKey])));
-            var _polarToCartesian2 = (0, _polarUtils.polarToCartesian)(cx, cy, innerR + radius / 2, start), tooltipX = _polarToCartesian2.x, tooltipY = _polarToCartesian2.y;
-            positions.set(d.name, {
-                x: tooltipX,
-                y: tooltipY
-            });
-            return drawArcs(d.children, {
-                radius: radius,
-                innerR: innerR + radius + ringPadding,
-                initialAngle: start,
-                childColor: fillColor
-            });
-        });
-    }
-    drawArcs(data.children, {
-        radius: thickness,
-        innerR: innerRadius,
-        initialAngle: startAngle
-    });
-    var layerClass = (0, _clsxDefault.default)('recharts-sunburst', className);
-    function renderTooltip() {
-        var tooltipComponent = (0, _reactUtils.findChildByType)([
-            children
-        ], (0, _tooltip.Tooltip));
-        if (!tooltipComponent || !activeNode) return null;
-        var viewBox = {
-            x: 0,
-            y: 0,
-            width: width,
-            height: height
         };
-        return /*#__PURE__*/ (0, _reactDefault.default).cloneElement(tooltipComponent, {
-            viewBox: viewBox,
-            coordinate: positions.get(activeNode.name),
-            payload: [
-                activeNode
-            ],
-            active: isTooltipActive
-        });
     }
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", {
-        className: (0, _clsxDefault.default)('recharts-wrapper', className),
-        style: {
-            position: 'relative',
-            width: width,
-            height: height
-        },
-        role: "region"
-    }, /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _surface.Surface), {
-        width: width,
-        height: height
-    }, children, /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-        className: layerClass
-    }, sectors)), renderTooltip());
+}
+var enqueueUpdate = debounce(function() {
+    Refresh.performReactRefresh();
+}, 30);
+// Everything below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function(module1) {
+    window.__REACT_REFRESH_VERSION_TRANSFORMER = version;
+    window.$RefreshReg$ = function(type, id) {
+        if (window.__REACT_REFRESH_VERSION_TRANSFORMER && window.__REACT_REFRESH_VERSION_RUNTIME && window.__REACT_REFRESH_VERSION_TRANSFORMER !== window.__REACT_REFRESH_VERSION_RUNTIME) // Both versions were set and they did not match
+        throw new Error(`react-refresh versions did not match between transformer and runtime. Please check your dependencies. Transformer: ${window.__REACT_REFRESH_VERSION_TRANSFORMER}, Runtime: ${window.__REACT_REFRESH_VERSION_RUNTIME}`);
+        Refresh.register(type, module1.id + ' ' + id);
+    };
+    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
 };
-
-},{"react":"21dqq","victory-vendor/d3-scale":"5Sv0O","clsx":"gocd3","../util/ReactUtils":"gDert","../container/Surface":"ldrIX","../container/Layer":"hLZRL","../shape/Sector":"djk2D","../component/Text":"gXuIW","../util/PolarUtils":"xMDoY","../component/Tooltip":"gEbNO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2AzTS":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Funnel", ()=>Funnel);
-/**
- * @fileOverview Render sectors of a funnel
- */ var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactSmooth = require("react-smooth");
-var _reactSmoothDefault = parcelHelpers.interopDefault(_reactSmooth);
-var _isFunction = require("lodash/isFunction");
-var _isFunctionDefault = parcelHelpers.interopDefault(_isFunction);
-var _isNumber = require("lodash/isNumber");
-var _isNumberDefault = parcelHelpers.interopDefault(_isNumber);
-var _isString = require("lodash/isString");
-var _isStringDefault = parcelHelpers.interopDefault(_isString);
-var _omit = require("lodash/omit");
-var _omitDefault = parcelHelpers.interopDefault(_omit);
-var _isEqual = require("lodash/isEqual");
-var _isEqualDefault = parcelHelpers.interopDefault(_isEqual);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _layer = require("../container/Layer");
-var _labelList = require("../component/LabelList");
-var _cell = require("../component/Cell");
-var _reactUtils = require("../util/ReactUtils");
-var _global = require("../util/Global");
-var _dataUtils = require("../util/DataUtils");
-var _chartUtils = require("../util/ChartUtils");
-var _types = require("../util/types");
-var _funnelUtils = require("../util/FunnelUtils");
-var _Funnel;
-function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-function _iterableToArrayLimit(r, l) {
-    var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-    if (null != t) {
-        var e, n, i, u, a = [], f = !0, o = !1;
-        try {
-            if (i = (t = t.call(r)).next, 0 === l) {
-                if (Object(t) !== t) return;
-                f = !1;
-            } else for(; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-        } catch (r) {
-            o = !0, n = r;
-        } finally{
-            try {
-                if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
-            } finally{
-                if (o) throw n;
-            }
-        }
-        return a;
-    }
-}
-function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-}
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
-    }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
-    }
-    return e;
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-        writable: false
-    });
-    return Constructor;
-}
-function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    try {
-        var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-        return !!t;
-    })();
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    Object.defineProperty(subClass, "prototype", {
-        writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-}
-var Funnel = /*#__PURE__*/ function(_PureComponent) {
-    function Funnel() {
-        var _this;
-        _classCallCheck(this, Funnel);
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        _this = _callSuper(this, Funnel, [].concat(args));
-        _defineProperty(_this, "state", {
-            isAnimationFinished: false
-        });
-        _defineProperty(_this, "handleAnimationEnd", function() {
-            var onAnimationEnd = _this.props.onAnimationEnd;
-            _this.setState({
-                isAnimationFinished: true
+module.exports.postlude = function(module1) {
+    if (isReactRefreshBoundary(module1.exports)) {
+        registerExportsForReactRefresh(module1);
+        if (module1.hot) {
+            module1.hot.dispose(function(data) {
+                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
+                data.prevExports = module1.exports;
             });
-            if ((0, _isFunctionDefault.default)(onAnimationEnd)) onAnimationEnd();
-        });
-        _defineProperty(_this, "handleAnimationStart", function() {
-            var onAnimationStart = _this.props.onAnimationStart;
-            _this.setState({
-                isAnimationFinished: false
+            module1.hot.accept(function(getParents) {
+                var prevExports = module1.hot.data.prevExports;
+                var nextExports = module1.exports;
+                // Since we just executed the code for it, it's possible
+                // that the new exports make it ineligible for being a boundary.
+                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
+                // It can also become ineligible if its exports are incompatible
+                // with the previous exports.
+                // For example, if you add/remove/change exports, we'll want
+                // to re-execute the importing modules, and force those components
+                // to re-render. Similarly, if you convert a class component
+                // to a function, we want to invalidate the boundary.
+                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+                if (isNoLongerABoundary || didInvalidate) {
+                    // We'll be conservative. The only case in which we won't do a full
+                    // reload is if all parent modules are also refresh boundaries.
+                    // In that case we'll add them to the current queue.
+                    var parents = getParents();
+                    if (parents.length === 0) {
+                        // Looks like we bubbled to the root. Can't recover from that.
+                        window.location.reload();
+                        return;
+                    }
+                    return parents;
+                }
+                enqueueUpdate();
             });
-            if ((0, _isFunctionDefault.default)(onAnimationStart)) onAnimationStart();
-        });
-        return _this;
-    }
-    _inherits(Funnel, _PureComponent);
-    return _createClass(Funnel, [
-        {
-            key: "isActiveIndex",
-            value: function isActiveIndex(i) {
-                var activeIndex = this.props.activeIndex;
-                if (Array.isArray(activeIndex)) return activeIndex.indexOf(i) !== -1;
-                return i === activeIndex;
-            }
-        },
-        {
-            key: "renderTrapezoidsStatically",
-            value: function renderTrapezoidsStatically(trapezoids) {
-                var _this2 = this;
-                var _this$props = this.props, shape = _this$props.shape, activeShape = _this$props.activeShape;
-                return trapezoids.map(function(entry, i) {
-                    var trapezoidOptions = _this2.isActiveIndex(i) ? activeShape : shape;
-                    var trapezoidProps = _objectSpread(_objectSpread({}, entry), {}, {
-                        isActive: _this2.isActiveIndex(i),
-                        stroke: entry.stroke
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), _extends({
-                        className: "recharts-funnel-trapezoid"
-                    }, (0, _types.adaptEventsOfChild)(_this2.props, entry, i), {
-                        key: "trapezoid-".concat(entry === null || entry === void 0 ? void 0 : entry.x, "-").concat(entry === null || entry === void 0 ? void 0 : entry.y, "-").concat(entry === null || entry === void 0 ? void 0 : entry.name, "-").concat(entry === null || entry === void 0 ? void 0 : entry.value),
-                        role: "img"
-                    }), /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _funnelUtils.FunnelTrapezoid), _extends({
-                        option: trapezoidOptions
-                    }, trapezoidProps)));
-                });
-            }
-        },
-        {
-            key: "renderTrapezoidsWithAnimation",
-            value: function renderTrapezoidsWithAnimation() {
-                var _this3 = this;
-                var _this$props2 = this.props, trapezoids = _this$props2.trapezoids, isAnimationActive = _this$props2.isAnimationActive, animationBegin = _this$props2.animationBegin, animationDuration = _this$props2.animationDuration, animationEasing = _this$props2.animationEasing, animationId = _this$props2.animationId;
-                var prevTrapezoids = this.state.prevTrapezoids;
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _reactSmoothDefault.default), {
-                    begin: animationBegin,
-                    duration: animationDuration,
-                    isActive: isAnimationActive,
-                    easing: animationEasing,
-                    from: {
-                        t: 0
-                    },
-                    to: {
-                        t: 1
-                    },
-                    key: "funnel-".concat(animationId),
-                    onAnimationStart: this.handleAnimationStart,
-                    onAnimationEnd: this.handleAnimationEnd
-                }, function(_ref) {
-                    var t = _ref.t;
-                    var stepData = trapezoids.map(function(entry, index) {
-                        var prev = prevTrapezoids && prevTrapezoids[index];
-                        if (prev) {
-                            var _interpolatorX = (0, _dataUtils.interpolateNumber)(prev.x, entry.x);
-                            var _interpolatorY = (0, _dataUtils.interpolateNumber)(prev.y, entry.y);
-                            var _interpolatorUpperWidth = (0, _dataUtils.interpolateNumber)(prev.upperWidth, entry.upperWidth);
-                            var _interpolatorLowerWidth = (0, _dataUtils.interpolateNumber)(prev.lowerWidth, entry.lowerWidth);
-                            var _interpolatorHeight = (0, _dataUtils.interpolateNumber)(prev.height, entry.height);
-                            return _objectSpread(_objectSpread({}, entry), {}, {
-                                x: _interpolatorX(t),
-                                y: _interpolatorY(t),
-                                upperWidth: _interpolatorUpperWidth(t),
-                                lowerWidth: _interpolatorLowerWidth(t),
-                                height: _interpolatorHeight(t)
-                            });
-                        }
-                        var interpolatorX = (0, _dataUtils.interpolateNumber)(entry.x + entry.upperWidth / 2, entry.x);
-                        var interpolatorY = (0, _dataUtils.interpolateNumber)(entry.y + entry.height / 2, entry.y);
-                        var interpolatorUpperWidth = (0, _dataUtils.interpolateNumber)(0, entry.upperWidth);
-                        var interpolatorLowerWidth = (0, _dataUtils.interpolateNumber)(0, entry.lowerWidth);
-                        var interpolatorHeight = (0, _dataUtils.interpolateNumber)(0, entry.height);
-                        return _objectSpread(_objectSpread({}, entry), {}, {
-                            x: interpolatorX(t),
-                            y: interpolatorY(t),
-                            upperWidth: interpolatorUpperWidth(t),
-                            lowerWidth: interpolatorLowerWidth(t),
-                            height: interpolatorHeight(t)
-                        });
-                    });
-                    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), null, _this3.renderTrapezoidsStatically(stepData));
-                });
-            }
-        },
-        {
-            key: "renderTrapezoids",
-            value: function renderTrapezoids() {
-                var _this$props3 = this.props, trapezoids = _this$props3.trapezoids, isAnimationActive = _this$props3.isAnimationActive;
-                var prevTrapezoids = this.state.prevTrapezoids;
-                if (isAnimationActive && trapezoids && trapezoids.length && (!prevTrapezoids || !(0, _isEqualDefault.default)(prevTrapezoids, trapezoids))) return this.renderTrapezoidsWithAnimation();
-                return this.renderTrapezoidsStatically(trapezoids);
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this$props4 = this.props, hide = _this$props4.hide, trapezoids = _this$props4.trapezoids, className = _this$props4.className, isAnimationActive = _this$props4.isAnimationActive;
-                var isAnimationFinished = this.state.isAnimationFinished;
-                if (hide || !trapezoids || !trapezoids.length) return null;
-                var layerClass = (0, _clsxDefault.default)('recharts-trapezoids', className);
-                return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _layer.Layer), {
-                    className: layerClass
-                }, this.renderTrapezoids(), (!isAnimationActive || isAnimationFinished) && (0, _labelList.LabelList).renderCallByParent(this.props, trapezoids));
-            }
         }
-    ], [
-        {
-            key: "getDerivedStateFromProps",
-            value: function getDerivedStateFromProps(nextProps, prevState) {
-                if (nextProps.animationId !== prevState.prevAnimationId) return {
-                    prevAnimationId: nextProps.animationId,
-                    curTrapezoids: nextProps.trapezoids,
-                    prevTrapezoids: prevState.curTrapezoids
-                };
-                if (nextProps.trapezoids !== prevState.curTrapezoids) return {
-                    curTrapezoids: nextProps.trapezoids
-                };
-                return null;
-            }
-        }
-    ]);
-}((0, _react.PureComponent));
-_Funnel = Funnel;
-_defineProperty(Funnel, "displayName", 'Funnel');
-_defineProperty(Funnel, "defaultProps", {
-    stroke: '#fff',
-    fill: '#808080',
-    legendType: 'rect',
-    labelLine: true,
-    hide: false,
-    isAnimationActive: !(0, _global.Global).isSsr,
-    animationBegin: 400,
-    animationDuration: 1500,
-    animationEasing: 'ease',
-    nameKey: 'name',
-    lastShapeType: 'triangle'
-});
-_defineProperty(Funnel, "getRealFunnelData", function(item) {
-    var _item$props = item.props, data = _item$props.data, children = _item$props.children;
-    var presentationProps = (0, _reactUtils.filterProps)(item.props, false);
-    var cells = (0, _reactUtils.findAllByType)(children, (0, _cell.Cell));
-    if (data && data.length) return data.map(function(entry, index) {
-        return _objectSpread(_objectSpread(_objectSpread({
-            payload: entry
-        }, presentationProps), entry), cells && cells[index] && cells[index].props);
-    });
-    if (cells && cells.length) return cells.map(function(cell) {
-        return _objectSpread(_objectSpread({}, presentationProps), cell.props);
-    });
-    return [];
-});
-_defineProperty(Funnel, "getRealWidthHeight", function(item, offset) {
-    var customWidth = item.props.width;
-    var width = offset.width, height = offset.height, left = offset.left, right = offset.right, top = offset.top, bottom = offset.bottom;
-    var realHeight = height;
-    var realWidth = width;
-    if ((0, _isNumberDefault.default)(customWidth)) realWidth = customWidth;
-    else if ((0, _isStringDefault.default)(customWidth)) realWidth = realWidth * parseFloat(customWidth) / 100;
-    return {
-        realWidth: realWidth - left - right - 50,
-        realHeight: realHeight - bottom - top,
-        offsetX: (width - realWidth) / 2,
-        offsetY: (height - realHeight) / 2
-    };
-});
-_defineProperty(Funnel, "getComposedData", function(_ref2) {
-    var item = _ref2.item, offset = _ref2.offset;
-    var funnelData = _Funnel.getRealFunnelData(item);
-    var _item$props2 = item.props, dataKey = _item$props2.dataKey, nameKey = _item$props2.nameKey, tooltipType = _item$props2.tooltipType, lastShapeType = _item$props2.lastShapeType, reversed = _item$props2.reversed;
-    var left = offset.left, top = offset.top;
-    var _Funnel$getRealWidthH = _Funnel.getRealWidthHeight(item, offset), realHeight = _Funnel$getRealWidthH.realHeight, realWidth = _Funnel$getRealWidthH.realWidth, offsetX = _Funnel$getRealWidthH.offsetX, offsetY = _Funnel$getRealWidthH.offsetY;
-    var maxValue = Math.max.apply(null, funnelData.map(function(entry) {
-        return (0, _chartUtils.getValueByDataKey)(entry, dataKey, 0);
-    }));
-    var len = funnelData.length;
-    var rowHeight = realHeight / len;
-    var parentViewBox = {
-        x: offset.left,
-        y: offset.top,
-        width: offset.width,
-        height: offset.height
-    };
-    var trapezoids = funnelData.map(function(entry, i) {
-        var rawVal = (0, _chartUtils.getValueByDataKey)(entry, dataKey, 0);
-        var name = (0, _chartUtils.getValueByDataKey)(entry, nameKey, i);
-        var val = rawVal;
-        var nextVal;
-        if (i !== len - 1) {
-            nextVal = (0, _chartUtils.getValueByDataKey)(funnelData[i + 1], dataKey, 0);
-            if (nextVal instanceof Array) {
-                var _nextVal = nextVal;
-                var _nextVal2 = _slicedToArray(_nextVal, 1);
-                nextVal = _nextVal2[0];
-            }
-        } else if (rawVal instanceof Array && rawVal.length === 2) {
-            var _rawVal = _slicedToArray(rawVal, 2);
-            val = _rawVal[0];
-            nextVal = _rawVal[1];
-        } else if (lastShapeType === 'rectangle') nextVal = val;
-        else nextVal = 0;
-        var x = (maxValue - val) * realWidth / (2 * maxValue) + top + 25 + offsetX;
-        var y = rowHeight * i + left + offsetY;
-        var upperWidth = val / maxValue * realWidth;
-        var lowerWidth = nextVal / maxValue * realWidth;
-        var tooltipPayload = [
-            {
-                name: name,
-                value: val,
-                payload: entry,
-                dataKey: dataKey,
-                type: tooltipType
-            }
-        ];
-        var tooltipPosition = {
-            x: x + upperWidth / 2,
-            y: y + rowHeight / 2
-        };
-        return _objectSpread(_objectSpread({
-            x: x,
-            y: y,
-            width: Math.max(upperWidth, lowerWidth),
-            upperWidth: upperWidth,
-            lowerWidth: lowerWidth,
-            height: rowHeight,
-            name: name,
-            val: val,
-            tooltipPayload: tooltipPayload,
-            tooltipPosition: tooltipPosition
-        }, (0, _omitDefault.default)(entry, 'width')), {}, {
-            payload: entry,
-            parentViewBox: parentViewBox,
-            labelViewBox: {
-                x: x + (upperWidth - lowerWidth) / 4,
-                y: y,
-                width: Math.abs(upperWidth - lowerWidth) / 2 + Math.min(upperWidth, lowerWidth),
-                height: rowHeight
-            }
-        });
-    });
-    if (reversed) trapezoids = trapezoids.map(function(entry, index) {
-        var newY = entry.y - index * rowHeight + (len - 1 - index) * rowHeight;
-        return _objectSpread(_objectSpread({}, entry), {}, {
-            upperWidth: entry.lowerWidth,
-            lowerWidth: entry.upperWidth,
-            x: entry.x - (entry.lowerWidth - entry.upperWidth) / 2,
-            y: entry.y - index * rowHeight + (len - 1 - index) * rowHeight,
-            tooltipPosition: _objectSpread(_objectSpread({}, entry.tooltipPosition), {}, {
-                y: newY + rowHeight / 2
-            }),
-            labelViewBox: _objectSpread(_objectSpread({}, entry.labelViewBox), {}, {
-                y: newY
-            })
-        });
-    });
-    return {
-        trapezoids: trapezoids,
-        data: funnelData
-    };
-});
-
-},{"react":"21dqq","react-smooth":"p2bRC","lodash/isFunction":"cfti6","lodash/isNumber":"crELm","lodash/isString":"iAF7t","lodash/omit":"8Uh9e","lodash/isEqual":"9XEia","clsx":"gocd3","../container/Layer":"hLZRL","../component/LabelList":"e2z7M","../component/Cell":"cmpyN","../util/ReactUtils":"gDert","../util/Global":"7fOrk","../util/DataUtils":"exzKF","../util/ChartUtils":"2s4mV","../util/types":"8jZsH","../util/FunnelUtils":"iQ98B","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iQ98B":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-// Trapezoid props is expecting x, y, height as numbers.
-// When props are being spread in from a user defined component in Funnel,
-// the prop types of an SVGElement have these typed as string | number.
-// This function will return the passed in props along with x, y, height as numbers.
-parcelHelpers.export(exports, "typeGuardTrapezoidProps", ()=>typeGuardTrapezoidProps);
-parcelHelpers.export(exports, "FunnelTrapezoid", ()=>FunnelTrapezoid);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _activeShapeUtils = require("./ActiveShapeUtils");
-function _typeof(o) {
-    "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-        return typeof o;
-    } : function(o) {
-        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-}
-function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-        var o = Object.getOwnPropertySymbols(e);
-        r && (o = o.filter(function(r) {
-            return Object.getOwnPropertyDescriptor(e, r).enumerable;
-        })), t.push.apply(t, o);
     }
-    return t;
-}
-function _objectSpread(e) {
-    for(var r = 1; r < arguments.length; r++){
-        var t = null != arguments[r] ? arguments[r] : {};
-        r % 2 ? ownKeys(Object(t), !0).forEach(function(r) {
-            _defineProperty(e, r, t[r]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r) {
-            Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-        });
+};
+function isReactRefreshBoundary(exports) {
+    if (Refresh.isLikelyComponentType(exports)) return true;
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    return false;
+    var hasExports = false;
+    var areAllExportsComponents = true;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        hasExports = true;
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
+        return false;
+        var exportValue = exports[key];
+        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
     }
-    return e;
+    return hasExports && areAllExportsComponents;
 }
-function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == _typeof(i) ? i : i + "";
-}
-function _toPrimitive(t, r) {
-    if ("object" != _typeof(t) || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-        var i = e.call(t, r || "default");
-        if ("object" != _typeof(i)) return i;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+    var prevSignature = getRefreshBoundarySignature(prevExports);
+    var nextSignature = getRefreshBoundarySignature(nextExports);
+    if (prevSignature.length !== nextSignature.length) return true;
+    for(var i = 0; i < nextSignature.length; i++){
+        if (prevSignature[i] !== nextSignature[i]) return true;
     }
-    return ("string" === r ? String : Number)(t);
+    return false;
 }
-function typeGuardTrapezoidProps(option, props) {
-    var xValue = "".concat(props.x || option.x);
-    var x = parseInt(xValue, 10);
-    var yValue = "".concat(props.y || option.y);
-    var y = parseInt(yValue, 10);
-    var heightValue = "".concat((props === null || props === void 0 ? void 0 : props.height) || (option === null || option === void 0 ? void 0 : option.height));
-    var height = parseInt(heightValue, 10);
-    return _objectSpread(_objectSpread(_objectSpread({}, props), (0, _activeShapeUtils.getPropsFromShapeOption)(option)), {}, {
-        height: height,
-        x: x,
-        y: y
-    });
+// When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+    var signature = [];
+    signature.push(Refresh.getFamilyByType(exports));
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        signature.push(key);
+        signature.push(Refresh.getFamilyByType(exportValue));
+    }
+    return signature;
 }
-function FunnelTrapezoid(props) {
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _activeShapeUtils.Shape), _extends({
-        shapeType: "trapezoid",
-        propTransformer: typeGuardTrapezoidProps
-    }, props));
+function registerExportsForReactRefresh(module1) {
+    var exports = module1.exports, id = module1.id;
+    Refresh.register(exports, id + ' %exports%');
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        var typeID = id + ' %exports% ' + key;
+        Refresh.register(exportValue, typeID);
+    }
 }
 
-},{"react":"21dqq","./ActiveShapeUtils":"6gaj7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4JUVP":[function(require,module,exports,__globalThis) {
-/**
- * @fileOverview Funnel Chart
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "FunnelChart", ()=>FunnelChart);
-var _generateCategoricalChart = require("./generateCategoricalChart");
-var _funnel = require("../numberAxis/Funnel");
-var FunnelChart = (0, _generateCategoricalChart.generateCategoricalChart)({
-    chartName: 'FunnelChart',
-    GraphicalChild: (0, _funnel.Funnel),
-    validateTooltipEventTypes: [
-        'item'
-    ],
-    defaultTooltipEventType: 'item',
-    axisComponents: [],
-    defaultProps: {
-        layout: 'centric'
-    }
-});
+},{"7422ead32dcc1e6b":"786KC","630b62916b1ae0e7":"4SQxb"}],"4SQxb":[function(require,module,exports,__globalThis) {
+module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.11.0\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"build-info.json\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
 
-},{"./generateCategoricalChart":"4ZsfY","../numberAxis/Funnel":"2AzTS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lOjBx":[function(require,module,exports,__globalThis) {
+},{}],"lOjBx":[function(require,module,exports,__globalThis) {
 'use strict';
 function checkDCE() {
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function') return;

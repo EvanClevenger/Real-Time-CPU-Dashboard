@@ -12,18 +12,30 @@ import {
   Tooltip,
 } from "recharts";
 
-// var ReactDom = require("react-dom");
-
-const socket = io("http://localhost:1234", {
+//connect to socket server
+const socket = io("http://localhost:3000", {
   transports: ["websocket", "polling"],
 });
 
 const App = ({}) => {
+  const [data, setData] = useState([]);
+
   //1. listen for cpu event and update status
+  useEffect(() => {
+    socket.on("cpu", (cpuPercent) => {
+      setData((currentData) => [...currentData, cpuPercent]);
+    });
+  }, []);
+
   //2. render line chart using the state
   return (
     <div>
       <h1> Check Your Real Time CPU Usage</h1>
+      <LineChart width={500} height={300} data={data}>
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Line dataKey="value" />
+      </LineChart>
     </div>
   );
 };
