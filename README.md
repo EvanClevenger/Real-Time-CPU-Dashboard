@@ -1,50 +1,70 @@
-# **Real-Time CPU Dashboard**
+# Getting Started with Create React App
 
-This project is a real-time **CPU usage monitoring dashboard** that utilizes a client-server architecture. The server collects real-time CPU usage statistics and transmits the data to the client via WebSocket. The client visualizes the data in an interactive line chart, making it easy to track CPU performance over time.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
----
+## Available Scripts
 
-## **Features**
+In the project directory, you can run:
 
-- **Real-time CPU usage monitoring.**
-- **Interactive line chart visualization using Recharts.**
-- **WebSocket communication with Socket.IO for seamless data streaming.**
-- **Timestamps** for each CPU usage data point, displayed in _hours and minutes_.
+### `npm start`
 
----
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## **Technologies Used**
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-Here’s a list of technologies and libraries used in this project:
+### `npm test`
 
-### **Backend:**
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-- **Node.js**: JavaScript runtime for building the server.
-- **http (built-in)**: Creates the server to handle requests.
-- **os-utils**: Retrieves system-level CPU usage statistics.
-- **Socket.IO**: Enables real-time, bidirectional communication between the server and client.
+### `npm run build`
 
-### **Frontend:**
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-- **React**: Library for building the user interface.
-- **Recharts**: Library for creating data visualizations such as line charts.
-- **Socket.IO Client**: Establishes WebSocket communication with the server.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
----
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## **Getting Started**
+### `npm run eject`
 
-Follow these steps to set up and run the project locally.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### **Prerequisites**
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-1. Make sure you have **Node.js** and **npm** installed. You can download them from [Node.js Official Website](https://nodejs.org/).
-2. A modern browser like **Chrome** or **Firefox** for running the client.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-### **Installation**
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-1. Clone this repository:
-   ```bash
-   git clone <repository-url>
-   cd Real-Time-CPU-Dashboard
-   ```
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
