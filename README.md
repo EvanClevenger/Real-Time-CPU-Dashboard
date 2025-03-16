@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+Real-Time CPU Dashboard
+This project is a real-time CPU usage monitoring dashboard that utilizes a client-server architecture. The server collects real-time CPU usage statistics and transmits the data to the client via WebSocket. The client visualizes the data in an interactive line chart, making it easy to track CPU performance over time.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+Real-time CPU usage monitoring.
 
-## Available Scripts
+Interactive line chart visualization using Recharts.
 
-In the project directory, you can run:
+WebSocket communication with Socket.IO for seamless data streaming.
 
-### `npm start`
+Timestamps for each CPU usage data point, displayed in hours and minutes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Technologies Used
+Here’s a list of technologies and libraries used in this project:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Backend:
+Node.js: JavaScript runtime for building the server.
 
-### `npm test`
+http (built-in): Creates the server to handle requests.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+os-utils: Retrieves system-level CPU usage statistics.
 
-### `npm run build`
+Socket.IO: Enables real-time, bidirectional communication between the server and client.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Frontend:
+React: Library for building the user interface.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Recharts: Library for creating data visualizations such as line charts.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Socket.IO Client: Establishes WebSocket communication with the server.
 
-### `npm run eject`
+Getting Started
+Follow these steps to set up and run the project locally.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Prerequisites
+Make sure you have Node.js and npm installed. You can download them from Node.js Official Website.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A modern browser like Chrome or Firefox for running the client.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Installation
+Clone this repository:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+bash
+git clone <repository-url>
+cd Real-Time-CPU-Dashboard
+Install dependencies for both server and client:
 
-## Learn More
+bash
+npm install
+Running the Project
+Start the server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+bash
+npm start
+Open your browser and navigate to:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+http://localhost:3000
+You should see the real-time CPU monitoring dashboard displaying live updates.
 
-### Code Splitting
+Project Structure
+Real-Time-CPU-Dashboard/
+│
+├── src/
+│   ├── server.js        # Backend server file
+│   ├── index.html       # Entry point for the client-side app
+│   └── components/      # React components (e.g., LineChart visualization)
+│
+├── package.json         # Node.js dependencies and scripts
+└── README.md            # Project documentation
+How It Works
+The server uses os-utils to calculate the CPU usage percentage every second.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Data is emitted to the client via Socket.IO, along with a timestamp generated using JavaScript's Date object.
 
-### Analyzing the Bundle Size
+The client listens for the cpu event and appends the data to a stateful array in React.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The React app renders the data in a real-time line chart using Recharts.
